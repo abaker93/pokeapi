@@ -1,7 +1,13 @@
+import Nav from "../components/Nav";
+import { Alert } from "@mui/material";
+
 const Error = () => {
 	return (
 		<>
-			<p>Oh no the pokemon ran away.</p>
+			<Nav />
+			<Alert severity="error" sx={{ marginTop: 10 }}>
+				Oh no the pokemon ran away.
+			</Alert>
 		</>
 	)
 }

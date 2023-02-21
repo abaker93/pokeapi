@@ -1,107 +1,162 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { baseURL, formatDexId } from '../utilities';
+import { Skeleton, Typography, Button } from '@mui/material';
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);
 
+	const [loading, setLoading] = useState(false);
 	const [pokemon, setPokemon] = useState([]);
-	const [pokemonSpecies, setPokemonSpecies] = useState([]);
-	const [nextPokemon, setNextPokemon] = useState([]);
-	const [prevPokemon, setPrevPokemon] = useState([]);
+	// const [pokemonSpecies, setPokemonSpecies] = useState([]);
+	// const [nextPokemon, setNextPokemon] = useState([]);
+	// const [prevPokemon, setPrevPokemon] = useState([]);
 
-	const getPokemon = async (id) => {
-		const res = await fetch(`${baseURL}/pokemon/${id}`);
-		const data = await res.json();
+	const getPokemon = id => {
+		setLoading(true);
 
-		setPokemon([data]);
+		fetch(`${baseURL}/pokemon/${id}`)
+			.then((res) => res.json())
+			.then((data) => {
+				let temp = data;
+				
+				const getPokemonSpecies = id => {
+					fetch(`${baseURL}/pokemon-species/${id}`)
+						.then((res) => res.json())
+						.then((data) => {
+							setPokemon([{...temp, ...data}])
+						})
+				}
+				getPokemonSpecies(id);
+				setTimeout(() => {
+					setLoading(false)
+				}, 2000)
+			});
+
+		
 	}
 
-	const getPokemonSpecies = async (id) => {
-		const res = await fetch(`${baseURL}/pokemon-species/${id}`);
-		const data = await res.json();
+	// const getPokemonSpecies = id => {
+	// 	setLoading(true);
 
-		setPokemonSpecies([data]);
-	}
+	// 	fetch(`${baseURL}/pokemon-species/${id}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			setPokemon({...pokemon, data});
+	// 			setLoading(false);
+	// 		});
+	// }
 
-	const getNextPokemon = async (id) => {
-		const res = await fetch(`${baseURL}/pokemon/${id + 1}`);
-		const data = await res.json();
+	// const getPrevPokemon = id => {
+	// 	setLoading(true);
 
-		setNextPokemon([data]);
-	}
+	// 	fetch(`${baseURL}/pokemon-species/${id - 1}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			setPrevPokemon([data]);
+	// 			setLoading(false);
+	// 		});
+	// }
 
-	const getPrevPokemon = async (id) => {
-		const res = await fetch(`${baseURL}/pokemon/${id - 1}`);
-		const data = await res.json();
+	// const getNextPokemon = id => {
+	// 	setLoading(true);
 
-		setPrevPokemon([data]);
-	}
+	// 	fetch(`${baseURL}/pokemon-species/${id + 1}`)
+	// 		.then((res) => res.json())
+	// 		.then((data) => {
+	// 			setNextPokemon([data]);
+	// 			setLoading(false);
+	// 		});
+	// };
 
 	useEffect(() => {
 		getPokemon(pokemonId);
-		getPokemonSpecies(pokemonId);
-		getNextPokemon(pokemonId);
-		getPrevPokemon(pokemonId);
+		// getPokemonSpecies(pokemonId);
+		// getPrevPokemon(pokemonId);
+		// getNextPokemon(pokemonId);
 	}, [pokemonId]);
 
-	// console.log(nextPokemon)
+	console.log(pokemon)
 
-	return pokemon.map((p, index) => (
-		<main
-			key={index}
-			data-type-one={p.types[0].type.name}
-			data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
-		>
+	return (
+		<>
+			{pokemon.map((p, index) => (
+				<main
+					key={index}
+					data-type-one={p.types[0].type.name}
+					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
+					style={{ marginTop: 70 }}
+				>
 
-			<header>
-				<div className="top">
-					<span className="japanese">
-						{pokemonSpecies[0].names.filter(n => n.language.name === 'ja').map(n => n.name)}
-					</span>
-					<img
-						className="poke-img"
-						src={p.sprites.other["official-artwork"].front_default}
-						alt={p.name}
-					/>
-					<Link to={`/pokemon/${p.id - 1}`}>
-						<img
-							className="prev-poke-img"
-							src={prevPokemon[0].sprites.other["official-artwork"].front_default}
-							alt={prevPokemon[0].name}
-						/>
-					</Link>
-					<Link to={`/pokemon/${p.id + 1}`}>
-						<img
-							className="next-poke-img"
-							src={nextPokemon[0].sprites.other["official-artwork"].front_default}
-							alt={nextPokemon[0].name}
-						/>
-					</Link>
-				</div>
-			</header>
-		
-			<section id="pokemonTitle">
-				<h1>
-					<span>
-						<span>No.</span>
-						{formatDexId(p.id)}
-					</span>
-					{p.name}
-				</h1>
+					<header>
+						<div className="top">
+							<span className="japanese">
+								{p.names.filter(n => n.language.name === 'ja').map(n => n.name)}
+							</span>
+							<img
+								className="poke-img"
+								src={p.sprites.other["official-artwork"].front_default}
+								alt={p.name}
+							/>
+							<Link to={`/pokemon/${p.id - 1}`}>
+								Previous
+								{/* <img
+									className="prev-poke-img"
+									src={prevPokemon[0].sprites.other["official-artwork"].front_default}
+									alt={prevPokemon[0].name}
+								/> */}
+							</Link>
+							<Link to={`/pokemon/${p.id + 1}`}>
+								Next
+								{/* <img
+									className="next-poke-img"
+									src={nextPokemon[0].sprites.other["official-artwork"].front_default}
+									alt={nextPokemon[0].name}
+								/> */}
+							</Link>
+						</div>
+					</header>
 
-				<p>
-					{pokemonSpecies[0].genera.filter(g => g.language.name === 'en').map(g => g.genus)}
-				</p>
+					
+					{loading ? (
+						<section id="pokemonTitle">
+							<Skeleton width="80%">
+								<Typography variant="h1" component="h1">.</Typography>
+							</Skeleton>
+							<Skeleton width="50%">
+								<Typography variant="body" component="p">.</Typography>
+							</Skeleton>
+							<Skeleton width="40%">
+								<Button />
+							</Skeleton>
+							<Skeleton width="40%">
+								<Button />
+							</Skeleton>
+						</section>
+					) : (
+						<section id="pokemonTitle">
+							<Typography variant="h1" component="h1">
+								<Typography variant="body2" component="span">
+									<Typography variant="caption" component="span">No.</Typography>
+									{formatDexId(p.id)}
+								</Typography>
+								{p.name}
+							</Typography>
 
-				<button type="button">{p.types[0].type.name}</button>
-				{p.types[1]
-					? <button type="button">{p.types[1].type.name}</button>
-					: null}
-			</section>
+							<Typography variant="body" component="p">
+								{p.genera.filter(g => g.language.name === 'en').map(g => g.genus)}
+							</Typography>
 
-		</main>
-	))
-}
+							<Button type="button">{p.types[0].type.name}</Button>
+							{p.types[1] ? (
+								<Button type="button">{p.types[1].type.name}</Button>
+							)	: null}
+						</section>
+					)}
+				</main>
+			))}
+		</>
+	);
+};
 
 export default Pokemon;
