@@ -1,0 +1,50 @@
+$transition:	all ease-in-out 0.2s;
+
+$fighting:		#CE406B;
+$psychic:     #F97178;
+$fire:				#FE9D52;
+$ground:			#DB7948;
+$electric:		#F3D139;
+$bug:					#90BF2B;
+$grass:				#67BB5D;
+$ice:					#73CEBF;
+$steel:				#598FA1;
+$water:				#4C8FD6;
+$dragon:			#096CC3;
+$ghost:				#5269AD;
+$flying:			#92AADD;
+$dark:				#5B5365;
+$poison:			#AB69C9;
+$fairy:				#ED92E8;
+$rock:				#C8B689;
+$normal:			#909AA2;
+
+$types: (
+	"fighting":	$fighting,
+	"psychic":	$psychic,
+	"fire":			$fire,
+	"ground":		$ground,
+	"electric":	$electric,
+	"bug":			$bug,
+	"grass":		$grass,
+	"ice":			$ice,
+	"steel":		$steel,
+	"water":		$water,
+	"dragon":		$dragon,
+	"ghost":		$ghost,
+	"flying":		$flying,
+	"dark":			$dark,
+	"poison":		$poison,
+	"fairy":		$fairy,
+	"rock":			$rock,
+	"normal":		$normal
+);
+
+@each $type1, $color1 in $types {
+	@each $type2, $color2 in $types {
+		[data-type-one=#{$type1}][data-type-two=#{$type2}] {
+			--type-one-color:	#{$color1};
+			--type-two-color:	#{$color2};
+		}
+	}
+}

@@ -1,0 +1,1721 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+[data-type-one=fighting][data-type-two=fighting] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=fighting][data-type-two=psychic] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=fighting][data-type-two=fire] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=fighting][data-type-two=ground] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=fighting][data-type-two=electric] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=fighting][data-type-two=bug] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=fighting][data-type-two=grass] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=fighting][data-type-two=ice] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=fighting][data-type-two=steel] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=fighting][data-type-two=water] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=fighting][data-type-two=dragon] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=fighting][data-type-two=ghost] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=fighting][data-type-two=flying] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=fighting][data-type-two=dark] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=fighting][data-type-two=poison] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=fighting][data-type-two=fairy] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=fighting][data-type-two=rock] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=fighting][data-type-two=normal] {
+  --type-one-color:	#CE406B;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=psychic][data-type-two=fighting] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=psychic][data-type-two=psychic] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=psychic][data-type-two=fire] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=psychic][data-type-two=ground] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=psychic][data-type-two=electric] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=psychic][data-type-two=bug] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=psychic][data-type-two=grass] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=psychic][data-type-two=ice] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=psychic][data-type-two=steel] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=psychic][data-type-two=water] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=psychic][data-type-two=dragon] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=psychic][data-type-two=ghost] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=psychic][data-type-two=flying] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=psychic][data-type-two=dark] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=psychic][data-type-two=poison] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=psychic][data-type-two=fairy] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=psychic][data-type-two=rock] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=psychic][data-type-two=normal] {
+  --type-one-color:	#F97178;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=fire][data-type-two=fighting] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=fire][data-type-two=psychic] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=fire][data-type-two=fire] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=fire][data-type-two=ground] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=fire][data-type-two=electric] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=fire][data-type-two=bug] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=fire][data-type-two=grass] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=fire][data-type-two=ice] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=fire][data-type-two=steel] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=fire][data-type-two=water] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=fire][data-type-two=dragon] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=fire][data-type-two=ghost] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=fire][data-type-two=flying] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=fire][data-type-two=dark] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=fire][data-type-two=poison] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=fire][data-type-two=fairy] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=fire][data-type-two=rock] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=fire][data-type-two=normal] {
+  --type-one-color:	#FE9D52;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=ground][data-type-two=fighting] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=ground][data-type-two=psychic] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=ground][data-type-two=fire] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=ground][data-type-two=ground] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=ground][data-type-two=electric] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=ground][data-type-two=bug] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=ground][data-type-two=grass] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=ground][data-type-two=ice] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=ground][data-type-two=steel] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=ground][data-type-two=water] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=ground][data-type-two=dragon] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=ground][data-type-two=ghost] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=ground][data-type-two=flying] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=ground][data-type-two=dark] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=ground][data-type-two=poison] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=ground][data-type-two=fairy] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=ground][data-type-two=rock] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=ground][data-type-two=normal] {
+  --type-one-color:	#DB7948;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=electric][data-type-two=fighting] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=electric][data-type-two=psychic] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=electric][data-type-two=fire] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=electric][data-type-two=ground] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=electric][data-type-two=electric] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=electric][data-type-two=bug] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=electric][data-type-two=grass] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=electric][data-type-two=ice] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=electric][data-type-two=steel] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=electric][data-type-two=water] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=electric][data-type-two=dragon] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=electric][data-type-two=ghost] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=electric][data-type-two=flying] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=electric][data-type-two=dark] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=electric][data-type-two=poison] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=electric][data-type-two=fairy] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=electric][data-type-two=rock] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=electric][data-type-two=normal] {
+  --type-one-color:	#F3D139;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=bug][data-type-two=fighting] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=bug][data-type-two=psychic] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=bug][data-type-two=fire] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=bug][data-type-two=ground] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=bug][data-type-two=electric] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=bug][data-type-two=bug] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=bug][data-type-two=grass] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=bug][data-type-two=ice] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=bug][data-type-two=steel] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=bug][data-type-two=water] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=bug][data-type-two=dragon] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=bug][data-type-two=ghost] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=bug][data-type-two=flying] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=bug][data-type-two=dark] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=bug][data-type-two=poison] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=bug][data-type-two=fairy] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=bug][data-type-two=rock] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=bug][data-type-two=normal] {
+  --type-one-color:	#90BF2B;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=grass][data-type-two=fighting] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=grass][data-type-two=psychic] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=grass][data-type-two=fire] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=grass][data-type-two=ground] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=grass][data-type-two=electric] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=grass][data-type-two=bug] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=grass][data-type-two=grass] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=grass][data-type-two=ice] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=grass][data-type-two=steel] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=grass][data-type-two=water] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=grass][data-type-two=dragon] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=grass][data-type-two=ghost] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=grass][data-type-two=flying] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=grass][data-type-two=dark] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=grass][data-type-two=poison] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=grass][data-type-two=fairy] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=grass][data-type-two=rock] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=grass][data-type-two=normal] {
+  --type-one-color:	#67BB5D;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=ice][data-type-two=fighting] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=ice][data-type-two=psychic] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=ice][data-type-two=fire] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=ice][data-type-two=ground] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=ice][data-type-two=electric] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=ice][data-type-two=bug] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=ice][data-type-two=grass] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=ice][data-type-two=ice] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=ice][data-type-two=steel] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=ice][data-type-two=water] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=ice][data-type-two=dragon] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=ice][data-type-two=ghost] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=ice][data-type-two=flying] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=ice][data-type-two=dark] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=ice][data-type-two=poison] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=ice][data-type-two=fairy] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=ice][data-type-two=rock] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=ice][data-type-two=normal] {
+  --type-one-color:	#73CEBF;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=steel][data-type-two=fighting] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=steel][data-type-two=psychic] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=steel][data-type-two=fire] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=steel][data-type-two=ground] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=steel][data-type-two=electric] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=steel][data-type-two=bug] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=steel][data-type-two=grass] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=steel][data-type-two=ice] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=steel][data-type-two=steel] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=steel][data-type-two=water] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=steel][data-type-two=dragon] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=steel][data-type-two=ghost] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=steel][data-type-two=flying] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=steel][data-type-two=dark] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=steel][data-type-two=poison] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=steel][data-type-two=fairy] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=steel][data-type-two=rock] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=steel][data-type-two=normal] {
+  --type-one-color:	#598FA1;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=water][data-type-two=fighting] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=water][data-type-two=psychic] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=water][data-type-two=fire] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=water][data-type-two=ground] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=water][data-type-two=electric] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=water][data-type-two=bug] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=water][data-type-two=grass] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=water][data-type-two=ice] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=water][data-type-two=steel] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=water][data-type-two=water] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=water][data-type-two=dragon] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=water][data-type-two=ghost] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=water][data-type-two=flying] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=water][data-type-two=dark] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=water][data-type-two=poison] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=water][data-type-two=fairy] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=water][data-type-two=rock] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=water][data-type-two=normal] {
+  --type-one-color:	#4C8FD6;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=dragon][data-type-two=fighting] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=dragon][data-type-two=psychic] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=dragon][data-type-two=fire] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=dragon][data-type-two=ground] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=dragon][data-type-two=electric] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=dragon][data-type-two=bug] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=dragon][data-type-two=grass] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=dragon][data-type-two=ice] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=dragon][data-type-two=steel] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=dragon][data-type-two=water] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=dragon][data-type-two=dragon] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=dragon][data-type-two=ghost] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=dragon][data-type-two=flying] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=dragon][data-type-two=dark] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=dragon][data-type-two=poison] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=dragon][data-type-two=fairy] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=dragon][data-type-two=rock] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=dragon][data-type-two=normal] {
+  --type-one-color:	#096CC3;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=ghost][data-type-two=fighting] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=ghost][data-type-two=psychic] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=ghost][data-type-two=fire] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=ghost][data-type-two=ground] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=ghost][data-type-two=electric] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=ghost][data-type-two=bug] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=ghost][data-type-two=grass] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=ghost][data-type-two=ice] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=ghost][data-type-two=steel] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=ghost][data-type-two=water] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=ghost][data-type-two=dragon] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=ghost][data-type-two=ghost] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=ghost][data-type-two=flying] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=ghost][data-type-two=dark] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=ghost][data-type-two=poison] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=ghost][data-type-two=fairy] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=ghost][data-type-two=rock] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=ghost][data-type-two=normal] {
+  --type-one-color:	#5269AD;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=flying][data-type-two=fighting] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=flying][data-type-two=psychic] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=flying][data-type-two=fire] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=flying][data-type-two=ground] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=flying][data-type-two=electric] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=flying][data-type-two=bug] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=flying][data-type-two=grass] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=flying][data-type-two=ice] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=flying][data-type-two=steel] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=flying][data-type-two=water] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=flying][data-type-two=dragon] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=flying][data-type-two=ghost] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=flying][data-type-two=flying] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=flying][data-type-two=dark] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=flying][data-type-two=poison] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=flying][data-type-two=fairy] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=flying][data-type-two=rock] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=flying][data-type-two=normal] {
+  --type-one-color:	#92AADD;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=dark][data-type-two=fighting] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=dark][data-type-two=psychic] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=dark][data-type-two=fire] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=dark][data-type-two=ground] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=dark][data-type-two=electric] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=dark][data-type-two=bug] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=dark][data-type-two=grass] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=dark][data-type-two=ice] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=dark][data-type-two=steel] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=dark][data-type-two=water] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=dark][data-type-two=dragon] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=dark][data-type-two=ghost] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=dark][data-type-two=flying] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=dark][data-type-two=dark] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=dark][data-type-two=poison] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=dark][data-type-two=fairy] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=dark][data-type-two=rock] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=dark][data-type-two=normal] {
+  --type-one-color:	#5B5365;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=poison][data-type-two=fighting] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=poison][data-type-two=psychic] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=poison][data-type-two=fire] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=poison][data-type-two=ground] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=poison][data-type-two=electric] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=poison][data-type-two=bug] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=poison][data-type-two=grass] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=poison][data-type-two=ice] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=poison][data-type-two=steel] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=poison][data-type-two=water] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=poison][data-type-two=dragon] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=poison][data-type-two=ghost] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=poison][data-type-two=flying] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=poison][data-type-two=dark] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=poison][data-type-two=poison] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=poison][data-type-two=fairy] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=poison][data-type-two=rock] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=poison][data-type-two=normal] {
+  --type-one-color:	#AB69C9;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=fairy][data-type-two=fighting] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=fairy][data-type-two=psychic] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=fairy][data-type-two=fire] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=fairy][data-type-two=ground] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=fairy][data-type-two=electric] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=fairy][data-type-two=bug] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=fairy][data-type-two=grass] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=fairy][data-type-two=ice] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=fairy][data-type-two=steel] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=fairy][data-type-two=water] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=fairy][data-type-two=dragon] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=fairy][data-type-two=ghost] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=fairy][data-type-two=flying] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=fairy][data-type-two=dark] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=fairy][data-type-two=poison] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=fairy][data-type-two=fairy] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=fairy][data-type-two=rock] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=fairy][data-type-two=normal] {
+  --type-one-color:	#ED92E8;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=rock][data-type-two=fighting] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=rock][data-type-two=psychic] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=rock][data-type-two=fire] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=rock][data-type-two=ground] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=rock][data-type-two=electric] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=rock][data-type-two=bug] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=rock][data-type-two=grass] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=rock][data-type-two=ice] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=rock][data-type-two=steel] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=rock][data-type-two=water] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=rock][data-type-two=dragon] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=rock][data-type-two=ghost] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=rock][data-type-two=flying] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=rock][data-type-two=dark] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=rock][data-type-two=poison] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=rock][data-type-two=fairy] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=rock][data-type-two=rock] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=rock][data-type-two=normal] {
+  --type-one-color:	#C8B689;
+  --type-two-color:	#909AA2;
+}
+
+[data-type-one=normal][data-type-two=fighting] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#CE406B;
+}
+
+[data-type-one=normal][data-type-two=psychic] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#F97178;
+}
+
+[data-type-one=normal][data-type-two=fire] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#FE9D52;
+}
+
+[data-type-one=normal][data-type-two=ground] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#DB7948;
+}
+
+[data-type-one=normal][data-type-two=electric] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#F3D139;
+}
+
+[data-type-one=normal][data-type-two=bug] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#90BF2B;
+}
+
+[data-type-one=normal][data-type-two=grass] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#67BB5D;
+}
+
+[data-type-one=normal][data-type-two=ice] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#73CEBF;
+}
+
+[data-type-one=normal][data-type-two=steel] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#598FA1;
+}
+
+[data-type-one=normal][data-type-two=water] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#4C8FD6;
+}
+
+[data-type-one=normal][data-type-two=dragon] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#096CC3;
+}
+
+[data-type-one=normal][data-type-two=ghost] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#5269AD;
+}
+
+[data-type-one=normal][data-type-two=flying] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#92AADD;
+}
+
+[data-type-one=normal][data-type-two=dark] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#5B5365;
+}
+
+[data-type-one=normal][data-type-two=poison] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#AB69C9;
+}
+
+[data-type-one=normal][data-type-two=fairy] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#ED92E8;
+}
+
+[data-type-one=normal][data-type-two=rock] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#C8B689;
+}
+
+[data-type-one=normal][data-type-two=normal] {
+  --type-one-color:	#909AA2;
+  --type-two-color:	#909AA2;
+}
+
+img {
+  max-width: 100%;
+}
+
+main header {
+  height: 30vh;
+  margin-bottom: 4rem;
+}
+main header .top {
+  position: absolute;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 30vh;
+  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+}
+main header .top .japanese {
+  position: absolute;
+  font-size: 18vw;
+  font-weight: bolder;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+}
+main header .top .poke-img {
+  position: relative;
+  top: 2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+main header .top .prev-poke-img, main header .top .next-poke-img {
+  position: absolute;
+  width: 6rem;
+  bottom: -3rem;
+  filter: brightness(0) opacity(0.2);
+  transition: all ease-in-out 0.2s;
+  width: 6rem;
+}
+main header .top .prev-poke-img:hover, main header .top .next-poke-img:hover {
+  filter: none;
+}
+main header .top .prev-poke-img {
+  left: -2rem;
+}
+main header .top .prev-poke-img:hover {
+  left: -1rem;
+}
+main header .top .next-poke-img {
+  right: -2rem;
+}
+main header .top .next-poke-img:hover {
+  right: -1rem;
+}
+
+/*# sourceMappingURL=main.css.map */
