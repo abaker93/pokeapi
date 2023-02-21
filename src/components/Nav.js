@@ -1,20 +1,34 @@
 import { Link } from "react-router-dom";
 
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { Settings } from '@mui/icons-material';
+
 const Nav = () => {
 	return (
-		<nav>
-			<ul>
-				<li>
-					<Link to={'/'}>Home</Link>
-				</li>
-				<li>
-					<Link to={'/pokedex/national'}>National Pokedex</Link>
-				</li>
-				<li>
-					<Link to={'/pokemon/425'}>Drifloon</Link>
-				</li>
-			</ul>
-		</nav>
+		<AppBar position="fixed">
+			<Toolbar>
+				<Typography
+					variant="h6"
+					component="div"
+					sx={{
+						flexGrow: 1,
+						mr: 2
+					}}
+				>
+					<Link to="/">
+						Drifloon Database
+					</Link>
+				</Typography>
+				<IconButton
+					size="large"
+					edge="end"
+					color="inherit"
+					aria-label="customization"
+				>
+					<Settings />
+				</IconButton>
+			</Toolbar>
+		</AppBar>
 	)
 }
 

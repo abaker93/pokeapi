@@ -1,6 +1,7 @@
 const baseURL = 'https://pokeapi.co/api/v2';
 
 const formatDexId = num => {
+	// console.log(num)
 	return num < 10
 		?	'000' + num.toString()
 		: num < 100

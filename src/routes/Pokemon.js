@@ -45,7 +45,7 @@ const Pokemon = () => {
 		getPrevPokemon(pokemonId);
 	}, [pokemonId]);
 
-	console.log(nextPokemon)
+	// console.log(nextPokemon)
 
 	return pokemon.map((p, index) => (
 		<main
