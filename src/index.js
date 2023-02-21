@@ -8,6 +8,8 @@ import Pokedex from './routes/Pokedex';
 import Pokemon from './routes/Pokemon';
 import Error from './routes/Error';
 
+import CssBaseline from '@mui/material/CssBaseline';
+
 import './main.css';
 
 const router = createBrowserRouter([
@@ -32,6 +34,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
+  <>
+    <CssBaseline />
     <RouterProvider router={router} />
+  </>
   // </React.StrictMode>
 );
