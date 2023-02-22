@@ -1,31 +1,45 @@
 import { Link } from "react-router-dom";
 import { formatDexId } from '../utilities';
+import { Box, Skeleton, Typography } from "@mui/material";
 
-const PokemonHeader = (params) => {
-	const prevId = params.id - 1;
-	const nextId = params.id + 1;
+const PokemonHeader = (props) => {
+	const p = props[0];
 
 	return (
-		<header>
-			<div className="top">
-				<span className="japanese">{params.japanese}</span>
-				<img className="poke-img" src={params.image} alt={params.name} />
-				<Link to={`/pokemon/${formatDexId(prevId)}`}>
+		props.loading ? (
+			<Skeleton variant="rectangle" width="100%" height="30vh" />
+		) : (
+			<header>
+				<Box className="top">
+					<Typography variant="body" component="span" className="japanese">
+						{p.names.filter(n => n.language.name === 'ja').map(n => n.name)}
+					</Typography>
 					<img
-						className="prev-poke-img"
-						src={params.prevImg}
-						alt={params.prevName}
+						className="poke-img"
+						src={p.sprites.other["official-artwork"].front_default}
+						alt={p.name}
 					/>
-				</Link>
-				<Link to={`/pokemon/${formatDexId(nextId)}`}>
-					<img
-						className="next-poke-img"
-						src={params.nextImg}
-						alt={params.nextName}
-					/>
-				</Link>
-			</div>
-		</header>
+					{p.prev.name !== null ? (
+						<Link to={`/pokemon/${formatDexId(p.id - 1)}`}>
+							<img
+								className="prev-poke-img"
+								src={p.prev.artwork}
+								alt={p.prev.name}
+							/>
+						</Link>
+					) : null}
+					{p.next.name !== null ? (
+						<Link to={`/pokemon/${formatDexId(p.id + 1)}`}>
+							<img
+								className="next-poke-img"
+								src={p.next.artwork}
+								alt={p.next.name}
+							/>
+						</Link>
+					) : null}
+				</Box>
+			</header>
+		)
 	)
 }
 

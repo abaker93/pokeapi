@@ -22,12 +22,13 @@ const Pokedex = () => {
 
 				const createPokemonObject = results => {
 					results.forEach(async pokemon => {
-						await fetch(`${baseURL}/pokemon/${pokemon.name}`)
-							.then((res) => res.json())
-							.then((data) => {
-								setAllPokemon(currentList => [...currentList, data]);
-								allPokemon.sort((a, b) => a.id - b.id);
-							});
+						await Promise.all([
+							fetch(`${baseURL}/pokemon/${pokemon.name}`).then(res => res.ok ? res.json() : null),
+							fetch(`${baseURL}/pokemon-species/${pokemon.name}`).then(res => res.ok ? res.json() : null)
+						]).then(response => {
+							setAllPokemon(currentList => [...currentList, {...response[0], ...response[1]}]);
+							allPokemon.sort((a, b) => a.id - b.id);
+						})
 					});
 				};
 				createPokemonObject(data.results);
@@ -38,6 +39,8 @@ const Pokedex = () => {
 	useEffect(() => {
 		getAllPokemon(pokedex, loadMore)
 	}, [pokedex]);
+
+	console.log(allPokemon)
 
 	return (
 		<>
