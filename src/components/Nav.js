@@ -3,13 +3,7 @@ import { Settings } from '@mui/icons-material';
 
 const Nav = () => {
 	return (
-		<AppBar
-			position="fixed"
-			sx={{
-				backgroundColor: "rgba(255, 255, 255, 0.8)",
-				backdropFilter: "blur(8px)"
-			}}
-		>
+		<AppBar position="fixed">
 			<Toolbar>
 				<Typography
 					variant="body1"
@@ -19,7 +13,7 @@ const Nav = () => {
 						mr: 2
 					}}
 				>
-					<Link href="/" color="black" underline="none">
+					<Link href="/" color="inherit" underline="none">
 						Drifloon Database
 					</Link>
 				</Typography>

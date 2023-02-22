@@ -9,8 +9,6 @@ import Home from "./routes/Home";
 import Pokedex from "./routes/Pokedex";
 import Pokemon from "./routes/Pokemon";
 
-// import { lightTheme, darkTheme } from "./utilities/themes";
-
 const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 const router = createBrowserRouter([
@@ -32,7 +30,7 @@ const router = createBrowserRouter([
 	}
 ])
 
-const App = () => {
+const AppContents = () => {
 	const theme = useTheme();
 	const colorMode = useContext(ColorModeContext);
 
@@ -45,7 +43,7 @@ const App = () => {
 	)
 };
 
-export default function ToggleColorMode() {
+export default function App() {
 	const [mode, setMode] = useState('light');
 	const colorMode = useMemo(() => ({
 		toggleColorMode: () => {
@@ -120,12 +118,15 @@ export default function ToggleColorMode() {
 		shape: {
 			borderRadius: 8,
 		},
-		overrides: {
+		components: {
 			MuiAppBar: {
-				colorInherit: {
-					backgroundColor: 'rgba(255,255,255,0.8)',
-					color: '#263238',
-					backdropFilter: "blur(8px)",
+				styleOverrides: {
+					root: {
+						backgroundColor: 'rgba(255,255,255,0.8)',
+						backgroundImage: 'none',
+						color: '#263238',
+						backdropFilter: "blur(8px)",
+					},
 				},
 			},
 		},
@@ -202,13 +203,15 @@ export default function ToggleColorMode() {
 		shape: {
 			borderRadius: 8,
 		},
-		overrides: {
+		components: {
 			MuiAppBar: {
-				colorInherit: {
-					backgroundColor: 'rgba(38, 50, 56, 0.8)',
-					backgroundImage: 'none',
-					color: '#FFFFFF',
-					backdropFilter: "blur(8px)",
+				styleOverrides: {
+					root: {
+						backgroundColor: 'rgba(38, 50, 56, 0.8)',
+						backgroundImage: 'none',
+						color: '#FFFFFF',
+						backdropFilter: "blur(8px)",
+					},
 				},
 			},
 		},
@@ -224,11 +227,11 @@ export default function ToggleColorMode() {
 
 			{mode === 'light' ? (
 				<ThemeProvider theme={lightTheme}>
-					<App />
+					<AppContents />
 				</ThemeProvider>
 			) : (
 				<ThemeProvider theme={darkTheme}>
-					<App />
+					<AppContents />
 				</ThemeProvider>
 			)}
 
