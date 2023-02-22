@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { formatDexId } from '../utilities';
+import { formatDexId } from '../utilities/utilities';
 import { Box, Skeleton, Typography } from "@mui/material";
 
 const PokemonHeader = (props) => {
@@ -10,9 +10,9 @@ const PokemonHeader = (props) => {
 			<Skeleton
 				variant="rectangle"
 				sx={{
-					width:				"100%",
-					height:				"30vh",
-					marginBottom:	"4rem"
+					width: "100%",
+					height: "30vh",
+					marginBottom: "4rem"
 				}}
 			/>
 		) : (

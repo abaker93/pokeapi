@@ -1669,11 +1669,19 @@ img {
   max-width: 100%;
 }
 
-main header {
+h1 {
+  font-size: 24px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
+main#Pokemon header {
   height: 30vh;
   margin-bottom: 4rem;
 }
-main header .top {
+main#Pokemon header .top {
   position: absolute;
   display: grid;
   align-items: center;
@@ -1681,20 +1689,20 @@ main header .top {
   height: 30vh;
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
 }
-main header .top .japanese {
+main#Pokemon header .top .japanese {
   position: absolute;
   font-size: 18vw;
   font-weight: bolder;
   mix-blend-mode: overlay;
   opacity: 0.3;
 }
-main header .top .poke-img {
+main#Pokemon header .top .poke-img {
   position: relative;
   top: 2rem;
   width: 80%;
   margin: 0 auto;
 }
-main header .top .prev-poke-img, main header .top .next-poke-img {
+main#Pokemon header .top .prev-poke-img, main#Pokemon header .top .next-poke-img {
   position: absolute;
   width: 6rem;
   bottom: -3rem;
@@ -1702,20 +1710,24 @@ main header .top .prev-poke-img, main header .top .next-poke-img {
   transition: all ease-in-out 0.2s;
   width: 6rem;
 }
-main header .top .prev-poke-img:hover, main header .top .next-poke-img:hover {
+main#Pokemon header .top .prev-poke-img:hover, main#Pokemon header .top .next-poke-img:hover {
   filter: none;
 }
-main header .top .prev-poke-img {
+main#Pokemon header .top .prev-poke-img {
   left: -2rem;
 }
-main header .top .prev-poke-img:hover {
+main#Pokemon header .top .prev-poke-img:hover {
   left: -1rem;
 }
-main header .top .next-poke-img {
+main#Pokemon header .top .next-poke-img {
   right: -2rem;
 }
-main header .top .next-poke-img:hover {
+main#Pokemon header .top .next-poke-img:hover {
   right: -1rem;
+}
+
+section#pokedex .MuiCard-root {
+  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
 }
 
 /*# sourceMappingURL=main.css.map */

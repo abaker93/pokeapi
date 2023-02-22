@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PokedexCard from "../components/PokedexCard";
-import { baseURL } from "../utilities";
+import { baseURL } from "../utilities/utilities";
 
-import { Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 
 const Pokedex = () => {
 	const pokedex = useParams().dex
@@ -32,7 +32,10 @@ const Pokedex = () => {
 					});
 				};
 				createPokemonObject(data.results);
-				setLoading(false);
+
+				setTimeout(() => {
+					setLoading(false)
+				}, 2000)
 			});
 	};
 
@@ -40,35 +43,29 @@ const Pokedex = () => {
 		getAllPokemon(pokedex, loadMore)
 	}, [pokedex]);
 
-	console.log(allPokemon)
-
 	return (
-		<>
-			{loading ? (
-				<Skeleton width="80%">
-					<Typography variant="h1" component="h1">.</Typography>
-				</Skeleton>
-			) : (
-				<h1>Pokedex</h1>
-			)}
-			<div>
-				<div>
-					{allPokemon.map((p, index) => (
-						<PokedexCard
-							key={index}
-							id={p.id}
-							image={p.sprites.other["official-artwork"].front_default}
-							name={p.name}
-							type={p.types.map(t => t.type.name)}
-							hp={p.stats.filter(s => s.stat.name === 'hp')}
-						/>
-					))}
-				</div>
+		<main>
+			<Box component="header">
+				{loading ? (
+					<Skeleton width="100%">
+						<Typography variant="h1" component="h1">.</Typography>
+					</Skeleton>
+				) : (
+					<Typography variant="h1" component="h1">{pokedex} Pokedex</Typography>
+				)}
+			</Box>
+
+			<section id="pokedex">
+				{allPokemon.map((p, i) => (
+					<PokedexCard
+						key={i}
+						{...p}
+					/>
+				))}
 
 				<button onClick={() => getAllPokemon()}>Load More</button>
-
-			</div>
-		</>
+			</section>
+		</main>
 	)
 }
 

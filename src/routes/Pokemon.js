@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import PokemonHeader from "../components/PokemonHeader";
 import PokemonTitle from '../components/PokemonTitle';
-import { baseURL } from '../utilities';
+import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);
@@ -90,6 +90,7 @@ const Pokemon = () => {
 			{pokemon.map((p, index) => (
 				<main
 					key={index}
+					id="Pokemon"
 					data-type-one={p.types[0].type.name}
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
 					style={{ marginTop: 70 }}

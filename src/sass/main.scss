@@ -4,7 +4,10 @@
 
 img { max-width: 100%; }
 
-main {
+h1 { font-size: 24px; }
+h2 { font-size: 20px; }
+
+main#Pokemon {
 	header {
 		height: 30vh;
 		margin-bottom: 4rem;
@@ -56,5 +59,11 @@ main {
 				&:hover { right: -1rem; }
 			}
 		}
+	}
+}
+
+section#pokedex {
+	.MuiCard-root {
+		background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
 	}
 }

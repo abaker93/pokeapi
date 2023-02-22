@@ -1,6 +1,6 @@
 import { Button, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
-import { formatDexId } from '../utilities';
+import { formatDexId } from '../utilities/utilities';
 
 const PokemonTitle = (props) => {
 	const p = props[0];
