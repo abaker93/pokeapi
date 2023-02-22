@@ -18,7 +18,7 @@ const PokemonHeader = (props) => {
 		) : (
 			<header>
 				<Box className="top">
-					<Typography variant="body" component="span" className="japanese">
+					<Typography variant="japanese" component="span" className="japanese">
 						{p.names.filter(n => n.language.name === 'ja').map(n => n.name)}
 					</Typography>
 					<img

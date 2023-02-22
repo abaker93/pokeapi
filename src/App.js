@@ -81,7 +81,7 @@ export default function App() {
 			divider: '#E2E2E2',
 		},
 		typography: {
-			fontFamily: '"Source Sans Pro", "Helvetica", "Arial", sans-serif',
+			fontFamily: 'source-sans-3, "Source Sans Pro", Helvetica, Arial, sans-serif',
 			fontSize: 16,
 			fontWeightMedium: 600,
 			fontWeightBold: 700,
@@ -113,6 +113,9 @@ export default function App() {
 			h6: {
 				fontSize: '0.9rem',
 				fontWeight: 700,
+			},
+			japanese: {
+				fontFamily: 'source-han-sans-japanese, "Source Sans Pro", Helvetica, Arial, sans-serif',
 			},
 		},
 		shape: {
@@ -166,7 +169,7 @@ export default function App() {
 			divider: '#E2E2E2',
 		},
 		typography: {
-			fontFamily: '"Source Sans Pro", "Helvetica", "Arial", sans-serif',
+			fontFamily: 'source-sans-3, "Source Sans Pro", Helvetica, Arial, sans-serif',
 			fontSize: 16,
 			fontWeightMedium: 600,
 			fontWeightBold: 700,
@@ -198,6 +201,9 @@ export default function App() {
 			h6: {
 				fontSize: '0.9rem',
 				fontWeight: 700,
+			},
+			japanese: {
+				fontFamily: 'source-han-sans-japanese, "Source Sans Pro", Helvetica, Arial, sans-serif',
 			},
 		},
 		shape: {
