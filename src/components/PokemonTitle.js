@@ -1,4 +1,5 @@
 import { Button, Skeleton, Typography } from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2';
 import { formatDexId } from '../utilities';
 
 const PokemonTitle = (props) => {
@@ -13,12 +14,15 @@ const PokemonTitle = (props) => {
 				<Skeleton width="50%">
 					<Typography variant="body" component="p">.</Typography>
 				</Skeleton>
-				<Skeleton width="40%">
-					<Button />
-				</Skeleton>
-				<Skeleton width="40%">
-					<Button />
-				</Skeleton>
+				<Grid container spacing={2}>
+					<Grid xs={4}>
+						<Skeleton variant="rounded" width="100%" height="3rem" />
+					</Grid>
+					<Grid xs={4}>
+						<Skeleton variant="rounded" width="100%" height="3rem" />
+					</Grid>
+				</Grid>
+				
 			</section>
 		) : (
 			<section id="pokemonTitle">

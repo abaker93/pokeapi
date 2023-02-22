@@ -1,28 +1,32 @@
-import { Link } from "react-router-dom";
-
-import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import { AppBar, IconButton, Link, Toolbar, Typography } from '@mui/material';
 import { Settings } from '@mui/icons-material';
 
 const Nav = () => {
 	return (
-		<AppBar position="fixed">
+		<AppBar
+			position="fixed"
+			sx={{
+				backgroundColor: "rgba(255, 255, 255, 0.8)",
+				backdropFilter: "blur(8px)"
+			}}
+		>
 			<Toolbar>
 				<Typography
-					variant="h6"
+					variant="body1"
 					component="div"
 					sx={{
 						flexGrow: 1,
 						mr: 2
 					}}
 				>
-					<Link to="/">
+					<Link href="/" color="black" underline="none">
 						Drifloon Database
 					</Link>
 				</Typography>
 				<IconButton
 					size="large"
 					edge="end"
-					color="inherit"
+					color="black"
 					aria-label="customization"
 				>
 					<Settings />

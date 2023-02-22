@@ -3,9 +3,7 @@ import { useParams } from "react-router-dom";
 
 import PokemonHeader from "../components/PokemonHeader";
 import PokemonTitle from '../components/PokemonTitle';
-import { baseURL, formatDexId } from '../utilities';
-
-import { Button, Skeleton, Typography } from '@mui/material';
+import { baseURL } from '../utilities';
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);

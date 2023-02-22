@@ -7,7 +7,14 @@ const PokemonHeader = (props) => {
 
 	return (
 		props.loading ? (
-			<Skeleton variant="rectangle" width="100%" height="30vh" />
+			<Skeleton
+				variant="rectangle"
+				sx={{
+					width:				"100%",
+					height:				"30vh",
+					marginBottom:	"4rem"
+				}}
+			/>
 		) : (
 			<header>
 				<Box className="top">
