@@ -8,75 +8,38 @@ const Pokemon = () => {
 
 	const [loading, setLoading] = useState(false);
 	const [pokemon, setPokemon] = useState([]);
-	// const [pokemonSpecies, setPokemonSpecies] = useState([]);
-	// const [nextPokemon, setNextPokemon] = useState([]);
-	// const [prevPokemon, setPrevPokemon] = useState([]);
 
 	const getPokemon = id => {
 		setLoading(true);
 
-		fetch(`${baseURL}/pokemon/${id}`)
-			.then((res) => res.json())
-			.then((data) => {
-				let temp = data;
-				
-				const getPokemonSpecies = id => {
-					fetch(`${baseURL}/pokemon-species/${id}`)
-						.then((res) => res.json())
-						.then((data) => {
-							setPokemon([{...temp, ...data}])
-						})
+		Promise.all([
+			fetch(`${baseURL}/pokemon/${id}`).then(value => value.json()),
+			fetch(`${baseURL}/pokemon-species/${id}`).then(value => value.json()),
+			fetch(`${baseURL}/pokemon/${id-1}`).then(value => value.json()),
+			fetch(`${baseURL}/pokemon/${id+1}`).then(value => value.json())
+		]).then(response => {
+			setPokemon([{
+				...response[0],
+				...response[1],
+				"prev": {
+					"name": response[2].name,
+					"artwork": response[2].sprites.other["official-artwork"].front_default
+				},
+				"next": {
+					"name": response[3].name,
+					"artwork": response[3].sprites.other["official-artwork"].front_default
 				}
-				getPokemonSpecies(id);
-				setTimeout(() => {
-					setLoading(false)
-				}, 2000)
-			});
+			}])
+		})
 
-		
+		setTimeout(() => {
+			setLoading(false)
+		}, 0)
 	}
-
-	// const getPokemonSpecies = id => {
-	// 	setLoading(true);
-
-	// 	fetch(`${baseURL}/pokemon-species/${id}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			setPokemon({...pokemon, data});
-	// 			setLoading(false);
-	// 		});
-	// }
-
-	// const getPrevPokemon = id => {
-	// 	setLoading(true);
-
-	// 	fetch(`${baseURL}/pokemon-species/${id - 1}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			setPrevPokemon([data]);
-	// 			setLoading(false);
-	// 		});
-	// }
-
-	// const getNextPokemon = id => {
-	// 	setLoading(true);
-
-	// 	fetch(`${baseURL}/pokemon-species/${id + 1}`)
-	// 		.then((res) => res.json())
-	// 		.then((data) => {
-	// 			setNextPokemon([data]);
-	// 			setLoading(false);
-	// 		});
-	// };
 
 	useEffect(() => {
 		getPokemon(pokemonId);
-		// getPokemonSpecies(pokemonId);
-		// getPrevPokemon(pokemonId);
-		// getNextPokemon(pokemonId);
 	}, [pokemonId]);
-
-	console.log(pokemon)
 
 	return (
 		<>
@@ -99,20 +62,18 @@ const Pokemon = () => {
 								alt={p.name}
 							/>
 							<Link to={`/pokemon/${p.id - 1}`}>
-								Previous
-								{/* <img
+								<img
 									className="prev-poke-img"
-									src={prevPokemon[0].sprites.other["official-artwork"].front_default}
-									alt={prevPokemon[0].name}
-								/> */}
+									src={p.prev.artwork}
+									alt={p.prev.name}
+								/>
 							</Link>
 							<Link to={`/pokemon/${p.id + 1}`}>
-								Next
-								{/* <img
+								<img
 									className="next-poke-img"
-									src={nextPokemon[0].sprites.other["official-artwork"].front_default}
-									alt={nextPokemon[0].name}
-								/> */}
+									src={p.next.artwork}
+									alt={p.next.name}
+								/>
 							</Link>
 						</div>
 					</header>
