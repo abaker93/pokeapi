@@ -44,14 +44,14 @@ const Pokedex = () => {
 	}, [pokedex]);
 
 	return (
-		<main>
+		<main style={{ paddingTop: 120 }}>
 			<Box component="header">
 				{loading ? (
 					<Skeleton width="100%">
-						<Typography variant="h1" component="h1">.</Typography>
+						<Typography variant="h2" component="h1">.</Typography>
 					</Skeleton>
 				) : (
-					<Typography variant="h1" component="h1">{pokedex} Pokedex</Typography>
+					<Typography variant="h2" component="h1" sx={{ textTransform: "capitalize" }}>{pokedex} Pokedex</Typography>
 				)}
 			</Box>
 
@@ -59,6 +59,7 @@ const Pokedex = () => {
 				{allPokemon.map((p, i) => (
 					<PokedexCard
 						key={i}
+						loading={loading}
 						{...p}
 					/>
 				))}
