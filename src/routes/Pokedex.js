@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Box, Container, Skeleton, Typography } from "@mui/material";
+import { Box, Button, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
 import PokedexCard from "../components/PokedexCard";
@@ -67,7 +67,7 @@ const Pokedex = () => {
 					</Grid>
 				))}
 
-				<button onClick={() => getAllPokemon(pokedex, loadMore)}>Load More</button>
+				<Button variant="contained" onClick={() => getAllPokemon(pokedex, loadMore)}>Load More</Button>
 			</Grid>
 		</Container>
 	)
