@@ -34,8 +34,8 @@ const PokedexCard = (props) => {
 										</Typography>
 									</Grid>
 									<Grid container xs={12}>
-										<Chip label={p.types[0].type.name} size="small" />
-										{p.types[1] ? <Chip label={p.types[1].type.name} size="small" /> : null}
+										<Chip variant="type" size="small" type={p.types[0].type.name} label={p.types[0].type.name} />
+										{p.types[1] ? <Chip variant="type" size="small" type={p.types[1].type.name} label={p.types[1].type.name} sx={{ ml: 1 }} /> : null}
 									</Grid>
 									<Grid container xs={12}>
 										<Grid xs>

@@ -21,11 +21,11 @@ const Nav = () => {
 			position="fixed"
 			elevation={0}
 			sx={{
-				padding: 2,
+				px: 2,
 				borderBottom: "1px solid ",
 			}}
 		>
-			<Toolbar>
+			<Toolbar sx={{ p: 0 }}>
 				<IconButton
 					size="large"
 					edge="start"

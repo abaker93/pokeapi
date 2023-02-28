@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Box, Container, Skeleton, Typography } from "@mui/material";
+import Grid from '@mui/material/Unstable_Grid2';
+
 import PokedexCard from "../components/PokedexCard";
 import { baseURL } from "../utilities/utilities";
-
-import { Box, Skeleton, Typography } from "@mui/material";
 
 const Pokedex = () => {
 	const pokedex = useParams().dex
@@ -44,7 +45,7 @@ const Pokedex = () => {
 	}, [pokedex]);
 
 	return (
-		<main style={{ paddingTop: 120 }}>
+		<Container sx={{ p: 2, pt: "120px" }}>
 			<Box component="header">
 				{loading ? (
 					<Skeleton width="100%">
@@ -55,18 +56,20 @@ const Pokedex = () => {
 				)}
 			</Box>
 
-			<section id="pokedex">
+			<Grid id="Pokedex" container spacing={2}>
 				{allPokemon.map((p, i) => (
-					<PokedexCard
-						key={i}
-						loading={loading}
-						{...p}
-					/>
+					<Grid xs={12}>
+						<PokedexCard
+							key={i}
+							loading={loading}
+							{...p}
+						/>
+					</Grid>
 				))}
 
-				<button onClick={() => getAllPokemon()}>Load More</button>
-			</section>
-		</main>
+				<button onClick={() => getAllPokemon(pokedex, loadMore)}>Load More</button>
+			</Grid>
+		</Container>
 	)
 }
 

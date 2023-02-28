@@ -1726,7 +1726,7 @@ main#Pokemon header .top .next-poke-img:hover {
   right: -1rem;
 }
 
-section#pokedex .MuiCard-root {
+#Pokedex .MuiCard-root {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
 }
 

@@ -73,6 +73,91 @@ const pokeTheme = createTheme({
 				},
 			},
 		},
+		MuiChip: {
+			variants: [
+				{
+					props: { variant: 'type' },
+					style: {
+						textTransform: 'uppercase',
+						fontSize: "0.75rem",
+						letterSpacing: "0.1em",
+						color: '#FFFFFF',
+					},
+				},
+				{
+					props: { type: 'fighting' },
+					style: { backgroundColor: '#CE406B' },
+				},
+				{
+					props: { type: 'psychic' },
+					style: { backgroundColor: '#F97178' },
+				},
+				{
+					props: { type: 'fire' },
+					style: { backgroundColor: '#FE9D52' },
+				},
+				{
+					props: { type: 'ground' },
+					style: { backgroundColor: '#DB7948' },
+				},
+				{
+					props: { type: 'electric' },
+					style: { backgroundColor: '#F3D139', color: '#000000' },
+				},
+				{
+					props: { type: 'bug' },
+					style: { backgroundColor: '#90BF2B' },
+				},
+				{
+					props: { type: 'grass' },
+					style: { backgroundColor: '#67BB5D' },
+				},
+				{
+					props: { type: 'ice' },
+					style: { backgroundColor: '#73CEBF' },
+				},
+				{
+					props: { type: 'steel' },
+					style: { backgroundColor: '#598FA1' },
+				},
+				{
+					props: { type: 'water' },
+					style: { backgroundColor: '#4C8FD6' },
+				},
+				{
+					props: { type: 'dragon' },
+					style: { backgroundColor: '#096CC3' },
+				},
+				{
+					props: { type: 'ghost' },
+					style: { backgroundColor: '#5269AD' },
+				},
+				{
+					props: { type: 'flying' },
+					style: { backgroundColor: '#92AADD' },
+				},
+				{
+					props: { type: 'dark' },
+					style: { backgroundColor: '#5B5365' },
+				},
+				{
+					props: { type: 'poison' },
+					style: { backgroundColor: '#AB69C9' },
+				},
+				{
+					props: { type: 'fairy' },
+					style: { backgroundColor: '#ED92E8' },
+				},
+				{
+					props: { type: 'rock' },
+					style: { backgroundColor: '#C8B689' },
+				},
+				{
+					props: { type: 'normal' },
+					style: { backgroundColor: '#909AA2' },
+				},
+			],
+		},
 	},
 	props: {
 		MuiTooltip: {
