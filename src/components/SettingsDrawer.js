@@ -1,6 +1,6 @@
 import { useColorMode } from '../utilities/context';
 import { Box, Divider, Drawer, IconButton, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
-import { CloseSharp, DarkModeSharp, LightModeSharp, SettingsBrightnessSharp } from '@mui/icons-material';
+import { CloseSharp, DarkModeSharp, LightModeSharp } from '@mui/icons-material';
 
 export default function SettingsDrawer(props) {
 	const { colorMode, toggleColorMode } = useColorMode();
@@ -49,10 +49,6 @@ export default function SettingsDrawer(props) {
 							<LightModeSharp fontSize="small" sx={{ mr: 1 }} />
 							<Typography variant="caption" component="span">Light</Typography>
 						</ToggleButton>
-						{/* <ToggleButton value="system" aria-label="system color mode">
-							<SettingsBrightnessSharp fontSize="inherit" />
-							<Typography>System</Typography>
-						</ToggleButton> */}
 						<ToggleButton value="dark" aria-label="dark color mode" size="medium">
 							<DarkModeSharp fontSize="small" sx={{ mr: 1 }} />
 							<Typography variant="caption" component="span">Dark</Typography>
