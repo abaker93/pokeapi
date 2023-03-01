@@ -7,6 +7,8 @@
 		align-items: center;
 		justify-items: center;
 		overflow-x: clip;
+		padding-top: calcREM(56px);
+		margin-bottom: calcREM(20px);
 
 		.japanese {
 			position: absolute;

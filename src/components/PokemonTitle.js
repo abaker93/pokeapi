@@ -1,13 +1,17 @@
-import { Button, Skeleton, Typography } from "@mui/material";
+import { createElement } from "react";
+import { FaceRetouchingOffRounded } from "@mui/icons-material";
+import { Chip, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
-import { formatDexId } from '../utilities/utilities';
+
+import { capitalize, formatDexId } from '../utilities/utilities';
+import TypeIcon from "../assets/TypeIcons";
 
 const PokemonTitle = (props) => {
 	const p = props[0];
 
 	return (
 		props.loading ? (
-			<section id="pokemonTitle">
+			<Container id="pokemonTitle">
 				<Skeleton width="80%">
 					<Typography variant="h1" component="h1">.</Typography>
 				</Skeleton>
@@ -22,10 +26,9 @@ const PokemonTitle = (props) => {
 						<Skeleton variant="rounded" width="100%" height="3rem" />
 					</Grid>
 				</Grid>
-				
-			</section>
+			</Container>
 		) : (
-			<section id="pokemonTitle">
+			<Container id="pokemonTitle">
 				<Typography variant="h1" component="h1">
 					<Typography variant="body2" component="span">
 						<Typography variant="caption" component="span">No.</Typography>
@@ -38,11 +41,11 @@ const PokemonTitle = (props) => {
 					{p.genera.filter(g => g.language.name === 'en').map(g => g.genus)}
 				</Typography>
 
-				<Button type="button">{p.types[0].type.name}</Button>
+				<Chip variant="type" type={p.types[0].type.name} icon={<TypeIcon type={p.types[0].type.name} />} label={p.types[0].type.name} />
 				{p.types[1] ? (
-					<Button type="button">{p.types[1].type.name}</Button>
-				)	: null}
-			</section>
+					<Chip variant="type" type={p.types[1].type.name} icon={<TypeIcon type={p.types[0].type.name} />} label={p.types[1].type.name} />
+				) : null}
+			</Container>
 		)
 	)
 }

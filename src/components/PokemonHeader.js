@@ -11,15 +11,15 @@ const PokemonHeader = (props) => {
 				variant="rectangle"
 				sx={{
 					width: "100%",
-					height: "30vh",
-					marginBottom: "4rem"
+					height: "35vh",
+					pt: "56px",
+					mb: "1.25rem"
 				}}
 			/>
 		) : (
 			<Container
 				component="header"
 				maxWidth="false"
-				sx={{ pt: "56px" }}
 			>
 				<Typography variant="japanese" component="span" className="japanese">
 					{p.names.filter(n => n.language.name === 'ja').map(n => n.name)}

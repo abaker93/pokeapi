@@ -95,14 +95,7 @@ const Pokemon = () => {
 					maxWidth="false"
 					data-type-one={p.types[0].type.name}
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
-					sx={{
-						px: {
-							xs: 0,
-							sm: 0,
-							md: 0,
-							lg: 0,
-							xl: 0
-						} }}
+					sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 				>
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />

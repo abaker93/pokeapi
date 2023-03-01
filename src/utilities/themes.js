@@ -159,6 +159,13 @@ const pokeTheme = createTheme({
 					style: { backgroundColor: '#909AA2' },
 				},
 			],
+			styleOverrides: {
+				icon: ({ ownerState }) => ({
+					...(ownerState.variant === 'type' && {
+						color: '#FFFFFF',
+					})
+				}),
+			},
 		},
 	},
 	props: {

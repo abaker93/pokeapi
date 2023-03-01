@@ -1732,6 +1732,8 @@ input {
   align-items: center;
   justify-items: center;
   overflow-x: clip;
+  padding-top: 3.5rem;
+  margin-bottom: 1.25rem;
 }
 #Pokemon header .japanese {
   position: absolute;
