@@ -1,5 +1,9 @@
 const baseURL = 'https://pokeapi.co/api/v2';
 
+const capitalize = text => {
+	return text.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase());
+}
+
 const formatDexId = num => {
 	// console.log(num)
 	return num < 10
@@ -11,4 +15,4 @@ const formatDexId = num => {
 				: num.toString();
 }
 
-export { baseURL, formatDexId };
+export { baseURL, capitalize, formatDexId };

@@ -1669,12 +1669,12 @@ img {
   max-width: 100%;
 }
 
-h1 {
-  font-size: 24px;
+.grid {
+  display: grid;
 }
 
-h2 {
-  font-size: 20px;
+.js-center {
+  justify-self: center;
 }
 
 main#Pokemon header {
@@ -1726,8 +1726,57 @@ main#Pokemon header .top .next-poke-img:hover {
   right: -1rem;
 }
 
-#Pokedex .MuiCard-root {
+#Pokedex .pokedex-card {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+  margin-top: 3rem;
+  overflow: visible;
+  color: #FFFFFF;
+}
+#Pokedex .pokedex-card .grid.MuiCardContent-root {
+  grid-template-rows: 4.5rem auto;
+  gap: 0.5rem;
+}
+#Pokedex .pokedex-card .row.name {
+  padding-bottom: 0.125rem;
+}
+#Pokedex .pokedex-card .row.types {
+  padding-bottom: 0.5rem;
+}
+#Pokedex .pokedex-card .row.stats {
+  grid-auto-flow: column;
+  justify-content: space-around;
+}
+#Pokedex .pokedex-card h2 {
+  font-weight: bold;
+  line-height: 1em;
+}
+#Pokedex .pokedex-card h2 > span {
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-right: 0.25rem;
+  opacity: 0.5;
+}
+#Pokedex .pokedex-card h2 > span > span {
+  font-size: 0.75em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 0.125rem;
+}
+#Pokedex .pokedex-card h3 {
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.07em;
+  text-align: center;
+}
+#Pokedex .pokedex-card p {
+  font-size: 0.875rem;
+  text-align: center;
+}
+#Pokedex .pokedex-card img {
+  position: relative;
+  top: -3rem;
+  max-width: 7.5rem;
 }
 
 /*# sourceMappingURL=main.css.map */
