@@ -33,9 +33,9 @@ const Pokedex = () => {
 				};
 				createPokemonObject(data.results);
 
-				setTimeout(() => {
+				// setTimeout(() => {
 					setLoading(false)
-				}, 2000)
+				// }, 2000)
 			});
 	};
 
@@ -44,7 +44,7 @@ const Pokedex = () => {
 	}, [pokedex]);
 
 	return (
-		<Container component="main" sx={{ p: 0, pt: "120px" }}>
+		<Container component="main" sx={{ p: 0, pt: "100px" }}>
 			<Container component="header">
 				{loading ? (
 					<Skeleton width="100%">
@@ -65,7 +65,7 @@ const Pokedex = () => {
 				))}
 			</Container>
 
-			<Container sx={{ pt: 2, pb: 10, textAlign: 'center' }}>
+			<Container sx={{ pt: 5, pb: 10, textAlign: 'center' }}>
 				{loading ? (
 					<Skeleton width="50%" height="40px" />
 				) : (

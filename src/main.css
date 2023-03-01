@@ -1724,6 +1724,55 @@ input {
   max-width: 7.5rem;
 }
 
+#Pokemon header {
+  height: 30vh;
+  margin-bottom: 4rem;
+}
+#Pokemon header .top {
+  position: absolute;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  height: 30vh;
+  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+}
+#Pokemon header .top .japanese {
+  position: absolute;
+  font-size: 18vw;
+  font-weight: bolder;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+}
+#Pokemon header .top .poke-img {
+  position: relative;
+  top: 2rem;
+  width: 80%;
+  margin: 0 auto;
+}
+#Pokemon header .top .prev-poke-img, #Pokemon header .top .next-poke-img {
+  position: absolute;
+  width: 6rem;
+  bottom: -3rem;
+  filter: brightness(0) opacity(0.2);
+  transition: all ease-in-out 0.2s;
+  width: 6rem;
+}
+#Pokemon header .top .prev-poke-img:hover, #Pokemon header .top .next-poke-img:hover {
+  filter: none;
+}
+#Pokemon header .top .prev-poke-img {
+  left: -2rem;
+}
+#Pokemon header .top .prev-poke-img:hover {
+  left: -1rem;
+}
+#Pokemon header .top .next-poke-img {
+  right: -2rem;
+}
+#Pokemon header .top .next-poke-img:hover {
+  right: -1rem;
+}
+
 img {
   max-width: 100%;
 }
@@ -1734,55 +1783,6 @@ img {
 
 .js-center {
   justify-self: center;
-}
-
-main#Pokemon header {
-  height: 30vh;
-  margin-bottom: 4rem;
-}
-main#Pokemon header .top {
-  position: absolute;
-  display: grid;
-  align-items: center;
-  justify-items: center;
-  height: 30vh;
-  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
-}
-main#Pokemon header .top .japanese {
-  position: absolute;
-  font-size: 18vw;
-  font-weight: bolder;
-  mix-blend-mode: overlay;
-  opacity: 0.3;
-}
-main#Pokemon header .top .poke-img {
-  position: relative;
-  top: 2rem;
-  width: 80%;
-  margin: 0 auto;
-}
-main#Pokemon header .top .prev-poke-img, main#Pokemon header .top .next-poke-img {
-  position: absolute;
-  width: 6rem;
-  bottom: -3rem;
-  filter: brightness(0) opacity(0.2);
-  transition: all ease-in-out 0.2s;
-  width: 6rem;
-}
-main#Pokemon header .top .prev-poke-img:hover, main#Pokemon header .top .next-poke-img:hover {
-  filter: none;
-}
-main#Pokemon header .top .prev-poke-img {
-  left: -2rem;
-}
-main#Pokemon header .top .prev-poke-img:hover {
-  left: -1rem;
-}
-main#Pokemon header .top .next-poke-img {
-  right: -2rem;
-}
-main#Pokemon header .top .next-poke-img:hover {
-  right: -1rem;
 }
 
 /*# sourceMappingURL=main.css.map */

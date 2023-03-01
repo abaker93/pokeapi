@@ -36,11 +36,12 @@ const Nav = () => {
 					<Pokeball color="#9754B1" style={{ height: "2rem" }} />
 				</IconButton>
 				<Typography
-					variant="h5"
-					component="div"
+					variant="h6"
+					component="p"
 					sx={{
 						flexGrow: 1,
-						mr: 2
+						mr: 2,
+						fontWeight: "bold"
 					}}
 				>
 					<Link href="/" color="inherit" underline="none">

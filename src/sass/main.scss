@@ -1,66 +1,12 @@
-@import "functions";
-@import "reset";
-@import "variables";
+@import "./functions";
+@import "./reset";
+@import "./variables";
 
-@import "components/components";
+@import "./components/components";
+@import "./routes/routes";
 
 img { max-width: 100%; }
 
 .grid { display: grid; }
 
 .js-center { justify-self: center; }
-
-main#Pokemon {
-	header {
-		height: 30vh;
-		margin-bottom: 4rem;
-
-		.top {
-			position: absolute;
-			display: grid;
-			align-items: center;
-			justify-items: center;
-			height: 30vh;
-			background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
-
-			.japanese {
-				position: absolute;
-				font-size: 18vw;
-				font-weight: bolder;
-				mix-blend-mode: overlay;
-				opacity: 0.3;
-			}
-
-			.poke-img {
-				position: relative;
-				top: 2rem;
-				width: 80%;
-				margin: 0 auto;
-			}
-
-			.prev-poke-img, .next-poke-img {
-				position: absolute;
-				width: 6rem;
-				bottom: -3rem;
-				filter: brightness(0) opacity(0.2);
-				transition: all ease-in-out 0.2s;
-				width: 6rem;
-				
-
-				&:hover { filter: none; }
-			}
-
-			.prev-poke-img {
-				left: -2rem;
-
-				&:hover { left: -1rem; }
-			}
-
-			.next-poke-img {
-				right: -2rem;
-
-				&:hover { right: -1rem; }
-			}
-		}
-	}
-}
