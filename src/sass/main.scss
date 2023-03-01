@@ -7,6 +7,12 @@
 
 img { max-width: 100%; }
 
+.position-absolute	{ position: absolute; }
+.position-fixed			{ position: fixed; }
+.position-relative	{ position: relative; }
+.position-static		{ position: static; }
+.position-sticky		{ position: sticky; }
+
 .grid { display: grid; }
 
 .js-center { justify-self: center; }

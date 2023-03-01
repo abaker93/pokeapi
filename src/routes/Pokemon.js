@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -84,28 +85,28 @@ const Pokemon = () => {
 		getPokemon(pokemonId);
 	}, [pokemonId]);
 
-	// console.log(pokemon)
 	return (
 		<>
 			{pokemon.map((p, index) => (
-				<main
+				<Container
 					key={index}
 					id="Pokemon"
+					component="main"
+					maxWidth="false"
 					data-type-one={p.types[0].type.name}
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
-					style={{ marginTop: 70 }}
+					sx={{
+						px: {
+							xs: 0,
+							sm: 0,
+							md: 0,
+							lg: 0,
+							xl: 0
+						} }}
 				>
-
-					<PokemonHeader
-						loading={loading}
-						{...pokemon}
-					/>
-					
-					<PokemonTitle
-						loading={loading}
-						{...pokemon}
-					/>
-				</main>
+					<PokemonHeader loading={loading} {...pokemon} />
+					<PokemonTitle loading={loading} {...pokemon} />
+				</Container>
 			))}
 		</>
 	);

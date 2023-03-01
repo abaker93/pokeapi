@@ -1725,56 +1725,85 @@ input {
 }
 
 #Pokemon header {
-  height: 30vh;
-  margin-bottom: 4rem;
-}
-#Pokemon header .top {
-  position: absolute;
+  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+  height: 35vh;
   display: grid;
+  position: relative;
   align-items: center;
   justify-items: center;
-  height: 30vh;
-  background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+  overflow-x: clip;
 }
-#Pokemon header .top .japanese {
+#Pokemon header .japanese {
   position: absolute;
   font-size: 18vw;
   font-weight: bolder;
   mix-blend-mode: overlay;
   opacity: 0.3;
 }
-#Pokemon header .top .poke-img {
+#Pokemon header .poke-img {
   position: relative;
-  top: 2rem;
-  width: 80%;
-  margin: 0 auto;
+  z-index: 1;
+  bottom: -10%;
+  width: 100%;
+  max-width: 350px;
 }
-#Pokemon header .top .prev-poke-img, #Pokemon header .top .next-poke-img {
+#Pokemon header .waves {
   position: absolute;
-  width: 6rem;
-  bottom: -3rem;
+  height: 100%;
+  width: 100%;
+}
+#Pokemon header .waves svg {
+  height: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+#Pokemon header .prev-poke-img, #Pokemon header .next-poke-img {
+  position: absolute;
+  z-index: 1;
+  bottom: -15vw;
+  width: 30vw;
   filter: brightness(0) opacity(0.2);
   transition: all ease-in-out 0.2s;
-  width: 6rem;
 }
-#Pokemon header .top .prev-poke-img:hover, #Pokemon header .top .next-poke-img:hover {
+#Pokemon header .prev-poke-img:hover, #Pokemon header .next-poke-img:hover {
   filter: none;
 }
-#Pokemon header .top .prev-poke-img {
-  left: -2rem;
+#Pokemon header .prev-poke-img {
+  left: -12vw;
 }
-#Pokemon header .top .prev-poke-img:hover {
-  left: -1rem;
+#Pokemon header .prev-poke-img:hover {
+  left: -8vw;
 }
-#Pokemon header .top .next-poke-img {
-  right: -2rem;
+#Pokemon header .next-poke-img {
+  right: -12vw;
 }
-#Pokemon header .top .next-poke-img:hover {
-  right: -1rem;
+#Pokemon header .next-poke-img:hover {
+  right: -8vw;
 }
 
 img {
   max-width: 100%;
+}
+
+.position-absolute {
+  position: absolute;
+}
+
+.position-fixed {
+  position: fixed;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.position-static {
+  position: static;
+}
+
+.position-sticky {
+  position: sticky;
 }
 
 .grid {
