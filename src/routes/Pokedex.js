@@ -63,9 +63,16 @@ const Pokedex = () => {
 						{...p}
 					/>
 				))}
-
-				<Button variant="contained" onClick={() => getAllPokemon(pokedex, loadMore)}>Load More</Button>
 			</Container>
+
+			<Container sx={{ pt: 2, pb: 10, textAlign: 'center' }}>
+				{loading ? (
+					<Skeleton width="50%" height="40px" />
+				) : (
+					<Button variant="contained" onClick={() => getAllPokemon(pokedex, loadMore)}>Load More</Button>
+				)}
+			</Container>
+
 		</Container>
 	)
 }

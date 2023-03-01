@@ -5,14 +5,15 @@ const PokedexCard = (props) => {
 	let p = props;
 
 	return (
-		props.loading ? (
-			<Skeleton width="100%" height="100px" />
+		p.loading ? (
+			<Skeleton className="pokedex-card" width="100%" height="200px" />
 		) : (
 				<Card
 					data-type-one={p.types[0].type.name}
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
 					className="pokedex-card"
 					elevation={16}
+					sx={{ overflow: "visible", color: "#FFFFFF" }}
 				>
 					<CardActionArea href={`/pokemon/${formatDexId(p.id)}`}>
 						<CardContent className="grid">
