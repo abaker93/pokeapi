@@ -6,7 +6,7 @@ export default function PokemonStats(props) {
 	const p = props[0];
 
 	return (
-		<Container>
+		<Container id="PokemonStats" className="grid">
 			<Typography component="h3">HP</Typography>
 			<LinearProgress variant="determinate" value={normalize(p.stats[0].base_stat)} />
 			<Typography component="p">{p.stats[0].base_stat}</Typography>
