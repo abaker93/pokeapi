@@ -1739,6 +1739,7 @@ input {
   position: absolute;
   font-size: 18vw;
   font-weight: bolder;
+  white-space: nowrap;
   mix-blend-mode: overlay;
   opacity: 0.3;
 }
@@ -1787,6 +1788,7 @@ input {
 
 #PokemonTitle {
   text-align: center;
+  margin-bottom: 1.25rem;
 }
 #PokemonTitle h1 {
   font-weight: bold;

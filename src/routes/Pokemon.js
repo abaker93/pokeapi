@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 
 import PokemonHeader from "../components/PokemonHeader";
 import PokemonTitle from '../components/PokemonTitle';
+import PokemonStats from '../components/PokemonStats';
 import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
@@ -99,6 +100,7 @@ const Pokemon = () => {
 				>
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
+					<PokemonStats loading={loading} {...pokemon} />
 				</Container>
 			))}
 		</>
