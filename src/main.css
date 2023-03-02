@@ -1724,7 +1724,7 @@ input {
   max-width: 7.5rem;
 }
 
-#Pokemon header {
+#PokemonHeader {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
   height: 35vh;
   display: grid;
@@ -1733,34 +1733,35 @@ input {
   justify-items: center;
   overflow-x: clip;
   padding-top: 3.5rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 2.5rem;
 }
-#Pokemon header .japanese {
+#PokemonHeader .japanese {
   position: absolute;
   font-size: 18vw;
   font-weight: bolder;
   mix-blend-mode: overlay;
   opacity: 0.3;
 }
-#Pokemon header .poke-img {
+#PokemonHeader .poke-img {
   position: relative;
   z-index: 1;
-  bottom: -10%;
+  bottom: 0;
   width: 100%;
   max-width: 350px;
+  max-height: 35vh;
 }
-#Pokemon header .waves {
+#PokemonHeader .waves {
   position: absolute;
   height: 100%;
   width: 100%;
 }
-#Pokemon header .waves svg {
+#PokemonHeader .waves svg {
   height: auto;
   width: 100%;
   position: absolute;
   bottom: 0;
 }
-#Pokemon header .prev-poke-img, #Pokemon header .next-poke-img {
+#PokemonHeader .prev-poke-img, #PokemonHeader .next-poke-img {
   position: absolute;
   z-index: 1;
   bottom: -15vw;
@@ -1768,20 +1769,43 @@ input {
   filter: brightness(0) opacity(0.2);
   transition: all ease-in-out 0.2s;
 }
-#Pokemon header .prev-poke-img:hover, #Pokemon header .next-poke-img:hover {
+#PokemonHeader .prev-poke-img:hover, #PokemonHeader .next-poke-img:hover {
   filter: none;
 }
-#Pokemon header .prev-poke-img {
+#PokemonHeader .prev-poke-img {
   left: -12vw;
 }
-#Pokemon header .prev-poke-img:hover {
+#PokemonHeader .prev-poke-img:hover {
   left: -8vw;
 }
-#Pokemon header .next-poke-img {
+#PokemonHeader .next-poke-img {
   right: -12vw;
 }
-#Pokemon header .next-poke-img:hover {
+#PokemonHeader .next-poke-img:hover {
   right: -8vw;
+}
+
+#PokemonTitle {
+  text-align: center;
+}
+#PokemonTitle h1 {
+  font-weight: bold;
+}
+#PokemonTitle h1 > span {
+  font-weight: bold;
+  font-size: 0.6em;
+  margin-right: 0.25rem;
+  opacity: 0.5;
+}
+#PokemonTitle h1 > span > span {
+  font-weight: bold;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  margin-right: 0.125rem;
+}
+#PokemonTitle p {
+  font-style: italic;
+  margin-bottom: 0.5rem;
 }
 
 img {

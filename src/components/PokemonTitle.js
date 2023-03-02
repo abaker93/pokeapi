@@ -11,7 +11,7 @@ const PokemonTitle = (props) => {
 
 	return (
 		props.loading ? (
-			<Container id="pokemonTitle">
+			<Container id="PokemonTitle">
 				<Skeleton width="80%">
 					<Typography variant="h1" component="h1">.</Typography>
 				</Skeleton>
@@ -28,13 +28,13 @@ const PokemonTitle = (props) => {
 				</Grid>
 			</Container>
 		) : (
-			<Container id="pokemonTitle">
-				<Typography variant="h1" component="h1">
-					<Typography variant="body2" component="span">
-						<Typography variant="caption" component="span">No.</Typography>
+			<Container id="PokemonTitle">
+				<Typography variant="h3" component="h1">
+					<Typography variant="h3" component="span">
+						<Typography variant="h3" component="span">No.</Typography>
 						{formatDexId(p.id)}
 					</Typography>
-					{p.name}
+					{capitalize(p.name)}
 				</Typography>
 
 				<Typography variant="body" component="p">

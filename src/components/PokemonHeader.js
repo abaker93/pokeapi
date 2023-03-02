@@ -18,6 +18,7 @@ const PokemonHeader = (props) => {
 			/>
 		) : (
 			<Container
+				id="PokemonHeader"
 				component="header"
 				maxWidth="false"
 			>

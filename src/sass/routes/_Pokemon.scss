@@ -1,63 +1,89 @@
-#Pokemon {
-	header {
-		background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
-		height: 35vh;
-		display: grid;
+#PokemonHeader {
+	background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+	height: 35vh;
+	display: grid;
+	position: relative;
+	align-items: center;
+	justify-items: center;
+	overflow-x: clip;
+	padding-top: calcREM(56px);
+	margin-bottom: calcREM(40px);
+
+	.japanese {
+		position: absolute;
+		font-size: 18vw;
+		font-weight: bolder;
+		mix-blend-mode: overlay;
+		opacity: 0.3;
+	}
+
+	.poke-img {
 		position: relative;
-		align-items: center;
-		justify-items: center;
-		overflow-x: clip;
-		padding-top: calcREM(56px);
-		margin-bottom: calcREM(20px);
+		z-index: 1;
+		bottom: 0;
+		width: 100%;
+		max-width: 350px;
+		max-height: 35vh;
+	}
 
-		.japanese {
-			position: absolute;
-			font-size: 18vw;
-			font-weight: bolder;
-			mix-blend-mode: overlay;
-			opacity: 0.3;
-		}
+	.waves {
+		position: absolute;
+		height: 100%;
+		width: 100%;
 
-		.poke-img {
-			position: relative;
-			z-index: 1;
-			bottom: -10%;
+		svg {
+			height: auto;
 			width: 100%;
-			max-width: 350px;
-		}
-
-		.waves {
 			position: absolute;
-			height: 100%;
-			width: 100%;
-			
-			svg {
-				height: auto;
-				width: 100%;
-				position: absolute;
-				bottom: 0;
+			bottom: 0;
+		}
+	}
+
+	.prev-poke-img, .next-poke-img {
+		position: absolute;
+		z-index: 1;
+		bottom: -15vw;
+		width: 30vw;
+		filter: brightness(0) opacity(0.2);
+		transition: $transition;
+
+		&:hover { filter: none; }
+	}
+
+	.prev-poke-img {
+		left: -12vw;
+		&:hover { left: -8vw; }
+	}
+
+	.next-poke-img {
+		right: -12vw;
+		&:hover { right: -8vw; }
+	}
+}
+
+#PokemonTitle {
+	text-align: center;
+
+	h1 {
+		font-weight: bold;
+
+		> span {
+			font-weight: bold;
+			font-size: 0.6em;
+			margin-right: calcREM(4px);
+			opacity: 0.5;
+
+			> span {
+				font-weight: bold;
+				font-size: 0.75em;
+				text-transform: uppercase;
+				margin-right: calcREM(2px);
 			}
 		}
+	}
 
-		.prev-poke-img, .next-poke-img {
-			position: absolute;
-			z-index: 1;
-			bottom: -15vw;
-			width: 30vw;
-			filter: brightness(0) opacity(0.2);
-			transition: $transition;
-
-			&:hover { filter: none; }
-		}
-
-		.prev-poke-img {
-			left: -12vw;
-			&:hover { left: -8vw; }
-		}
-
-		.next-poke-img {
-			right: -12vw;
-			&:hover { right: -8vw; }
-		}
+	p {
+		font-style: italic;
+		margin-bottom: calcREM(8px);
 	}
 }
