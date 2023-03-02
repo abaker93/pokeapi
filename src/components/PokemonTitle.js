@@ -1,5 +1,3 @@
-import { createElement } from "react";
-import { Face, FaceRetouchingOffRounded } from "@mui/icons-material";
 import { Chip, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 

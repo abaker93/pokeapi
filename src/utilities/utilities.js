@@ -15,11 +15,11 @@ const formatDexId = num => {
 				: num.toString();
 }
 
-const normalize = (...values) => {
-	const min = values.reduce((a, b) => a - b);
-	const max = values.reduce((a, b) => b - a)
+	const normalize = (value) => {
+		const min = 1;
+		const max = 255;
 
-	((values - min) * 100) / (max - min);
-}
+		return ((value - min) * 100) / (max - min)
+	};
 
 export { baseURL, capitalize, formatDexId, normalize };
