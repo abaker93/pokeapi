@@ -163,6 +163,9 @@ const pokeTheme = createTheme({
 				icon: ({ ownerState }) => ({
 					...(ownerState.variant === 'type' && {
 						color: '#FFFFFF',
+						width: '1em',
+						height: '1em',
+						fontSize: '1.71rem',
 					})
 				}),
 			},

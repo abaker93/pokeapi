@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { FaceRetouchingOffRounded } from "@mui/icons-material";
+import { Face, FaceRetouchingOffRounded } from "@mui/icons-material";
 import { Chip, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
@@ -43,7 +43,7 @@ const PokemonTitle = (props) => {
 
 				<Chip variant="type" type={p.types[0].type.name} icon={<TypeIcon type={p.types[0].type.name} />} label={p.types[0].type.name} />
 				{p.types[1] ? (
-					<Chip variant="type" type={p.types[1].type.name} icon={<TypeIcon type={p.types[0].type.name} />} label={p.types[1].type.name} />
+					<Chip variant="type" type={p.types[1].type.name} icon={<TypeIcon type={p.types[1].type.name} />} label={p.types[1].type.name} sx={{ ml: 1 }} />
 				) : null}
 			</Container>
 		)
