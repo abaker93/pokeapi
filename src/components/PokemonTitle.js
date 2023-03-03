@@ -1,7 +1,7 @@
 import { Chip, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { capitalize, formatDexId } from '../utilities/utilities';
+import { formatDexId } from '../utilities/utilities';
 import TypeIcon from "../assets/TypeIcons";
 
 const PokemonTitle = (props) => {
@@ -32,7 +32,7 @@ const PokemonTitle = (props) => {
 						<Typography variant="h3" component="span">No.</Typography>
 						{formatDexId(p.id)}
 					</Typography>
-					{capitalize(p.name)}
+					{p.names.filter(n => n.language.name === "en").map(n => n.name)}
 				</Typography>
 
 				<Typography variant="body" component="p">

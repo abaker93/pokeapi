@@ -30,7 +30,7 @@ const PokedexCard = (props) => {
 											<Typography component="span">No.</Typography>
 											{formatDexId(p.id)}
 										</Typography>
-										{capitalize(p.name)}
+										{p.names.filter(n => n.language.name === "en").map(n => n.name)}
 									</Typography>
 								</div>
 								<div className="row types">

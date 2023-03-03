@@ -1810,6 +1810,32 @@ input {
   margin-bottom: 0.5rem;
 }
 
+#PokemonStats {
+  grid-template-columns: min-content auto min-content;
+  gap: 8px;
+  align-items: center;
+}
+#PokemonStats h3 {
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1em;
+  justify-self: end;
+}
+#PokemonStats p {
+  font-size: 1rem;
+  line-height: 1em;
+}
+#PokemonStats .MuiLinearProgress-root {
+  height: 0.6rem;
+  border-radius: 500px;
+  background-color: lightgray;
+}
+#PokemonStats .MuiLinearProgress-bar {
+  border-radius: 500px;
+  background-color: var(--type-one-color);
+}
+
 img {
   max-width: 100%;
 }
@@ -1835,7 +1861,7 @@ img {
 }
 
 .grid {
-  display: grid;
+  display: grid !important;
 }
 
 .js-center {
