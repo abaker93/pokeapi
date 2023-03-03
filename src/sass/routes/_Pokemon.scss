@@ -89,3 +89,33 @@
 		margin-bottom: calcREM(8px);
 	}
 }
+
+#PokemonStats {
+	grid-template-columns: min-content auto min-content;
+	gap: 8px;
+	align-items: center;
+	
+	h3 {
+		font-size: 0.75rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		line-height: 1em;
+		justify-self: end;
+	}
+
+	p {
+		font-size: 1rem;
+		line-height: 1em;
+	}
+
+	.MuiLinearProgress-root {
+		height: 0.6rem;
+		border-radius: 500px;
+		background-color: lightgray;
+	}
+	
+	.MuiLinearProgress-bar {
+		border-radius: 500px;
+		background-color: var(--type-one-color);
+	}
+}
