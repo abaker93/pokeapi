@@ -1,6 +1,6 @@
-import { formatDexId } from '../utilities/utilities';
+import { formatDexId } from '../../utilities/utilities';
 import { Box, Container, Link, Skeleton, Typography } from "@mui/material";
-import { Wave1, Wave2, Wave3, Wave4 } from '../assets/Waves';
+import { Wave1, Wave2, Wave3, Wave4 } from '../../assets/Waves';
 
 const PokemonHeader = (props) => {
 	const p = props[0];

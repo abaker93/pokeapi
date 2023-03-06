@@ -2,29 +2,30 @@ import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import PokemonHeader from "../components/PokemonHeader";
-import PokemonTitle from '../components/PokemonTitle';
-import PokemonStats from '../components/PokemonStats';
+import PokemonHeader from "../components/Pokemon/PokemonHeader";
+import PokemonTitle from '../components/Pokemon/PokemonTitle';
+import PokemonStats from '../components/Pokemon/PokemonStats';
 import { baseURL } from '../utilities/utilities';
+import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);
 
 	const [loading, setLoading] = useState(false);
 	const [pokemon, setPokemon] = useState([]);
+	// const [evolution, setEvolution] = useState([]);
+	// const [evolutionChain, setEvolutionChain] = useState([{chain: [],}]);
 
 	const getPokemon = id => {
-		setLoading(true);
-
 		Promise.all([
 			fetch(`${baseURL}/pokemon/${id}`).then(res => res.ok ? res.json() : null),
 			fetch(`${baseURL}/pokemon-species/${id}`).then(res => res.ok ? res.json() : null),
 			fetch(`${baseURL}/pokemon/${id-1}`).then(res => res.ok ? res.json() : null),
 			fetch(`${baseURL}/pokemon/${id+1}`).then(res => res.ok ? res.json() : null)
 		]).then(response => {
-			response[2] !== null
-			? response[3] !== null
-				? setPokemon([{
+			if (response[2] !== null) {
+				if (response[3] !== null) {
+					setPokemon([{
 						...response[0],
 						...response[1],
 						"prev": {
@@ -36,7 +37,8 @@ const Pokemon = () => {
 							"artwork": response[3].sprites.other["official-artwork"].front_default
 						}
 					}])
-				: setPokemon([{
+				} else {
+					setPokemon([{
 						...response[0],
 						...response[1],
 						"prev": {
@@ -48,8 +50,10 @@ const Pokemon = () => {
 							"artwork": null
 						}
 					}])
-			: response[3] !== null
-				? setPokemon([{
+				}
+			} else {
+				if (response[3] !== null) {
+					setPokemon([{
 						...response[0],
 						...response[1],
 						"prev": {
@@ -61,7 +65,8 @@ const Pokemon = () => {
 							"artwork": response[3].sprites.other["official-artwork"].front_default
 						}
 					}])
-				: setPokemon([{
+				} else {
+					setPokemon([{
 						...response[0],
 						...response[1],
 						"prev": {
@@ -73,18 +78,61 @@ const Pokemon = () => {
 							"artwork": null
 						}
 					}])
+				}
+			}
+
+			/*const getEvolution = async evoURL => {
+				let evoLevel = 1;
+				let nextId = 1;
+
+				const checkIfEvolves = evo => {
+					if (evo !== null) {
+						setEvolutionChain([
+							...evolutionChain,
+							{
+								evoLevel: evoLevel,
+								id: nextId,
+							},
+						])
+						nextId++;
+						evo.evolves_to.map(b => checkIfEvolves(b))
+						evoLevel++;
+
+					} else {
+						console.log("doesn't evolve")
+					}
+				}
+
+				await fetch(evoURL)
+					.then(res => res.ok ? res.json() : null)
+					.then(data => {
+						console.log(data)
+
+						checkIfEvolves(data.chain)
+
+						setEvolution([{
+							evolution: {
+								baby_trigger_item: data.baby_trigger_item,
+								chain: evolutionChain,
+								id: data.id,
+							}
+						}])
+					});
+			}
+			getEvolution(response[1].evolution_chain.url);*/
 		}).catch((err) => {
 			console.log(err);
 		});
-
-		setTimeout(() => {
-			setLoading(false)
-		}, 2000)
 	}
 
 	useEffect(() => {
-		getPokemon(pokemonId);
+		setLoading(true);
+			getPokemon(pokemonId);
+		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId]);
+
+	// console.log(pokemon)
+	// console.log(evolutionChain)
 
 	return (
 		<>
@@ -101,6 +149,7 @@ const Pokemon = () => {
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
 					<PokemonStats loading={loading} {...pokemon} />
+					<PokemonEvolution loading={loading} {...pokemon} />
 				</Container>
 			))}
 		</>

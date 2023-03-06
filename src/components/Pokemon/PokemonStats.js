@@ -1,6 +1,6 @@
 import { Container, LinearProgress, Typography } from "@mui/material";
 
-import { normalize } from "../utilities/utilities";
+import { normalize } from "../../utilities/utilities";
 
 export default function PokemonStats(props) {
 	const p = props[0];

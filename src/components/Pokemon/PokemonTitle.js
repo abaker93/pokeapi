@@ -1,8 +1,8 @@
 import { Chip, Container, Skeleton, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { formatDexId } from '../utilities/utilities';
-import TypeIcon from "../assets/TypeIcons";
+import { formatDexId } from '../../utilities/utilities';
+import TypeIcon from "../../assets/TypeIcons";
 
 const PokemonTitle = (props) => {
 	const p = props[0];
