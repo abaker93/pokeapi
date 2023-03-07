@@ -1,23 +1,4 @@
-export const typesArray = [
-	"normal",
-	"fighting",
-	"flying",
-	"poison",
-	"ground",
-	"rock",
-	"bug",
-	"ghost",
-	"steel",
-	"fire",
-	"water",
-	"grass",
-	"electric",
-	"psychic",
-	"ice",
-	"dragon",
-	"dark",
-	"fairy"
-];
+export const eggCycleSteps = 257;
 
 export const defense = {
   normal: {
@@ -381,3 +362,24 @@ export const defense = {
 		fairy: 1
 	}
 }
+
+export const typesArray = [
+	"normal",
+	"fighting",
+	"flying",
+	"poison",
+	"ground",
+	"rock",
+	"bug",
+	"ghost",
+	"steel",
+	"fire",
+	"water",
+	"grass",
+	"electric",
+	"psychic",
+	"ice",
+	"dragon",
+	"dark",
+	"fairy"
+];
