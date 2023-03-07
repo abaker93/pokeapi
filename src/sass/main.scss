@@ -4,6 +4,11 @@
 @import "./components/components";
 @import "./routes/routes";
 
+:root {
+	--female: #{$female};
+	--male: #{$male};
+}
+
 img { max-width: 100%; }
 
 .position-absolute	{ position: absolute; }

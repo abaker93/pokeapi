@@ -18,7 +18,7 @@ export default function PokemonBreeding(props) {
 
 	useEffect(() => {
 		p.egg_groups.map(g => getBreeding(g.url))
-	}, [p.egg_groups])
+	}, [])
 
 	return (
 		<Container id="PokemonBreeding" className="grid">

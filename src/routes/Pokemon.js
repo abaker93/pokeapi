@@ -9,6 +9,7 @@ import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
 import PokemonDefense from "../components/Pokemon/PokemonDefense";
 import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
+import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
 import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
@@ -156,6 +157,7 @@ const Pokemon = () => {
 					<PokemonDefense loading={loading} {...pokemon} />
 					<PokemonAbilities loading={loading} {...pokemon} />
 					<PokemonBreeding loading={loading} {...pokemon} />
+					<PokemonAdditionalInfo loading={loading} {...pokemon} />
 				</Container>
 			))}
 		</>
