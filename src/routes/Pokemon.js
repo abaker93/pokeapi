@@ -7,6 +7,7 @@ import PokemonTitle from '../components/Pokemon/PokemonTitle';
 import PokemonStats from '../components/Pokemon/PokemonStats';
 import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
 import PokemonDefense from "../components/Pokemon/PokemonDefense";
+import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
@@ -152,6 +153,7 @@ const Pokemon = () => {
 					<PokemonStats loading={loading} {...pokemon} />
 					<PokemonEvolution loading={loading} {...pokemon} />
 					<PokemonDefense loading={loading} {...pokemon} />
+					<PokemonAbilities loading={loading} {...pokemon} />
 				</Container>
 			))}
 		</>

@@ -24,9 +24,14 @@ export const normalize = (value) => {
 };
 
 export const calcDefense = (def1, def2, off) => {
-	console.log(def1, def2, off)
-	console.log(defense[def1][off], defense[def2][off])
 	const calc = defense[def1][off] * defense[def2][off];
+	let val;
 
-	return (calc)
+	calc === 0.5
+		? val = "½"
+		: calc === 0.25
+			? val = "¼"
+			: val = calc;
+
+	return (val)
 }
