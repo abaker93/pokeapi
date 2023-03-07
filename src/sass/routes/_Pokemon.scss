@@ -121,3 +121,9 @@
 		background-color: var(--type-one-color);
 	}
 }
+
+#PokemonDefense {
+	grid-template-columns: repeat(9, min-content);
+	justify-content: space-between;
+	row-gap: 0.5rem;
+}

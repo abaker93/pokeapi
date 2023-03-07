@@ -1,7 +1,11 @@
+import { Container } from "@mui/material";
+
 export default function PokemonEvolution(props) {
 	
 	
 	return (
-		<h1>Evolution</h1>
+		<Container id="PokemonEvolution" className="grid">
+			<h2>Pokemon Evolution</h2>
+		</Container>
 	)
 }

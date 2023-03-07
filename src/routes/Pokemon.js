@@ -5,8 +5,9 @@ import { useParams } from "react-router-dom";
 import PokemonHeader from "../components/Pokemon/PokemonHeader";
 import PokemonTitle from '../components/Pokemon/PokemonTitle';
 import PokemonStats from '../components/Pokemon/PokemonStats';
-import { baseURL } from '../utilities/utilities';
 import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
+import PokemonDefense from "../components/Pokemon/PokemonDefense";
+import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);
@@ -150,6 +151,7 @@ const Pokemon = () => {
 					<PokemonTitle loading={loading} {...pokemon} />
 					<PokemonStats loading={loading} {...pokemon} />
 					<PokemonEvolution loading={loading} {...pokemon} />
+					<PokemonDefense loading={loading} {...pokemon} />
 				</Container>
 			))}
 		</>

@@ -87,6 +87,16 @@ const pokeTheme = createTheme({
 					},
 				},
 				{
+					props: { orientation: 'vertical' },
+					style: {
+						flexDirection: 'column',
+						height: 'max-content',
+						fontSize: '0.7rem',
+						color: '#FFFFFF',
+						fontWeight: '600',
+					},
+				},
+				{
 					props: { type: 'fighting' },
 					style: { backgroundColor: '#CE406B' },
 				},
@@ -104,7 +114,7 @@ const pokeTheme = createTheme({
 				},
 				{
 					props: { type: 'electric' },
-					style: { backgroundColor: '#F3D139', color: '#000000' },
+					style: { backgroundColor: '#F3D139' },
 				},
 				{
 					props: { type: 'bug' },
@@ -166,7 +176,19 @@ const pokeTheme = createTheme({
 						width: '1em',
 						height: '1em',
 						fontSize: '1.71rem',
-					})
+						...(ownerState.orientation === 'vertical' && {
+							width: '1.2rem',
+							height: '1.2rem',
+							fontSize: '0.75rem',
+							margin: '3px 3px 0',
+						}),
+					}),
+				}),
+				label: ({ ownerState }) => ({
+					...(ownerState.orientation === 'vertical' && {
+						padding: 0,
+						paddingBottom: '3px',
+					}),
 				}),
 			},
 		},
@@ -191,7 +213,8 @@ const lightTheme = createTheme(pokeTheme, {
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					backgroundColor: 'rgba(255,255,255,0.8)',
+					backgroundColor: 'rgba(255,255,255,0.1)',
+					borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
 					color: '#263238',
 				},
 			},

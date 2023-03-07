@@ -1,11 +1,12 @@
-const baseURL = 'https://pokeapi.co/api/v2';
+import { defense } from "./data";
 
-const capitalize = text => {
+export const baseURL = 'https://pokeapi.co/api/v2';
+
+export const capitalize = text => {
 	return text.toLowerCase().replace(/\b(\w)/g, x => x.toUpperCase());
 }
 
-const formatDexId = num => {
-	// console.log(num)
+export const formatDexId = num => {
 	return num < 10
 		?	'000' + num.toString()
 		: num < 100
@@ -15,11 +16,17 @@ const formatDexId = num => {
 				: num.toString();
 }
 
-	const normalize = (value) => {
-		const min = 1;
-		const max = 255;
+export const normalize = (value) => {
+	const min = 1;
+	const max = 255;
 
-		return ((value - min) * 100) / (max - min)
-	};
+	return ((value - min) * 100) / (max - min)
+};
 
-export { baseURL, capitalize, formatDexId, normalize };
+export const calcDefense = (def1, def2, off) => {
+	console.log(def1, def2, off)
+	console.log(defense[def1][off], defense[def2][off])
+	const calc = defense[def1][off] * defense[def2][off];
+
+	return (calc)
+}

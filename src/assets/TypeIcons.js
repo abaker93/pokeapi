@@ -7,7 +7,7 @@ export default function TypeIcon(props) {
     case "dragon":
       return Dragon("#FFFFFF");
     case "electric":
-      return Electric("#000000");
+      return Electric("#FFFFFF");
     case "fairy":
       return Fairy("#FFFFFF");
     case "fighting":
