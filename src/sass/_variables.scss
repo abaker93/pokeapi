@@ -1,52 +1,134 @@
-$baseFontSize:	16px;
+@use "sass:map";
 
+$baseFontSize:	16px;
 $transition:	all ease-in-out 0.2s;
 
 $fighting:		#CE406B;
+$fightingAlt:	#D95A59;
 $psychic:     #F97178;
+$psychicAlt:	#FFA59D;
 $fire:				#FE9D52;
+$fireAlt:			#FFAB49;
 $ground:			#DB7948;
+$groundAlt:		#D59967;
 $electric:		#F3D139;
+$electricAlt:	#F9E47F;
 $bug:					#90BF2B;
+$bugAlt:			#ACC933;
 $grass:				#67BB5D;
+$grassAlt:		#59C37B;
 $ice:					#73CEBF;
+$iceAlt:			#91DDD9;
 $steel:				#598FA1;
+$steelAlt:		#60AFAD;
 $water:				#4C8FD6;
+$waterAlt:		#7DCADE;
 $dragon:			#096CC3;
-$ghost:				#5269AD;
+$dragonAlt:		#0584B9;
+$ghost:				#5267AD;
+$ghostAlt:		#7A74D7;
 $flying:			#92AADD;
+$flyingAlt:		#A6C1F0;
 $dark:				#5B5365;
+$darkAlt:			#707583;
 $poison:			#AB69C9;
+$poisonAlt:		#C56BCC;
 $fairy:				#ED92E8;
+$fairyAlt:		#F5A8E6;
 $rock:				#C8B689;
+$rockAlt:			#DBCF95;
 $normal:			#909AA2;
+$normalAlt:		#A9A7A0;
 
-$types: (
-	"fighting":	$fighting,
-	"psychic":	$psychic,
-	"fire":			$fire,
-	"ground":		$ground,
-	"electric":	$electric,
-	"bug":			$bug,
-	"grass":		$grass,
-	"ice":			$ice,
-	"steel":		$steel,
-	"water":		$water,
-	"dragon":		$dragon,
-	"ghost":		$ghost,
-	"flying":		$flying,
-	"dark":			$dark,
-	"poison":		$poison,
-	"fairy":		$fairy,
-	"rock":			$rock,
-	"normal":		$normal
+$types-map: (
+	fighting: (
+		def:	$fighting,
+		alt:	$fightingAlt
+	),
+	psychic: (
+		def:	$psychic,
+		alt:	$psychicAlt
+	),
+	fire: (
+		def:	$fire,
+		alt:	$fireAlt
+	),
+	ground: (
+		def:	$ground,
+		alt:	$groundAlt
+	),
+	electric: (
+		def:	$electric,
+		alt:	$electricAlt
+	),
+	bug: (
+		def:	$bug,
+		alt:	$bugAlt
+	),
+	grass: (
+		def:	$grass,
+		alt:	$grassAlt
+	),
+	ice: (
+		def:	$ice,
+		alt:	$iceAlt
+	),
+	steel: (
+		def:	$steel,
+		alt:	$steelAlt
+	),
+	water: (
+		def:	$water,
+		alt:	$waterAlt
+	),
+	dragon: (
+		def:	$dragon,
+		alt:	$dragonAlt
+	),
+	ghost: (
+		def:	$ghost,
+		alt:	$ghostAlt
+	),
+	flying: (
+		def:	$flying,
+		alt:	$flyingAlt
+	),
+	dark: (
+		def:	$dark,
+		alt:	$darkAlt
+	),
+	poison: (
+		def:	$poison,
+		alt:	$poisonAlt
+	),
+	fairy: (
+		def:	$fairy,
+		alt:	$fairyAlt
+	),
+	rock: (
+		def:	$rock,
+		alt:	$rockAlt
+	),
+	normal: (
+		def:	$normal,
+		alt:	$normalAlt
+	)
 );
 
-@each $type1, $color1 in $types {
-	@each $type2, $color2 in $types {
+@each $type1, $map1 in $types-map {
+	@each $type2, $map2 in $types-map {
+		$color1:		map-get($map1, def);
+		$color2:		map-get($map2, def);
+		$colorAlt:	map-get($map1, alt);
+
 		[data-type-one=#{$type1}][data-type-two=#{$type2}] {
-			--type-one-color:	#{$color1};
-			--type-two-color:	#{$color2};
+			@if ($type1 == $type2) {
+				--type-one-color: #{$color1};
+				--type-two-color: #{$colorAlt};
+			} @else {
+				--type-one-color: #{$color1};
+				--type-two-color: #{$color2};
+			}
 		}
 	}
 }
