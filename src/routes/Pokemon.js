@@ -1,6 +1,6 @@
-import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Container, Typography } from "@mui/material";
 
 import PokemonHeader from "../components/Pokemon/PokemonHeader";
 import PokemonTitle from '../components/Pokemon/PokemonTitle';
@@ -10,18 +10,19 @@ import PokemonDefense from "../components/Pokemon/PokemonDefense";
 import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
+
 import { baseURL } from '../utilities/utilities';
 
 const Pokemon = () => {
 	let pokemonId = parseInt(useParams().pokeId);
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [pokemon, setPokemon] = useState([]);
-	// const [evolution, setEvolution] = useState([]);
-	// const [evolutionChain, setEvolutionChain] = useState([{chain: [],}]);
+	const [evolutionChain, setEvolutionChain] = useState([]);
+	const [evolutionPokemon, setEvolutionPokemon] = useState([]);
 
-	const getPokemon = id => {
-		Promise.all([
+	const getPokemon = async id => {
+		await Promise.all([
 			fetch(`${baseURL}/pokemon/${id}`).then(res => res.ok ? res.json() : null),
 			fetch(`${baseURL}/pokemon-species/${id}`).then(res => res.ok ? res.json() : null),
 			fetch(`${baseURL}/pokemon/${id-1}`).then(res => res.ok ? res.json() : null),
@@ -85,45 +86,62 @@ const Pokemon = () => {
 				}
 			}
 
-			/*const getEvolution = async evoURL => {
-				let evoLevel = 1;
-				let nextId = 1;
+			const evoURL = response[1].evolution_chain.url;
 
-				const checkIfEvolves = evo => {
-					if (evo !== null) {
-						setEvolutionChain([
-							...evolutionChain,
-							{
-								evoLevel: evoLevel,
-								id: nextId,
-							},
-						])
-						nextId++;
-						evo.evolves_to.map(b => checkIfEvolves(b))
-						evoLevel++;
-
-					} else {
-						console.log("doesn't evolve")
-					}
-				}
-
-				await fetch(evoURL)
-					.then(res => res.ok ? res.json() : null)
+			const getEvolutionChain = async url => {
+				await fetch(url)
+					.then(res => res.json())
 					.then(data => {
-						console.log(data)
+						setEvolutionChain(data);
+						console.log(data);
 
-						checkIfEvolves(data.chain)
+						const getEvolutionPokemon = results => {
+							// console.log("results", results)
+							results.forEach(async pokemon => {
+								await Promise.all([
+									fetch(`${baseURL}/pokemon/${pokemon}`).then(res => res.ok ? res.json() : null),
+									fetch(`${baseURL}/pokemon-species/${pokemon}`).then(res => res.ok ? res.json() : null)
+								]).then(response => {
+									// console.log("response", response)		
+									if (response[0] !== null || response[1] !== null) {
+										setEvolutionPokemon(currentList => [...currentList, {...response[0], ...response[1]}]);
+										evolutionPokemon.sort((a, b) => a.id - b.id);
+									};
+								});
+							});
+						};
+						const lvl1 = [[data.chain.species.name]];
+						const lvl2 = data.chain.evolves_to.map(a => [a.species.name]);
+						const lvl3 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.species.name))
+						const lvl4 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.species.name)))
+						const lvl5 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.evolves_to.map(d => d.species.name))))
+						
+						let pokemonResults = [];
 
-						setEvolution([{
-							evolution: {
-								baby_trigger_item: data.baby_trigger_item,
-								chain: evolutionChain,
-								id: data.id,
-							}
-						}])
-					});
+						const arrayDivider = (...arr) => {
+							// console.log("arr", arr);
+							arr.forEach(lvl => {
+								// console.log("lvl", lvl);
+								for (let i = 0; i < lvl.length; i++) {
+									// console.log("lvl[i]", lvl[i]);
+									for (let j = 0; j < lvl[i].length; j++) {
+										if (lvl[i][j].length > 0) {
+											pokemonResults.push(lvl[i][j]);
+										}
+									}
+								}
+							})
+							
+						}
+						arrayDivider(lvl1, lvl2, lvl3, lvl4, lvl5)
+
+						// console.log("pokemonResults", pokemonResults)
+						getEvolutionPokemon(pokemonResults)
+
+					})
 			}
-			getEvolution(response[1].evolution_chain.url);*/
+			getEvolutionChain(evoURL);
+
 		}).catch((err) => {
 			console.log(err);
 		});
@@ -135,8 +153,8 @@ const Pokemon = () => {
 		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId]);
 
-	// console.log(pokemon)
-	// console.log(evolutionChain)
+	console.log("evolutionChain", evolutionChain)
+	// console.log("evolutionPokemon", evolutionPokemon)
 
 	return (
 		<>
@@ -153,7 +171,10 @@ const Pokemon = () => {
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
 					<PokemonStats loading={loading} {...pokemon} />
-					<PokemonEvolution loading={loading} {...pokemon} />
+					<PokemonEvolution
+						loading={loading}
+						evolutionChain={evolutionChain}
+						pokemon={pokemon} />
 					<PokemonDefense loading={loading} {...pokemon} />
 					<PokemonAbilities loading={loading} {...pokemon} />
 					<PokemonBreeding loading={loading} {...pokemon} />
