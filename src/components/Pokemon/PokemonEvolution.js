@@ -2,25 +2,35 @@ import { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
 
 export default function PokemonEvolution(props) {
-	const [evolution, loading, pokemon] = [props.evolutionChain, props.loading, props.pokemon];
+	const loading = props.loading;
+	const currentPokemon = props.pokemon[0];
+	const evolutionChain = props.evolution.chain;
+	const pokemon = props.evolution.pokemon;
 
-	console.log(evolution)
-	console.log(pokemon)
+	console.log(currentPokemon)
 
 	return (
 		<Container id="PokemonEvolution" className="grid">
 			{loading ? (
 				<p>Loading</p>
 			) : (
-				evolution.chain.evolves_to.length > 0 ? (
+				evolutionChain.chain.evolves_to.length > 0 ? (
+					pokemon.map(p => (
+						<p key={p.id}>{p.name}</p>
+					))
+				) : (
+					<Typography variant="body1">
+						{currentPokemon.names.filter(n => n.language.name === "en").map(n => n.name)} does not evolve.
+					</Typography>
+				)
+				
+				/*evolution.chain.evolves_to.length > 0 ? (
 					<PokemonEvolutionNode loading={loading} evolution={evolution.chain}>
 						<p>{evolution.chain.species.name}</p>
 					</PokemonEvolutionNode>
 				) : (
-					<Typography variant="body1">
-						{pokemon.names.filter(n => n.language.name === "en").map(n => n.name)} does not evolve.
-					</Typography>
-				) /* end level 1 */
+					
+				)*/ /* end level 1 */
 			)}
 		</Container>
 	)

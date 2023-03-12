@@ -153,7 +153,7 @@ const Pokemon = () => {
 		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId]);
 
-	console.log("evolutionChain", evolutionChain)
+	// console.log("evolutionChain", evolutionChain)
 	// console.log("evolutionPokemon", evolutionPokemon)
 
 	return (
@@ -170,11 +170,15 @@ const Pokemon = () => {
 				>
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
-					<PokemonStats loading={loading} {...pokemon} />
+					{/*<PokemonStats loading={loading} {...pokemon} />*/}
 					<PokemonEvolution
 						loading={loading}
-						evolutionChain={evolutionChain}
-						pokemon={pokemon} />
+						evolution={{
+							chain: evolutionChain,
+							pokemon: evolutionPokemon,
+						}}
+						pokemon={evolutionPokemon}
+					/>
 					<PokemonDefense loading={loading} {...pokemon} />
 					<PokemonAbilities loading={loading} {...pokemon} />
 					<PokemonBreeding loading={loading} {...pokemon} />
