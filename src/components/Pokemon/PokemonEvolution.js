@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
+import { useEffect } from "react";
 
 export default function PokemonEvolution(props) {
 	const loading = props.loading;
@@ -7,73 +7,77 @@ export default function PokemonEvolution(props) {
 	const evolutionChain = props.evolution.chain;
 	const pokemon = props.evolution.pokemon;
 
-	console.log(currentPokemon)
+	const a = evolutionChain.chain;
+	let levels;
+
+	if (a) {
+		if (a.evolves_to.length > 0) {
+			a.evolves_to.map(b => {
+				if (b.evolves_to.length > 0) {
+					b.evolves_to.map(c => {
+						if (c.evolves_to.length > 0) {
+							levels = 4;
+						} else {
+							levels = 3;
+						}
+					})
+				} else {
+					levels = 2;
+				}
+			})
+		} else {
+			levels = 1;
+		}
+	}
 
 	return (
-		<Container id="PokemonEvolution" className="grid">
+		<Container id="PokemonEvolution" className="grid" data-level={levels}>
 			{loading ? (
 				<p>Loading</p>
 			) : (
-				evolutionChain.chain.evolves_to.length > 0 ? (
-					pokemon.map(p => (
-						<p key={p.id}>{p.name}</p>
-					))
+				levels > 1 ? (
+					<PokemonEvolutionNode levels={levels} pokemon={pokemon.filter(f => f.name === a.species.name)} details={a.evolution_details}>
+						{a.evolves_to.map((b, index) => (
+							<PokemonEvolutionNode key={index} levels={levels} pokemon={pokemon.filter(f => f.name === b.species.name)} details={b.evolution_details}>
+								{b.evolves_to.map((c, index) => (
+									<PokemonEvolutionNode key={index} pokemon={pokemon.filter(f => f.name === c.species.name)} details={c.evolution_details}>
+
+									</PokemonEvolutionNode>
+								))}
+							</PokemonEvolutionNode>
+						))}
+					</PokemonEvolutionNode>
 				) : (
 					<Typography variant="body1">
 						{currentPokemon.names.filter(n => n.language.name === "en").map(n => n.name)} does not evolve.
 					</Typography>
-				)
-				
-				/*evolution.chain.evolves_to.length > 0 ? (
-					<PokemonEvolutionNode loading={loading} evolution={evolution.chain}>
-						<p>{evolution.chain.species.name}</p>
-					</PokemonEvolutionNode>
-				) : (
-					
-				)*/ /* end level 1 */
+				) /* end level 1 */
 			)}
 		</Container>
 	)
 }
 
 function PokemonEvolutionNode (props) {
-	const evolution = props.evolution;
-	const speciesURL = evolution.species.url;
-	
-	const [pokemon, setPokemon] = useState([]);
+	const details = props.details;
 
-	const getPokemon = async url => {
-		await fetch(url)
-			.then(res => res.json())
-			.then(data => {
-				const varieties = data.varieties.filter(f => f.is_default).map(m => m.pokemon.url)
-
-				const getVariety = async (url, species)  => {
-					await fetch(url)
-						.then(res => res.json())
-						.then(data => {
-							setPokemon(Object.assign(species, data))
-						});
-				}
-				getVariety(varieties, data);
-				
-			});
-	};
-
-	useEffect(() => {
-		getPokemon(speciesURL)
-	}, [speciesURL]);
-
-	// console.log(pokemon)
+	console.log(details)
 
 	return (
-		props.loading ? (
-			<p>Loading...</p>
-		) : (
-			<div>
-				{/* <p>{pokemon.names.filter(n => n.language.name === 'en').map(n => n.name)}</p> */}
-				{props.children}
+		props.pokemon.map(p => (
+			<div className="evolutionNode" key={p.id}>
+				<div className="current">
+					{details.length > 0 ? (
+						<p>arrow</p>
+					) : null}
+					<img src={p.sprites.other.home.front_default} alt={p.name} />
+				</div>
+				{props.children ? (
+					<div className="next">
+						{props.children}
+					</div>
+				) : null}
 			</div>
-		)
+		))
+		
 	)
 }

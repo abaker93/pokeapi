@@ -93,16 +93,14 @@ const Pokemon = () => {
 					.then(res => res.json())
 					.then(data => {
 						setEvolutionChain(data);
-						console.log(data);
 
+						// TODO:	- add logic for pokemon like lycanrock (regex get ID in pokemonResults and use ID instead of pokemon name for fetch)
 						const getEvolutionPokemon = results => {
-							// console.log("results", results)
 							results.forEach(async pokemon => {
 								await Promise.all([
 									fetch(`${baseURL}/pokemon/${pokemon}`).then(res => res.ok ? res.json() : null),
 									fetch(`${baseURL}/pokemon-species/${pokemon}`).then(res => res.ok ? res.json() : null)
 								]).then(response => {
-									// console.log("response", response)		
 									if (response[0] !== null || response[1] !== null) {
 										setEvolutionPokemon(currentList => [...currentList, {...response[0], ...response[1]}]);
 										evolutionPokemon.sort((a, b) => a.id - b.id);
@@ -114,16 +112,12 @@ const Pokemon = () => {
 						const lvl2 = data.chain.evolves_to.map(a => [a.species.name]);
 						const lvl3 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.species.name))
 						const lvl4 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.species.name)))
-						const lvl5 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.evolves_to.map(d => d.species.name))))
 						
 						let pokemonResults = [];
 
 						const arrayDivider = (...arr) => {
-							// console.log("arr", arr);
 							arr.forEach(lvl => {
-								// console.log("lvl", lvl);
 								for (let i = 0; i < lvl.length; i++) {
-									// console.log("lvl[i]", lvl[i]);
 									for (let j = 0; j < lvl[i].length; j++) {
 										if (lvl[i][j].length > 0) {
 											pokemonResults.push(lvl[i][j]);
@@ -133,11 +127,9 @@ const Pokemon = () => {
 							})
 							
 						}
-						arrayDivider(lvl1, lvl2, lvl3, lvl4, lvl5)
+						arrayDivider(lvl1, lvl2, lvl3, lvl4)
 
-						// console.log("pokemonResults", pokemonResults)
 						getEvolutionPokemon(pokemonResults)
-
 					})
 			}
 			getEvolutionChain(evoURL);
@@ -153,9 +145,6 @@ const Pokemon = () => {
 		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId]);
 
-	// console.log("evolutionChain", evolutionChain)
-	// console.log("evolutionPokemon", evolutionPokemon)
-
 	return (
 		<>
 			{pokemon.map((p, index) => (
@@ -170,7 +159,7 @@ const Pokemon = () => {
 				>
 					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
-					{/*<PokemonStats loading={loading} {...pokemon} />*/}
+					<PokemonStats loading={loading} {...pokemon} />
 					<PokemonEvolution
 						loading={loading}
 						evolution={{
