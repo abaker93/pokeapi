@@ -96,10 +96,10 @@ const Pokemon = () => {
 
 						// TODO:	- add logic for pokemon like lycanrock (regex get ID in pokemonResults and use ID instead of pokemon name for fetch)
 						const getEvolutionPokemon = results => {
-							results.forEach(async pokemon => {
+							results.forEach(async id => {
 								await Promise.all([
-									fetch(`${baseURL}/pokemon/${pokemon}`).then(res => res.ok ? res.json() : null),
-									fetch(`${baseURL}/pokemon-species/${pokemon}`).then(res => res.ok ? res.json() : null)
+									fetch(`${baseURL}/pokemon/${id}`).then(res => res.ok ? res.json() : null),
+									fetch(`${baseURL}/pokemon-species/${id}`).then(res => res.ok ? res.json() : null)
 								]).then(response => {
 									if (response[0] !== null || response[1] !== null) {
 										setEvolutionPokemon(currentList => [...currentList, {...response[0], ...response[1]}]);
@@ -108,10 +108,10 @@ const Pokemon = () => {
 								});
 							});
 						};
-						const lvl1 = [[data.chain.species.name]];
-						const lvl2 = data.chain.evolves_to.map(a => [a.species.name]);
-						const lvl3 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.species.name))
-						const lvl4 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.species.name)))
+						const lvl1 = [[data.chain.species.url]];
+						const lvl2 = data.chain.evolves_to.map(a => [a.species.url]);
+						const lvl3 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.species.url))
+						const lvl4 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.species.url)))
 						
 						let pokemonResults = [];
 
@@ -120,12 +120,13 @@ const Pokemon = () => {
 								for (let i = 0; i < lvl.length; i++) {
 									for (let j = 0; j < lvl[i].length; j++) {
 										if (lvl[i][j].length > 0) {
-											pokemonResults.push(lvl[i][j]);
+											let match = lvl[i][j].match(/\d+[/]$/gm);
+											match = parseInt(match);
+											pokemonResults.push(match);
 										}
 									}
 								}
 							})
-							
 						}
 						arrayDivider(lvl1, lvl2, lvl3, lvl4)
 
@@ -157,9 +158,9 @@ const Pokemon = () => {
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
 					sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 				>
-					<PokemonHeader loading={loading} {...pokemon} />
+					{/*<PokemonHeader loading={loading} {...pokemon} />*/}
 					<PokemonTitle loading={loading} {...pokemon} />
-					<PokemonStats loading={loading} {...pokemon} />
+					{/*<PokemonStats loading={loading} {...pokemon} />*/}
 					<PokemonEvolution
 						loading={loading}
 						evolution={{
