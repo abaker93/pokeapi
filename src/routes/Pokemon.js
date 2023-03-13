@@ -94,7 +94,6 @@ const Pokemon = () => {
 					.then(data => {
 						setEvolutionChain(data);
 
-						// TODO:	- add logic for pokemon like lycanrock (regex get ID in pokemonResults and use ID instead of pokemon name for fetch)
 						const getEvolutionPokemon = results => {
 							results.forEach(async id => {
 								await Promise.all([
@@ -158,9 +157,11 @@ const Pokemon = () => {
 					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
 					sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 				>
-					{/*<PokemonHeader loading={loading} {...pokemon} />*/}
+					<PokemonHeader loading={loading} {...pokemon} />
 					<PokemonTitle loading={loading} {...pokemon} />
-					{/*<PokemonStats loading={loading} {...pokemon} />*/}
+					<PokemonStats loading={loading} {...pokemon} />
+					{/*
+					// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
 					<PokemonEvolution
 						loading={loading}
 						evolution={{
@@ -168,7 +169,7 @@ const Pokemon = () => {
 							pokemon: evolutionPokemon,
 						}}
 						pokemon={evolutionPokemon}
-					/>
+					/>*/}
 					<PokemonDefense loading={loading} {...pokemon} />
 					<PokemonAbilities loading={loading} {...pokemon} />
 					<PokemonBreeding loading={loading} {...pokemon} />
