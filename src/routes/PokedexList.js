@@ -4,11 +4,12 @@ import { useParams } from "react-router-dom";
 import { Button, Container, Skeleton, Typography } from "@mui/material";
 
 import PokedexCard from "../components/PokedexCard";
+import { getPokedexName } from "../utilities/utilities";
 
 const P = new Pokedex();
 
 const PokedexList = () => {
-	const dex = useParams().dex;
+	const dex = getPokedexName(useParams().dex);
 
 	const [loading, setLoading] = useState(true);
 	const [loadMore, setLoadMore] = useState({
@@ -17,36 +18,50 @@ const PokedexList = () => {
 	});
 	const [allPokemon, setAllPokemon] = useState([]);
 
-	const getAllPokemon = (dex, load) => {
-		P.getPokemonsList(load)
-			.then(res => {
-				setLoadMore({...loadMore, offset: loadMore.offset + loadMore.limit})
-				
-				const createAllPokemon = res => {
-					res.forEach(poke => {
-						let id = poke.url.match(/\/\d+\//gm);
-						id = id[0].slice(1, -1);
+	const createAllPokemon = res => {
+		res.forEach(poke => {
+			let id;
 
-						P.getResource([`/api/v2/pokemon/${id}`, `/api/v2/pokemon-species/${id}`])
-							.then(res => {
-								setAllPokemon(currentList => [...currentList, {...res[0], ...res[1]}]);
-								allPokemon.sort((a, b) => a.order - b.order)
-							})
-							.catch(error => {
-								console.log(error)
-							})
-					});
-				};
-				createAllPokemon(res.results)
-			})
-			.catch((error) => {
-				console.log('There was an ERROR:', error);
-			});
+			if (poke.url) {
+				id = poke.url.match(/\/\d+\//gm);
+			} else {
+				id = poke.pokemon_species.url.match(/\/\d+\//gm);
+			}
+
+			id = id[0].slice(1, -1);
+
+			P.getResource([`/api/v2/pokemon/${id}`, `/api/v2/pokemon-species/${id}`])
+				.then(res => {
+					setAllPokemon(currentList => [...currentList, {...res[0], ...res[1]}]);
+					allPokemon.sort((a, b) => a.order - b.order)
+				})
+				.catch(error => {
+					console.log(error)
+				})
+		});
+	};
+
+	const getAllPokemon = (dex, load) => {
+		if (dex === 1) {
+			P.getPokemonsList(load)
+				.then(res => {
+					setLoadMore({...loadMore, offset: loadMore.offset + loadMore.limit})
+					createAllPokemon(res.results)
+				})
+				.catch((error) => {
+					console.log('There was an ERROR:', error);
+				});
+		} else {
+			P.getPokedexByName(dex)
+				.then(res => {
+					createAllPokemon(res.pokemon_entries);
+				})
+		}
 	}
 
 	useEffect(() => {
 		setLoading(true);
-		getAllPokemon(dex, loadMore);
+		getAllPokemon(dex.id, loadMore);
 		setLoading(false);
 	}, [])
 
@@ -58,7 +73,7 @@ const PokedexList = () => {
 						<Typography variant="h2" component="h1">.</Typography>
 					</Skeleton>
 				) : (
-					<Typography variant="h2" component="h1" sx={{ textTransform: "capitalize" }}>{dex} Pokedex</Typography>
+					<Typography variant="h2" component="h1" sx={{ textTransform: "capitalize" }}>{dex.name} Pokedex</Typography>
 				)}
 			</Container>
 
@@ -76,7 +91,7 @@ const PokedexList = () => {
 				{loading ? (
 					<Skeleton width="50%" height="40px" />
 				) : (
-					<Button variant="contained" onClick={() => getAllPokemon(dex, loadMore)}>Load More</Button>
+					<Button variant="contained" onClick={() => getAllPokemon(dex.id, loadMore)}>Load More</Button>
 				)}
 			</Container>
 
