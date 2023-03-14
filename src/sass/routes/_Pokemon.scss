@@ -165,7 +165,8 @@
 
 #PokemonAdditionalInfo {
 	margin-bottom: 2rem;
-	grid-template-columns: 6fr 3fr 3fr;
+
+	> div:nth-of-type(1) { grid-template-columns: 6fr 3fr 3fr; }
 
 	h2 { grid-column: 1 / 4; }
 

@@ -1840,6 +1840,8 @@
 
 #PokemonAdditionalInfo {
   margin-bottom: 2rem;
+}
+#PokemonAdditionalInfo > div:nth-of-type(1) {
   grid-template-columns: 6fr 3fr 3fr;
 }
 #PokemonAdditionalInfo h2 {
