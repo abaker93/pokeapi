@@ -4,7 +4,7 @@ import { typesArray } from "../../utilities/data";
 import { calcDefense } from "../../utilities/utilities";
 
 export default function PokemonDefense(props) {
-	const p = props[0];
+	const p = props;
 
 	return (
 		<Container id="PokemonDefense" className="grid">

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { eggCycleSteps } from "../../utilities/data";
 
 export default function PokemonBreeding(props) {
-	const p = props[0];
+	const p = props;
 
 	const [breeding, setBreeding] = useState([]);
 

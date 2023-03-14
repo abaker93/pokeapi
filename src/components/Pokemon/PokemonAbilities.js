@@ -1,7 +1,7 @@
 import { capitalize, Card, CardActionArea, CardContent, Container, Typography } from "@mui/material";
 
 export default function PokemonAbilities(props) {
-	const p = props[0];
+	const p = props;
 
 	return (
 		<Container id="PokemonAbilities" className="grid">

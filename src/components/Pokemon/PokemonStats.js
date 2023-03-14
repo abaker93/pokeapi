@@ -3,7 +3,7 @@ import { Container, LinearProgress, Typography } from "@mui/material";
 import { normalize } from "../../utilities/utilities";
 
 export default function PokemonStats(props) {
-	const p = props[0];
+	const p = props;
 
 	return (
 		<Container id="PokemonStats" className="grid">

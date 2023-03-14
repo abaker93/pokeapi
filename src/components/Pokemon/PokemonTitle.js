@@ -5,7 +5,8 @@ import { formatDexId } from '../../utilities/utilities';
 import TypeIcon from "../../assets/TypeIcons";
 
 const PokemonTitle = (props) => {
-	const p = props[0];
+	console.log(props)
+	const p = props;
 
 	return (
 		props.loading ? (

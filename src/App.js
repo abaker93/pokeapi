@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'pokemon/:pokeId',
-        element: <Pokemon />
+        element: <Pokemon />,
       }
     ]
 	}

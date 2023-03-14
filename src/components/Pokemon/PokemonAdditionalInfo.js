@@ -3,7 +3,7 @@ import { FemaleSharp, MaleSharp } from "@mui/icons-material";
 import { calcMeasurement } from "../../utilities/utilities";
 
 export default function PokemonAdditionalInfo (props) {
-	const p = props[0];
+	const p = props;
 
 	const female = p.gender_rate / 8;
 	const male = 1 - female;

@@ -1,3 +1,4 @@
+import Pokedex from 'pokedex-promise-v2';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Typography } from "@mui/material";
@@ -11,172 +12,119 @@ import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
 
-import { baseURL } from '../utilities/utilities';
+import { getPokedexName } from '../utilities/utilities';
+
+const P = new Pokedex();
 
 const Pokemon = () => {
-	let pokemonId = parseInt(useParams().pokeId);
+	const pokemonId = parseInt(useParams().pokeId);
 
 	const [loading, setLoading] = useState(true);
 	const [pokemon, setPokemon] = useState([]);
-	const [evolutionChain, setEvolutionChain] = useState([]);
-	const [evolutionPokemon, setEvolutionPokemon] = useState([]);
 
-	const getPokemon = async id => {
-		await Promise.all([
-			fetch(`${baseURL}/pokemon/${id}`).then(res => res.ok ? res.json() : null),
-			fetch(`${baseURL}/pokemon-species/${id}`).then(res => res.ok ? res.json() : null),
-			fetch(`${baseURL}/pokemon/${id-1}`).then(res => res.ok ? res.json() : null),
-			fetch(`${baseURL}/pokemon/${id+1}`).then(res => res.ok ? res.json() : null)
-		]).then(response => {
-			if (response[2] !== null) {
-				if (response[3] !== null) {
-					setPokemon([{
-						...response[0],
-						...response[1],
-						"prev": {
-							"name": response[2].name,
-							"artwork": response[2].sprites.other["official-artwork"].front_default
+	const getPokemon = (id) => {
+		let urls = [
+			`/api/v2/pokemon/${id}`,
+			`/api/v2/pokemon-species/${id}`,
+		];
+
+		if (id-1 >= 1) {
+			urls.push(`/api/v2/pokemon/${id-1}`)
+		}
+
+		if (id+1 <= 1010) {
+			urls.push(`/api/v2/pokemon/${id+1}`)
+		}
+		console.log(urls)
+
+		P.getResource(urls)
+			.then(res => {
+				if (res.length === 3) {
+					if (id-1 >= 1) {
+						setPokemon({
+							...res[0],
+							...res[1],
+							prev: {
+								name: res[2].name,
+								artwork: res[2].sprites.other["official-artwork"].front_default,
+							},
+							next: null,
+						})
+					}
+			
+					if (id+1 <= 1010) {
+						setPokemon({
+							...res[0],
+							...res[1],
+							prev: null,
+							next: {
+								name: res[2].name,
+								artwork: res[2].sprites.other["official-artwork"].front_default,
+							}
+						})
+					}
+				} else if (res.length === 4) {
+					setPokemon({
+						...res[0],
+						...res[1],
+						prev: {
+							name: res[2].name,
+							artwork: res[2].sprites.other["official-artwork"].front_default,
 						},
-						"next": {
-							"name": response[3].name,
-							"artwork": response[3].sprites.other["official-artwork"].front_default
+						next: {
+							name: res[3].name,
+							artwork: res[3].sprites.other["official-artwork"].front_default,
 						}
-					}])
-				} else {
-					setPokemon([{
-						...response[0],
-						...response[1],
-						"prev": {
-							"name": response[2].name,
-							"artwork": response[2].sprites.other["official-artwork"].front_default
-						},
-						"next": {
-							"name": null,
-							"artwork": null
-						}
-					}])
-				}
-			} else {
-				if (response[3] !== null) {
-					setPokemon([{
-						...response[0],
-						...response[1],
-						"prev": {
-							"name": null,
-							"artwork": null
-						},
-						"next": {
-							"name": response[3].name,
-							"artwork": response[3].sprites.other["official-artwork"].front_default
-						}
-					}])
-				} else {
-					setPokemon([{
-						...response[0],
-						...response[1],
-						"prev": {
-							"name": null,
-							"artwork": null
-						},
-						"next": {
-							"name": null,
-							"artwork": null
-						}
-					}])
-				}
-			}
-
-			const evoURL = response[1].evolution_chain.url;
-
-			const getEvolutionChain = async url => {
-				await fetch(url)
-					.then(res => res.json())
-					.then(data => {
-						setEvolutionChain(data);
-
-						const getEvolutionPokemon = results => {
-							results.forEach(async id => {
-								await Promise.all([
-									fetch(`${baseURL}/pokemon/${id}`).then(res => res.ok ? res.json() : null),
-									fetch(`${baseURL}/pokemon-species/${id}`).then(res => res.ok ? res.json() : null)
-								]).then(response => {
-									if (response[0] !== null || response[1] !== null) {
-										setEvolutionPokemon(currentList => [...currentList, {...response[0], ...response[1]}]);
-										evolutionPokemon.sort((a, b) => a.id - b.id);
-									};
-								});
-							});
-						};
-						const lvl1 = [[data.chain.species.url]];
-						const lvl2 = data.chain.evolves_to.map(a => [a.species.url]);
-						const lvl3 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.species.url))
-						const lvl4 = data.chain.evolves_to.map(a => a.evolves_to.map(b => b.evolves_to.map(c => c.species.url)))
-						
-						let pokemonResults = [];
-
-						const arrayDivider = (...arr) => {
-							arr.forEach(lvl => {
-								for (let i = 0; i < lvl.length; i++) {
-									for (let j = 0; j < lvl[i].length; j++) {
-										if (lvl[i][j].length > 0) {
-											let match = lvl[i][j].match(/\d+[/]$/gm);
-											match = parseInt(match);
-											pokemonResults.push(match);
-										}
-									}
-								}
-							})
-						}
-						arrayDivider(lvl1, lvl2, lvl3, lvl4)
-
-						getEvolutionPokemon(pokemonResults)
 					})
-			}
-			getEvolutionChain(evoURL);
-
-		}).catch((err) => {
-			console.log(err);
-		});
+				}
+			})
+			.catch(error => {
+				console.log(error)
+			})
 	}
 
 	useEffect(() => {
 		setLoading(true);
-			getPokemon(pokemonId);
+		getPokemon(pokemonId);
+
+
 		setTimeout(() => { setLoading(false); }, 2000)
-	}, [pokemonId]);
+	}, [pokemonId])
+
+	console.log(pokemon)
 
 	return (
-		<>
-			{pokemon.map((p, index) => (
-				<Container
-					key={index}
-					id="Pokemon"
-					component="main"
-					maxWidth="false"
-					data-type-one={p.types[0].type.name}
-					data-type-two={p.types[1] ? p.types[1].type.name : p.types[0].type.name}
-					sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
-				>
-					<PokemonHeader loading={loading} {...pokemon} />
-					<PokemonTitle loading={loading} {...pokemon} />
-					<PokemonStats loading={loading} {...pokemon} />
-					{/*
-					// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
-					<PokemonEvolution
-						loading={loading}
-						evolution={{
-							chain: evolutionChain,
-							pokemon: evolutionPokemon,
-						}}
-						pokemon={evolutionPokemon}
-					/>*/}
-					<PokemonDefense loading={loading} {...pokemon} />
-					<PokemonAbilities loading={loading} {...pokemon} />
-					<PokemonBreeding loading={loading} {...pokemon} />
-					<PokemonAdditionalInfo loading={loading} {...pokemon} />
-				</Container>
-			))}
-		</>
+		loading ? (
+			<p>loading</p>
+		) : (
+		<Container
+			key={pokemon.id}
+			id="Pokemon"
+			component="main"
+			maxWidth="false"
+			data-type-one={pokemon.types[0].type.name}
+			data-type-two={pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name}
+			sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
+		>
+			<PokemonHeader loading={loading} {...pokemon} />
+			<PokemonTitle loading={loading} {...pokemon} />
+			<PokemonStats loading={loading} {...pokemon} />
+			{/*
+			// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
+			<PokemonEvolution
+				loading={loading}
+				evolution={{
+					chain: evolutionChain,
+					pokemon: evolutionPokemon,
+				}}
+				pokemon={evolutionPokemon}
+			/>*/}
+			<PokemonDefense loading={loading} {...pokemon} />
+			<PokemonAbilities loading={loading} {...pokemon} />
+			<PokemonBreeding loading={loading} {...pokemon} />
+			<PokemonAdditionalInfo loading={loading} {...pokemon} />
+		</Container>
+		)
 	);
 };
 
