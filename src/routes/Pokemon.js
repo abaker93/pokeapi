@@ -1,7 +1,7 @@
 import Pokedex from 'pokedex-promise-v2';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Typography } from "@mui/material";
+import { Container } from "@mui/material";
 
 import PokemonHeader from "../components/Pokemon/PokemonHeader";
 import PokemonTitle from '../components/Pokemon/PokemonTitle';
@@ -12,8 +12,6 @@ import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
 
-import { getPokedexName } from '../utilities/utilities';
-
 const P = new Pokedex();
 
 const Pokemon = () => {
@@ -21,8 +19,19 @@ const Pokemon = () => {
 
 	const [loading, setLoading] = useState(true);
 	const [pokemon, setPokemon] = useState([]);
+	const [eggGroups, setEggGroups] = useState([]);
 
-	const getPokemon = (id) => {
+	const getEggGroups = eggGroups => {
+		eggGroups.forEach(group => {
+			P.getResource(group.url)
+				.then(res => {
+					setEggGroups(currentList => [...currentList, {...res}])
+				})
+		})
+	}
+
+	//*		get pokemon data, pokemon-species data + optional prev/next pokemon data
+	const getPokemon = id => {
 		let urls = [
 			`/api/v2/pokemon/${id}`,
 			`/api/v2/pokemon-species/${id}`,
@@ -32,10 +41,11 @@ const Pokemon = () => {
 			urls.push(`/api/v2/pokemon/${id-1}`)
 		}
 
+		// TODO:		replace this with a dynamic number instead of a manually input max
+		// TODO:		get number from national pokedex
 		if (id+1 <= 1010) {
 			urls.push(`/api/v2/pokemon/${id+1}`)
 		}
-		console.log(urls)
 
 		P.getResource(urls)
 			.then(res => {
@@ -77,6 +87,10 @@ const Pokemon = () => {
 						}
 					})
 				}
+
+				//*		get egg groups from pokemon
+				//*		to pass to PokemonBreeding component
+				getEggGroups(res[1].egg_groups)
 			})
 			.catch(error => {
 				console.log(error)
@@ -86,12 +100,8 @@ const Pokemon = () => {
 	useEffect(() => {
 		setLoading(true);
 		getPokemon(pokemonId);
-
-
 		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId])
-
-	console.log(pokemon)
 
 	return (
 		loading ? (
@@ -121,7 +131,7 @@ const Pokemon = () => {
 			/>*/}
 			<PokemonDefense loading={loading} {...pokemon} />
 			<PokemonAbilities loading={loading} {...pokemon} />
-			<PokemonBreeding loading={loading} {...pokemon} />
+			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pokemon} />
 			<PokemonAdditionalInfo loading={loading} {...pokemon} />
 		</Container>
 		)

@@ -1,12 +1,12 @@
 import { Container, LinearProgress, Typography } from "@mui/material";
-
+import Grid from "@mui/material/Unstable_Grid2";
 import { normalize } from "../../utilities/utilities";
 
 export default function PokemonStats(props) {
 	const p = props;
 
 	return (
-		<Container id="PokemonStats" className="grid">
+		<Container id="PokemonStats" className="grid" sx={{ mb: 5 }}>
 			<Typography component="h3">HP</Typography>
 			<LinearProgress variant="determinate" value={normalize(p.stats[0].base_stat)} />
 			<Typography component="p">{p.stats[0].base_stat}</Typography>

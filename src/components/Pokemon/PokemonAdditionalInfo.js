@@ -11,7 +11,7 @@ export default function PokemonAdditionalInfo (props) {
 	const genderless = female < 0 || male < 0 ? true : false;
 
 	return (
-		<Container id="PokemonAdditionalInfo">
+		<Container id="PokemonAdditionalInfo" mb={5}>
 			<Typography variant="h2" mb={1}>Additional Info</Typography>
 
 			<Grid container mb={5}>
@@ -52,8 +52,8 @@ export default function PokemonAdditionalInfo (props) {
 			<Grid container mb={5}>
 				<Grid xs>
 					<Typography variant="h3" mb={1}>EV Yield</Typography>
-					{p.stats.filter(f => f.effort > 0).map(m => (
-						<Chip size="small" label={`${m.effort} ${m.stat.name}`} />
+					{p.stats.filter(f => f.effort > 0).map((m, index) => (
+						<Chip key={index} size="small" label={`${m.effort} ${m.stat.name}`} />
 					))}
 				</Grid>
 			</Grid>
