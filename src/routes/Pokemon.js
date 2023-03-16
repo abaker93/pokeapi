@@ -11,6 +11,7 @@ import PokemonDefense from "../components/Pokemon/PokemonDefense";
 import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
+import PokemonText from '../components/Pokemon/PokemonText';
 
 const P = new Pokedex();
 
@@ -118,7 +119,7 @@ const Pokemon = () => {
 		>
 			<PokemonHeader loading={loading} {...pokemon} />
 			<PokemonTitle loading={loading} {...pokemon} />
-			<PokemonStats loading={loading} {...pokemon} />
+			{/*<PokemonStats loading={loading} {...pokemon} />*/}
 			{/*
 			// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
 			<PokemonEvolution
@@ -129,10 +130,11 @@ const Pokemon = () => {
 				}}
 				pokemon={evolutionPokemon}
 			/>*/}
-			<PokemonDefense loading={loading} {...pokemon} />
-			<PokemonAbilities loading={loading} {...pokemon} />
-			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pokemon} />
-			<PokemonAdditionalInfo loading={loading} {...pokemon} />
+			{/*<PokemonDefense loading={loading} {...pokemon} />*/}
+			{/*<PokemonAbilities loading={loading} {...pokemon} />*/}
+			{/*<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pokemon} />*/}
+			{/*<PokemonAdditionalInfo loading={loading} {...pokemon} />*/}
+			<PokemonText loading={loading} {...pokemon} />
 		</Container>
 		)
 	);
