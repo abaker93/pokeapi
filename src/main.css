@@ -1618,6 +1618,154 @@
   --type-two-color: #A9A7A0;
 }
 
+.game__red {
+  color: #C03028;
+}
+
+.game__blue {
+  color: #5d81d6;
+}
+
+.game__yellow {
+  color: #d6b11f;
+}
+
+.game__gold {
+  color: #ad9551;
+}
+
+.game__silver {
+  color: #9797ab;
+}
+
+.game__crystal {
+  color: #87bfbf;
+}
+
+.game__ruby {
+  color: #C03028;
+}
+
+.game__sapphire {
+  color: #5d81d6;
+}
+
+.game__firered {
+  color: #C03028;
+}
+
+.game__leafgreen {
+  color: #65a843;
+}
+
+.game__emerald {
+  color: #909e1b;
+}
+
+.game__diamond {
+  color: #8471bd;
+}
+
+.game__pearl {
+  color: #de4f7a;
+}
+
+.game__platinum {
+  color: #9797ab;
+}
+
+.game__heartgold {
+  color: #ad9551;
+}
+
+.game__soulsilver {
+  color: #9797ab;
+}
+
+.game__black {
+  color: #574438;
+}
+
+.game__white {
+  color: #9797ab;
+}
+
+.game__black2 {
+  color: #574438;
+}
+
+.game__white2 {
+  color: #9797ab;
+}
+
+.game__x {
+  color: #5d81d6;
+}
+
+.game__y {
+  color: #C03028;
+}
+
+.game__omegaruby {
+  color: #C03028;
+}
+
+.game__alphasapphire {
+  color: #5d81d6;
+}
+
+.game__sun {
+  color: #db8624;
+}
+
+.game__moon {
+  color: #7038f8;
+}
+
+.game__ultrasun {
+  color: #db8624;
+}
+
+.game__ultramoon {
+  color: #7038f8;
+}
+
+.game__letsgopikachu {
+  color: #d6b11f;
+}
+
+.game__letsgoeevee {
+  color: #ac8639;
+}
+
+.game__sword {
+  color: #5d81d6;
+}
+
+.game__shield {
+  color: #C03028;
+}
+
+.game__brilliantdiamond {
+  color: #8471bd;
+}
+
+.game__shiningpearl {
+  color: #de4f7a;
+}
+
+.game__legendsarceus {
+  color: #65a843;
+}
+
+.game__scarlet {
+  color: #C03028;
+}
+
+.game__violet {
+  color: #7038f8;
+}
+
 .pokedex-card {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
   margin-top: 3rem !important;

@@ -2,11 +2,11 @@ import { useState } from "react";
 import { Container, Tab, Tabs, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import generations from "../../data/generations.json";
-import { romanize } from "../../utilities/utilities";
+import { lowerCaseDashes, lowerCaseNoSpaces, romanize } from "../../utilities/utilities";
+import { Box } from "@mui/system";
 
 const PokemonText = props => {
 	const p = props;
-	console.log(p)
 	
 	const [value, setValue] = useState(0);
 
@@ -14,17 +14,11 @@ const PokemonText = props => {
 		setValue(newValue);
 	}
 
-	const versionName = (arr) => {
-		if (arr) {
-			let x = arr.toLowerCase();
-			x = x.replace(" ", "-");
-			return x;
-		} else { return null; }
-	}
+	
 
 	return (
 		<Container id="PokemonText" sx={{ mb: 5 }}>
-			<Grid>
+			<Box>
 				<Tabs
 					value={value}
 					onChange={handleChange}
@@ -37,20 +31,16 @@ const PokemonText = props => {
 					))}
 
 				</Tabs>
-			</Grid>
+			</Box>
 			{generations.results.map((g, index) => (
-				<GenerationPanel key={g.id} value={value} index={index}>
-					{console.log("g", index, g)}
-					{g.version.map((v) => (
-						<>
-						{console.log("v", index, v)}
+				<GenerationPanel key={index} value={value} index={index} generation={g}>
+					{g.version.map(v => (
 						<FlavorText
 							key={v.name}
 							game={v.name}
-							text={p.flavor_text_entries.filter(f => f.version.name === versionName(v.name) && f.language.name === "en")}
-							num={v.pokedex.map(pd => p.pokedex_numbers.filter(f => f.pokedex.name === versionName(pd)))}
+							text={p.flavor_text_entries.filter(f => f.version.name === lowerCaseDashes(v.name) && f.language.name === "en")}
+							num={v.pokedex.map(pd => p.pokedex_numbers.filter(f => f.pokedex.name === lowerCaseDashes(pd)))}
 						/>
-						</>
 					))}
 				</GenerationPanel>
 			))}
@@ -68,8 +58,12 @@ const GenerationPanel = props => {
 			role="tabpanel"
 			hidden={props.value !== props.index}
 			id={`panelGen${romanNum}`}
+			aria-labelledby={`genTab${romanNum}`}
 		>
-			{props.children}
+			{props.value === props.index && (
+				props.children
+			)}
+			
 		</Container>
 	)
 }
@@ -78,19 +72,16 @@ const GenerationPanel = props => {
 
 const FlavorText = props => {
 	const game = props.game;
-	const num = props.num[0] ? props.num[0].entry_number : null;
+	const num = props.num[0][0] ? props.num[0][0].entry_number : null;
 	const text = props.text[0] ? props.text[0].flavor_text : null;
-	//console.log("game", game)
-	//console.log("num", num)
-	//console.log("text", text)
 
 	if (text) {
 		return (
 			<Grid>
-				<Typography component="h3" variant="h6">{game}</Typography>
+				<Typography component="h3" variant="h6" className={`game__${lowerCaseNoSpaces(game)}`}>{game}</Typography>
 				<Typography variant="body1">
 					<Typography component="span" variant="caption">{num}</Typography>
-					{text}
+					{text.replace(/\s/g, " ")}
 				</Typography>
 			</Grid>
 		)

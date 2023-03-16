@@ -248,6 +248,22 @@ export const getPokedexName = (dex) => {
 	return dexInfo;
 };
 
+export const lowerCaseDashes = (arr) => {
+	if (arr) {
+		let x = arr.toLowerCase();
+		x = x.replace(" ", "-");
+		return x;
+	} else { return null; }
+};
+
+export const lowerCaseNoSpaces = (arr) => {
+	if (arr) {
+		let x = arr.toLowerCase();
+		x = x.replace(/\s/g, "");
+		return x;
+	} else { return null; }
+};
+
 export const normalize = (value) => {
 	const min = 1;
 	const max = 255;

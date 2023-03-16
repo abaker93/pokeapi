@@ -135,3 +135,68 @@ $types-map: (
 		}
 	}
 }
+
+
+
+
+
+$red:			#C03028;
+$blue:		#5d81d6;
+$yellow:	#d6b11f;
+$gold:		#ad9551;
+$silver:	#9797ab;
+$crystal:	#87bfbf;
+$green:		#65a843;
+$emerald:	#909e1b;
+$diamond:	#8471bd;
+$pearl:		#de4f7a;
+$black:		#574438;
+$sun:			#db8624;
+$moon:		#7038f8;
+$eevee:		#ac8639;
+
+$games-map: (
+	"red":							$red,
+	"blue":							$blue,
+	"yellow":						$yellow,
+	"gold":							$gold,
+	"silver":						$silver,
+	"crystal":					$crystal,
+	"ruby":							$red,
+	"sapphire":					$blue,
+	"firered":					$red,
+	"leafgreen":				$green,
+	"emerald":					$emerald,
+	"diamond":					$diamond,
+	"pearl":						$pearl,
+	"platinum":					$silver,
+	"heartgold":				$gold,
+	"soulsilver":				$silver,
+	"black":						$black,
+	"white":						$silver,
+	"black2":						$black,
+	"white2":						$silver,
+	"x":								$blue,
+	"y":								$red,
+	"omegaruby":				$red,
+	"alphasapphire":		$blue,
+	"sun":							$sun,
+	"moon":							$moon,
+	"ultrasun":					$sun,
+	"ultramoon":				$moon,
+	"letsgopikachu":		$yellow,
+	"letsgoeevee":			$eevee,
+	"sword":						$blue,
+	"shield":						$red,
+	"brilliantdiamond":	$diamond,
+	"shiningpearl":			$pearl,
+	"legendsarceus":		$green,
+	"scarlet":					$red,
+	"violet":						$moon
+);
+
+@each $game, $color in $games-map {
+	.game__#{$game} {
+		color: #{$color};
+	}
+}
