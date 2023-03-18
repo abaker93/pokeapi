@@ -665,7 +665,7 @@
 
 [data-type-one=ice][data-type-two=ice] {
   --type-one-color: #73CEBF;
-  --type-two-color: #91DDD9;
+  --type-two-color: #9EDDE1;
 }
 
 [data-type-one=ice][data-type-two=steel] {
@@ -950,7 +950,7 @@
 
 [data-type-one=dragon][data-type-two=dragon] {
   --type-one-color: #096CC3;
-  --type-two-color: #0584B9;
+  --type-two-color: #089CDA;
 }
 
 [data-type-one=dragon][data-type-two=ghost] {
@@ -1140,7 +1140,7 @@
 
 [data-type-one=flying][data-type-two=flying] {
   --type-one-color: #92AADD;
-  --type-two-color: #A6C1F0;
+  --type-two-color: #CEDDF6;
 }
 
 [data-type-one=flying][data-type-two=dark] {
