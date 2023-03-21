@@ -242,18 +242,18 @@ const PokemonText = props => {
 	const handleChange = (event, newValue) => { setValue(newValue); }
 
 	const filterVersions = (flavorText, games) => {
-		let filter = [];
+		let filter = false;
 		
 		for (let i = 0; i < games.length; i++) {
-			filter.push(flavorText.filter(f => f.version.name === games[i]))
+			if (flavorText.filter(f => f.version.name === games[i]).length > 0) { filter = true; }
 		};
-		
-		return filter[0].length > 0 ? true : false;
+		return filter;
 	}
 
 	return (
 		<Container id="PokemonText" sx={{ mb: 5 }}>
 			<Box>
+				{/* // TODO: change how value is selected so the first available tab displays the first available panel on load. */}
 				<Tabs
 					value={value}
 					onChange={handleChange}
@@ -262,39 +262,39 @@ const PokemonText = props => {
 					aria-label="game flavor text sorted by generation"
 				>
 					{filterVersions(flavorTextFilter, ["red", "blue", "yellow"]) ? (
-						<Tab label="Gen I" id="genTabI" aria-controls="panelGenI" />
+						<Tab label="Gen I" id="genTabI" aria-controls="panelGenI" value={0} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["gold", "silver", "crystal"]) ? (
-						<Tab label="Gen II" id="genTabII" aria-controls="panelGenII" />
+						<Tab label="Gen II" id="genTabII" aria-controls="panelGenII" value={1} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["ruby", "sapphire", "emerald", "firered", "leafgreen", "colosseum", "xd"]) ? (
-						<Tab label="Gen III" id="genTabIII" aria-controls="panelGenIII" />
+						<Tab label="Gen III" id="genTabIII" aria-controls="panelGenIII" value={2} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["diamond", "pearl", "platinum", "heartgold", "soulsilver"]) ? (
-						<Tab label="Gen IV" id="genTabIV" aria-controls="panelGenIV" />
+						<Tab label="Gen IV" id="genTabIV" aria-controls="panelGenIV" value={3} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["black", "white", "black-2", "white-2"]) ? (
-						<Tab label="Gen V" id="genTabV" aria-controls="panelGenV" />
+						<Tab label="Gen V" id="genTabV" aria-controls="panelGenV" value={4} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["x", "y", "omega-ruby", "alpha-sapphire"]) ? (
-						<Tab label="Gen VI" id="genTabVI" aria-controls="panelGenVI" />
+						<Tab label="Gen VI" id="genTabVI" aria-controls="panelGenVI" value={5} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["sun", "moon", "ultra-sun", "ultra-moon", "lets-go-pikachu", "lets-go-eevee"]) ? (
-						<Tab label="Gen VII" id="genTabVII" aria-controls="panelGenVII" />
+						<Tab label="Gen VII" id="genTabVII" aria-controls="panelGenVII" value={6} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["sword", "shield", "the-isle-of-armor", "the-crown-tundra", "brilliant-diamond", "shining-pearl", "legends-arceus"]) ? (
-						<Tab label="Gen VIII" id="genTabVIII" aria-controls="panelGenVIII" />
+						<Tab label="Gen VIII" id="genTabVIII" aria-controls="panelGenVIII" value={7} />
 					) : null}
 
 					{filterVersions(flavorTextFilter, ["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]) ? (
-						<Tab label="Gen IX" id="genTabIX" aria-controls="panelGenIX" />
+						<Tab label="Gen IX" id="genTabIX" aria-controls="panelGenIX" value={8} />
 					) : null}
 
 				</Tabs>
