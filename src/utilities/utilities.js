@@ -260,6 +260,7 @@ export const lowerCaseNoSpaces = (arr) => {
 	if (arr) {
 		let x = arr.toLowerCase();
 		x = x.replace(/\s/g, "");
+		x = x.replace(/[^\w\d\s]/g, "");
 		return x;
 	} else { return null; }
 };
