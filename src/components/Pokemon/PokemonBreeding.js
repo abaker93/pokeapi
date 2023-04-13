@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, Container, Typography } from "@mui/material";
+import { Card, CardActionArea, CardContent, Chip, Container, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import { eggCycleSteps } from "../../utilities/data";
 
@@ -27,13 +27,7 @@ export default function PokemonBreeding(props) {
 										.filter(f => f.language.name === "en")
 										.map(m => (
 											<Grid key={index} xs={12}>
-												<Card variant="type" type={pokemon.types[0].type.name}>
-													<CardActionArea>
-														<CardContent href={`./egg-group/${m.name}`}>
-															<Typography variant="body1">{m.name}</Typography>
-														</CardContent>
-													</CardActionArea>
-												</Card>
+												<Chip size="large" type={pokemon.types[0].type.name} label={m.name} />
 											</Grid>
 										))
 								))}

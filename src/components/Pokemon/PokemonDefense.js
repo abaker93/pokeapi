@@ -10,19 +10,17 @@ export default function PokemonDefense(props) {
 	return (
 		<Container id="PokemonDefense" sx={{ mb: 5 }}>
 			<Grid container rowSpacing={2} justifyContent="space-between">
-				{typesArray.map((type, index) => {
-					return (
-						<Grid xs={1.33} display="flex" justifyContent="center">
-							<PokemonDefenseChip
-								defense={[
-									p.types[0].type.name,
-									p.types[1] ? p.types[1].type.name : null
-								]}
-								offense={type}
-							/>
-						</Grid>
-					)
-				})}
+				{typesArray.map((type, index) => (
+					<Grid key={index} xs={1.33} display="flex" justifyContent="center">
+						<PokemonDefenseChip
+							defense={[
+								p.types[0].type.name,
+								p.types[1] ? p.types[1].type.name : null
+							]}
+							offense={type}
+						/>
+					</Grid>
+				))}
 			</Grid>
 		</Container>
 	)

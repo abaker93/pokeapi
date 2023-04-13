@@ -6,12 +6,12 @@ import { Container } from "@mui/material";
 import PokemonHeader from "../components/Pokemon/PokemonHeader";
 import PokemonTitle from '../components/Pokemon/PokemonTitle';
 import PokemonStats from '../components/Pokemon/PokemonStats';
-//import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
+import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
 import PokemonDefense from "../components/Pokemon/PokemonDefense";
 import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
-import PokemonText from '../components/Pokemon/PokemonText';
+//import PokemonText from '../components/Pokemon/PokemonText';
 
 const P = new Pokedex();
 
@@ -19,20 +19,77 @@ const Pokemon = () => {
 	const pokemonId = parseInt(useParams().pokeId);
 
 	const [loading, setLoading] = useState(true);
+	const [pageData, setPageData] = useState([]);
 	const [pokemon, setPokemon] = useState([]);
 	const [eggGroups, setEggGroups] = useState([]);
+	const [evoChain, setEvoChain] = useState([]);
+	const [evoPokemon, setEvoPokemon] = useState([]);
 
+	//~		get pokemon's egg groups
 	const getEggGroups = eggGroups => {
 		eggGroups.forEach(group => {
 			P.getResource(group.url)
 				.then(res => {
 					setEggGroups(currentList => [...currentList, {...res}])
 				})
+				.catch(error => {
+					console.log(error)
+				})
 		})
 	}
 
-	//*		get pokemon data, pokemon-species data + optional prev/next pokemon data
-	const getPokemon = id => {
+	//~		get pokemon in evolution chain
+	const getEvoPokemon = id => {
+		P.getResource([
+			`/api/v2/pokemon/${id}`,
+			`/api/v2/pokemon-species/${id}`,
+		])
+			.then(res => {
+				setEvoPokemon(currentList => [...currentList, {
+					...res[0],
+					...res[1]
+				}])
+			})
+			.catch(error => {
+				console.log(error)
+			})
+	}
+
+	//~		get pokemon's evolution chain
+	const getEvoChain = url => {
+		P.getResource(url)
+			.then(res => {
+				if (res.chain.species.url) {
+					let id = res.chain.species.url.match(/[\/][0-9]+/g);
+					id = id[0].substring(1)
+					getEvoPokemon(id);
+
+					res.chain.evolves_to.map(x => {
+						if (x.species.url) {
+							let id = x.species.url.match(/[\/][0-9]+/g);
+							id = id[0].substring(1)
+							getEvoPokemon(id);
+						}
+
+						x.evolves_to.map(y => {
+							if (y.species.url) {
+								let id = y.species.url.match(/[\/][0-9]+/g);
+								id = id[0].substring(1)
+								getEvoPokemon(id);
+							}
+						})
+					})
+				}
+
+				setEvoChain(res);
+			})
+			.catch(error => {
+				console.log(error)
+			})
+	}
+
+	//~		get pokemon data, pokemon-species data + optional prev/next pokemon data
+	const getPageData = id => {
 		let urls = [
 			`/api/v2/pokemon/${id}`,
 			`/api/v2/pokemon-species/${id}`,
@@ -52,7 +109,7 @@ const Pokemon = () => {
 			.then(res => {
 				if (res.length === 3) {
 					if (id-1 >= 1) {
-						setPokemon({
+						setPageData({
 							...res[0],
 							...res[1],
 							prev: {
@@ -64,7 +121,7 @@ const Pokemon = () => {
 					}
 			
 					if (id+1 <= 1010) {
-						setPokemon({
+						setPageData({
 							...res[0],
 							...res[1],
 							prev: null,
@@ -75,7 +132,7 @@ const Pokemon = () => {
 						})
 					}
 				} else if (res.length === 4) {
-					setPokemon({
+					setPageData({
 						...res[0],
 						...res[1],
 						prev: {
@@ -89,9 +146,15 @@ const Pokemon = () => {
 					})
 				}
 
-				//*		get egg groups from pokemon
-				//*		to pass to PokemonBreeding component
+				// console.log(res)
+
+				//~		get egg groups from pokemon
+				//~		to pass to PokemonBreeding component
 				getEggGroups(res[1].egg_groups)
+
+				//~		get evolution chain from pokemon
+				//~		to pass to PokemonEvolution component
+				getEvoChain(res[1].evolution_chain.url)
 			})
 			.catch(error => {
 				console.log(error)
@@ -100,7 +163,7 @@ const Pokemon = () => {
 
 	useEffect(() => {
 		setLoading(true);
-		getPokemon(pokemonId);
+		getPageData(pokemonId);
 		setTimeout(() => { setLoading(false); }, 2000)
 	}, [pokemonId])
 
@@ -113,28 +176,29 @@ const Pokemon = () => {
 			id="Pokemon"
 			component="main"
 			maxWidth="false"
-			data-type-one={pokemon.types[0].type.name}
-			data-type-two={pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name}
+			data-type-one={pageData.types[0].type.name}
+			data-type-two={pageData.types[1] ? pageData.types[1].type.name : pageData.types[0].type.name}
 			sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 		>
-			<PokemonHeader loading={loading} {...pokemon} />
-			<PokemonTitle loading={loading} {...pokemon} />
-			<PokemonStats loading={loading} {...pokemon} />
+			<PokemonHeader loading={loading} {...pageData} />
+			<PokemonTitle loading={loading} {...pageData} />
+			<PokemonStats loading={loading} {...pageData} />
 			{/*
 			// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
+			*/}
 			<PokemonEvolution
 				loading={loading}
 				evolution={{
-					chain: evolutionChain,
-					pokemon: evolutionPokemon,
+					chain: evoChain,
+					pokemon: evoPokemon
 				}}
-				pokemon={evolutionPokemon}
-			/>*/}
-			<PokemonDefense loading={loading} {...pokemon} />
-			<PokemonAbilities loading={loading} {...pokemon} />
-			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pokemon} />
-			<PokemonAdditionalInfo loading={loading} {...pokemon} />
-			<PokemonText loading={loading} {...pokemon} />
+				pokemon={pageData}
+			/>
+			<PokemonDefense loading={loading} {...pageData} />
+			<PokemonAbilities loading={loading} {...pageData} />
+			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pageData} />
+			<PokemonAdditionalInfo loading={loading} {...pageData} />
+			{/* <PokemonText loading={loading} {...pokemon} /> */}
 		</Container>
 		)
 	);
