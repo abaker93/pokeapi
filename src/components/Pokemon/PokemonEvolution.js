@@ -23,30 +23,42 @@ const PokemonEvolution = (props) => {
 	}
 	
 	return (
-		<Container id="PokemonEvolution">
-			{evoPokemon.filter(f1 => f1.id == getID(evoChain.chain.species.url)).map(m2 => (
-				<div key={m2.id} id="lvl-1">
-					<img src={m2.sprites.other["official-artwork"].front_default} />
-				</div>
-			))}
+		<Container id="PokemonEvolution" sx={{ mb: 5 }}>
+			{evoPokemon.filter(f1 => f1.id == getID(evoChain.chain.species.url)).map(m1 => (
+				<div key={m1.id} className="lvl1">
+					<div className="lvl1-branch">
+						<div className="lvl1-img">
+							<img src={m1.sprites.other["official-artwork"].front_default} />
+						</div>
 
-			{evoChain.chain.evolves_to.map(l2 => (
-				<div key={getID(l2.species.url)} id="lvl-2">
-					{evoPokemon.filter(f2 => f2.id == getID(l2.species.url)).map(m2 => (
-						<div key={m2.id}>
-							<img src={m2.sprites.other["official-artwork"].front_default} />
-						</div>
-					))}
-					
-					{l2.evolves_to.map(l3 => (
-						<div key={getID(l3.species.url)} id="lvl-3">
-							{evoPokemon.filter(f3 => f3.id == getID(l3.species.url)).map(m3 => (
-								<div key={m3.id} id="lvl-3">
-									<img src={m3.sprites.other["official-artwork"].front_default} />
-								</div>
-							))}
-						</div>
-					))}
+						{evoChain.chain.evolves_to.length > 0 ? (
+							<div className="lvl2">
+								{evoChain.chain.evolves_to.map(l2 => (
+									<div className="lvl2-branch">
+										<div key={getID(l2.species.url)} className="lvl2-img">
+											{evoPokemon.filter(f2 => f2.id == getID(l2.species.url)).map(m2 => (
+												<img key={m2.id} src={m2.sprites.other["official-artwork"].front_default} />
+											))}
+										</div>
+										
+										{l2.evolves_to.length > 0 ? (
+											<div className="lvl3">
+												{l2.evolves_to.map(l3 => (
+													<div key={getID(l3.species.url)} className="lvl3">
+														{evoPokemon.filter(f3 => f3.id == getID(l3.species.url)).map(m3 => (
+															<div className="lvl3-img">
+																<img key={m3.id} src={m3.sprites.other["official-artwork"].front_default} />
+															</div>
+														))}
+													</div>
+												))}
+											</div>
+										) : null }
+									</div>
+								))}
+							</div>
+						) : null }
+					</div>
 				</div>
 			))}
 		</Container>

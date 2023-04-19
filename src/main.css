@@ -1958,35 +1958,13 @@
   border-radius: 50%;
 }
 
-#PokemonEvolution .evolutionNode {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 1.25rem;
-  align-items: center;
+#PokemonEvolution .lvl1-branch, #PokemonEvolution .lvl2-branch, #PokemonEvolution .lvl3-branch {
+  display: flex;
   justify-content: center;
-}
-#PokemonEvolution .evolutionNode .current {
-  display: grid;
-  grid-template-columns: auto auto;
   align-items: center;
 }
-#PokemonEvolution[data-level="2"] > .evolutionNode {
-  grid-auto-columns: repeat(2, minmax(0, 1fr));
-}
-#PokemonEvolution[data-level="2"] > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode {
-  grid-auto-columns: 1fr 3fr;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode {
-  grid-auto-columns: repeat(2, minmax(0, 1fr));
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
+#PokemonEvolution .lvl1-img, #PokemonEvolution .lvl2-img, #PokemonEvolution .lvl3-img {
+  width: calc((100vw - 2rem) / 3);
 }
 
 :root {
