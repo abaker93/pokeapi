@@ -251,7 +251,8 @@ export const getPokedexName = (dex) => {
 export const lowerCaseDashes = (arr) => {
 	if (arr) {
 		let x = arr.toLowerCase();
-		x = x.replace(" ", "-");
+		x = x.replace(/[^\w\d\s]/g, "");
+		x = x.replace(/\s/g, "-");
 		return x;
 	} else { return null; }
 };

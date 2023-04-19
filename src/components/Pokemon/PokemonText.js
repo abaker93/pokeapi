@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Container, Link, Tab, Tabs, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import GenerationPanel from "../GenerationPanel";
 import { formatDexId, lowerCaseNoSpaces } from "../../utilities/utilities";
 
 const PokemonText = props => {
@@ -209,12 +210,12 @@ const PokemonText = props => {
 			},
 			{
 				game: "Brilliant Diamond",
-				num: pokedexNumbers.filter(f => f.pokedex.name === "original-sinnoh").map(m => m.entry_number)[0],
+				num: pokedexNumbers.filter(f => f.pokedex.name === "updated-sinnoh").map(m => m.entry_number)[0],
 				text: flavorTextFilter.filter(f => f.version.name === "diamond").map(m => m.flavor_text)[0]
 			},
 			{
 				game: "Shining Pearl",
-				num: pokedexNumbers.filter(f => f.pokedex.name === "original-sinnoh").map(m => m.entry_number)[0],
+				num: pokedexNumbers.filter(f => f.pokedex.name === "updated-sinnoh").map(m => m.entry_number)[0],
 				text: flavorTextFilter.filter(f => f.version.name === "pearl").map(m => m.flavor_text)[0]
 			},
 			{
@@ -237,7 +238,7 @@ const PokemonText = props => {
 		],
 	}
 
-	const [value, setValue] = useState(7);
+	const [value, setValue] = useState(null);
 
 	const handleChange = (event, newValue) => { setValue(newValue); }
 
@@ -261,6 +262,8 @@ const PokemonText = props => {
 	const genVIII = filterVersions(flavorTextFilter, ["sword", "shield", "the-isle-of-armor", "the-crown-tundra", "brilliant-diamond", "shining-pearl", "legends-arceus"]);
 	const genIX = filterVersions(flavorTextFilter, ["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]);
 
+	//console.log("pokedex entries", genI, genII, genIII, genIV, genV, genVI, genVII, genVIII, genIX);
+
 	const findFirstGen = () => {
 		if (genI)	{
 			setValue(0)
@@ -276,11 +279,12 @@ const PokemonText = props => {
 			setValue(5)
 		} else if (genVII) {
 			setValue(6)
-			console.log(value)
 		} else if (genVIII) {
 			setValue(7)
-		} else {
+		} else if (genIX) {
 			setValue(8)
+		} else {
+			setValue(null)
 		}
 	}
 
@@ -288,8 +292,25 @@ const PokemonText = props => {
 		findFirstGen();
 	}, [])
 
+	if (value === null) {
+		return (
+			<Container id="PokemonText" sx={{ mb: 5 }}>
+				<Typography variant="h2" mb={1}>Pokédex entries</Typography>
+				<Typography variant="body1">
+					No Pokédex entries available for {p.names.filter(f => f.language.name === "en").map(m => m.name)}.
+					<Tooltip title="... or PokéAPI hasn't been updated with this data. Click this footnote for more information.">
+						<sup><Link href="/notes" underline="hover" sx={{ ml: 0.5, fontWeight: "medium" }}>1</Link></sup>
+					</Tooltip>
+				</Typography>
+			</Container>
+		)
+	}
+
 	return (
 		<Container id="PokemonText" sx={{ mb: 5 }}>
+			<Box>
+				<Typography variant="h2" mb={1}>Pokédex entries</Typography>
+			</Box>
 			<Box>
 				<Tabs
 					value={value}
@@ -333,9 +354,9 @@ const PokemonText = props => {
 					{genIX ? (
 						<Tab label="Gen IX" id="genTabIX" aria-controls="panelGenIX" value={8} />
 					) : null}
-
 				</Tabs>
 			</Box>
+
 			{genI ? (
 				<GenerationPanel value={value} index={0} gen="I">
 					{flavorTextEntries.gen_i.map(m => (
@@ -494,7 +515,6 @@ const PokemonText = props => {
 									text={m.text}
 								/>
 							)
-							
 						) : null
 					))}
 				</GenerationPanel>
@@ -519,21 +539,6 @@ const PokemonText = props => {
 }
 
 
-
-const GenerationPanel = props => {
-	return (
-		<Container
-			role="tabpanel"
-			hidden={props.value !== props.index}
-			id={`panelGen${props.gen}`}
-			aria-labelledby={`genTab${props.gen}`}
-		>
-			{props.value === props.index && (
-				props.children
-			)}
-		</Container>
-	)
-}
 
 
 

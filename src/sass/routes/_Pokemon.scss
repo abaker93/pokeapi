@@ -155,3 +155,10 @@
 		width: calc((100vw - 2rem) / 3);
 	}
 }
+
+#PokemonLocations {
+	.locations span:not(:last-child)::after {
+		content: ",";
+		padding-right: 0.5rem;
+	}
+}

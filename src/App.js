@@ -4,10 +4,12 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/Root";
 import Error from "./routes/Error";
 import Home from "./routes/Home";
+import Notes from "./routes/Notes";
 import PokedexList from "./routes/PokedexList";
 import Pokemon from "./routes/Pokemon";
 
 import { ColorModeProvider } from "./utilities/context";
+
 
 const router = createBrowserRouter([
 	{
@@ -23,7 +25,11 @@ const router = createBrowserRouter([
       {
         path: 'pokemon/:pokeId',
         element: <Pokemon />,
-      }
+      },
+      {
+        path: 'notes',
+        element: <Notes />,
+      },
     ]
 	}
 ])
