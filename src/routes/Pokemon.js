@@ -12,6 +12,7 @@ import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
 import PokemonText from '../components/Pokemon/PokemonText';
+import PokemonLocations from '../components/Pokemon/PokemonLocations';
 
 const P = new Pokedex();
 
@@ -20,10 +21,10 @@ const Pokemon = () => {
 
 	const [loading, setLoading] = useState(true);
 	const [pageData, setPageData] = useState([]);
-	const [pokemon, setPokemon] = useState([]);
 	const [eggGroups, setEggGroups] = useState([]);
 	const [evoChain, setEvoChain] = useState([]);
 	const [evoPokemon, setEvoPokemon] = useState([]);
+	const [locations, setLocations] = useState([]);
 
 	//~		get pokemon's egg groups
 	const getEggGroups = eggGroups => {
@@ -146,8 +147,6 @@ const Pokemon = () => {
 					})
 				}
 
-				// console.log(res)
-
 				//~		get egg groups from pokemon
 				//~		to pass to PokemonBreeding component
 				getEggGroups(res[1].egg_groups)
@@ -155,6 +154,11 @@ const Pokemon = () => {
 				//~		get evolution chain from pokemon
 				//~		to pass to PokemonEvolution component
 				getEvoChain(res[1].evolution_chain.url)
+
+				//~		get encounter locations from pokemon
+				//~		to pass to PokemonLocation component
+				P.getResource(res[0].location_area_encounters)
+					.then(loc => setLocations(loc))
 			})
 			.catch(error => {
 				console.log(error)
@@ -172,7 +176,7 @@ const Pokemon = () => {
 			<p>loading</p>
 		) : (
 		<Container
-			key={pokemon.id}
+			key={pageData.id}
 			id="Pokemon"
 			component="main"
 			maxWidth="false"
@@ -183,9 +187,6 @@ const Pokemon = () => {
 			<PokemonHeader loading={loading} {...pageData} />
 			<PokemonTitle loading={loading} {...pageData} />
 			<PokemonStats loading={loading} {...pageData} />
-			{/*
-			// TODO: come back to evolution later... working on logic for evolution conditions (arrows)
-			*/}
 			<PokemonEvolution
 				loading={loading}
 				evolution={{
@@ -199,6 +200,7 @@ const Pokemon = () => {
 			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pageData} />
 			<PokemonAdditionalInfo loading={loading} {...pageData} />
 			<PokemonText loading={loading} {...pageData} />
+			<PokemonLocations loading={loading} locations={locations} {...pageData} />
 		</Container>
 		)
 	);
