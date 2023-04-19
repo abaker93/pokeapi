@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Container, Tab, Tabs, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { formatDexId, lowerCaseNoSpaces } from "../../utilities/utilities";
@@ -237,7 +237,7 @@ const PokemonText = props => {
 		],
 	}
 
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState(7);
 
 	const handleChange = (event, newValue) => { setValue(newValue); }
 
@@ -247,13 +247,50 @@ const PokemonText = props => {
 		for (let i = 0; i < games.length; i++) {
 			if (flavorText.filter(f => f.version.name === games[i]).length > 0) { filter = true; }
 		};
+
 		return filter;
 	}
+
+	const genI = filterVersions(flavorTextFilter, ["red", "blue", "yellow"]);
+	const genII = filterVersions(flavorTextFilter, ["gold", "silver", "crystal"]);
+	const genIII = filterVersions(flavorTextFilter, ["ruby", "sapphire", "emerald", "firered", "leafgreen", "colosseum", "xd"]);
+	const genIV = filterVersions(flavorTextFilter, ["diamond", "pearl", "platinum", "heartgold", "soulsilver"]);
+	const genV = filterVersions(flavorTextFilter, ["black", "white", "black-2", "white-2"]);
+	const genVI = filterVersions(flavorTextFilter, ["x", "y", "omega-ruby", "alpha-sapphire"]);
+	const genVII = filterVersions(flavorTextFilter, ["sun", "moon", "ultra-sun", "ultra-moon", "lets-go-pikachu", "lets-go-eevee"]);
+	const genVIII = filterVersions(flavorTextFilter, ["sword", "shield", "the-isle-of-armor", "the-crown-tundra", "brilliant-diamond", "shining-pearl", "legends-arceus"]);
+	const genIX = filterVersions(flavorTextFilter, ["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]);
+
+	const findFirstGen = () => {
+		if (genI)	{
+			setValue(0)
+		} else if (genII) {
+			setValue(1)
+		} else if (genIII) {
+			setValue(2)
+		} else if (genIV) {
+			setValue(3)
+		} else if (genV) {
+			setValue(4)
+		} else if (genVI) {
+			setValue(5)
+		} else if (genVII) {
+			setValue(6)
+			console.log(value)
+		} else if (genVIII) {
+			setValue(7)
+		} else {
+			setValue(8)
+		}
+	}
+
+	useEffect(() => {
+		findFirstGen();
+	}, [])
 
 	return (
 		<Container id="PokemonText" sx={{ mb: 5 }}>
 			<Box>
-				{/* // TODO: change how value is selected so the first available tab displays the first available panel on load. */}
 				<Tabs
 					value={value}
 					onChange={handleChange}
@@ -261,45 +298,45 @@ const PokemonText = props => {
 					scrollButtons="auto"
 					aria-label="game flavor text sorted by generation"
 				>
-					{filterVersions(flavorTextFilter, ["red", "blue", "yellow"]) ? (
+					{genI ? (
 						<Tab label="Gen I" id="genTabI" aria-controls="panelGenI" value={0} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["gold", "silver", "crystal"]) ? (
+					{genII ? (
 						<Tab label="Gen II" id="genTabII" aria-controls="panelGenII" value={1} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["ruby", "sapphire", "emerald", "firered", "leafgreen", "colosseum", "xd"]) ? (
+					{genIII ? (
 						<Tab label="Gen III" id="genTabIII" aria-controls="panelGenIII" value={2} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["diamond", "pearl", "platinum", "heartgold", "soulsilver"]) ? (
+					{genIV ? (
 						<Tab label="Gen IV" id="genTabIV" aria-controls="panelGenIV" value={3} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["black", "white", "black-2", "white-2"]) ? (
+					{genV ? (
 						<Tab label="Gen V" id="genTabV" aria-controls="panelGenV" value={4} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["x", "y", "omega-ruby", "alpha-sapphire"]) ? (
+					{genVI ? (
 						<Tab label="Gen VI" id="genTabVI" aria-controls="panelGenVI" value={5} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["sun", "moon", "ultra-sun", "ultra-moon", "lets-go-pikachu", "lets-go-eevee"]) ? (
+					{genVII ? (
 						<Tab label="Gen VII" id="genTabVII" aria-controls="panelGenVII" value={6} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["sword", "shield", "the-isle-of-armor", "the-crown-tundra", "brilliant-diamond", "shining-pearl", "legends-arceus"]) ? (
+					{genVIII ? (
 						<Tab label="Gen VIII" id="genTabVIII" aria-controls="panelGenVIII" value={7} />
 					) : null}
 
-					{filterVersions(flavorTextFilter, ["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]) ? (
+					{genIX ? (
 						<Tab label="Gen IX" id="genTabIX" aria-controls="panelGenIX" value={8} />
 					) : null}
 
 				</Tabs>
 			</Box>
-			{filterVersions(flavorTextFilter, ["red", "blue", "yellow"]) ? (
+			{genI ? (
 				<GenerationPanel value={value} index={0} gen="I">
 					{flavorTextEntries.gen_i.map(m => (
 						m.text ? (
@@ -314,7 +351,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["gold", "silver", "crystal"]) ? (
+			{genII ? (
 				<GenerationPanel value={value} index={1} gen="II">
 					{flavorTextEntries.gen_ii.map(m => (
 						m.text ? (
@@ -329,7 +366,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["ruby", "sapphire", "emerald", "firered", "leafgreen"]) ? (
+			{genIII ? (
 				<GenerationPanel value={value} index={2} gen="III">
 					{flavorTextEntries.gen_iii.map(m => (
 						m.text ? (
@@ -344,7 +381,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["diamond", "pearl", "platinum", "heartgold", "soulsilver"]) ? (
+			{genIV ? (
 				<GenerationPanel value={value} index={3} gen="IV">
 					{flavorTextEntries.gen_iv.map(m => (
 						m.text ? (
@@ -359,7 +396,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["black", "white", "black-2", "white-2"]) ? (
+			{genV ? (
 				<GenerationPanel value={value} index={4} gen="V">
 					{flavorTextEntries.gen_v.map(m => (
 						m.text ? (
@@ -374,7 +411,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["x", "y", "omega-ruby", "alpha-sapphire"]) ? (
+			{genVI ? (
 				<GenerationPanel value={value} index={5} gen="VI">
 					{flavorTextEntries.gen_vi.map(m => (
 						m.text ? (
@@ -403,7 +440,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["sun", "moon", "ultra-sun", "ultra-moon", "lets-go-pikachu", "lets-go-eevee"]) ? (
+			{genVII ? (
 				<GenerationPanel value={value} index={6} gen="VII">
 					{flavorTextEntries.gen_vii.map(m => (
 						m.text ? (
@@ -434,7 +471,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["sword", "shield", "brilliant-diamond", "shining-pearl", "legends-arceus"]) ? (
+			{genVIII ? (
 				<GenerationPanel value={value} index={7} gen="VIII">
 					{flavorTextEntries.gen_viii.map(m => (
 						m.text ? (
@@ -463,7 +500,7 @@ const PokemonText = props => {
 				</GenerationPanel>
 			) : null}
 
-			{filterVersions(flavorTextFilter, ["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]) ? (
+			{genIX ? (
 				<GenerationPanel value={value} index={8} gen="IX">
 					{flavorTextEntries.gen_ix.map(m => (
 						m.text ? (

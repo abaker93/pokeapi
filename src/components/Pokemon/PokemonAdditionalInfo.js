@@ -66,12 +66,12 @@ export default function PokemonAdditionalInfo (props) {
 					{/* // TODO: need to figure out math for capture rate with a reg pokebal, full hp */}
 					<Typography variant="body1">{p.capture_rate}</Typography>
 				</Grid>
-				<Grid xs={7}>
+				{/* <Grid xs={7}>
 					<Typography component="h4" variant="h6">Base Friendship</Typography>
 				</Grid>
 				<Grid xs={5}>
 					<Typography variant="body1"></Typography>
-				</Grid>
+					</Grid> */}
 				<Grid xs={7}>
 					<Typography component="h4" variant="h6">Base Experience</Typography>
 				</Grid>

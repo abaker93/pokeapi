@@ -11,7 +11,7 @@ import PokemonDefense from "../components/Pokemon/PokemonDefense";
 import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
 import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
 import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
-//import PokemonText from '../components/Pokemon/PokemonText';
+import PokemonText from '../components/Pokemon/PokemonText';
 
 const P = new Pokedex();
 
@@ -198,7 +198,7 @@ const Pokemon = () => {
 			<PokemonAbilities loading={loading} {...pageData} />
 			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pageData} />
 			<PokemonAdditionalInfo loading={loading} {...pageData} />
-			{/* <PokemonText loading={loading} {...pokemon} /> */}
+			<PokemonText loading={loading} {...pageData} />
 		</Container>
 		)
 	);
