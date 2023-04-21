@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Box, Container, Link, Tab, Tabs, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import GenerationPanel from "../GenerationPanel";
+import TabPanel from "../TabPanel";
 import { formatDexId, lowerCaseNoSpaces } from "../../utilities/utilities";
 
 const PokemonText = props => {
@@ -358,7 +358,7 @@ const PokemonText = props => {
 			</Box>
 
 			{genI ? (
-				<GenerationPanel value={value} index={0} gen="I">
+				<TabPanel value={value} index={0} id="panelGenI" ariaLabelledBy="tabGenI">
 					{flavorTextEntries.gen_i.map(m => (
 						m.text ? (
 							<FlavorText
@@ -369,11 +369,11 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genII ? (
-				<GenerationPanel value={value} index={1} gen="II">
+				<TabPanel value={value} index={1} id="panelGenII" ariaLabelledBy="tabGenII">
 					{flavorTextEntries.gen_ii.map(m => (
 						m.text ? (
 							<FlavorText
@@ -384,11 +384,11 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIII ? (
-				<GenerationPanel value={value} index={2} gen="III">
+				<TabPanel value={value} index={2} id="panelGenIII" ariaLabelledBy="tabGenIII">
 					{flavorTextEntries.gen_iii.map(m => (
 						m.text ? (
 							<FlavorText
@@ -399,11 +399,11 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIV ? (
-				<GenerationPanel value={value} index={3} gen="IV">
+				<TabPanel value={value} index={3} id="panelGenIV" ariaLabelledBy="tabGenIV">
 					{flavorTextEntries.gen_iv.map(m => (
 						m.text ? (
 							<FlavorText
@@ -414,11 +414,11 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genV ? (
-				<GenerationPanel value={value} index={4} gen="V">
+				<TabPanel value={value} index={4} id="panelGenV" ariaLabelledBy="tabGenV">
 					{flavorTextEntries.gen_v.map(m => (
 						m.text ? (
 							<FlavorText
@@ -429,11 +429,11 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVI ? (
-				<GenerationPanel value={value} index={5} gen="VI">
+				<TabPanel value={value} index={5} id="panelGenVI" ariaLabelledBy="tabGenVI">
 					{flavorTextEntries.gen_vi.map(m => (
 						m.text ? (
 							m.game === "X" || m.game === "Y" ? (
@@ -458,11 +458,11 @@ const PokemonText = props => {
 							
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVII ? (
-				<GenerationPanel value={value} index={6} gen="VII">
+				<TabPanel value={value} index={6} id="panelGenVII" ariaLabelledBy="tabGenVII">
 					{flavorTextEntries.gen_vii.map(m => (
 						m.text ? (
 							m.game === "Sun" || m.game === "Moon" || m.game === "Ultra Sun" || m.game === "Ultra Moon" ? (
@@ -489,11 +489,11 @@ const PokemonText = props => {
 							
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVIII ? (
-				<GenerationPanel value={value} index={7} gen="VIII">
+				<TabPanel value={value} index={7} id="panelGenVIII" ariaLabelledBy="tabGenVIII">
 					{flavorTextEntries.gen_viii.map(m => (
 						m.text ? (
 							m.game === "Sword" || m.game === "Shield" ? (
@@ -517,11 +517,11 @@ const PokemonText = props => {
 							)
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIX ? (
-				<GenerationPanel value={value} index={8} gen="IX">
+				<TabPanel value={value} index={8} id="panelGenIX" ariaLabelledBy="tabGenIX">
 					{flavorTextEntries.gen_ix.map(m => (
 						m.text ? (
 							<FlavorText
@@ -532,7 +532,7 @@ const PokemonText = props => {
 							/>
 						) : null
 					))}
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 		</Container>
 	)

@@ -8,7 +8,7 @@ import {
 	Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import GenerationPanel from "../GenerationPanel";
+import TabPanel from "../TabPanel";
 import { lowerCaseDashes, lowerCaseNoSpaces } from "../../utilities/utilities";
 
 
@@ -146,7 +146,7 @@ const PokemonLocations = props => {
 			</Box>
 
 			{genI ? (
-				<GenerationPanel value={value} index={0} gen="I">
+				<TabPanel value={value} index={0} id="panelGenI" ariaLabelledBy="tabGenI">
 					<Encounter
 						game="Red"
 						locations={filterLocations("red")}
@@ -159,11 +159,11 @@ const PokemonLocations = props => {
 						game="Yellow"
 						locations={filterLocations("yellow")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genII ? (
-				<GenerationPanel value={value} index={1} gen="II">
+				<TabPanel value={value} index={1} id="panelGenII" ariaLabelledBy="tabGenII">
 					<Encounter
 						game="Gold"
 						locations={filterLocations("gold")}
@@ -176,11 +176,11 @@ const PokemonLocations = props => {
 						game="Crystal"
 						locations={filterLocations("crystal")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIII ? (
-				<GenerationPanel value={value} index={2} gen="III">
+				<TabPanel value={value} index={2} id="panelGenIII" ariaLabelledBy="tabGenIII">
 					<Encounter
 						game="Ruby"
 						locations={filterLocations("ruby")}
@@ -201,11 +201,11 @@ const PokemonLocations = props => {
 						game="LeafGreen"
 						locations={filterLocations("leafgreen")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIV ? (
-				<GenerationPanel value={value} index={3} gen="IV">
+				<TabPanel value={value} index={3} id="panelGenIV" ariaLabelledBy="tabGenIV">
 					<Encounter
 						game="Diamond"
 						locations={filterLocations("diamond")}
@@ -226,11 +226,11 @@ const PokemonLocations = props => {
 						game="SoulSilver"
 						locations={filterLocations("soulsilver")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genV ? (
-				<GenerationPanel value={value} index={4} gen="V">
+				<TabPanel value={value} index={4} id="panelGenV" ariaLabelledBy="tabGenV">
 					<Encounter
 						game="Black"
 						locations={filterLocations("black")}
@@ -247,11 +247,11 @@ const PokemonLocations = props => {
 						game="White 2"
 						locations={filterLocations("white-2")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVI ? (
-				<GenerationPanel value={value} index={5} gen="VI">
+				<TabPanel value={value} index={5} id="panelGenVI" ariaLabelledBy="tabGenVI">
 					<Encounter
 						game="X"
 						locations={filterLocations("x")}
@@ -268,11 +268,11 @@ const PokemonLocations = props => {
 						game="Alpha Sapphire"
 						locations={filterLocations("alpha-sapphire")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVII ? (
-				<GenerationPanel value={value} index={6} gen="VII">
+				<TabPanel value={value} index={6} id="panelGenVII" ariaLabelledBy="tabGenVII">
 					<Encounter
 						game="Sun"
 						locations={filterLocations("sun")}
@@ -297,11 +297,11 @@ const PokemonLocations = props => {
 						game="Let's Go Eevee"
 						locations={filterLocations("lets-go-eevee")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genVIII ? (
-				<GenerationPanel value={value} index={7} gen="VIII">
+				<TabPanel value={value} index={7} id="panelGenVIII" ariaLabelledBy="tabGenVIII">
 					<Encounter
 						game="Sword"
 						locations={filterLocations("sword")}
@@ -322,11 +322,11 @@ const PokemonLocations = props => {
 						game="Legends Arceus"
 						locations={filterLocations("legends-arceus")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 
 			{genIX ? (
-				<GenerationPanel value={value} index={8} gen="IX">
+				<TabPanel value={value} index={8} id="panelGenIX" ariaLabelledBy="tabGenIX">
 					<Encounter
 						game="Scarlet"
 						locations={filterLocations("scarlet")}
@@ -335,7 +335,7 @@ const PokemonLocations = props => {
 						game="Violet"
 						locations={filterLocations("violet")}
 					/>
-				</GenerationPanel>
+				</TabPanel>
 			) : null}
 		</Container>
 	)
@@ -350,7 +350,7 @@ const Encounter = props => {
 	const locations = props.locations;
 	const [locNames, setLocNames] = useState([]);
 
-	console.log("locations", locations)
+	// console.log("locations", locations)
 
 	const getLocationArea = locations => {
 		locations.forEach(loc => {
@@ -368,7 +368,8 @@ const Encounter = props => {
 		getLocationArea(locations)
 	}, [locations])
 
-//	TODO: Change all references of "Road #" to "Route #" 
+//	TODO:		Change all references of "Road #" to "Route #."
+//	TODO:		But don't change Victory Road (and other Roads) to Route.
 
 	if (locations.length > 0) {
 		return (
