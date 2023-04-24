@@ -2009,4 +2009,8 @@ img {
   justify-self: center;
 }
 
+#PokemonMoves .icon {
+  height: 1.25em;
+}
+
 /*# sourceMappingURL=main.css.map */

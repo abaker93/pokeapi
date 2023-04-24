@@ -4,13 +4,13 @@ import { Box, Chip, Container, Link, Tab, Table, TableBody, TableCell, TableCont
 import TabPanel from "../TabPanel";
 import TypeIcon from "../../assets/TypeIcons";
 import { useNavigate } from "react-router-dom";
+import { Physical, Special, Status } from "../../assets/MoveIcons";
 
 const P = new Pokedex();
 
 const PokemonMoves = props => {
 	const pokeName = props.names.filter(f => f.language.name === "en").map(m => m.name)[0];
 	const moves = props.moves;
-	console.log(moves)
 
 	const [value, setValue] = useState({
 		gen:			null,
@@ -141,6 +141,228 @@ const PokemonMoves = props => {
 		findFirst();
 	}, [])
 
+	const moveData = [
+		{
+			index: 0,
+			id: "GenI",
+			name: "Gen I",
+			version: "genI",
+			games: [
+				{
+					id: "RedBlue",
+					name: "Red & Blue",
+					version: "red-blue",
+					moves: filterMoves("red-blue"),
+					moveMethods: ["level-up", "hm", "tm"]
+				},
+				{
+					id: "Yellow",
+					name: "Yellow",
+					version: "yellow",
+					moves: filterMoves("yellow"),
+					moveMethods: ["level-up", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 1,
+			id: "GenII",
+			name: "Gen II",
+			version: "genII",
+			games: [
+				{
+					id: "GoldSilver",
+					name: "Gold & Silver",
+					version: "gold-silver",
+					moves: filterMoves("gold-silver"),
+					moveMethods: ["level-up", "egg", "hm", "tm"]
+				},
+				{
+					id: "Crystal",
+					name: "Crystal",
+					version: "crystal",
+					moves: filterMoves("crystal"),
+					moveMethods: ["level-up", "egg", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 2,
+			id: "GenIII",
+			name: "Gen III",
+			version: "genIII",
+			games: [
+				{
+					id: "RubySapphire",
+					name: "Ruby & Sapphire",
+					version: "ruby-sapphire",
+					moves: filterMoves("ruby-sapphire"),
+					moveMethods: ["level-up", "egg", "hm", "tm"]
+				},
+				{
+					id: "Emerald",
+					name: "Emerald",
+					version: "emerald",
+					moves: filterMoves("emerald"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				},
+				{
+					id: "FireRedLeafGreen",
+					name: "FireRed & LeafGreen",
+					version: "firered-leafgreen",
+					moves: filterMoves("firered-leafgreen"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 3,
+			id: "GenIV",
+			name: "Gen IV",
+			version: "genIV",
+			games: [
+				{
+					id: "DiamondPearl",
+					name: "Diamond & Pearl",
+					version: "diamond-pearl",
+					moves: filterMoves("diamond-pearl"),
+					moveMethods: ["level-up", "egg", "hm", "tm"]
+				},
+				{
+					id: "Platinum",
+					name: "Platinum",
+					version: "platinum",
+					moves: filterMoves("platinum"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				},
+				{
+					id: "HeartGoldSoulSilver",
+					name: "HeartGold & SoulSilver",
+					version: "heartgold-soulsilver",
+					moves: filterMoves("heartgold-soulsilver"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 4,
+			id: "GenV",
+			name: "Gen V",
+			version: "genV",
+			games: [
+				{
+					id: "BlackWhite",
+					name: "Black & White",
+					version: "black-white",
+					moves: filterMoves("black-white"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				},
+				{
+					id: "Black2White2",
+					name: "Black 2 & White 2",
+					version: "black-2-white-2",
+					moves: filterMoves("black-2-white-2"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 5,
+			id: "GenVI",
+			name: "Gen VI",
+			version: "genVI",
+			games: [
+				{
+					id: "XY",
+					name: "X & Y",
+					version: "x-y",
+					moves: filterMoves("x-y"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				},
+				{
+					id: "OmegaRubyAlphaSapphire",
+					name: "Omega Ruby & Alpha Sapphire",
+					version: "omega-ruby-alpha-sapphire",
+					moves: filterMoves("omega-ruby-alpha-sapphire"),
+					moveMethods: ["level-up", "egg", "tutor", "hm", "tm"]
+				}
+			]
+		},
+		{
+			index: 6,
+			id: "GenVII",
+			name: "Gen VII",
+			version: "genVII",
+			games: [
+				{
+					id: "SunMoon",
+					name: "Sun & Moon",
+					version: "sun-moon",
+					moves: filterMoves("sun-moon"),
+					moveMethods: ["level-up", "egg", "tutor", "tm"]
+				},
+				{
+					id: "UltraSunUltraMoon",
+					name: "Ultra Sun & Ultra Moon",
+					version: "ultra-sun-ultra-moon",
+					moves: filterMoves("ultra-sun-ultra-moon"),
+					moveMethods: ["level-up", "egg", "tutor", "tm"]
+				},
+				{
+					id: "LetsGoPikachuLetsGoEevee",
+					name: "Let's Go Pikachu & Let's Go Eevee",
+					version: "lets-go-pikachu-lets-go-eevee",
+					moves: filterMoves("lets-go-pikachu-lets-go-eevee"),
+					moveMethods: ["level-up", "tm"]
+				}
+			]
+		},
+		{
+			index: 7,
+			id: "GenVIII",
+			name: "Gen VIII",
+			version: "genVIII",
+			games: [
+				{
+					id: "SwordShield",
+					name: "Sword & Shield",
+					version: "sword-shield",
+					moves: filterMoves("sword-shield"),
+					moveMethods: ["level-up", "egg", "tutor", "tm", "tr"]
+				},
+				{
+					id: "BrilliantDiamondShiningPearl",
+					name: "Brilliant Diamond & Shining Pearl",
+					version: "brilliant-diamond-shining-pearl",
+					moves: filterMoves("brilliant-diamond-shining-pearl"),
+					moveMethods: ["level-up", "egg", "tm"]
+				},
+				{
+					id: "LegendsAcreus",
+					name: "Legends: Arceus",
+					version: "legends-arceus",
+					moves: filterMoves("legends-arceus"),
+					moveMethods: ["level-up", "tutor"]
+				}
+			]
+		},
+		{
+			index: 8,
+			id: "GenIX",
+			name: "Gen IX",
+			version: "genIX",
+			games: [
+				{
+					id: "ScarletViolet",
+					name: "Scarlet & Violet",
+					version: "scarlet-violet",
+					moves: filterMoves("scarlet-violet"),
+					moveMethods: ["level-up", "egg", "tm"]
+				},
+			]
+		},
+	]
+
 	if (value.gen === null) { return }
 
 	return (
@@ -194,593 +416,87 @@ const PokemonMoves = props => {
 				</Tabs>
 			</Box>
 
-			{g[1] ? (
-				<TabPanel value={value.gen} index={0} id="panelGenI" ariaLabelledBy="tabGenI">
+			{moveData.map((m1, index) => (
+				<TabPanel key={index} value={value.gen} index={index} id={`panel${m1.id}`} ariaLabelledBy={`tab${m1.id}`}>
 					<Tabs
-						value={value.genI}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genI: newValue }))}
+						value={value[m1.version]}
+						onChange={(e, newValue) => setValue(prev => ({ ...prev, [m1.version]: newValue }))}
 						variant="scrollable"
 						scrollButtons="auto"
 						aria-label="learned moves sorted by game"
 					>
-						{v.redBlue ? (
-							<Tab label="Red/Blue" id="tabRedBlue" aria-controls="panelRedBlue" value={0} />
-						) : null}
-
-						{v.yellow ? (
-							<Tab label="Yellow" id="tabYellow" aria-controls="panelYellow" value={1} />
-						) : null}
+						{m1.games.map((m2, index) => (
+							m2.moves.length > 0 ? (
+								<Tab key={index} label={m2.name} id={`tab${m2.id}`} aria-controls={`panel${m2.id}`} value={index} />
+							) : null
+						))}
 					</Tabs>
 
-					{v.redBlue ? (
-						<TabPanel value={value.genI} index={0} id="panelRedBlue" ariaLabelledBy="tabRedBlue">
-							<LevelMoves
-								game="Red & Blue"
-								version="red-blue"
-								moves={filterMoves("red-blue").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Red & Blue"
-								version="red-blue"
-								method="hm"
-								moves={filterMoves("red-blue").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Red & Blue"
-								version="red-blue"
-								method="tm"
-								moves={filterMoves("red-blue").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-					
-					{v.yellow ? (
-						<TabPanel value={value.genI} index={1} id="panelYellow" ariaLabelledBy="tabYellow">
-							<LevelMoves
-								game="Yellow"
-								version="yellow"
-								moves={filterMoves("yellow").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Yellow"
-								version="yellow"
-								method="hm"
-								moves={filterMoves("yellow").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Yellow"
-								version="yellow"
-								method="tm"
-								moves={filterMoves("yellow").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
+					{m1.games.map((m2, index) => (
+						m2.moves.length > 0 ? (
+							<TabPanel key={index} value={value[m1.version]} index={index} id={`panel${m2.id}`} ariaLabelledBy={`tab${m2.id}`}>
+								{m2.moveMethods.map((m3, index) => (
+									m3 === "level-up" ? (
+										<LevelMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === m3))}
+											pokemon={pokeName}
+										/>
+									) : m3 === "egg" || m3 === "tutor" ? (
+										<MiscMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === m3))}
+											pokemon={pokeName}
+										/>
+									) : m3 === "hm" ? (
+										<MachineMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
+											pokemon={pokeName}
+										/>
+									) : m3 === "tm" ? (
+										<MachineMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
+											pokemon={pokeName}
+										/>
+									) : m3 === "tr" ? (
+										<MachineMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
+											pokemon={pokeName}
+										/>
+									) : (
+										<MiscMoves
+											key={index}
+											game={m2.name}
+											version={m2.version}
+											method={m3}
+											moves={m2.moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === m3))}
+											pokemon={pokeName}
+										/>
+									)
+								))}
+							</TabPanel>
+						) : null
+					))}
 				</TabPanel>
-			) : null }
-
-			{g[2] ? (
-				<TabPanel value={value.gen} index={1} id="panelGenII" ariaLabelledBy="tabGenII">
-					<Tabs
-						value={value.genII}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genII: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.goldSilver ? (
-							<Tab label="Gold/Silver" id="goldSilverTab" aria-controls="goldSilverPanel" value={0} />
-						) : null}
-
-						{v.crystal ? (
-							<Tab label="Crystal" id="crystalTab" aria-controls="crystalPanel" value={1} />
-						) : null}
-					</Tabs>
-
-					{v.goldSilver ? (
-						<TabPanel value={value.genII} index={0} id="panelGoldSilver" ariaLabelledBy="tabGoldSilver">
-							<LevelMoves
-								game="Gold & Silver"
-								version="gold-silver"
-								moves={filterMoves("gold-silver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Gold & Silver"
-								version="gold-silver"
-								method="hm"
-								moves={filterMoves("gold-silver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Gold & Silver"
-								version="gold-silver"
-								method="tm"
-								moves={filterMoves("gold-silver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.crystal ? (
-						<TabPanel value={value.genII} index={1} id="panelCrystal" ariaLabelledBy="tabCrystal">
-							<LevelMoves
-								game="Crystal"
-								version="crystal"
-								moves={filterMoves("crystal").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Crystal"
-								version="crystal"
-								method="hm"
-								moves={filterMoves("crystal").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Crystal"
-								version="crystal"
-								method="tm"
-								moves={filterMoves("crystal").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-				</TabPanel>
-			) : null }
-
-			{g[3] ? (
-				<TabPanel value={value.gen} index={2} id="panelGenIII" ariaLabelledBy="tabGenIII">
-					<Tabs
-						value={value.genIII}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genIII: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.rubySapphire ? (
-							<Tab label="Ruby/Sapphire" id="rubySapphireTab" aria-controls="rubySapphirePanel" value={0} />
-						) : null}
-
-						{v.emerald ? (
-							<Tab label="Emerald" id="emeraldTab" aria-controls="emeraldPanel" value={1} />
-						) : null}
-
-						{v.fireRedLeafGreen ? (
-							<Tab label="FireRed/LeafGreen" id="fireRedLeafGreenTab" aria-controls="fireRedLeafGreenPanel" value={2} />
-						) : null}
-					</Tabs>
-
-					{v.rubySapphire ? (
-						<TabPanel value={value.genIII} index={0} id="panelRubySapphire" ariaLabelledBy="tabRubySapphire">
-							<LevelMoves
-								game="Ruby & Sapphire"
-								version="ruby-sapphire"
-								moves={filterMoves("ruby-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Ruby & Sapphire"
-								version="ruby-sapphire"
-								method="hm"
-								moves={filterMoves("ruby-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Ruby & Sapphire"
-								version="ruby-sapphire"
-								method="tm"
-								moves={filterMoves("ruby-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.emerald ? (
-						<TabPanel value={value.genIII} index={1} id="panelEmerald" ariaLabelledBy="tabEmerald">
-							<LevelMoves
-								game="Emerald"
-								version="emerald"
-								moves={filterMoves("emerald").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Emerald"
-								version="emerald"
-								method="hm"
-								moves={filterMoves("emerald").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Emerald"
-								version="emerald"
-								method="tm"
-								moves={filterMoves("emerald").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.fireRedLeafGreen ? (
-						<TabPanel value={value.genIII} index={2} id="panelFireRedLeafGreen" ariaLabelledBy="tabFireRedLeafGreen">
-							<LevelMoves
-								game="FireRed & LeafGreen"
-								version="firered-leafgreen"
-								moves={filterMoves("firered-leafgreen").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="FireRed & LeafGreen"
-								version="firered-leafgreen"
-								method="hm"
-								moves={filterMoves("firered-leafgreen").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="FireRed & LeafGreen"
-								version="firered-leafgreen"
-								method="tm"
-								moves={filterMoves("firered-leafgreen").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-				</TabPanel>
-			) : null }
-
-			{g[4] ? (
-				<TabPanel value={value.gen} index={3} id="panelGenIV" ariaLabelledBy="tabGenIV">
-					<Tabs
-						value={value.genIV}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genIV: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.diamondPearl ? (
-							<Tab label="Diamond/Pearl" id="diamondPearlTab" aria-controls="diamondPearlPanel" value={0} />
-						) : null}
-
-						{v.platinum ? (
-							<Tab label="Platinum" id="platinumTab" aria-controls="platinumPanel" value={1} />
-						) : null}
-
-						{v.heartGoldSoulSilver ? (
-							<Tab label="HeartGold/SoulSilver" id="heartGoldSoulSilverTab" aria-controls="heartGoldSoulSilverPanel" value={2} />
-						) : null}
-					</Tabs>
-
-					{v.diamondPearl ? (
-						<TabPanel value={value.genIV} index={0} id="panelDiamondPearl" ariaLabelledBy="tabDiamondPearl">
-							<LevelMoves
-								game="Diamond & Pearl"
-								version="diamond-pearl"
-								moves={filterMoves("diamond-pearl").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Diamond & Pearl"
-								version="diamond-pearl"
-								method="hm"
-								moves={filterMoves("diamond-pearl").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Diamond & Pearl"
-								version="diamond-pearl"
-								method="tm"
-								moves={filterMoves("diamond-pearl").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.platinum ? (
-						<TabPanel value={value.genIV} index={1} id="panelPlatinum" ariaLabelledBy="tabPlatinum">
-							<LevelMoves
-								game="Platinum"
-								version="platinum"
-								moves={filterMoves("platinum").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Platinum"
-								version="platinum"
-								method="hm"
-								moves={filterMoves("platinum").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Platinum"
-								version="platinum"
-								method="tm"
-								moves={filterMoves("platinum").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.heartGoldSoulSilver ? (
-						<TabPanel value={value.genIV} index={2} id="panelHeartGoldSoulSilver" ariaLabelledBy="tabHeartGoldSoulSilver">
-							<LevelMoves
-								game="HeartGold & SoulSilver"
-								version="heartgold-soulsilver"
-								moves={filterMoves("heartgold-soulsilver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="HeartGold & SoulSilver"
-								version="heartgold-soulsilver"
-								method="hm"
-								moves={filterMoves("heartgold-soulsilver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="HeartGold & SoulSilver"
-								version="heartgold-soulsilver"
-								method="tm"
-								moves={filterMoves("heartgold-soulsilver").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-				</TabPanel>
-			) : null }
-
-			{g[5] ? (
-				<TabPanel value={value.gen} index={4} id="panelGenV" ariaLabelledBy="tabGenV">
-					<Tabs
-						value={value.genV}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genV: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.blackWhite ? (
-							<Tab label="Black/White" id="blackWhiteTab" aria-controls="blackWhitePanel" value={0} />
-						) : null}
-
-						{v.black2White2 ? (
-							<Tab label="Black 2 / White 2" id="black2White2Tab" aria-controls="black2White2Panel" value={1} />
-						) : null}
-					</Tabs>
-
-					{v.blackWhite ? (
-						<TabPanel value={value.genV} index={0} id="panelBlackWhite" ariaLabelledBy="tabBlackWhite">
-							<LevelMoves
-								game="Black & White"
-								version="black-white"
-								moves={filterMoves("black-white").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Black & White"
-								version="black-white"
-								method="hm"
-								moves={filterMoves("black-white").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Black & White"
-								version="black-white"
-								method="tm"
-								moves={filterMoves("black-white").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.black2White2 ? (
-						<TabPanel value={value.genV} index={1} id="panelBlack2White2" ariaLabelledBy="tabBlack2White2">
-							<LevelMoves
-								game="Black 2 & White 2"
-								version="black-2-white-2"
-								moves={filterMoves("black-2-white-2").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Black 2 & White 2"
-								version="black-2-white-2"
-								method="hm"
-								moves={filterMoves("black-2-white-2").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Black 2 & White 2"
-								version="black-2-white-2"
-								method="tm"
-								moves={filterMoves("black-2-white-2").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-				</TabPanel>
-			) : null }
-
-			{g[6] ? (
-				<TabPanel value={value.gen} index={5} id="panelGenVI" ariaLabelledBy="tabGenVI">
-					<Tabs
-						value={value.genVI}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genVI: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.xY ? (
-							<Tab label="X / Y" id="xYTab" aria-controls="xYPanel" value={0} />
-						) : null}
-
-						{v.omegaRubyAlphaSapphire ? (
-							<Tab label="Omega Ruby / Alpha Sapphire" id="omegaRubyAlphaSapphireTab" aria-controls="omegaRubyAlphaSapphirePanel" value={1} />
-						) : null}
-					</Tabs>
-
-					{v.xY ? (
-						<TabPanel value={value.genVI} index={0} id="panelXY" ariaLabelledBy="tabXY">
-							<LevelMoves
-								game="X & Y"
-								version="x-y"
-								moves={filterMoves("x-y").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="X & Y"
-								version="x-y"
-								method="hm"
-								moves={filterMoves("x-y").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="X & Y"
-								version="x-y"
-								method="tm"
-								moves={filterMoves("x-y").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-
-					{v.omegaRubyAlphaSapphire ? (
-						<TabPanel value={value.genVI} index={1} id="panelOmegaRubyAlphaSapphire" ariaLabelledBy="tabOmegaRubyAlphaSapphire">
-							<LevelMoves
-								game="Omega Ruby & Alpha Sapphire"
-								version="omega-ruby-alpha-sapphire"
-								moves={filterMoves("omega-ruby-alpha-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "level-up"))}
-								pokemon={pokeName}
-							/>
-
-							<MachineMoves
-								game="Omega Ruby & Alpha Sapphire"
-								version="omega-ruby-alpha-sapphire"
-								method="hm"
-								moves={filterMoves("omega-ruby-alpha-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-							
-							<MachineMoves
-								game="Omega Ruby & Alpha Sapphire"
-								version="omega-ruby-alpha-sapphire"
-								method="tm"
-								moves={filterMoves("omega-ruby-alpha-sapphire").filter(f => f.version_group_details.some(s => s.move_learn_method.name === "machine"))}
-								pokemon={pokeName}
-							/>
-						</TabPanel>
-					) : null}
-				</TabPanel>
-			) : null }
-
-			{g[7] ? (
-				<TabPanel value={value.gen} index={6} id="panelGenVII" ariaLabelledBy="tabGenVII">
-					<Tabs
-						value={value.genVII}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genVII: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.sunMoon ? (
-							<Tab label="Sun/Moon" id="sunMoonTab" aria-controls="sunMoonPanel" value={0} />
-						) : null}
-
-						{v.ultraSunUltraMoon ? (
-							<Tab label="Ultra Sun/Ultra Moon" id="ultraSunUltraMoonTab" aria-controls="ultraSunUltraMoonPanel" value={1} />
-						) : null}
-
-						{v.letsGoPikachuLetsGoEevee ? (
-							<Tab label="Let's Go Pikachu/Let's Go Eevee" id="letsGoPikachuLetsGoEeveeTab" aria-controls="letsGoPikachuLetsGoEeveePanel" value={2} />
-						) : null}
-					</Tabs>
-
-					
-				</TabPanel>
-			) : null }
-
-			{g[8] ? (
-				<TabPanel value={value.gen} index={7} id="panelGenVIII" ariaLabelledBy="tabGenVIII">
-					<Tabs
-						value={value.genVIII}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genVIII: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.swordShield ? (
-							<Tab label="Sword/Shield" id="swordShieldTab" aria-controls="swordShieldPanel" value={0} />
-						) : null}
-
-						{v.theIsleOfArmor ? (
-							<Tab label="Isle of Armor" id="theIsleOfArmorTab" aria-controls="theIsleOfArmorPanel" value={1} />
-						) : null}
-
-						{v.theCrownTundra ? (
-							<Tab label="Crown Tundra" id="theCrownTundraTab" aria-controls="theCrownTundraPanel" value={2} />
-						) : null}
-
-						{v.brilliantDiamondShiningPearl ? (
-							<Tab label="Brilliant Diamond/Shining Pearl" id="brilliantDiamondShiningPearlTab" aria-controls="brilliantDiamondShiningPearlPanel" value={3} />
-						) : null}
-
-						{v.legendsArceus ? (
-							<Tab label="Legends Arceus" id="legendsArceusTab" aria-controls="legendsArceusPanel" value={4} />
-						) : null}
-					</Tabs>
-				</TabPanel>
-			) : null }
-
-			{g[9] ? (
-				<TabPanel value={value.gen} index={8} id="panelGenIX" ariaLabelledBy="tabGenIX">
-					<Tabs
-						value={value.genIX}
-						onChange={(e, newValue) => setValue(prev => ({ ...prev, genIX: newValue }))}
-						variant="scrollable"
-						scrollButtons="auto"
-						aria-label="learned moves sorted by game"
-					>
-						{v.scarletViolet ? (
-							<Tab label="Scarlet/Violet" id="scarletVioletTab" aria-controls="scarletVioletPanel" value={0} />
-						) : null}
-
-						{v.theTealMask ? (
-							<Tab label="Teal Mask" id="theTealMaskTab" aria-controls="theTealMaskPanel" value={1} />
-						) : null}
-
-						{v.theIndigoDisk ? (
-							<Tab label="Indigo Disk" id="theIndigoDiskTab" aria-controls="theIndigoDiskPanel" value={2} />
-						) : null}
-					</Tabs>
-				</TabPanel>
-			) : null }
+			))}
 		</Container>
 	)
 }
@@ -838,7 +554,15 @@ const LevelMoves = props => {
 								<TableCell>{move.level_learned_at}</TableCell>
 								<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
 								<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
-								<TableCell>{move.damage_class.name}</TableCell>
+								<TableCell>
+									{move.damage_class.name === "physical" ? (
+										<Physical />
+									) : move.damage_class.name === "special" ? (
+										<Special />
+									) : move.damage_class.name === "status" ? (
+										<Status />
+									) : null}
+								</TableCell>
 								<TableCell>{move.power ? move.power : <>&mdash;</>}</TableCell>
 								<TableCell>{move.accuracy ? `${move.accuracy}%` : <>&mdash;</>}</TableCell>
 							</TableRow>
@@ -912,7 +636,15 @@ const MachineMoves = props => {
 											<TableCell>{move.machine.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
 											<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
 											<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
-											<TableCell>{move.damage_class.name}</TableCell>
+											<TableCell>
+												{move.damage_class.name === "physical" ? (
+													<Physical />
+												) : move.damage_class.name === "special" ? (
+													<Special />
+												) : move.damage_class.name === "status" ? (
+													<Status />
+												) : null}
+											</TableCell>
 											<TableCell>{move.power ? move.power : <>&mdash;</>}</TableCell>
 											<TableCell>{move.accuracy ? `${move.accuracy}%` : <>&mdash;</>}</TableCell>
 										</TableRow>
@@ -924,6 +656,77 @@ const MachineMoves = props => {
 				)
 			}
 			
+		</>
+	)
+}
+
+const MiscMoves = props => {
+	let navigate = useNavigate();
+	const [moves, setMoves] = useState([]);
+
+	const getMoves = arr => {
+		arr.map(m1 => (
+			m1.version_group_details.filter(f => f.version_group.name === props.version && f.move_learn_method.name === props.method).map(m2 => (
+				P.getMoveByName(m1.move.name)
+					.then(res => {
+						setMoves(currentList => [...currentList, {...res, ...m2} ])
+					})
+					.catch(error => {
+						console.log(error)
+					})
+			))
+		))
+	}
+
+	useEffect(() => {
+		getMoves(props.moves);
+	}, [props.moves]);
+
+	if (moves.length < 1) {
+		return (
+			<>
+				<Typography variant="h3">Moves learnt by {props.method}</Typography>
+				<Typography variant="body1">{props.pokemon} does not learn any moves by {props.method} in <Link href={`/game/${props.version}`} underline="hover">Pokémon {props.game}</Link>.</Typography>
+			</>
+		)
+	}
+
+	return (
+		<>
+			<Typography variant="h3">Moves learnt by {props.method}</Typography>
+			<Typography variant="body1">{props.pokemon} learns the following moves by {props.method} in <Link href={`/game/${props.version}`} underline="hover">Pokémon {props.game}</Link>.</Typography>
+			<TableContainer>
+				<Table size="small">
+					<TableHead>
+						<TableRow>
+							<TableCell>Move</TableCell>
+							<TableCell>Type</TableCell>
+							<TableCell>Category</TableCell>
+							<TableCell>Pow.</TableCell>
+							<TableCell>Acc.</TableCell>
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{moves.sort((a,b) => a.name < b.name ? -1 : 0).map(move => (
+							<TableRow key={move.id} onClick={() => navigate(`/move/${move.name}`)} hover style={{ cursor: "pointer" }}>
+								<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
+								<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
+								<TableCell>
+									{move.damage_class.name === "physical" ? (
+										<Physical />
+									) : move.damage_class.name === "special" ? (
+										<Special />
+									) : move.damage_class.name === "status" ? (
+										<Status />
+									) : null}
+								</TableCell>
+								<TableCell>{move.power ? move.power : <>&mdash;</>}</TableCell>
+								<TableCell>{move.accuracy ? `${move.accuracy}%` : <>&mdash;</>}</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
 		</>
 	)
 }
