@@ -1,8 +1,8 @@
-import { Card, CardActionArea, CardContent, Chip, Container, Typography } from "@mui/material";
+import { Chip, Container, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 import { eggCycleSteps } from "../../utilities/data";
 
-export default function PokemonBreeding(props) {
+const Breeding = props => {
 	const loading = props.loading;
 	const eggGroups = props.eggGroups;
 	const pokemon = props.pokemon;
@@ -10,7 +10,7 @@ export default function PokemonBreeding(props) {
 	// TODO:		Loading skeleton elements
 
 	return (
-		<Container id="PokemonBreeding" sx={{ mb: 5 }}>
+		<Container id="PokeBreeding" sx={{ mb: 5 }}>
 			{loading ? (
 				<p>Loading...</p>
 			) : (
@@ -52,3 +52,5 @@ export default function PokemonBreeding(props) {
 		</Container>
 	)
 }
+
+export default Breeding;

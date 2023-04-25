@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardContent, Chip, Skeleton, Typography } from "@mui/material";
-import { formatDexId } from "../utilities/utilities";
+import { formatDexId, getPokeName } from "../utilities/utilities";
 
 const PokedexCard = (props) => {
 	let p = props;
@@ -30,7 +30,7 @@ const PokedexCard = (props) => {
 											<Typography component="span">No.</Typography>
 											{formatDexId(p.id)}
 										</Typography>
-										{p.names.filter(n => n.language.name === "en").map(n => n.name)}
+										{getPokeName(p.names, "en")}
 									</Typography>
 								</div>
 								<div className="row types">

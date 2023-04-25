@@ -1,4 +1,4 @@
-#PokemonHeader {
+#PokeHeader {
 	background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
 	height: 35vh;
 	display: grid;
@@ -64,7 +64,7 @@
 	}
 }
 
-#PokemonTitle {
+#PokeTitle {
 	text-align: center;
 
 	h1 {
@@ -91,7 +91,7 @@
 	}
 }
 
-#PokemonStats {
+#PokeStats {
 	grid-template-columns: min-content auto min-content;
 	gap: 8px;
 	align-items: center;
@@ -121,30 +121,7 @@
 	}
 }
 
-//// #PokemonDefense {}
-
-#PokemonAbilities {
-	span.MuiTypography-caption {
-		line-height: 1;
-		opacity: 0.7;
-		font-style: italic;
-	}
-
-	.MuiCard-root { height: fit-content; }
-}
-
-#PokemonBreeding {
-	.MuiCard-root { height: fit-content; }
-}
-
-#PokemonAdditionalInfo .pie-chart {
-	background: conic-gradient($male calc(var(--male-percentage) * 1%), $female 0);
-	height: 3rem;
-	width: 3rem;
-	border-radius: 50%;
-}
-
-#PokemonEvolution {
+#PokeEvolution {
 	.lvl1-branch, .lvl2-branch, .lvl3-branch {
 		display: flex;
 		justify-content: center;
@@ -156,7 +133,20 @@
 	}
 }
 
-#PokemonLocations {
+//// #PokeDefense {}
+
+//// #PokeAbilities {}
+
+//// #PokeBreeding {}
+
+#PokeInfo .pie-chart {
+	background: conic-gradient($male calc(var(--male-percentage) * 1%), $female 0);
+	height: 3rem;
+	width: 3rem;
+	border-radius: 50%;
+}
+
+#PokeEncounters {
 	.locations span:not(:last-child)::after {
 		content: ",";
 		padding-right: 0.5rem;

@@ -1825,7 +1825,7 @@
   max-width: 7.5rem;
 }
 
-#PokemonHeader {
+#PokeHeader {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
   height: 35vh;
   display: grid;
@@ -1836,7 +1836,7 @@
   padding-top: 3.5rem;
   margin-bottom: 2.5rem;
 }
-#PokemonHeader .japanese {
+#PokeHeader .japanese {
   position: absolute;
   font-size: 18vw;
   font-weight: bolder;
@@ -1844,7 +1844,7 @@
   mix-blend-mode: overlay;
   opacity: 0.3;
 }
-#PokemonHeader .poke-img {
+#PokeHeader .poke-img {
   position: relative;
   z-index: 1;
   bottom: 0;
@@ -1854,18 +1854,18 @@
   object-fit: contain;
   object-position: center;
 }
-#PokemonHeader .waves {
+#PokeHeader .waves {
   position: absolute;
   height: 100%;
   width: 100%;
 }
-#PokemonHeader .waves svg {
+#PokeHeader .waves svg {
   height: auto;
   width: 100%;
   position: absolute;
   bottom: 0;
 }
-#PokemonHeader .prev-poke-img, #PokemonHeader .next-poke-img {
+#PokeHeader .prev-poke-img, #PokeHeader .next-poke-img {
   position: absolute;
   z-index: 1;
   bottom: -15vw;
@@ -1873,101 +1873,88 @@
   filter: brightness(0) opacity(0.2);
   transition: all ease-in-out 0.2s;
 }
-#PokemonHeader .prev-poke-img:hover, #PokemonHeader .next-poke-img:hover {
+#PokeHeader .prev-poke-img:hover, #PokeHeader .next-poke-img:hover {
   filter: none;
 }
-#PokemonHeader .prev-poke-img {
+#PokeHeader .prev-poke-img {
   left: -12vw;
 }
-#PokemonHeader .prev-poke-img:hover {
+#PokeHeader .prev-poke-img:hover {
   left: -8vw;
 }
-#PokemonHeader .next-poke-img {
+#PokeHeader .next-poke-img {
   right: -12vw;
 }
-#PokemonHeader .next-poke-img:hover {
+#PokeHeader .next-poke-img:hover {
   right: -8vw;
 }
 
-#PokemonTitle {
+#PokeTitle {
   text-align: center;
 }
-#PokemonTitle h1 {
+#PokeTitle h1 {
   font-weight: bold;
 }
-#PokemonTitle h1 > span {
+#PokeTitle h1 > span {
   font-weight: bold;
   font-size: 0.6em;
   margin-right: 0.25rem;
   opacity: 0.5;
 }
-#PokemonTitle h1 > span > span {
+#PokeTitle h1 > span > span {
   font-weight: bold;
   font-size: 0.75em;
   text-transform: uppercase;
   margin-right: 0.125rem;
 }
-#PokemonTitle p {
+#PokeTitle p {
   font-style: italic;
   margin-bottom: 0.5rem;
 }
 
-#PokemonStats {
+#PokeStats {
   grid-template-columns: min-content auto min-content;
   gap: 8px;
   align-items: center;
 }
-#PokemonStats h3 {
+#PokeStats h3 {
   font-size: 0.75rem;
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1em;
   justify-self: end;
 }
-#PokemonStats p {
+#PokeStats p {
   font-size: 1rem;
   line-height: 1em;
 }
-#PokemonStats .MuiLinearProgress-root {
+#PokeStats .MuiLinearProgress-root {
   height: 0.6rem;
   border-radius: 500px;
   background-color: lightgray;
 }
-#PokemonStats .MuiLinearProgress-bar {
+#PokeStats .MuiLinearProgress-bar {
   border-radius: 500px;
   background-color: var(--type-one-color);
 }
 
-#PokemonAbilities span.MuiTypography-caption {
-  line-height: 1;
-  opacity: 0.7;
-  font-style: italic;
+#PokeEvolution .lvl1-branch, #PokeEvolution .lvl2-branch, #PokeEvolution .lvl3-branch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#PokemonAbilities .MuiCard-root {
-  height: fit-content;
-}
-
-#PokemonBreeding .MuiCard-root {
-  height: fit-content;
+#PokeEvolution .lvl1-img, #PokeEvolution .lvl2-img, #PokeEvolution .lvl3-img {
+  width: calc((100vw - 2rem) / 3);
 }
 
-#PokemonAdditionalInfo .pie-chart {
+#PokeInfo .pie-chart {
   background: conic-gradient(#3d387d calc(var(--male-percentage) * 1%), #e8a19f 0);
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
 }
 
-#PokemonEvolution .lvl1-branch, #PokemonEvolution .lvl2-branch, #PokemonEvolution .lvl3-branch {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#PokemonEvolution .lvl1-img, #PokemonEvolution .lvl2-img, #PokemonEvolution .lvl3-img {
-  width: calc((100vw - 2rem) / 3);
-}
-
-#PokemonLocations .locations span:not(:last-child)::after {
+#PokeEncounters .locations span:not(:last-child)::after {
   content: ",";
   padding-right: 0.5rem;
 }
@@ -2014,7 +2001,7 @@ img {
 }
 
 #PokemonSprites .sprite {
-  height: 60px;
+  max-height: 60px;
 }
 
 /*# sourceMappingURL=main.css.map */

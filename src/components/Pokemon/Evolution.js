@@ -1,14 +1,10 @@
-import { Container } from "@mui/material";
-import { capitalize } from "../../utilities/utilities";
+import { Container, Typography } from "@mui/material";
+import { getPokeName } from "../../utilities/utilities";
 
-const PokemonEvolution = (props) => {
+const Evolution = props => {
 	const evoChain = props.evolution.chain;
 	const evoPokemon = props.evolution.pokemon;
 	const pokemon = props.pokemon;
-
-	//console.log("evoChain", evoChain);
-	//console.log("evoPokemon", evoPokemon);
-	//console.log("pokemon", pokemon)
 
 	const getID = (text) => {
 		let id = text.match(/[\/][0-9]+/g);
@@ -18,12 +14,12 @@ const PokemonEvolution = (props) => {
 
 	if (evoChain.chain.evolves_to.length < 1) {
 		return (
-			<div>{pokemon.names.filter(f => f.language.name === "en").map(m => m.name)} does not evolve.</div>
+			<Typography variant="body2" textAlign="center">{getPokeName(pokemon.names, "en")} does not evolve.</Typography>
 		)
 	}
 	
 	return (
-		<Container id="PokemonEvolution" sx={{ mb: 5 }}>
+		<Container id="PokeEvolution" sx={{ mb: 5 }}>
 			{evoPokemon.filter(f1 => f1.id == getID(evoChain.chain.species.url)).map(m1 => (
 				<div key={m1.id} className="lvl1">
 					<div className="lvl1-branch">
@@ -65,4 +61,4 @@ const PokemonEvolution = (props) => {
 	)
 }
 
-export default PokemonEvolution;
+export default Evolution;
