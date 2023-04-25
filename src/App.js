@@ -6,6 +6,7 @@ import Error from "./routes/Error";
 import Home from "./routes/Home";
 import Notes from "./routes/Notes";
 import PokedexList from "./routes/PokedexList";
+import PokedexTracker from "./routes/PokedexTracker";
 import Pokemon from "./routes/Pokemon";
 
 import { ColorModeProvider } from "./utilities/context";
@@ -18,12 +19,28 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home />},
       {
-        path: 'pokedex/:dex',
-        element: <PokedexList />
+        path: 'pokedex/',
+        children: [
+          { index: true, element: <PokedexList /> },
+          {
+            path: ':dex',
+            element: <PokedexList />
+          },
+        ],
       },
       {
         path: 'pokemon/:pokeId',
         element: <Pokemon />,
+      },
+      {
+        path: 'tracker/',
+        children: [
+          { index: true, element: <PokedexTracker /> },
+          {
+            path: ':game',
+            element: <PokedexTracker />
+          },
+        ],
       },
       {
         path: 'notes',
