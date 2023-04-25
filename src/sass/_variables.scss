@@ -21,17 +21,17 @@ $bugAlt:			#ACC933;
 $grass:				#67BB5D;
 $grassAlt:		#59C37B;
 $ice:					#73CEBF;
-$iceAlt:			#91DDD9;
+$iceAlt:			#9EDDE1;
 $steel:				#598FA1;
 $steelAlt:		#60AFAD;
 $water:				#4C8FD6;
 $waterAlt:		#7DCADE;
 $dragon:			#096CC3;
-$dragonAlt:		#0584B9;
+$dragonAlt:		#089CDA;
 $ghost:				#5267AD;
 $ghostAlt:		#7A74D7;
 $flying:			#92AADD;
-$flyingAlt:		#A6C1F0;
+$flyingAlt:		#CEDDF6;
 $dark:				#5B5365;
 $darkAlt:			#707583;
 $poison:			#AB69C9;
@@ -133,5 +133,70 @@ $types-map: (
 				--type-two-color: #{$color2};
 			}
 		}
+	}
+}
+
+
+
+
+
+$red:			#C03028;
+$blue:		#5d81d6;
+$yellow:	#d6b11f;
+$gold:		#ad9551;
+$silver:	#9797ab;
+$crystal:	#87bfbf;
+$green:		#65a843;
+$emerald:	#909e1b;
+$diamond:	#8471bd;
+$pearl:		#de4f7a;
+$black:		#574438;
+$sun:			#db8624;
+$moon:		#7038f8;
+$eevee:		#ac8639;
+
+$games-map: (
+	"red":							$red,
+	"blue":							$blue,
+	"yellow":						$yellow,
+	"gold":							$gold,
+	"silver":						$silver,
+	"crystal":					$crystal,
+	"ruby":							$red,
+	"sapphire":					$blue,
+	"firered":					$red,
+	"leafgreen":				$green,
+	"emerald":					$emerald,
+	"diamond":					$diamond,
+	"pearl":						$pearl,
+	"platinum":					$silver,
+	"heartgold":				$gold,
+	"soulsilver":				$silver,
+	"black":						$black,
+	"white":						$silver,
+	"black2":						$black,
+	"white2":						$silver,
+	"x":								$blue,
+	"y":								$red,
+	"omegaruby":				$red,
+	"alphasapphire":		$blue,
+	"sun":							$sun,
+	"moon":							$moon,
+	"ultrasun":					$sun,
+	"ultramoon":				$moon,
+	"letsgopikachu":		$yellow,
+	"letsgoeevee":			$eevee,
+	"sword":						$blue,
+	"shield":						$red,
+	"brilliantdiamond":	$diamond,
+	"shiningpearl":			$pearl,
+	"legendsarceus":		$green,
+	"scarlet":					$red,
+	"violet":						$moon
+);
+
+@each $game, $color in $games-map {
+	.game__#{$game} {
+		color: #{$color};
 	}
 }

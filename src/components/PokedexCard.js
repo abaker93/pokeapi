@@ -1,5 +1,5 @@
 import { Card, CardActionArea, CardContent, Chip, Skeleton, Typography } from "@mui/material";
-import { capitalize, formatDexId } from "../utilities/utilities";
+import { formatDexId } from "../utilities/utilities";
 
 const PokedexCard = (props) => {
 	let p = props;

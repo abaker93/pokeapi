@@ -3,7 +3,7 @@ import { Box, Container, Link, Skeleton, Typography } from "@mui/material";
 import { Wave1, Wave2, Wave3, Wave4 } from '../../assets/Waves';
 
 const PokemonHeader = (props) => {
-	const p = props[0];
+	const p = props;
 
 	return (
 		props.loading ? (
@@ -30,7 +30,7 @@ const PokemonHeader = (props) => {
 					src={p.sprites.other["official-artwork"].front_default}
 					alt={p.name}
 				/>
-				{p.prev.name !== null ? (
+				{p.prev !== null ? (
 					<Link href={`/pokemon/${formatDexId(p.id - 1)}`}>
 						<img
 							className="prev-poke-img"
@@ -39,7 +39,7 @@ const PokemonHeader = (props) => {
 						/>
 					</Link>
 				) : null}
-				{p.next.name !== null ? (
+				{p.next !== null ? (
 					<Link href={`/pokemon/${formatDexId(p.id + 1)}`}>
 						<img
 							className="next-poke-img"

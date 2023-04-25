@@ -1,0 +1,281 @@
+{
+	"results": [
+		{
+			"id": "genI",
+			"mainRegion": "Kanto",
+			"name": "Generation I",
+			"shortName": "Gen I",
+			"version": [
+				{
+					"name": "Red",
+					"pokedex": ["Kanto"]
+				},
+				{
+					"name": "Blue",
+					"pokedex": ["Kanto"]
+				},
+				{
+					"name": "Yellow",
+					"pokedex": ["Kanto"]
+				}
+			]
+		},
+		{
+			"id": "genII",
+			"mainRegion": "Johto",
+			"name": "Generation II",
+			"shortName": "Gen II",
+			"version": [
+				{
+					"name": "Gold",
+					"pokedex": ["Original Johto"]
+				},
+				{
+					"name": "Silver",
+					"pokedex": ["Original Johto"]
+				},
+				{
+					"name": "Crystal",
+					"pokedex": ["Original Johto"]
+				}
+			]
+		},
+		{
+			"id": "genIII",
+			"mainRegion": "Hoenn",
+			"name": "Generation III",
+			"shortName": "Gen III",
+			"version": [
+				{
+					"name": "Ruby",
+					"pokedex": ["Hoenn"]
+				},
+				{
+					"name": "Sapphire",
+					"pokedex": ["Hoenn"]
+				},
+				{
+					"name": "Emerald",
+					"pokedex": ["Hoenn"]
+				},
+				{
+					"name": "FireRed",
+					"pokedex": ["Kanto"]
+				},
+				{
+					"name": "LeafGreen",
+					"pokedex": ["Kanto"]
+				},
+				{
+					"name": "Colosseum",
+					"pokedex": [null]
+				},
+				{
+					"name": "XD",
+					"pokedex": [null]
+				}
+			]
+		},
+		{
+			"id": "genIV",
+			"mainRegion": "Sinnoh",
+			"name": "Generation IV",
+			"shortName": "Gen IV",
+			"version": [
+				{
+					"name": "Diamond",
+					"pokedex": ["Original Sinnoh"]
+				},
+				{
+					"name": "Pearl",
+					"pokedex": ["Original Sinnoh"]
+				},
+				{
+					"name": "Platinum",
+					"pokedex": ["Extended Sinnoh"]
+				},
+				{
+					"name": "HeartGold",
+					"pokedex": ["Updated Johto"]
+				},
+				{
+					"name": "SoulSilver",
+					"pokedex": ["Updated Johto"]
+				}
+			]
+		},
+		{
+			"id": "genV",
+			"mainRegion": "Unova",
+			"name": "Generation V",
+			"shortName": "Gen V",
+			"version": [
+				{
+					"name": "Black",
+					"pokedex": ["Original Unova"]
+				},
+				{
+					"name": "White",
+					"pokedex": ["Original Unova"]
+				},
+				{
+					"name": "Black 2",
+					"pokedex": ["Updated Unova"]
+				},
+				{
+					"name": "White 2",
+					"pokedex": ["Updated Unova"]
+				}
+			]
+		},
+		{
+			"id": "genVI",
+			"mainRegion": "Kalos",
+			"name": "Generation VI",
+			"shortName": "Gen VI",
+			"version": [
+				{
+					"name": "X",
+					"pokedex": [
+						"Kalos Central",
+						"Kalos Coastal",
+						"Kalos Mountain"
+					]
+				},
+				{
+					"name": "Y",
+					"pokedex": [
+						"Kalos Central",
+						"Kalos Coastal",
+						"Kalos Mountain"
+					]
+				},
+				{
+					"name": "Omega Ruby",
+					"pokedex": ["Updated Hoenn"]
+				},
+				{
+					"name": "Alpha Sapphire",
+					"pokedex": ["Updated Hoenn"]
+				}
+			]
+		},
+		{
+			"id": "genVII",
+			"mainRegion": "Alola",
+			"name": "Generation VII",
+			"shortName": "Gen VII",
+			"version": [
+				{
+					"name": "Sun",
+					"pokedex": [
+						"Original Alola",
+						"Original Melemele",
+						"Original Akala",
+						"Original Ulaula",
+						"Original Poni"
+					]
+				},
+				{
+					"name": "Moon",
+					"pokedex": [
+						"Original Alola",
+						"Original Melemele",
+						"Original Akala",
+						"Original Ulaula",
+						"Original Poni"
+					]
+				},
+				{
+					"name": "Ultra Sun",
+					"pokedex": [
+						"Updated Alola",
+						"Updated Melemele",
+						"Updated Akala",
+						"Updated Ulaula",
+						"Updated Poni"
+					]
+				},
+				{
+					"name": "Ultra Moon",
+					"pokedex": [
+						"Updated Alola",
+						"Updated Melemele",
+						"Updated Akala",
+						"Updated Ulaula",
+						"Updated Poni"
+					]
+				},
+				{
+					"name": "Let's Go Pikachu",
+					"pokedex": ["Lets Go Kanto"]
+
+				},
+				{
+					"name": "Let's Go Eevee",
+					"pokedex": ["Lets Go Kanto"]
+				}
+			]
+		},
+		{
+			"id": "genVIII",
+			"mainRegion": "Galar",
+			"name": "Generation VIII",
+			"shortName": "Gen VIII",
+			"version": [
+				{
+					"name": "Sword",
+					"pokedex": ["Galar"]
+				},
+				{
+					"name": "Shield",
+					"pokedex": ["Galar"]
+				},
+				{
+					"name": "The Isle of Armor",
+					"pokedex": ["Isle of Armor"]
+				},
+				{
+					"name": "The Crown Tundra",
+					"pokedex": ["Crown Tundra"]
+				},
+				{
+					"name": "Brilliant Diamond",
+					"pokedex": [null]
+				},
+				{
+					"name": "Shining Pearl",
+					"pokedex": [null]
+				},
+				{
+					"name": "Legends Arceus",
+					"pokedex": ["Hisui"]
+				}
+			]
+		},
+		{
+			"id": "genIX",
+			"mainRegion": "Paldea",
+			"name": "Generation IX",
+			"shortName": "Gen IX",
+			"version": [
+				{
+					"name": "Scarlet",
+					"pokedex": ["Paldea"]
+				},
+				{
+					"name": "Violet",
+					"pokedex": ["Paldea"]
+				},
+				{
+					"name": "The Teal Mask",
+					"pokedex": ["Teal Mask"]
+				},
+				{
+					"name": "The Indigo Disk",
+					"pokedex": ["Indigo Disk"]
+				}
+			]
+		}
+	]
+}

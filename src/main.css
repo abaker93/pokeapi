@@ -665,7 +665,7 @@
 
 [data-type-one=ice][data-type-two=ice] {
   --type-one-color: #73CEBF;
-  --type-two-color: #91DDD9;
+  --type-two-color: #9EDDE1;
 }
 
 [data-type-one=ice][data-type-two=steel] {
@@ -950,7 +950,7 @@
 
 [data-type-one=dragon][data-type-two=dragon] {
   --type-one-color: #096CC3;
-  --type-two-color: #0584B9;
+  --type-two-color: #089CDA;
 }
 
 [data-type-one=dragon][data-type-two=ghost] {
@@ -1140,7 +1140,7 @@
 
 [data-type-one=flying][data-type-two=flying] {
   --type-one-color: #92AADD;
-  --type-two-color: #A6C1F0;
+  --type-two-color: #CEDDF6;
 }
 
 [data-type-one=flying][data-type-two=dark] {
@@ -1618,6 +1618,154 @@
   --type-two-color: #A9A7A0;
 }
 
+.game__red {
+  color: #C03028;
+}
+
+.game__blue {
+  color: #5d81d6;
+}
+
+.game__yellow {
+  color: #d6b11f;
+}
+
+.game__gold {
+  color: #ad9551;
+}
+
+.game__silver {
+  color: #9797ab;
+}
+
+.game__crystal {
+  color: #87bfbf;
+}
+
+.game__ruby {
+  color: #C03028;
+}
+
+.game__sapphire {
+  color: #5d81d6;
+}
+
+.game__firered {
+  color: #C03028;
+}
+
+.game__leafgreen {
+  color: #65a843;
+}
+
+.game__emerald {
+  color: #909e1b;
+}
+
+.game__diamond {
+  color: #8471bd;
+}
+
+.game__pearl {
+  color: #de4f7a;
+}
+
+.game__platinum {
+  color: #9797ab;
+}
+
+.game__heartgold {
+  color: #ad9551;
+}
+
+.game__soulsilver {
+  color: #9797ab;
+}
+
+.game__black {
+  color: #574438;
+}
+
+.game__white {
+  color: #9797ab;
+}
+
+.game__black2 {
+  color: #574438;
+}
+
+.game__white2 {
+  color: #9797ab;
+}
+
+.game__x {
+  color: #5d81d6;
+}
+
+.game__y {
+  color: #C03028;
+}
+
+.game__omegaruby {
+  color: #C03028;
+}
+
+.game__alphasapphire {
+  color: #5d81d6;
+}
+
+.game__sun {
+  color: #db8624;
+}
+
+.game__moon {
+  color: #7038f8;
+}
+
+.game__ultrasun {
+  color: #db8624;
+}
+
+.game__ultramoon {
+  color: #7038f8;
+}
+
+.game__letsgopikachu {
+  color: #d6b11f;
+}
+
+.game__letsgoeevee {
+  color: #ac8639;
+}
+
+.game__sword {
+  color: #5d81d6;
+}
+
+.game__shield {
+  color: #C03028;
+}
+
+.game__brilliantdiamond {
+  color: #8471bd;
+}
+
+.game__shiningpearl {
+  color: #de4f7a;
+}
+
+.game__legendsarceus {
+  color: #65a843;
+}
+
+.game__scarlet {
+  color: #C03028;
+}
+
+.game__violet {
+  color: #7038f8;
+}
+
 .pokedex-card {
   background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
   margin-top: 3rem !important;
@@ -1743,7 +1891,6 @@
 
 #PokemonTitle {
   text-align: center;
-  margin-bottom: 1.25rem;
 }
 #PokemonTitle h1 {
   font-weight: bold;
@@ -1769,7 +1916,6 @@
   grid-template-columns: min-content auto min-content;
   gap: 8px;
   align-items: center;
-  margin-bottom: 2rem;
 }
 #PokemonStats h3 {
   font-size: 0.75rem;
@@ -1792,102 +1938,38 @@
   background-color: var(--type-one-color);
 }
 
-#PokemonEvolution {
-  margin-bottom: 2rem;
-}
-
-#PokemonDefense {
-  grid-template-columns: repeat(9, min-content);
-  justify-content: space-between;
-  row-gap: 0.5rem;
-  margin-bottom: 2rem;
-}
-
-#PokemonAbilities {
-  margin-bottom: 2rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1rem;
-}
-#PokemonAbilities h2 {
-  grid-column: 1/3;
-}
 #PokemonAbilities span.MuiTypography-caption {
   line-height: 1;
   opacity: 0.7;
   font-style: italic;
 }
-#PokemonAbilities .col {
-  row-gap: 0.5rem;
-}
 #PokemonAbilities .MuiCard-root {
   height: fit-content;
 }
 
-#PokemonBreeding {
-  margin-bottom: 2rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 1rem;
-}
-#PokemonBreeding h2 {
-  grid-column: 1/3;
-}
-#PokemonBreeding .col {
-  row-gap: 0.5rem;
-}
 #PokemonBreeding .MuiCard-root {
   height: fit-content;
 }
 
-#PokemonAdditionalInfo {
-  margin-bottom: 2rem;
-  grid-template-columns: 6fr 3fr 3fr;
-}
-#PokemonAdditionalInfo h2 {
-  grid-column: 1/4;
-}
 #PokemonAdditionalInfo .pie-chart {
   background: conic-gradient(#3d387d calc(var(--male-percentage) * 1%), #e8a19f 0);
   height: 3rem;
   width: 3rem;
   border-radius: 50%;
 }
-#PokemonAdditionalInfo .col.gender {
-  grid-template-columns: 3rem auto;
-  column-gap: 1rem;
+
+#PokemonEvolution .lvl1-branch, #PokemonEvolution .lvl2-branch, #PokemonEvolution .lvl3-branch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-#PokemonAdditionalInfo .col.gender h3 {
-  grid-column: 1/3;
+#PokemonEvolution .lvl1-img, #PokemonEvolution .lvl2-img, #PokemonEvolution .lvl3-img {
+  width: calc((100vw - 2rem) / 3);
 }
 
-#PokemonEvolution .evolutionNode {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 1.25rem;
-  align-items: center;
-  justify-content: center;
-}
-#PokemonEvolution .evolutionNode .current {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-}
-#PokemonEvolution[data-level="2"] > .evolutionNode {
-  grid-auto-columns: repeat(2, minmax(0, 1fr));
-}
-#PokemonEvolution[data-level="2"] > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode {
-  grid-auto-columns: 1fr 3fr;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode {
-  grid-auto-columns: repeat(2, minmax(0, 1fr));
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
-}
-#PokemonEvolution[data-level="3"] > .evolutionNode > .next > .evolutionNode > .next > .evolutionNode > .current {
-  gap: 1.25rem;
+#PokemonLocations .locations span:not(:last-child)::after {
+  content: ",";
+  padding-right: 0.5rem;
 }
 
 :root {
@@ -1925,6 +2007,14 @@ img {
 
 .js-center {
   justify-self: center;
+}
+
+#PokemonMoves .icon {
+  height: 1.25em;
+}
+
+#PokemonSprites .sprite {
+  height: 60px;
 }
 
 /*# sourceMappingURL=main.css.map */
