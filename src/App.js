@@ -10,7 +10,6 @@ import Pokemon from "./routes/Pokemon";
 
 import { ColorModeProvider } from "./utilities/context";
 
-
 const router = createBrowserRouter([
 	{
 		path: '/',

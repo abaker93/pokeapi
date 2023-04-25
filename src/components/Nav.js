@@ -9,23 +9,14 @@ const Nav = () => {
 	const [openDrawer, setOpenDrawer] = useState(false);
 
 	const toggleDrawer = open => event => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) { return; }
 
     setOpenDrawer(open);
   };
 
 	return (
-		<AppBar
-			position="fixed"
-			elevation={0}
-			sx={{
-				px: 2,
-				borderBottom: "1px solid ",
-			}}
-		>
-			<Toolbar sx={{ p: 0 }}>
+		<AppBar position="sticky">
+			<Toolbar>
 				<IconButton
 					size="large"
 					edge="start"
@@ -33,21 +24,17 @@ const Nav = () => {
 					href="/"
 					disableRipple={true}
 				>
-					<Pokeball color="#9754B1" style={{ height: "2rem" }} />
+					<Pokeball fill="#9754B1" />
 				</IconButton>
-				<Typography
-					variant="h6"
-					component="p"
-					sx={{
-						flexGrow: 1,
-						mr: 2,
-						fontWeight: "bold"
-					}}
+				<Link
+					href="/"
+					color="inherit"
+					underline="none"
+					mr={2}
+					flexGrow={1}
 				>
-					<Link href="/" color="inherit" underline="none">
-						Drifloon Database
-					</Link>
-				</Typography>
+					<Typography variant="h6" component="p" fontWeight="bold">Drifloon Database</Typography>
+				</Link>
 				<IconButton
 					size="large"
 					edge="end"

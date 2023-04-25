@@ -1,9 +1,33 @@
-import { useColorMode } from '../utilities/context';
-import { Box, Divider, Drawer, IconButton, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
+import Pokedex from 'pokedex-promise-v2';
+import { Autocomplete, Box, Divider, Drawer, IconButton, TextField, ToggleButton, ToggleButtonGroup, Toolbar, Typography } from '@mui/material';
 import { CloseSharp, DarkModeSharp, LightModeSharp } from '@mui/icons-material';
+import { useColorMode } from '../utilities/context';
+import { getPokeName } from '../utilities/utilities';
+
+const P = new Pokedex();
 
 export default function SettingsDrawer(props) {
 	const { colorMode, toggleColorMode } = useColorMode();
+
+	const [pokeList, setPokeList] = useState([]);
+
+	const getPokeList = () => {
+		P.getPokemonSpeciesList(10000, 0)
+			.then(res => {
+				res.results.map(r => {
+					P.getResource(r.url)
+						.then(res2 => {
+							setPokeList(currentList => [...currentList, getPokeName(res2.names, "en")])
+						})
+				})
+			})
+	}
+
+	useEffect(() => {
+		getPokeList();
+	}, [])
+	
 	return (
 		<Drawer
 			anchor="right"
@@ -14,7 +38,6 @@ export default function SettingsDrawer(props) {
 			<Box
 				sx={{ width: 300 }}
 				role="presentation"
-				onKeyDown={props.toggleDrawer}
 			>
 				<Toolbar>
 					<Typography sx={{ flexGrow: 1 }}>Settings</Typography>
@@ -30,10 +53,7 @@ export default function SettingsDrawer(props) {
 				</Toolbar>
 				<Divider />
 
-				<Box
-					sx={{ padding: 3 }}
-				>
-
+				<Box mt={3} px={3}>
 					<Typography variant="caption" component="p" sx={{ mb: 1, textTransform: "uppercase", fontWeight: "bold" }}>Mode</Typography>
 
 					<ToggleButtonGroup
@@ -54,6 +74,14 @@ export default function SettingsDrawer(props) {
 							<Typography variant="caption" component="span">Dark</Typography>
 						</ToggleButton>
 					</ToggleButtonGroup>
+				</Box>
+
+				<Box mt={3} px={3}>
+					<Typography variant="caption" component="p" sx={{ mb: 1, textTransform: "uppercase", fontWeight: "bold" }}>Favorite Pokemon</Typography>
+					<Autocomplete
+						options={pokeList.sort((a,b) => a < b ? -1 : a > b ? 1 : 0)}
+						renderInput={params => <TextField {...params} />}
+					/>
 				</Box>
 			</Box>
 		</Drawer>
