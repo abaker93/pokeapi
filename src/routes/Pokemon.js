@@ -14,6 +14,7 @@ import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
 import PokemonText from '../components/Pokemon/PokemonText';
 import PokemonLocations from '../components/Pokemon/PokemonLocations';
 import PokemonMoves from '../components/Pokemon/PokemonMoves';
+import PokemonSprites from '../components/Pokemon/PokemonSprites';
 
 const P = new Pokedex();
 
@@ -203,6 +204,7 @@ const Pokemon = () => {
 			<PokemonText loading={loading} {...pageData} />
 			<PokemonLocations loading={loading} locations={locations} {...pageData} />
 			<PokemonMoves loading={loading} {...pageData} />
+			<PokemonSprites loading={loading} {...pageData} />
 		</Container>
 		)
 	);

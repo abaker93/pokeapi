@@ -2013,4 +2013,9 @@ img {
   height: 1.25em;
 }
 
+#PokemonSprites .sprite {
+  width: 60px;
+  height: 60px;
+}
+
 /*# sourceMappingURL=main.css.map */
