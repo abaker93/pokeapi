@@ -1,11 +1,9 @@
-import { Card, CardActionArea, CardContent, Chip, Container, Typography } from "@mui/material";
+import { Chip, Container, Typography } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2';
 
-export default function PokemonAbilities(props) {
-	const p = props;
-
+const Abilities = p => {
 	return (
-		<Container id="PokemonAbilities" sx={{ mb: 5 }}>
+		<Container id="PokeAbilities" sx={{ mb: 5 }}>
 			<Typography variant="h2" mb={1}>Abilities</Typography>
 
 			<Grid container spacing={2}>
@@ -35,3 +33,5 @@ export default function PokemonAbilities(props) {
 		</Container>
 	)
 }
+
+export default Abilities;

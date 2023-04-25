@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import Pokedex from 'pokedex-promise-v2';
+import { useNavigate } from "react-router-dom";
 import { Box, Chip, Container, Link, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tabs, Typography } from "@mui/material";
 import TabPanel from "../TabPanel";
-import TypeIcon from "../../assets/TypeIcons";
-import { useNavigate } from "react-router-dom";
 import { Physical, Special, Status } from "../../assets/MoveIcons";
+import { getPokeName } from "../../utilities/utilities";
 
 const P = new Pokedex();
 
-const PokemonMoves = props => {
-	const pokeName = props.names.filter(f => f.language.name === "en").map(m => m.name)[0];
+const Moves = props => {
+	const pokeName = getPokeName(props.names, "en");
 	const moves = props.moves;
 
 	const [value, setValue] = useState({
@@ -552,7 +552,7 @@ const LevelMoves = props => {
 						{moves.sort((a, b) => a.level_learned_at - b.level_learned_at).map(move => (
 							<TableRow key={move.id} onClick={() => navigate(`/move/${move.name}`)} hover style={{ cursor: "pointer" }}>
 								<TableCell>{move.level_learned_at}</TableCell>
-								<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
+								<TableCell>{getPokeName(move.names, "en")}</TableCell>
 								<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
 								<TableCell>
 									{move.damage_class.name === "physical" ? (
@@ -633,8 +633,8 @@ const MachineMoves = props => {
 								<TableBody>
 									{filteredMoves.sort((a,b) => a.machine.name < b.machine.name ? -1 : a.name > b.name ? 1 : 0).map(move => (
 										<TableRow key={move.id} onClick={() => navigate(`/move/${move.name}`)} hover style={{ cursor: "pointer" }}>
-											<TableCell>{move.machine.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
-											<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
+											<TableCell>{getPokeName(move.machine.names, "en")}</TableCell>
+											<TableCell>{getPokeName(move.names, "en")}</TableCell>
 											<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
 											<TableCell>
 												{move.damage_class.name === "physical" ? (
@@ -709,7 +709,7 @@ const MiscMoves = props => {
 					<TableBody>
 						{moves.sort((a,b) => a.name < b.name ? -1 : 0).map(move => (
 							<TableRow key={move.id} onClick={() => navigate(`/move/${move.name}`)} hover style={{ cursor: "pointer" }}>
-								<TableCell>{move.names.filter(f => f.language.name === "en").map(m => m.name)}</TableCell>
+								<TableCell>{getPokeName(move.names, "en")}</TableCell>
 								<TableCell><Chip variant="type" type={move.type.name} label={move.type.name} /></TableCell>
 								<TableCell>
 									{move.damage_class.name === "physical" ? (
@@ -731,4 +731,4 @@ const MiscMoves = props => {
 	)
 }
 
-export default PokemonMoves;
+export default Moves;

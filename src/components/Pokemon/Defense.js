@@ -4,15 +4,13 @@ import TypeIcon from "../../assets/TypeIcons";
 import { typesArray } from "../../utilities/data";
 import { calcDefense } from "../../utilities/utilities";
 
-export default function PokemonDefense(props) {
-	const p = props;
-
+const Defense = p => {
 	return (
-		<Container id="PokemonDefense" sx={{ mb: 5 }}>
+		<Container id="PokeDefense" sx={{ mb: 5 }}>
 			<Grid container rowSpacing={2} justifyContent="space-between">
 				{typesArray.map((type, index) => (
 					<Grid key={index} xs={1.33} display="flex" justifyContent="center">
-						<PokemonDefenseChip
+						<DefenseChip
 							defense={[
 								p.types[0].type.name,
 								p.types[1] ? p.types[1].type.name : null
@@ -26,14 +24,16 @@ export default function PokemonDefense(props) {
 	)
 }
 
-function PokemonDefenseChip(props) {
+const DefenseChip = p => {
 	return (
 		<Chip
 			variant="type"
-			type={props.offense}
+			type={p.offense}
 			orientation="vertical"
-			icon={<TypeIcon type={props.offense} />}
-			label={calcDefense(props.defense[0], props.defense[1], props.offense)}
+			icon={<TypeIcon type={p.offense} />}
+			label={calcDefense(p.defense[0], p.defense[1], p.offense)}
 		/>
 	)
 }
+
+export default Defense;

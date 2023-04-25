@@ -3,18 +3,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container } from "@mui/material";
 
-import PokemonHeader from "../components/Pokemon/PokemonHeader";
-import PokemonTitle from '../components/Pokemon/PokemonTitle';
-import PokemonStats from '../components/Pokemon/PokemonStats';
-import PokemonEvolution from "../components/Pokemon/PokemonEvolution";
-import PokemonDefense from "../components/Pokemon/PokemonDefense";
-import PokemonAbilities from "../components/Pokemon/PokemonAbilities";
-import PokemonBreeding from "../components/Pokemon/PokemonBreeding";
-import PokemonAdditionalInfo from "../components/Pokemon/PokemonAdditionalInfo";
-import PokemonText from '../components/Pokemon/PokemonText';
-import PokemonLocations from '../components/Pokemon/PokemonLocations';
-import PokemonMoves from '../components/Pokemon/PokemonMoves';
-import PokemonSprites from '../components/Pokemon/PokemonSprites';
+import Header from "../components/Pokemon/Header";
+import Stats from '../components/Pokemon/Stats';
+import Evolution from "../components/Pokemon/Evolution";
+import Defense from "../components/Pokemon/Defense";
+import Abilities from "../components/Pokemon/Abilities";
+import Breeding from "../components/Pokemon/Breeding";
+import Info from "../components/Pokemon/Info";
+import FlavorText from '../components/Pokemon/FlavorText';
+import Encounters from '../components/Pokemon/Encounters';
+import Moves from '../components/Pokemon/Moves';
+import Sprites from '../components/Pokemon/Sprites';
 
 const P = new Pokedex();
 
@@ -186,10 +185,9 @@ const Pokemon = () => {
 			data-type-two={pageData.types[1] ? pageData.types[1].type.name : pageData.types[0].type.name}
 			sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 		>
-			<PokemonHeader loading={loading} {...pageData} />
-			<PokemonTitle loading={loading} {...pageData} />
-			<PokemonStats loading={loading} {...pageData} />
-			<PokemonEvolution
+			<Header loading={loading} {...pageData} />
+			<Stats loading={loading} {...pageData} />
+			<Evolution
 				loading={loading}
 				evolution={{
 					chain: evoChain,
@@ -197,14 +195,14 @@ const Pokemon = () => {
 				}}
 				pokemon={pageData}
 			/>
-			<PokemonDefense loading={loading} {...pageData} />
-			<PokemonAbilities loading={loading} {...pageData} />
-			<PokemonBreeding loading={loading} eggGroups={eggGroups} pokemon={pageData} />
-			<PokemonAdditionalInfo loading={loading} {...pageData} />
-			<PokemonText loading={loading} {...pageData} />
-			<PokemonLocations loading={loading} locations={locations} {...pageData} />
-			<PokemonMoves loading={loading} {...pageData} />
-			<PokemonSprites loading={loading} {...pageData} />
+			<Defense loading={loading} {...pageData} />
+			<Abilities loading={loading} {...pageData} />
+			<Breeding loading={loading} eggGroups={eggGroups} pokemon={pageData} />
+			<Info loading={loading} {...pageData} />
+			<FlavorText loading={loading} {...pageData} />
+			<Encounters loading={loading} locations={locations} {...pageData} />
+			<Moves loading={loading} {...pageData} />
+			<Sprites loading={loading} {...pageData} />
 		</Container>
 		)
 	);

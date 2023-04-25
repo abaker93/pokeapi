@@ -3,15 +3,13 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { FemaleSharp, MaleSharp } from "@mui/icons-material";
 import { calcMeasurement } from "../../utilities/utilities";
 
-export default function PokemonAdditionalInfo (props) {
-	const p = props;
-
+const Info = p => {
 	const female = p.gender_rate / 8;
 	const male = 1 - female;
 	const genderless = female < 0 || male < 0 ? true : false;
 
 	return (
-		<Container id="PokemonAdditionalInfo" mb={5}>
+		<Container id="PokeInfo" mb={5}>
 			<Typography variant="h2" mb={1}>Additional Info</Typography>
 
 			<Grid container mb={5}>
@@ -88,3 +86,5 @@ export default function PokemonAdditionalInfo (props) {
 		</Container>
 	)
 }
+
+export default Info;

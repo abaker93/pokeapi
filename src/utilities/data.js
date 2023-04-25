@@ -1,5 +1,7 @@
+//--  P/Breeding
 export const eggCycleSteps = 257;
 
+//--  u/utilities
 export const defense = {
   normal: {
     normal: 1,
@@ -363,6 +365,7 @@ export const defense = {
 	}
 }
 
+//--  P/Defense
 export const typesArray = [
 	"normal",
 	"fighting",

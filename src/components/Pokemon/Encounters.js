@@ -1,25 +1,15 @@
 import { useEffect, useState } from "react";
 import Pokedex from 'pokedex-promise-v2';
-import {
-	Box, Container, Link,
-	Tab, Table, TableBody,
-	TableCell, TableContainer,
-	TableHead, TableRow, Tabs,
-	Tooltip, Typography } from "@mui/material";
+import { Box, Container, Link, Tab, Tabs, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
 import TabPanel from "../TabPanel";
-import { lowerCaseDashes, lowerCaseNoSpaces } from "../../utilities/utilities";
-
-
-
-
+import { getPokeName, lowerCaseDashes, lowerCaseNoSpaces } from "../../utilities/utilities";
 
 const P = new Pokedex();
 
-const PokemonLocations = props => {
+const Encounters = props => {
 	const loc = props.locations;
-	const pokeName = props.names.filter(f => f.language.name === "en").map(m => m.name);
 
 	const [value, setValue] = useState(null);
 
@@ -51,8 +41,6 @@ const PokemonLocations = props => {
 	const genVIII = filterVersions(["sword", "shield", "the-isle-of-armor", "the-crown-tundra", "brilliant-diamond", "shining-pearl", "legends-arceus"]);
 	const genIX = filterVersions(["scarlet", "violet", "the-teal-mask", "the-indigo-disk"]);
 
-	//console.log("locations", genI, genII, genIII, genIV, genV, genVI, genVII, genVIII, genIX);
-
 	const findFirstGen = () => {
 		if (genI)	{
 			setValue(0)
@@ -83,9 +71,9 @@ const PokemonLocations = props => {
 
 	if (value === null) {
 		return (
-			<Container id="PokemonLocations" sx={{ mb: 5 }}>
-				<Typography variant="h2" mb={1}>Where to find {pokeName} in the wild</Typography>
-				<Typography variant="body1">{pokeName} can't be found in the wild.
+			<Container id="PokeEncounters" sx={{ mb: 5 }}>
+				<Typography variant="h2" mb={1}>Where to find {getPokeName(props.names, "en")} in the wild</Typography>
+				<Typography variant="body1">{getPokeName(props.names, "en")} can't be found in the wild.
 					<Tooltip title="... or PokéAPI hasn't been updated with this data. Click this footnote for more information.">
 						<sup><Link href="/notes" underline="hover" sx={{ ml: 0.5, fontWeight: "medium" }}>1</Link></sup>
 					</Tooltip>
@@ -95,9 +83,9 @@ const PokemonLocations = props => {
 	}
 
 	return (
-		<Container id="PokemonLocations" sx={{ mb: 5 }}>
+		<Container id="PokeEncounters" sx={{ mb: 5 }}>
 			<Box>
-				<Typography variant="h2" mb={1}>Where to find {pokeName} in the wild</Typography>
+				<Typography variant="h2" mb={1}>Where to find {getPokeName(props.names, "en")} in the wild</Typography>
 			</Box>
 			<Box>
 				<Tabs
@@ -391,4 +379,4 @@ const Encounter = props => {
 	}
 }
 
-export default PokemonLocations;
+export default Encounters;

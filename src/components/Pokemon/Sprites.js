@@ -1,12 +1,10 @@
+import React from "react";
 import { Container, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
 import ArrowForwardSharp from "@mui/icons-material/ArrowForwardSharp";
-import React from "react";
-import { formatDexId } from "../../utilities/utilities";
+import { formatDexId, getPokeName } from "../../utilities/utilities";
 
-const PokemonSprites = props => {
-	const pokeName = props.names.filter(f => f.language.name === "en").map(m => m.name)[0];
-
-	console.log(props.sprites)
+const Sprites = props => {
+	const pokeName = getPokeName(props.names, "en");
 
 	const sprites = [
 		{
@@ -67,10 +65,8 @@ const PokemonSprites = props => {
 		},
 	]
 
-	console.log(props.sprites)
-
 	return (
-		<Container id="PokemonSprites">
+		<Container id="PokeSprites">
 			<TableContainer>
 				<Table>
 					<TableHead>
@@ -157,4 +153,4 @@ const PokemonSprites = props => {
 	)
 }
 
-export default PokemonSprites;
+export default Sprites;

@@ -1,7 +1,8 @@
 import { defense } from "./data";
 
-export const baseURL = "https://pokeapi.co/api/v2";
+// export const baseURL = "https://pokeapi.co/api/v2";
 
+//--	P/Defense
 export const calcDefense = (def1, def2, off) => {
 	let calc;
 	let val;
@@ -17,6 +18,7 @@ export const calcDefense = (def1, def2, off) => {
 	return val;
 };
 
+//--	P/Info
 export const calcMeasurement = (num, type) => {
 	let calc;
 
@@ -49,10 +51,12 @@ export const calcMeasurement = (num, type) => {
 	return calc;
 };
 
-export const capitalize = (text) => {
-	return text.toLowerCase().replace(/\b(\w)/g, (x) => x.toUpperCase());
-};
+//--	
+// export const capitalize = (text) => {
+// 	return text.toLowerCase().replace(/\b(\w)/g, (x) => x.toUpperCase());
+// };
 
+//--	c/PokedexCard  P/Header
 export const formatDexId = (num) => {
 	return num < 10
 		? "000" + num.toString()
@@ -63,6 +67,7 @@ export const formatDexId = (num) => {
 		: num.toString();
 };
 
+//--	r/PokedexList
 export const getPokedexName = (dex) => {
 	let dexInfo = {
 		id: 0,
@@ -248,6 +253,12 @@ export const getPokedexName = (dex) => {
 	return dexInfo;
 };
 
+//--	c/PokedexCard  P/Header  P/Encounters  P/Evolution  P/FlavorText  P/Header  P/Moves  P/Sprites
+export const getPokeName = (names, lang) => {
+	return names.filter(f => f.language.name === lang).map(m => m.name)[0]
+}
+
+//--	P/Encounters
 export const lowerCaseDashes = (arr) => {
 	if (arr) {
 		let x = arr.toLowerCase();
@@ -257,6 +268,7 @@ export const lowerCaseDashes = (arr) => {
 	} else { return null; }
 };
 
+//--	P/Encounters
 export const lowerCaseNoSpaces = (arr) => {
 	if (arr) {
 		let x = arr.toLowerCase();
@@ -266,6 +278,7 @@ export const lowerCaseNoSpaces = (arr) => {
 	} else { return null; }
 };
 
+//--	P/Stats
 export const normalize = (value) => {
 	const min = 1;
 	const max = 255;
@@ -273,23 +286,25 @@ export const normalize = (value) => {
 	return ((value - min) * 100) / (max - min);
 };
 
-export const romanize = num => {
-	if (isNaN(num)) {
-		return null;
-	}
+//--	
+// export const romanize = num => {
+// 	if (isNaN(num)) {
+// 		return null;
+// 	}
 
-	const digits = String(+num).split("");
-	const key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM", "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC", "","I","II","III","IV","V","VI","VII","VIII","IX"];
-	let roman = "";
-	let i = 3;
+// 	const digits = String(+num).split("");
+// 	const key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM", "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC", "","I","II","III","IV","V","VI","VII","VIII","IX"];
+// 	let roman = "";
+// 	let i = 3;
 
-	for (i > 0; i--;) {
-		roman = (key[+digits.pop() + (i * 10)] || "") + roman;
-	}
+// 	for (i > 0; i--;) {
+// 		roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+// 	}
 
-	return Array(+digits.join("") + 1).join("M") + roman;
-}
+// 	return Array(+digits.join("") + 1).join("M") + roman;
+// }
 
+//--	u/utilities
 export const round2Decimal = (num) => {
 	return Math.round(num * 100) / 100;
 };

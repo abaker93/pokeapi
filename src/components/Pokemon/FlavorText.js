@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { Box, Container, Link, Tab, Tabs, Tooltip, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import TabPanel from "../TabPanel";
-import { formatDexId, lowerCaseNoSpaces } from "../../utilities/utilities";
+import { formatDexId, getPokeName, lowerCaseNoSpaces } from "../../utilities/utilities";
 
-const PokemonText = props => {
+const FlavorText = props => {
 	const p = props;
 	const flavorTextFilter = p.flavor_text_entries.filter(f => f.language.name === "en");
 	const pokedexNumbers = p.pokedex_numbers;
@@ -297,7 +297,7 @@ const PokemonText = props => {
 			<Container id="PokemonText" sx={{ mb: 5 }}>
 				<Typography variant="h2" mb={1}>Pokédex entries</Typography>
 				<Typography variant="body1">
-					No Pokédex entries available for {p.names.filter(f => f.language.name === "en").map(m => m.name)}.
+					No Pokédex entries available for {getPokeName(p.names, "en")}.
 					<Tooltip title="... or PokéAPI hasn't been updated with this data. Click this footnote for more information.">
 						<sup><Link href="/notes" underline="hover" sx={{ ml: 0.5, fontWeight: "medium" }}>1</Link></sup>
 					</Tooltip>
@@ -361,7 +361,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={0} id="panelGenI" ariaLabelledBy="tabGenI">
 					{flavorTextEntries.gen_i.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -376,7 +376,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={1} id="panelGenII" ariaLabelledBy="tabGenII">
 					{flavorTextEntries.gen_ii.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -391,7 +391,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={2} id="panelGenIII" ariaLabelledBy="tabGenIII">
 					{flavorTextEntries.gen_iii.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -406,7 +406,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={3} id="panelGenIV" ariaLabelledBy="tabGenIV">
 					{flavorTextEntries.gen_iv.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -421,7 +421,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={4} id="panelGenV" ariaLabelledBy="tabGenV">
 					{flavorTextEntries.gen_v.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -437,7 +437,7 @@ const PokemonText = props => {
 					{flavorTextEntries.gen_vi.map(m => (
 						m.text ? (
 							m.game === "X" || m.game === "Y" ? (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={{
@@ -448,7 +448,7 @@ const PokemonText = props => {
 									text={m.text}
 								/>
 							) : (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={m.num}
@@ -466,7 +466,7 @@ const PokemonText = props => {
 					{flavorTextEntries.gen_vii.map(m => (
 						m.text ? (
 							m.game === "Sun" || m.game === "Moon" || m.game === "Ultra Sun" || m.game === "Ultra Moon" ? (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={{
@@ -479,7 +479,7 @@ const PokemonText = props => {
 									text={m.text}
 								/>
 							) : (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={m.num}
@@ -497,7 +497,7 @@ const PokemonText = props => {
 					{flavorTextEntries.gen_viii.map(m => (
 						m.text ? (
 							m.game === "Sword" || m.game === "Shield" ? (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={{
@@ -508,7 +508,7 @@ const PokemonText = props => {
 									text={m.text}
 								/>
 							) : (
-								<FlavorText
+								<Entry
 									key={m.game}
 									game={m.game}
 									num={m.num}
@@ -524,7 +524,7 @@ const PokemonText = props => {
 				<TabPanel value={value} index={8} id="panelGenIX" ariaLabelledBy="tabGenIX">
 					{flavorTextEntries.gen_ix.map(m => (
 						m.text ? (
-							<FlavorText
+							<Entry
 								key={m.game}
 								game={m.game}
 								num={m.num}
@@ -542,7 +542,7 @@ const PokemonText = props => {
 
 
 
-const FlavorText = props => {
+const Entry = props => {
 	const game = props.game;
 	let num = props.num ? props.num : null;
 	const text = props.text ? props.text : null;
@@ -686,4 +686,4 @@ const FlavorText = props => {
 
 }
 
-export default PokemonText;
+export default FlavorText;
