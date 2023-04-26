@@ -70,8 +70,8 @@ export const formatDexId = (num) => {
 //--	r/PokedexList
 export const getPokedexName = (dex) => {
 	let dexInfo = {
-		id: 0,
-		name: "",
+		id: 1,
+		name: "national",
 	};
 
 	const lowercase = dex.toLowerCase().replace(/[^A-Z0-9]+/gi, "");

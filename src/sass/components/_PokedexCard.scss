@@ -1,63 +1,80 @@
+// .pokedex-card {
+// 	$poke-image-width: 120px;
+// 	background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
+// 	margin-top: calcREM(calc($poke-image-width * 0.4)) !important;
+// 	transform: scale(1);
+// 	transition: $transition !important;
+
+// 	&.MuiSkeleton-root { transform: scale(1) !important; }
+
+// 	&.MuiCard-root:hover { transform: scale(1.1); }
+
+// 	.grid.MuiCardContent-root {
+// 		grid-template-rows: calcREM(calc($poke-image-width * 0.6)) auto;
+// 		gap: 0.5rem;
+// 	}
+
+// 	.row.name { padding-bottom: calcREM(2px); }
+
+// 	.row.types { padding-bottom: 0.5rem; }
+
+// 	.row.stats {
+// 		grid-auto-flow: column;
+// 		justify-content: space-around;
+// 	}
+
+// 	h2 {
+// 		font-weight: bold;
+// 		line-height: 1em;
+
+// 		> span {
+// 			font-size: 0.75em;
+// 			font-weight: bold;
+// 			margin-right: calcREM(4px);
+// 			opacity: 0.5;
+
+// 			> span {
+// 				font-size: 0.75em;
+// 				font-weight: bold;
+// 				text-transform: uppercase;
+// 				margin-right: calcREM(2px);
+// 			}
+// 		}
+// 	}
+
+// 	h3 {
+// 		font-size: calcREM(10px);
+// 		font-weight: 700;
+// 		line-height: 1.2;
+// 		letter-spacing: 0.07em;
+// 		text-align: center;
+// 	}
+
+// 	p {
+// 		font-size: calcREM(14px);
+// 		text-align: center;
+// 	}
+
+// 	img {
+// 		position: relative;
+// 		top: calcREM(calc(($poke-image-width * 0.4) * -1));
+// 		max-width: calcREM($poke-image-width);
+// 	}
+// }
+
 .pokedex-card {
-	$poke-image-width: 120px;
-	background: linear-gradient(45deg, var(--type-one-color), var(--type-two-color));
-	margin-top: calcREM(calc($poke-image-width * 0.4)) !important;
-	transform: scale(1);
-	transition: $transition !important;
-
-	&.MuiSkeleton-root { transform: scale(1) !important; }
-
-	&.MuiCard-root:hover { transform: scale(1.1); }
-
-	.grid.MuiCardContent-root {
-		grid-template-rows: calcREM(calc($poke-image-width * 0.6)) auto;
-		gap: 0.5rem;
-	}
-
-	.row.name { padding-bottom: calcREM(2px); }
-
-	.row.types { padding-bottom: 0.5rem; }
-
-	.row.stats {
-		grid-auto-flow: column;
-		justify-content: space-around;
+	img {
+		width: calc(100% + 1.5rem);
+		position: absolute;
+		left: -1.5rem;
+		top: -1.5rem;
 	}
 
 	h2 {
-		font-weight: bold;
-		line-height: 1em;
-
-		> span {
+		& > span {
 			font-size: 0.75em;
-			font-weight: bold;
-			margin-right: calcREM(4px);
-			opacity: 0.5;
 
-			> span {
-				font-size: 0.75em;
-				font-weight: bold;
-				text-transform: uppercase;
-				margin-right: calcREM(2px);
-			}
+			& > span { font-size: 0.75em; }
 		}
-	}
-
-	h3 {
-		font-size: calcREM(10px);
-		font-weight: 700;
-		line-height: 1.2;
-		letter-spacing: 0.07em;
-		text-align: center;
-	}
-
-	p {
-		font-size: calcREM(14px);
-		text-align: center;
-	}
-
-	img {
-		position: relative;
-		top: calcREM(calc(($poke-image-width * 0.4) * -1));
-		max-width: calcREM($poke-image-width);
 	}
 }

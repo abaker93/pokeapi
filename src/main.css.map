@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["sass/main.scss"],"names":[],"mappings":"AA2BA;EAAM;EAAc","file":"main.css"}
+{"version":3,"sourceRoot":"","sources":["sass/components/_PokedexCard.scss","sass/main.scss"],"names":[],"mappings":"AAiEC;EACC;EACA;EACA;EACA;;AAIA;EACC;;AAEA;EAAW;;;ACjDd;EAAM;EAAc","file":"main.css"}

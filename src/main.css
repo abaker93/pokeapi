@@ -1,3 +1,16 @@
+.pokedex-card img {
+  width: calc(100% + 1.5rem);
+  position: absolute;
+  left: -1.5rem;
+  top: -1.5rem;
+}
+.pokedex-card h2 > span {
+  font-size: 0.75em;
+}
+.pokedex-card h2 > span > span {
+  font-size: 0.75em;
+}
+
 svg {
   height: 30px;
   max-height: 100%;
