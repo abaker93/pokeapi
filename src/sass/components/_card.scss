@@ -1,0 +1,23 @@
+.pokedex-card {
+	@include type-gradient();
+	transition: transform cubic-bezier(0.4, 0, 0.2, 1) 0.25s,
+							box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+
+	img {
+		position: absolute;
+		height: calc(100% + 4rem);
+		left: -1.5rem;
+		top: -2rem;
+		transition: $transition;
+	}
+
+	&:hover {
+		transform: scale(1.05);
+
+		img {
+			top: -3rem;
+			left: 0;
+			transform: rotate(5deg) scale(1.5);
+		}
+	}
+}

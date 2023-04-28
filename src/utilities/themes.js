@@ -1,4 +1,7 @@
 import { createTheme, responsiveFontSizes } from "@mui/material/styles";
+import { typesArray } from "./data";
+import "./colors";
+import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, text, water, white } from "./colors";
 
 let pokeTheme = createTheme({
 	palette: {
@@ -22,58 +25,66 @@ let pokeTheme = createTheme({
 			main:	'#4FA44A',
 		},
 		divider:		'#E2E2E2',
-		'gray-50':	'#F3F3F3',
-		'gray-100':	'#E2E2E2',
-		'gray-200':	'#D1D1D1',
-		'gray-300':	'#C0C0C0',
-		'gray-400':	'#AFAFAF',
-		'gray-500':	'#9E9E9E',
-		'gray-600':	'#888888',
-		'gray-700':	'#737373',
-		'gray-800':	'#5D5D5D',
-		'gray-900':	'#474747',
 	},
 	typography: {
-		fontFamily:	'source-sans-3, "Source Sans Pro", Helvetica, Arial, sans-serif',
-		fontSize: 	16,
+		fontFamily:		'source-sans-3, "Source Sans Pro", Helvetica, Arial, sans-serif',
+		fontSize: 		16,
+		htmlFontSize: 16,
 		fontWeightLight:		300,
 		fontWeightRegular:	350,
-		fontWeightMedium: 	500,
-		fontWeightBold:			700,
+		fontWeightMedium: 	400,
+		fontWeightBold:			500,
 		h1: {
-			fontSize: 	'calc(1.375rem + 1.5vw)',
+			fontSize: 	'2rem',
 			fontWeight:	300,
 			lineHeight: 1.2,
 		},
 		h2: {
-			fontSize: 	'calc(1.325rem + 0.9vw)',
+			fontSize: 	'1.75rem',
 			fontWeight:	300,
 			lineHeight: 1.2,
 		},
 		h3: {
-			fontSize: 	'calc(1.3rem + 0.6vw)',
-			fontWeight:	300,
+			fontSize: 	'1.5rem',
+			fontWeight:	350,
 			lineHeight: 1.2,
 		},
 		h4: {
-			fontSize: 	'calc(1.275rem + 0.3vw)',
-			fontWeight:	300,
+			fontSize: 	'1.375rem',
+			fontWeight:	350,
 			lineHeight: 1.2,
 		},
 		h5: {
 			fontSize: 	'1.25rem',
-			fontWeight:	300,
+			fontWeight:	350,
 			lineHeight: 1.2,
 		},
 		h6: {
-			fontSize: 	'1rem',
-			fontWeight:	300,
-			lineHeight: 1.2,
-		},
-		body1: {
-			fontSize:		'1rem',
+			fontSize: 	'1.125rem',
 			fontWeight:	350,
 			lineHeight: 1.2,
+		},
+		subtitle1: {
+			fontSize: '1rem',
+			fontWeight:	400,
+		},
+		subtitle2: {
+			fontSize: '0.875rem',
+			fontWeight: 400,
+		},
+		body1: {
+			fontSize: '1rem',
+			fontWeight:	350,
+			lineHeight: 1.5,
+		},
+		body2: {
+			fontSize: '0.875rem',
+			fontWeight:	350,
+			lineHeight: 1.5,
+		},
+		button: {
+			fontWeight: 400,
+			letterSpacing: '0.025em',
 		},
 		japanese: {
 			fontFamily: 'source-han-sans-japanese, "Source Sans Pro", Helvetica, Arial, sans-serif',
@@ -86,20 +97,107 @@ let pokeTheme = createTheme({
 		MuiAppBar: {
 			styleOverrides: {
 				root: {
-					backgroundImage: 'none',
-					backdropFilter: "blur(8px)",
+					backgroundImage:	'none',
+					backdropFilter:		'blur(8px)',
 				},
 			},
 		},
-		MuiCard: {
+		MuiChip: {
 			variants: [
 				{
-					props: { variant: 'pokedex' },
+					props: { size:	'xsmall', },
 					style: {
-						
+						fontSize:			'0.875rem',
+						height:				'20px',
 					},
 				},
+				{
+					props: { type: 'bug', },
+					style: { backgroundColor: bug[500], color: bug.color, },
+				},
+				{
+					props: { type: 'dark', },
+					style: { backgroundColor: dark[500], color: dark.color, },
+				},
+				{
+					props: { type: 'dragon', },
+					style: { backgroundColor: dragon[500], color: dragon.color, },
+				},
+				{
+					props: { type: 'electric', },
+					style: { backgroundColor: electric[500], color: electric.color, },
+				},
+				{
+					props: { type: 'fairy', },
+					style: { backgroundColor: fairy[500], color: fairy.color, },
+				},
+				{
+					props: { type: 'fighting', },
+					style: { backgroundColor: fighting[500], color: fighting.color, },
+				},
+				{
+					props: { type: 'fire', },
+					style: { backgroundColor: fire[500], color: fire.color, },
+				},
+				{
+					props: { type: 'flying', },
+					style: { backgroundColor: flying[500], color: flying.color, },
+				},
+				{
+					props: { type: 'ghost', },
+					style: { backgroundColor: ghost[500], color: ghost.color, },
+				},
+				{
+					props: { type: 'grass', },
+					style: { backgroundColor: grass[500], color: grass.color, },
+				},
+				{
+					props: { type: 'ground', },
+					style: { backgroundColor: ground[500], color: ground.color, },
+				},
+				{
+					props: { type: 'ice', },
+					style: { backgroundColor: ice[500], color: ice.color, },
+				},
+				{
+					props: { type: 'normal', },
+					style: { backgroundColor: normal[500], color: normal.color, },
+				},
+				{
+					props: { type: 'poison', },
+					style: { backgroundColor: poison[500], color: poison.color, },
+				},
+				{
+					props: { type: 'psychic', },
+					style: { backgroundColor: psychic[500], color: psychic.color, },
+				},
+				{
+					props: { type: 'rock', },
+					style: { backgroundColor: rock[500], color: rock.color, },
+				},
+				{
+					props: { type: 'steel', },
+					style: { backgroundColor: steel[500], color: steel.color, },
+				},
+				{
+					props: { type: 'water', },
+					style: { backgroundColor: water[500], color: water.color, },
+				},
 			],
+			styleOverrides: {
+				label: ({ ownerState }) => ({
+					...(ownerState.size === 'xsmall' && {
+						paddingLeft: '8px',
+						paddingRight: '8px',
+						paddingTop: '3px',
+					}),
+					...(ownerState.variant === 'type' && {
+						fontWeight: 400,
+						letterSpacing: '0.025em',
+						textTransform: 'uppercase'
+					}),
+				}),
+			},
 		},
 	},
 
@@ -310,9 +408,9 @@ let pokeTheme = createTheme({
 	// },
 })
 
-pokeTheme = responsiveFontSizes(pokeTheme);
+// pokeTheme = responsiveFontSizes(pokeTheme);
 
-const lightTheme = createTheme(pokeTheme, {
+export const lightTheme = createTheme(pokeTheme, {
 	// palette: {
 	// 	mode: 'light',
 	// 	text: {
@@ -334,7 +432,7 @@ const lightTheme = createTheme(pokeTheme, {
 	// },
 });
 
-const darkTheme = createTheme(pokeTheme, {
+export const darkTheme = createTheme(pokeTheme, {
 	// palette: {
 	// 	mode: 'dark',
 	// 	text: {
@@ -358,5 +456,3 @@ const darkTheme = createTheme(pokeTheme, {
 	// 	},
 	// },
 });
-
-export { lightTheme, darkTheme };

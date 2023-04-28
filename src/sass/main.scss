@@ -1,8 +1,9 @@
-// @import "./functions";
-// @import "./variables";
+// @import "functions";
+@import "variables";
+@import "mixins";
 
-@import "./components/components";
-// @import "./routes/routes";
+@import "components/components";
+// @import "routes/routes";
 
 // :root {
 // 	--female: #{$female};
