@@ -28,7 +28,7 @@ const Hero = p => {
 	}
 
 	return (
-		<Container id="PokeHeader" component="header" maxWidth="false">
+		<Container id="PokeHeader" component="header" maxWidth="false" type1={p.types[0].type.name} type2={p.types[1] ? p.types[1].type.name : p.types[0].type.name}>
 			<Typography variant="japanese" component="span" className="japanese">{getPokeName(p.names, "ja")}</Typography>
 			<img className="poke-img" src={p.sprites.other["official-artwork"].front_default} alt={p.name} />
 			{p.prev !== null ? (

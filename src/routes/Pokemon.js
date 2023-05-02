@@ -181,8 +181,8 @@ const Pokemon = () => {
 			id="Pokemon"
 			component="main"
 			maxWidth="false"
-			data-type-one={pageData.types[0].type.name}
-			data-type-two={pageData.types[1] ? pageData.types[1].type.name : pageData.types[0].type.name}
+			type1={pageData.types[0].type.name}
+			type2={pageData.types[1] ? pageData.types[1].type.name : pageData.types[0].type.name}
 			sx={{ px: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 } }}
 		>
 			<Header loading={loading} {...pageData} />

@@ -2933,6 +2933,1315 @@
   transform: rotate(5deg) scale(1.5);
 }
 
+#PokeHeader {
+  min-height: 400px;
+  height: 35vh;
+  width: 100%;
+  position: relative;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  overflow-x: clip;
+  padding-top: calcREM(56px);
+  margin-bottom: calcREM(40px);
+}
+#PokeHeader[type1=bug][type2=bug] {
+  background: linear-gradient(45deg, #90BF2B 0%, #B9D83B 50%, #E4F14B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=dark] {
+  background: linear-gradient(45deg, #90BF2B 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=dragon] {
+  background: linear-gradient(45deg, #90BF2B 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=electric] {
+  background: linear-gradient(45deg, #90BF2B 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=fairy] {
+  background: linear-gradient(45deg, #90BF2B 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=fighting] {
+  background: linear-gradient(45deg, #90BF2B 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=fire] {
+  background: linear-gradient(45deg, #90BF2B 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=flying] {
+  background: linear-gradient(45deg, #90BF2B 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=ghost] {
+  background: linear-gradient(45deg, #90BF2B 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=grass] {
+  background: linear-gradient(45deg, #90BF2B 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=ground] {
+  background: linear-gradient(45deg, #90BF2B 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=ice] {
+  background: linear-gradient(45deg, #90BF2B 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=normal] {
+  background: linear-gradient(45deg, #90BF2B 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=poison] {
+  background: linear-gradient(45deg, #90BF2B 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=psychic] {
+  background: linear-gradient(45deg, #90BF2B 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=rock] {
+  background: linear-gradient(45deg, #90BF2B 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=steel] {
+  background: linear-gradient(45deg, #90BF2B 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=bug][type2=water] {
+  background: linear-gradient(45deg, #90BF2B 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=bug] {
+  background: linear-gradient(45deg, #5B5365 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=dark] {
+  background: linear-gradient(45deg, #5B5365 0%, #636374 50%, #717684 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=dragon] {
+  background: linear-gradient(45deg, #5B5365 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=electric] {
+  background: linear-gradient(45deg, #5B5365 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=fairy] {
+  background: linear-gradient(45deg, #5B5365 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=fighting] {
+  background: linear-gradient(45deg, #5B5365 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=fire] {
+  background: linear-gradient(45deg, #5B5365 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=flying] {
+  background: linear-gradient(45deg, #5B5365 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=ghost] {
+  background: linear-gradient(45deg, #5B5365 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=grass] {
+  background: linear-gradient(45deg, #5B5365 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=ground] {
+  background: linear-gradient(45deg, #5B5365 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=ice] {
+  background: linear-gradient(45deg, #5B5365 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=normal] {
+  background: linear-gradient(45deg, #5B5365 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=poison] {
+  background: linear-gradient(45deg, #5B5365 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=psychic] {
+  background: linear-gradient(45deg, #5B5365 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=rock] {
+  background: linear-gradient(45deg, #5B5365 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dark][type2=steel] {
+  background: linear-gradient(45deg, #5B5365 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dark][type2=water] {
+  background: linear-gradient(45deg, #5B5365 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=bug] {
+  background: linear-gradient(45deg, #096CC3 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=dark] {
+  background: linear-gradient(45deg, #096CC3 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=dragon] {
+  background: linear-gradient(45deg, #096CC3 0%, #0084D1 50%, #089AD9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=electric] {
+  background: linear-gradient(45deg, #096CC3 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=fairy] {
+  background: linear-gradient(45deg, #096CC3 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=fighting] {
+  background: linear-gradient(45deg, #096CC3 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=fire] {
+  background: linear-gradient(45deg, #096CC3 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=flying] {
+  background: linear-gradient(45deg, #096CC3 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=ghost] {
+  background: linear-gradient(45deg, #096CC3 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=grass] {
+  background: linear-gradient(45deg, #096CC3 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=ground] {
+  background: linear-gradient(45deg, #096CC3 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=ice] {
+  background: linear-gradient(45deg, #096CC3 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=normal] {
+  background: linear-gradient(45deg, #096CC3 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=poison] {
+  background: linear-gradient(45deg, #096CC3 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=psychic] {
+  background: linear-gradient(45deg, #096CC3 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=rock] {
+  background: linear-gradient(45deg, #096CC3 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=dragon][type2=steel] {
+  background: linear-gradient(45deg, #096CC3 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=dragon][type2=water] {
+  background: linear-gradient(45deg, #096CC3 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=electric][type2=bug] {
+  background: linear-gradient(45deg, #F3D139 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=dark] {
+  background: linear-gradient(45deg, #F3D139 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=dragon] {
+  background: linear-gradient(45deg, #F3D139 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=electric] {
+  background: linear-gradient(45deg, #F3D139 0%, #F6DA60 50%, #F9E580 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=fairy] {
+  background: linear-gradient(45deg, #F3D139 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=fighting] {
+  background: linear-gradient(45deg, #F3D139 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=fire] {
+  background: linear-gradient(45deg, #F3D139 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=flying] {
+  background: linear-gradient(45deg, #F3D139 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=ghost] {
+  background: linear-gradient(45deg, #F3D139 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=grass] {
+  background: linear-gradient(45deg, #F3D139 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=ground] {
+  background: linear-gradient(45deg, #F3D139 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=ice] {
+  background: linear-gradient(45deg, #F3D139 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=normal] {
+  background: linear-gradient(45deg, #F3D139 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=poison] {
+  background: linear-gradient(45deg, #F3D139 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=psychic] {
+  background: linear-gradient(45deg, #F3D139 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=rock] {
+  background: linear-gradient(45deg, #F3D139 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=steel] {
+  background: linear-gradient(45deg, #F3D139 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=electric][type2=water] {
+  background: linear-gradient(45deg, #F3D139 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=bug] {
+  background: linear-gradient(45deg, #ED92E8 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=dark] {
+  background: linear-gradient(45deg, #ED92E8 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=dragon] {
+  background: linear-gradient(45deg, #ED92E8 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=electric] {
+  background: linear-gradient(45deg, #ED92E8 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=fairy] {
+  background: linear-gradient(45deg, #ED92E8 0%, #F29CE6 50%, #F5A8E6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=fighting] {
+  background: linear-gradient(45deg, #ED92E8 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=fire] {
+  background: linear-gradient(45deg, #ED92E8 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=flying] {
+  background: linear-gradient(45deg, #ED92E8 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=ghost] {
+  background: linear-gradient(45deg, #ED92E8 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=grass] {
+  background: linear-gradient(45deg, #ED92E8 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=ground] {
+  background: linear-gradient(45deg, #ED92E8 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=ice] {
+  background: linear-gradient(45deg, #ED92E8 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=normal] {
+  background: linear-gradient(45deg, #ED92E8 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=poison] {
+  background: linear-gradient(45deg, #ED92E8 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=psychic] {
+  background: linear-gradient(45deg, #ED92E8 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=rock] {
+  background: linear-gradient(45deg, #ED92E8 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=steel] {
+  background: linear-gradient(45deg, #ED92E8 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fairy][type2=water] {
+  background: linear-gradient(45deg, #ED92E8 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=bug] {
+  background: linear-gradient(45deg, #CE406B 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=dark] {
+  background: linear-gradient(45deg, #CE406B 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=dragon] {
+  background: linear-gradient(45deg, #CE406B 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=electric] {
+  background: linear-gradient(45deg, #CE406B 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=fairy] {
+  background: linear-gradient(45deg, #CE406B 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=fighting] {
+  background: linear-gradient(45deg, #CE406B 0%, #D54D62 50%, #D95959 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=fire] {
+  background: linear-gradient(45deg, #CE406B 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=flying] {
+  background: linear-gradient(45deg, #CE406B 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=ghost] {
+  background: linear-gradient(45deg, #CE406B 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=grass] {
+  background: linear-gradient(45deg, #CE406B 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=ground] {
+  background: linear-gradient(45deg, #CE406B 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=ice] {
+  background: linear-gradient(45deg, #CE406B 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=normal] {
+  background: linear-gradient(45deg, #CE406B 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=poison] {
+  background: linear-gradient(45deg, #CE406B 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=psychic] {
+  background: linear-gradient(45deg, #CE406B 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=rock] {
+  background: linear-gradient(45deg, #CE406B 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fighting][type2=steel] {
+  background: linear-gradient(45deg, #CE406B 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fighting][type2=water] {
+  background: linear-gradient(45deg, #CE406B 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=fire][type2=bug] {
+  background: linear-gradient(45deg, #FE9D52 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=dark] {
+  background: linear-gradient(45deg, #FE9D52 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=dragon] {
+  background: linear-gradient(45deg, #FE9D52 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=electric] {
+  background: linear-gradient(45deg, #FE9D52 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=fairy] {
+  background: linear-gradient(45deg, #FE9D52 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=fighting] {
+  background: linear-gradient(45deg, #FE9D52 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=fire] {
+  background: linear-gradient(45deg, #FE9D52 0%, #FFAF4C 50%, #FFC247 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=flying] {
+  background: linear-gradient(45deg, #FE9D52 0%, #E9B0C4 50%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=ghost] {
+  background: linear-gradient(45deg, #FE9D52 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=grass] {
+  background: linear-gradient(45deg, #FE9D52 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=ground] {
+  background: linear-gradient(45deg, #FE9D52 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=ice] {
+  background: linear-gradient(45deg, #FE9D52 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=normal] {
+  background: linear-gradient(45deg, #FE9D52 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=poison] {
+  background: linear-gradient(45deg, #FE9D52 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=psychic] {
+  background: linear-gradient(45deg, #FE9D52 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=rock] {
+  background: linear-gradient(45deg, #FE9D52 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=steel] {
+  background: linear-gradient(45deg, #FE9D52 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=fire][type2=water] {
+  background: linear-gradient(45deg, #FE9D52 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=bug] {
+  background: linear-gradient(45deg, #92AADD 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=dark] {
+  background: linear-gradient(45deg, #92AADD 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=dragon] {
+  background: linear-gradient(45deg, #92AADD 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=electric] {
+  background: linear-gradient(45deg, #92AADD 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=fairy] {
+  background: linear-gradient(45deg, #92AADD 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=fighting] {
+  background: linear-gradient(45deg, #92AADD 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=fire] {
+  background: linear-gradient(45deg, #92AADD 0%, #E9B0C4 50%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=flying] {
+  background: linear-gradient(45deg, #92AADD 0%, #AEC3EA 50%, #D0DEF6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=ghost] {
+  background: linear-gradient(45deg, #92AADD 0%, #7289C5 50%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=grass] {
+  background: linear-gradient(45deg, #92AADD 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=ground] {
+  background: linear-gradient(45deg, #92AADD 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=ice] {
+  background: linear-gradient(45deg, #92AADD 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=normal] {
+  background: linear-gradient(45deg, #92AADD 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=poison] {
+  background: linear-gradient(45deg, #92AADD 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=psychic] {
+  background: linear-gradient(45deg, #92AADD 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=rock] {
+  background: linear-gradient(45deg, #92AADD 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=steel] {
+  background: linear-gradient(45deg, #92AADD 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=flying][type2=water] {
+  background: linear-gradient(45deg, #92AADD 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=bug] {
+  background: linear-gradient(45deg, #5267AD 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=dark] {
+  background: linear-gradient(45deg, #5267AD 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=dragon] {
+  background: linear-gradient(45deg, #5267AD 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=electric] {
+  background: linear-gradient(45deg, #5267AD 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=fairy] {
+  background: linear-gradient(45deg, #5267AD 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=fighting] {
+  background: linear-gradient(45deg, #5267AD 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=fire] {
+  background: linear-gradient(45deg, #5267AD 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=flying] {
+  background: linear-gradient(45deg, #5267AD 0%, #7289C5 50%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=ghost] {
+  background: linear-gradient(45deg, #5267AD 0%, #656EC3 50%, #7B75D7 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=grass] {
+  background: linear-gradient(45deg, #5267AD 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=ground] {
+  background: linear-gradient(45deg, #5267AD 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=ice] {
+  background: linear-gradient(45deg, #5267AD 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=normal] {
+  background: linear-gradient(45deg, #5267AD 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=poison] {
+  background: linear-gradient(45deg, #5267AD 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=psychic] {
+  background: linear-gradient(45deg, #5267AD 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=rock] {
+  background: linear-gradient(45deg, #5267AD 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ghost][type2=steel] {
+  background: linear-gradient(45deg, #5267AD 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ghost][type2=water] {
+  background: linear-gradient(45deg, #5267AD 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=bug] {
+  background: linear-gradient(45deg, #67BB5D 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=dark] {
+  background: linear-gradient(45deg, #67BB5D 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=dragon] {
+  background: linear-gradient(45deg, #67BB5D 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=electric] {
+  background: linear-gradient(45deg, #67BB5D 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=fairy] {
+  background: linear-gradient(45deg, #67BB5D 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=fighting] {
+  background: linear-gradient(45deg, #67BB5D 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=fire] {
+  background: linear-gradient(45deg, #67BB5D 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=flying] {
+  background: linear-gradient(45deg, #67BB5D 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=ghost] {
+  background: linear-gradient(45deg, #67BB5D 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=grass] {
+  background: linear-gradient(45deg, #67BB5D 0%, #8BD265 50%, #B1E86D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=ground] {
+  background: linear-gradient(45deg, #67BB5D 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=ice] {
+  background: linear-gradient(45deg, #67BB5D 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=normal] {
+  background: linear-gradient(45deg, #67BB5D 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=poison] {
+  background: linear-gradient(45deg, #67BB5D 0%, #62C099 33.33%, #6996CB 66.67%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=psychic] {
+  background: linear-gradient(45deg, #67BB5D 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=rock] {
+  background: linear-gradient(45deg, #67BB5D 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=grass][type2=steel] {
+  background: linear-gradient(45deg, #67BB5D 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=grass][type2=water] {
+  background: linear-gradient(45deg, #67BB5D 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=bug] {
+  background: linear-gradient(45deg, #DB7948 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=dark] {
+  background: linear-gradient(45deg, #DB7948 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=dragon] {
+  background: linear-gradient(45deg, #DB7948 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=electric] {
+  background: linear-gradient(45deg, #DB7948 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=fairy] {
+  background: linear-gradient(45deg, #DB7948 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=fighting] {
+  background: linear-gradient(45deg, #DB7948 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=fire] {
+  background: linear-gradient(45deg, #DB7948 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=flying] {
+  background: linear-gradient(45deg, #DB7948 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=ghost] {
+  background: linear-gradient(45deg, #DB7948 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=grass] {
+  background: linear-gradient(45deg, #DB7948 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=ground] {
+  background: linear-gradient(45deg, #DB7948 0%, #D48C59 50%, #CE9E6F 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=ice] {
+  background: linear-gradient(45deg, #DB7948 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=normal] {
+  background: linear-gradient(45deg, #DB7948 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=poison] {
+  background: linear-gradient(45deg, #DB7948 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=psychic] {
+  background: linear-gradient(45deg, #DB7948 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=rock] {
+  background: linear-gradient(45deg, #DB7948 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ground][type2=steel] {
+  background: linear-gradient(45deg, #DB7948 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ground][type2=water] {
+  background: linear-gradient(45deg, #DB7948 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=ice][type2=bug] {
+  background: linear-gradient(45deg, #73CEBF 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=dark] {
+  background: linear-gradient(45deg, #73CEBF 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=dragon] {
+  background: linear-gradient(45deg, #73CEBF 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=electric] {
+  background: linear-gradient(45deg, #73CEBF 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=fairy] {
+  background: linear-gradient(45deg, #73CEBF 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=fighting] {
+  background: linear-gradient(45deg, #73CEBF 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=fire] {
+  background: linear-gradient(45deg, #73CEBF 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=flying] {
+  background: linear-gradient(45deg, #73CEBF 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=ghost] {
+  background: linear-gradient(45deg, #73CEBF 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=grass] {
+  background: linear-gradient(45deg, #73CEBF 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=ground] {
+  background: linear-gradient(45deg, #73CEBF 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=ice] {
+  background: linear-gradient(45deg, #73CEBF 0%, #85D5D1 50%, #9DDDE1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=normal] {
+  background: linear-gradient(45deg, #73CEBF 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=poison] {
+  background: linear-gradient(45deg, #73CEBF 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=psychic] {
+  background: linear-gradient(45deg, #73CEBF 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=rock] {
+  background: linear-gradient(45deg, #73CEBF 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=steel] {
+  background: linear-gradient(45deg, #73CEBF 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=ice][type2=water] {
+  background: linear-gradient(45deg, #73CEBF 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=bug] {
+  background: linear-gradient(45deg, #909AA2 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=dark] {
+  background: linear-gradient(45deg, #909AA2 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=dragon] {
+  background: linear-gradient(45deg, #909AA2 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=electric] {
+  background: linear-gradient(45deg, #909AA2 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=fairy] {
+  background: linear-gradient(45deg, #909AA2 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=fighting] {
+  background: linear-gradient(45deg, #909AA2 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=fire] {
+  background: linear-gradient(45deg, #909AA2 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=flying] {
+  background: linear-gradient(45deg, #909AA2 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=ghost] {
+  background: linear-gradient(45deg, #909AA2 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=grass] {
+  background: linear-gradient(45deg, #909AA2 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=ground] {
+  background: linear-gradient(45deg, #909AA2 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=ice] {
+  background: linear-gradient(45deg, #909AA2 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=normal] {
+  background: linear-gradient(45deg, #909AA2 0%, #96A29E 50%, #AAA8A1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=poison] {
+  background: linear-gradient(45deg, #909AA2 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=psychic] {
+  background: linear-gradient(45deg, #909AA2 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=rock] {
+  background: linear-gradient(45deg, #909AA2 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=normal][type2=steel] {
+  background: linear-gradient(45deg, #909AA2 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=normal][type2=water] {
+  background: linear-gradient(45deg, #909AA2 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=bug] {
+  background: linear-gradient(45deg, #AB69C9 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=dark] {
+  background: linear-gradient(45deg, #AB69C9 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=dragon] {
+  background: linear-gradient(45deg, #AB69C9 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=electric] {
+  background: linear-gradient(45deg, #AB69C9 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=fairy] {
+  background: linear-gradient(45deg, #AB69C9 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=fighting] {
+  background: linear-gradient(45deg, #AB69C9 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=fire] {
+  background: linear-gradient(45deg, #AB69C9 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=flying] {
+  background: linear-gradient(45deg, #AB69C9 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=ghost] {
+  background: linear-gradient(45deg, #AB69C9 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=grass] {
+  background: linear-gradient(45deg, #AB69C9 0%, #6996CB 33.33%, #62C099 66.67%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=ground] {
+  background: linear-gradient(45deg, #AB69C9 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=ice] {
+  background: linear-gradient(45deg, #AB69C9 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=normal] {
+  background: linear-gradient(45deg, #AB69C9 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=poison] {
+  background: linear-gradient(45deg, #AB69C9 0%, #C465CD 50%, #DE5ECD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=psychic] {
+  background: linear-gradient(45deg, #AB69C9 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=rock] {
+  background: linear-gradient(45deg, #AB69C9 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=poison][type2=steel] {
+  background: linear-gradient(45deg, #AB69C9 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=poison][type2=water] {
+  background: linear-gradient(45deg, #AB69C9 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=psychic][type2=bug] {
+  background: linear-gradient(45deg, #F97178 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=dark] {
+  background: linear-gradient(45deg, #F97178 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=dragon] {
+  background: linear-gradient(45deg, #F97178 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=electric] {
+  background: linear-gradient(45deg, #F97178 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=fairy] {
+  background: linear-gradient(45deg, #F97178 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=fighting] {
+  background: linear-gradient(45deg, #F97178 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=fire] {
+  background: linear-gradient(45deg, #F97178 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=flying] {
+  background: linear-gradient(45deg, #F97178 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=ghost] {
+  background: linear-gradient(45deg, #F97178 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=grass] {
+  background: linear-gradient(45deg, #F97178 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=ground] {
+  background: linear-gradient(45deg, #F97178 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=ice] {
+  background: linear-gradient(45deg, #F97178 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=normal] {
+  background: linear-gradient(45deg, #F97178 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=poison] {
+  background: linear-gradient(45deg, #F97178 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=psychic] {
+  background: linear-gradient(45deg, #F97178 0%, #FD8987 50%, #FFA69E 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=rock] {
+  background: linear-gradient(45deg, #F97178 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=steel] {
+  background: linear-gradient(45deg, #F97178 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=psychic][type2=water] {
+  background: linear-gradient(45deg, #F97178 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=bug] {
+  background: linear-gradient(45deg, #C8B689 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=dark] {
+  background: linear-gradient(45deg, #C8B689 0%, #5B5365 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=dragon] {
+  background: linear-gradient(45deg, #C8B689 0%, #096CC3 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=electric] {
+  background: linear-gradient(45deg, #C8B689 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=fairy] {
+  background: linear-gradient(45deg, #C8B689 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=fighting] {
+  background: linear-gradient(45deg, #C8B689 0%, #CE406B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=fire] {
+  background: linear-gradient(45deg, #C8B689 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=flying] {
+  background: linear-gradient(45deg, #C8B689 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=ghost] {
+  background: linear-gradient(45deg, #C8B689 0%, #5267AD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=grass] {
+  background: linear-gradient(45deg, #C8B689 0%, #67BB5D 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=ground] {
+  background: linear-gradient(45deg, #C8B689 0%, #DB7948 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=ice] {
+  background: linear-gradient(45deg, #C8B689 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=normal] {
+  background: linear-gradient(45deg, #C8B689 0%, #909AA2 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=poison] {
+  background: linear-gradient(45deg, #C8B689 0%, #AB69C9 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=psychic] {
+  background: linear-gradient(45deg, #C8B689 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=rock] {
+  background: linear-gradient(45deg, #C8B689 0%, #D2C28E 50%, #DBCF95 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=steel] {
+  background: linear-gradient(45deg, #C8B689 0%, #598FA1 100%);
+  color: #263238;
+}
+#PokeHeader[type1=rock][type2=water] {
+  background: linear-gradient(45deg, #C8B689 0%, #4C8FD6 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=bug] {
+  background: linear-gradient(45deg, #598FA1 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=dark] {
+  background: linear-gradient(45deg, #598FA1 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=dragon] {
+  background: linear-gradient(45deg, #598FA1 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=electric] {
+  background: linear-gradient(45deg, #598FA1 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=fairy] {
+  background: linear-gradient(45deg, #598FA1 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=fighting] {
+  background: linear-gradient(45deg, #598FA1 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=fire] {
+  background: linear-gradient(45deg, #598FA1 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=flying] {
+  background: linear-gradient(45deg, #598FA1 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=ghost] {
+  background: linear-gradient(45deg, #598FA1 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=grass] {
+  background: linear-gradient(45deg, #598FA1 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=ground] {
+  background: linear-gradient(45deg, #598FA1 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=ice] {
+  background: linear-gradient(45deg, #598FA1 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=normal] {
+  background: linear-gradient(45deg, #598FA1 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=poison] {
+  background: linear-gradient(45deg, #598FA1 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=psychic] {
+  background: linear-gradient(45deg, #598FA1 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=rock] {
+  background: linear-gradient(45deg, #598FA1 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=steel][type2=steel] {
+  background: linear-gradient(45deg, #598FA1 0%, #5A9FAA 50%, #60AFAC 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=steel][type2=water] {
+  background: linear-gradient(45deg, #598FA1 0%, #4C8FD6 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=bug] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #90BF2B 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=dark] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #5B5365 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=dragon] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #096CC3 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=electric] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #F3D139 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=fairy] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #ED92E8 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=fighting] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #CE406B 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=fire] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #FE9D52 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=flying] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #92AADD 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=ghost] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #5267AD 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=grass] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #67BB5D 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=ground] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #DB7948 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=ice] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #73CEBF 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=normal] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #909AA2 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=poison] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #AB69C9 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=psychic] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #F97178 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=rock] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #C8B689 100%);
+  color: #263238;
+}
+#PokeHeader[type1=water][type2=steel] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #598FA1 100%);
+  color: #FFFFFF;
+}
+#PokeHeader[type1=water][type2=water] {
+  background: linear-gradient(45deg, #4C8FD6 0%, #55B0DD 50%, #7DCADE 100%);
+  color: #FFFFFF;
+}
+
 svg {
   height: 30px;
   max-height: 100%;
