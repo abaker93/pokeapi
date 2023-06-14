@@ -28,3 +28,7 @@ export const formatDexId = (num, dig) => {
 export const getNameByLang = (names, lang) => {
 	return names.filter(f => f.language.name === lang).map(m => m.name)[0]
 }
+
+export const getNumByDex = (nums, dex) => {
+	return nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
+}
