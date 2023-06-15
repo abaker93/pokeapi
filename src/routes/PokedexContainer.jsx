@@ -13,6 +13,7 @@ const PokemonContainer = () => {
 	const [loading, setLoading] = useState(true)
 	const [dex, setDex] = useState('kanto')
 	const [dexName, setDexName] = useState('')
+	const [dexLength, setDexLength] = useState(3)
 	const [loadMore, setLoadMore] = useState({ limit: 20, offset: 0 })
 	const [searchOptions, setSearchOptions] = useState([])
 	const [searchInput, setSearchInput] = useState('')
@@ -27,6 +28,7 @@ const PokemonContainer = () => {
 						id: getNumByDex(poke.pokedex_numbers, dex),
 						name: getNameByLang(poke.names, lang)
 					}])
+					setDexLength(getNumByDex(poke.pokedex_numbers, dex))
 				})
 			})
 			.catch(console.error)
@@ -49,11 +51,12 @@ const PokemonContainer = () => {
 		getPokedex(dex)
 		
 		setTimeout(() => {
-			pokemon.sort((a,b) => a.id - b.id)
+			searchOptions.sort((a,b) => a.id - b.id)
+
 			setLoading(false)
 		}, 300)
 	}, [dex])
-
+	
 	if (loading) {
 		return (
 			<p>Loading... change this later</p>
@@ -70,6 +73,7 @@ const PokemonContainer = () => {
 						setSearchInput={setSearchInput}
 						searchValue={searchValue}
 						setSearchValue={setSearchValue}
+						dexLength={dexLength}
 					/>
 				) : null}
 			</Header>

@@ -6,7 +6,7 @@ import parse from 'autosuggest-highlight/parse';
 import { formatDexId } from '../utilities'
 
 const Search = props => {
-	const { searchOptions, searchInput, setSearchInput, searchValue, setSearchValue } = props
+	const { searchOptions, searchInput, setSearchInput, searchValue, setSearchValue, dexLength } = props
 
 	const filterOptions = (options, { inputValue }) => matchSorter(options, inputValue, {keys: ['id', 'name'], baseSort: (a, b) => (a.id - b.id)})
 
@@ -21,7 +21,6 @@ const Search = props => {
 			value={searchValue ? searchValue : null}
 			onChange={(e, newValue) => setSearchValue(newValue)}
 			isOptionEqualToValue={(option, value) => option.name === value.name || option.id === value.id}
-			open={open}
 			renderInput={params => (
 				<TextField
 					label="Search by name or #"
@@ -30,7 +29,7 @@ const Search = props => {
 				/>
 			)}
 			renderOption={(props, option, { inputValue }) => {
-				const id = formatDexId(option.id, 3)
+				const id = formatDexId(option.id, dexLength)
 
 				const nameMatches = match(option.name, inputValue, { insideWords: true, findAllOccurrences: true })
 				const nameParts = parse(option.name, nameMatches)

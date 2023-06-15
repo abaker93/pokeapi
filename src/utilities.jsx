@@ -1,27 +1,38 @@
 export const formatDexId = (num, dig) => {
-	switch (dig) {
-		case 3 :
-			if (num < 10) {
-				return '00' + num.toString()
-			} else if (num < 100) {
-				return '0' + num.toString()
-			} else {
-				return num.toString()
-			}
-			break
-		case 4 :
-			if (num < 10) {
-				return '000' + num.toString()
-			} else if (num < 100) {
-				return '00' + num.toString()
-			} else if (num < 1000) {
-				return '0' + num.toString()
-			} else {
-				return num.toString()
-			}
-			break
-		default:
+	if (dig < 10) {
+
+		return num.toString()
+
+	} else if (dig < 100) {
+
+		if (num < 10) {
+			return '0' + num.toString()
+		} else {
 			return num.toString()
+		}
+
+	} else if (dig < 1000) {
+
+		if (num < 10) {
+			return '00' + num.toString()
+		} else if (num < 100) {
+			return '0' + num.toString()
+		} else {
+			return num.toString()
+		}
+
+	} else {
+
+		if (num < 10) {
+			return '000' + num.toString()
+		} else if (num < 100) {
+			return '00' + num.toString()
+		} else if (num < 1000) {
+			return '0' + num.toString()
+		} else {
+			return num.toString()
+		}
+
 	}
 }
 
