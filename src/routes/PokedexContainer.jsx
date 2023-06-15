@@ -20,17 +20,57 @@ const PokemonContainer = () => {
 	const [searchValue, setSearchValue] = useState('')
 	const [pokemon, setPokemon] = useState([])
 
-	const getPokemonSpecies = urls => {
+	const getPokemon = arr => {
+		const sliceArr = arr.slice(loadMore.offset, (loadMore.offset + loadMore.limit))
+		let pokemon = []
+
+		sliceArr.forEach(obj => {
+			P.getResource(obj.url)
+				.then(species => {
+
+					P.getResource(species.varieties.filter(f => f.is_default)[0].pokemon.url)
+						.then(poke => {
+
+							pokemon = [...pokemon, {
+								id: getNumByDex(species.pokedex_numbers, dex),
+								name: getNameByLang(species.names, lang),
+								sprite: poke.sprites.other["official-artwork"].front_default,
+								types: [
+									{slot: 1, type: poke.types[0].type.name},
+									{slot: 2, type: poke.types.length > 1 ? poke.types[1].type.name : null}
+								]
+							}]
+
+							console.log(pokemon)
+						})
+				})
+			
+		})
+
+		setLoadMore({ limit: loadMore.limit, offset: loadMore.offset + loadMore.limit})
+	}
+
+	const getSearchOptions = urls => {
 		P.getResource(urls)
 			.then(data => {
+				let optArr = []
+
 				data.forEach(poke => {
-					setSearchOptions(opt => [...opt, {
+					optArr = [...optArr, {
 						id: getNumByDex(poke.pokedex_numbers, dex),
-						name: getNameByLang(poke.names, lang)
-					}])
+						name: getNameByLang(poke.names, lang),
+						url: `/api/v2/pokemon-species/${poke.id}/`
+					}]
 					setDexLength(getNumByDex(poke.pokedex_numbers, dex))
 				})
+
+				return optArr
 			})
+			.then(data => {
+				setSearchOptions(data)
+				return data
+			})
+			.then(data => getPokemon(data))
 			.catch(console.error)
 	}
 
@@ -39,24 +79,24 @@ const PokemonContainer = () => {
 		P.getPokedexByName(dex)
 			.then(data => {
 				setDexName(getNameByLang(data.names, lang))
-				
+				return data
+			})
+			.then(data => {
 				let urlArr = []
 				data.pokemon_entries.map(p => urlArr.push(p.pokemon_species.url))
-				getPokemonSpecies(urlArr)
+				
+				getSearchOptions(urlArr)
 			})
 			.catch(console.error)
 	}
 
 	useEffect(() => {
 		getPokedex(dex)
-		
-		setTimeout(() => {
-			searchOptions.sort((a,b) => a.id - b.id)
-
-			setLoading(false)
-		}, 300)
+		setTimeout(() => setLoading(false), 300)
 	}, [dex])
-	
+
+	console.log(loadMore.limit, loadMore.offset)
+
 	if (loading) {
 		return (
 			<p>Loading... change this later</p>
