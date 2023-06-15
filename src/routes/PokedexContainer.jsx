@@ -1,7 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
-import { getNameByLang, getNumByDex } from '../utilities';
+
+import Search from '../components/Search'
+import { getNameByLang, getNumByDex } from '../utilities'
+import { Box, Container, Paper, Typography } from '@mui/material'
 
 const P = new Pokedex()
 
@@ -13,15 +16,18 @@ const PokemonContainer = () => {
 	const [loadMore, setLoadMore] = useState({ limit: 20, offset: 0 })
 	const [searchOptions, setSearchOptions] = useState([])
 	const [searchInput, setSearchInput] = useState('')
+	const [searchValue, setSearchValue] = useState('')
 	const [pokemon, setPokemon] = useState([])
 
-	const getPokemonSpecies = url => {
-		P.getResource(url)
+	const getPokemonSpecies = urls => {
+		P.getResource(urls)
 			.then(data => {
-				setPokemon(poke => [...poke, {
-					id: getNumByDex(data.pokedex_numbers, dex),
-					name: getNameByLang(data.names, lang)
-				}])
+				data.forEach(poke => {
+					setSearchOptions(opt => [...opt, {
+						id: getNumByDex(poke.pokedex_numbers, dex),
+						name: getNameByLang(poke.names, lang)
+					}])
+				})
 			})
 			.catch(console.error)
 	}
@@ -31,30 +37,54 @@ const PokemonContainer = () => {
 		P.getPokedexByName(dex)
 			.then(data => {
 				setDexName(getNameByLang(data.names, lang))
-
-				data.pokemon_entries.map(p => getPokemonSpecies(p.pokemon_species.url))
-				setLoading(false)
-				// return data
-			})
-			// .then(data => {
 				
-			// })
+				let urlArr = []
+				data.pokemon_entries.map(p => urlArr.push(p.pokemon_species.url))
+				getPokemonSpecies(urlArr)
+			})
 			.catch(console.error)
 	}
 
 	useEffect(() => {
 		getPokedex(dex)
+		
+		setTimeout(() => {
+			pokemon.sort((a,b) => a.id - b.id)
+			setLoading(false)
+		}, 300)
 	}, [dex])
 
-	pokemon.sort((a,b) => a.id - b.id)
-
-	console.log(loading)
+	if (loading) {
+		return (
+			<p>Loading... change this later</p>
+		)
+	}
 
 	return (
-		<>
-			<h1>Pokedex Container</h1>
-			{console.log(pokemon)}
-		</>
+		<Container maxWidth="xl" sx={{ mt: 2 }}>
+			<Header name={dexName}>
+				{searchOptions.length > 0 ? (
+					<Search
+						searchOptions={searchOptions}
+						searchInput={searchInput}
+						setSearchInput={setSearchInput}
+						searchValue={searchValue}
+						setSearchValue={setSearchValue}
+					/>
+				) : null}
+			</Header>
+		</Container>
+	)
+}
+
+const Header = props => {
+	return (
+		<Paper variant="outlined" sx={{ py: 2, px: 3 }}>
+			<Box mb={3}>
+				<Typography variant="h3" component="h1">{props.name} Pokedex</Typography>
+				{props.children}
+			</Box>
+		</Paper>
 	)
 }
 
