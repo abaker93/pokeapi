@@ -124,10 +124,6 @@ const Header = props => {
 const PokedexCards = props => {
 	const { arr, dex, dexLength, lang, loadMore, setLoadMore, pokemon, setPokemon } = props
 
-	// TODO: 	Everytime the search box is emptied this loads again with an additional 20 poke.
-	// todo				Would like this to show whatever was loaded previously.
-	// todo				I'll think through this logic later.
-
 	const getPokemon = arr => {
 		const sliceArr = arr.slice(loadMore.offset, (loadMore.offset + loadMore.limit))
 
@@ -160,8 +156,7 @@ const PokedexCards = props => {
 	const handleClick = e => getPokemon(arr)
 
 	useEffect(() => {
-		setLoadMore({ limit: 20, offset: 0 })
-		getPokemon(arr)
+		pokemon.length === 0 ? getPokemon(arr) : null
 	}, [arr])
 
 	return (
@@ -178,11 +173,13 @@ const PokedexCards = props => {
 					/>
 				))}
 			</Box>
-			<Box>
-				<Button variant="contained" onClick={e => handleClick()}>
-					Load More
-				</Button>
-			</Box>
+			{pokemon.length < dexLength ? (
+				<Box>
+					<Button variant="contained" onClick={e => handleClick()}>
+						Load More
+					</Button>
+				</Box>
+			) : null}
 		</>
 	)
 }
