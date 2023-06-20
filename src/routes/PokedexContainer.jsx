@@ -1,54 +1,27 @@
 import { useEffect, useState } from 'react'
 import { useOutletContext } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
+import { matchSorter } from 'match-sorter'
+
+import { Box, Button, Card, CardContent, Chip, Container, Paper, Typography } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
 
 import Search from '../components/Search'
-import { getNameByLang, getNumByDex } from '../utilities'
-import { Box, Container, Paper, Typography } from '@mui/material'
+import { formatDexId, getNameByLang, getNumByDex } from '../utilities'
 
 const P = new Pokedex()
 
-const PokemonContainer = () => {
+const PokedexContainer = () => {
 	const lang = useOutletContext()
-	const [loading, setLoading] = useState(true)
+	const [loading, setLoading] = useState(false)
 	const [dex, setDex] = useState('kanto')
 	const [dexName, setDexName] = useState('')
 	const [dexLength, setDexLength] = useState(3)
-	const [loadMore, setLoadMore] = useState({ limit: 20, offset: 0 })
 	const [searchOptions, setSearchOptions] = useState([])
 	const [searchInput, setSearchInput] = useState('')
 	const [searchValue, setSearchValue] = useState('')
+	const [loadMore, setLoadMore] = useState({ limit: 20, offset: 0 })
 	const [pokemon, setPokemon] = useState([])
-
-	const getPokemon = arr => {
-		const sliceArr = arr.slice(loadMore.offset, (loadMore.offset + loadMore.limit))
-		let pokemon = []
-
-		sliceArr.forEach(obj => {
-			P.getResource(obj.url)
-				.then(species => {
-
-					P.getResource(species.varieties.filter(f => f.is_default)[0].pokemon.url)
-						.then(poke => {
-
-							pokemon = [...pokemon, {
-								id: getNumByDex(species.pokedex_numbers, dex),
-								name: getNameByLang(species.names, lang),
-								sprite: poke.sprites.other["official-artwork"].front_default,
-								types: [
-									{slot: 1, type: poke.types[0].type.name},
-									{slot: 2, type: poke.types.length > 1 ? poke.types[1].type.name : null}
-								]
-							}]
-
-							console.log(pokemon)
-						})
-				})
-			
-		})
-
-		setLoadMore({ limit: loadMore.limit, offset: loadMore.offset + loadMore.limit})
-	}
 
 	const getSearchOptions = urls => {
 		P.getResource(urls)
@@ -70,12 +43,10 @@ const PokemonContainer = () => {
 				setSearchOptions(data)
 				return data
 			})
-			.then(data => getPokemon(data))
 			.catch(console.error)
 	}
 
 	const getPokedex = dex => {
-		setLoading(true)
 		P.getPokedexByName(dex)
 			.then(data => {
 				setDexName(getNameByLang(data.names, lang))
@@ -84,18 +55,16 @@ const PokemonContainer = () => {
 			.then(data => {
 				let urlArr = []
 				data.pokemon_entries.map(p => urlArr.push(p.pokemon_species.url))
-				
 				getSearchOptions(urlArr)
 			})
 			.catch(console.error)
 	}
 
 	useEffect(() => {
+		setLoadMore({ limit: 20, offset: 0 })
 		getPokedex(dex)
-		setTimeout(() => setLoading(false), 300)
+		// setTimeout(() => setLoading(false), 300)
 	}, [dex])
-
-	console.log(loadMore.limit, loadMore.offset)
 
 	if (loading) {
 		return (
@@ -117,6 +86,26 @@ const PokemonContainer = () => {
 					/>
 				) : null}
 			</Header>
+
+			{searchInput
+				? (
+					<SearchPokedexCards
+						arr={matchSorter(searchOptions, searchInput, {keys: ['id', 'name']})}
+						dex={dex}
+						dexLength={dexLength}
+						lang={lang}
+					/>
+				) : (
+					<PokedexCards
+						arr={searchOptions}
+						dex={dex}
+						dexLength={dexLength}
+						lang={lang}
+						loadMore={loadMore} setLoadMore={setLoadMore}
+						pokemon={pokemon} setPokemon={setPokemon}
+					/>
+				)
+			}
 		</Container>
 	)
 }
@@ -132,4 +121,163 @@ const Header = props => {
 	)
 }
 
-export default PokemonContainer
+const PokedexCards = props => {
+	const { arr, dex, dexLength, lang, loadMore, setLoadMore, pokemon, setPokemon } = props
+
+	// TODO: 	Everytime the search box is emptied this loads again with an additional 20 poke.
+	// todo				Would like this to show whatever was loaded previously.
+	// todo				I'll think through this logic later.
+
+	const getPokemon = arr => {
+		const sliceArr = arr.slice(loadMore.offset, (loadMore.offset + loadMore.limit))
+
+		sliceArr.forEach(obj => {
+			P.getResource(obj.url)
+				.then(species => {
+
+					P.getResource(species.varieties.filter(f => f.is_default)[0].pokemon.url)
+						.then(poke => {
+
+							setPokemon(val => [...val, {
+								id: getNumByDex(species.pokedex_numbers, dex),
+								name: getNameByLang(species.names, lang),
+								sprite: poke.sprites.other["official-artwork"].front_default,
+								types: [
+									{slot: 1, type: poke.types[0].type.name},
+									{slot: 2, type: poke.types.length > 1 ? poke.types[1].type.name : null}
+								]
+							}])
+
+						})
+
+				})
+			
+		})
+
+		setLoadMore({ limit: loadMore.limit, offset: loadMore.offset + loadMore.limit})
+	}
+
+	const handleClick = e => getPokemon(arr)
+
+	useEffect(() => {
+		setLoadMore({ limit: 20, offset: 0 })
+		getPokemon(arr)
+	}, [arr])
+
+	return (
+		<>
+			<Box>
+				{pokemon.sort((a,b) => a.id - b.id).map(m => (
+					<PokedexCard
+						key={m.id}
+						id={m.id}
+						name={m.name}
+						sprite={m.sprite}
+						types={m.types}
+						dexLength={dexLength}
+					/>
+				))}
+			</Box>
+			<Box>
+				<Button variant="contained" onClick={e => handleClick()}>
+					Load More
+				</Button>
+			</Box>
+		</>
+	)
+}
+
+const SearchPokedexCards = props => {
+	const [pokemon, setPokemon] = useState([])
+
+	const getPokemon = arr => {
+		setPokemon([])
+		
+		arr.forEach(obj => {
+			P.getResource(obj.url)
+				.then(species => {
+					
+					P.getResource(species.varieties.filter(f => f.is_default)[0].pokemon.url)
+						.then(poke => {
+							
+							setPokemon(pokemon => [...pokemon, {
+								id: getNumByDex(species.pokedex_numbers, props.dex),
+								name: getNameByLang(species.names, props.lang),
+								sprite: poke.sprites.other["official-artwork"].front_default,
+								types: [
+									{slot: 1, type: poke.types[0].type.name},
+									{slot: 2, type: poke.types.length > 1 ? poke.types[1].type.name : null}
+								]
+							}])
+						})
+				})
+		})
+	}
+
+	useEffect(() => {
+		const filterPokemon = async () => {
+			await setPokemon([])
+			getPokemon(props.arr)
+		}
+
+		filterPokemon()
+	}, [props.arr])
+
+	return (
+		<Box>
+			{pokemon.sort((a,b) => a.id - b.id).map(m => (
+				<PokedexCard
+					key={m.id}
+					id={m.id}
+					name={m.name}
+					sprite={m.sprite}
+					types={m.types}
+					dexLength={props.dexLength}
+				/>
+			))}
+		</Box>
+	)
+}
+
+const PokedexCard = props => {
+	return(
+		<Card
+			type1={props.types[0].type}
+			type2={
+				props.types[1].type !== null
+					? props.types[1].type
+					: props.types[0].type
+			}
+		>
+			<CardContent>
+				<Grid container columnSpacing={2}>
+					<Grid xs={4}>
+						<img src={props.sprite} alt={props.name} style={{ maxWidth: "100%" }} />
+					</Grid>
+					<Grid xs={8}>
+						<Box>
+							<Typography variant="h6" component="h2" fontWeight="medium">
+								<Typography component="span">
+									<Typography component="span">
+										No.
+									</Typography>
+									{formatDexId(props.id, props.dexLength)}
+								</Typography>
+								{props.name}
+							</Typography>
+						</Box>
+						<Box>
+							<Chip size="xsmall" label={props.types[0].type} />
+							{props.types[1].type !== null
+								? <Chip size="xsmall" label={props.types[1].type} />
+								: null
+							}
+						</Box>
+					</Grid>
+				</Grid>
+			</CardContent>
+		</Card>
+	)
+}
+
+export default PokedexContainer

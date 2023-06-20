@@ -1,8 +1,8 @@
 import { Autocomplete, Box, TextField, Typography } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Unstable_Grid2'
 import { matchSorter } from 'match-sorter'
-import match from 'autosuggest-highlight/match';
-import parse from 'autosuggest-highlight/parse';
+import match from 'autosuggest-highlight/match'
+import parse from 'autosuggest-highlight/parse'
 import { formatDexId } from '../utilities'
 
 const Search = props => {
@@ -13,6 +13,7 @@ const Search = props => {
 	return (
 		<Autocomplete
 			id="pokedex-search"
+			freeSolo
 			options={searchOptions}
 			getOptionLabel={option => option.name}
 			filterOptions={filterOptions}
@@ -30,7 +31,6 @@ const Search = props => {
 			)}
 			renderOption={(props, option, { inputValue }) => {
 				const id = formatDexId(option.id, dexLength)
-
 				const nameMatches = match(option.name, inputValue, { insideWords: true, findAllOccurrences: true })
 				const nameParts = parse(option.name, nameMatches)
 				const idMatches = match(id, inputValue, { insideWords: true, findAllOccurrences: true })
