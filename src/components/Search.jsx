@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 import { matchSorter } from 'match-sorter'
 import match from 'autosuggest-highlight/match'
 import parse from 'autosuggest-highlight/parse'
-import { formatDexId } from '../utilities'
+import { formatDexId } from '../utilities/utilities'
 
 const Search = props => {
 	const { searchOptions, searchInput, setSearchInput, searchValue, setSearchValue, dexLength } = props

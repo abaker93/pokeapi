@@ -8,7 +8,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 
 import Filter from '../components/Filter'
 import Search from '../components/Search'
-import { formatDexId, getNameByLang, getNumByDex } from '../utilities'
+import { formatDexId, getNameByLang, getNumByDex } from '../utilities/utilities'
 
 
 const P = new Pokedex()
