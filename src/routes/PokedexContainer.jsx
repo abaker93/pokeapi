@@ -3,12 +3,13 @@ import { useOutletContext } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 import { matchSorter } from 'match-sorter'
 
-import { Box, Button, Container, Typography } from '@mui/material'
+import { Box, Button, Container } from '@mui/material'
 
 import Filter from '../components/Filter'
-import Search from '../components/Search'
 import Card from '../components/pokedex/Card'
+import Header from '../components/pokedex/Header'
 import { getNameByLang, getNumByDex } from '../utilities/utilities'
+
 
 const P = new Pokedex()
 
@@ -77,18 +78,15 @@ const PokedexContainer = () => {
 	return (
 		<>
 			<Filter />
-			<Header name={dexName}>
-				{searchOptions.length > 0 ? (
-					<Search
-						searchOptions={searchOptions}
-						searchInput={searchInput}
-						setSearchInput={setSearchInput}
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-						dexLength={dexLength}
-					/>
-				) : null}
-			</Header>
+			<Header
+				dexLength={dexLength}
+				dexName={dexName}
+				searchOptions={searchOptions}
+				searchInput={searchInput}
+				setSearchInput={setSearchInput}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+			/>
 			{searchInput
 				? (
 					<SearchPokedexCards
@@ -109,17 +107,6 @@ const PokedexContainer = () => {
 				)
 			}
 		</>
-	)
-}
-
-const Header = props => {
-	return (
-		<Container maxWidth="xl" sx={{ mt: 2 }}>
-			<Box mb={3}>
-				<Typography variant="h3" component="h1">{props.name} Pokédex</Typography>
-				{props.children}
-			</Box>
-		</Container>
 	)
 }
 
@@ -237,18 +224,20 @@ const SearchPokedexCards = props => {
 	}, [props.arr])
 
 	return (
-		<Box>
-			{pokemon.sort((a,b) => a.id - b.id).map(m => (
-				<Card
-					key={m.id}
-					id={m.id}
-					name={m.name}
-					sprite={m.sprite}
-					types={m.types}
-					dexLength={props.dexLength}
-				/>
-			))}
-		</Box>
+		<Container maxWidth="xl" sx={{ mt: 2 }}>
+			<Box>
+				{pokemon.sort((a,b) => a.id - b.id).map(m => (
+					<Card
+						key={m.id}
+						id={m.id}
+						name={m.name}
+						sprite={m.sprite}
+						types={m.types}
+						dexLength={props.dexLength}
+					/>
+				))}
+			</Box>
+		</Container>
 	)
 }
 

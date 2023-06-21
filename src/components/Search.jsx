@@ -24,7 +24,7 @@ const Search = props => {
 			isOptionEqualToValue={(option, value) => option.name === value.name || option.id === value.id}
 			renderInput={params => (
 				<TextField
-					label="Search by name or #"
+					label="Search for Pokémon by name or Pokedéx number"
 					variant="outlined"
 					{...params}
 				/>

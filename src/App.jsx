@@ -33,10 +33,10 @@ const router = createBrowserRouter([
 
 const App = () => {
 	return (
-		<>
+		<ColorModeProvider>
 			<CssBaseline />
 			<RouterProvider router={router} />
-		</>
+		</ColorModeProvider>
 	)
 }
 
