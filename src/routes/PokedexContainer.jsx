@@ -3,13 +3,12 @@ import { useOutletContext } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 import { matchSorter } from 'match-sorter'
 
-import { Box, Button, Card, CardContent, Chip, Container, Paper, Typography } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Button, Container, Typography } from '@mui/material'
 
 import Filter from '../components/Filter'
 import Search from '../components/Search'
-import { formatDexId, getNameByLang, getNumByDex } from '../utilities/utilities'
-
+import Card from '../components/pokedex/Card'
+import { getNameByLang, getNumByDex } from '../utilities/utilities'
 
 const P = new Pokedex()
 
@@ -78,49 +77,49 @@ const PokedexContainer = () => {
 	return (
 		<>
 			<Filter />
-			<Container maxWidth="xl" sx={{ mt: 2 }}>
-				<Header name={dexName}>
-					{searchOptions.length > 0 ? (
-						<Search
-							searchOptions={searchOptions}
-							searchInput={searchInput}
-							setSearchInput={setSearchInput}
-							searchValue={searchValue}
-							setSearchValue={setSearchValue}
-							dexLength={dexLength}
-						/>
-					) : null}
-				</Header>
-				{searchInput
-					? (
-						<SearchPokedexCards
-							arr={matchSorter(searchOptions, searchInput, {keys: ['id', 'name']})}
-							dex={dex}
-							dexLength={dexLength}
-							lang={lang}
-						/>
-					) : (
-						<PokedexCards
-							arr={searchOptions}
-							dex={dex}
-							dexLength={dexLength}
-							lang={lang}
-							loadMore={loadMore} setLoadMore={setLoadMore}
-							pokemon={pokemon} setPokemon={setPokemon}
-						/>
-					)
-				}
-			</Container>
+			<Header name={dexName}>
+				{searchOptions.length > 0 ? (
+					<Search
+						searchOptions={searchOptions}
+						searchInput={searchInput}
+						setSearchInput={setSearchInput}
+						searchValue={searchValue}
+						setSearchValue={setSearchValue}
+						dexLength={dexLength}
+					/>
+				) : null}
+			</Header>
+			{searchInput
+				? (
+					<SearchPokedexCards
+						arr={matchSorter(searchOptions, searchInput, {keys: ['id', 'name']})}
+						dex={dex}
+						dexLength={dexLength}
+						lang={lang}
+					/>
+				) : (
+					<PokedexCards
+						arr={searchOptions}
+						dex={dex}
+						dexLength={dexLength}
+						lang={lang}
+						loadMore={loadMore} setLoadMore={setLoadMore}
+						pokemon={pokemon} setPokemon={setPokemon}
+					/>
+				)
+			}
 		</>
 	)
 }
 
 const Header = props => {
 	return (
-		<Box mb={3}>
-			<Typography variant="h3" component="h1">{props.name} Pokédex</Typography>
-			{props.children}
-		</Box>
+		<Container maxWidth="xl" sx={{ mt: 2 }}>
+			<Box mb={3}>
+				<Typography variant="h3" component="h1">{props.name} Pokédex</Typography>
+				{props.children}
+			</Box>
+		</Container>
 	)
 }
 
@@ -156,8 +155,6 @@ const PokedexCards = props => {
 		setLoadMore({ limit: loadMore.limit, offset: loadMore.offset + loadMore.limit})
 	}
 
-	const handleClick = e => getPokemon(arr)
-
 	useEffect(() => {
 		if (pokemon.length === 0) {
 			setLoadMore({ limit: 20, offset: 0 })
@@ -167,21 +164,34 @@ const PokedexCards = props => {
 
 	return (
 		<>
-			<Box>
-				{pokemon.sort((a,b) => a.id - b.id).map(m => (
-					<PokedexCard
-						key={m.id}
-						id={m.id}
-						name={m.name}
-						sprite={m.sprite}
-						types={m.types}
-						dexLength={dexLength}
-					/>
-				))}
-			</Box>
-			{pokemon.length < dexLength ? (
+			<Container maxWidth="xl" sx={{ mt: 2 }}>
 				<Box>
-					<Button variant="contained" onClick={e => handleClick()}>
+					{pokemon.sort((a,b) => a.id - b.id).map(m => (
+						<Card
+							key={m.id}
+							id={m.id}
+							name={m.name}
+							sprite={m.sprite}
+							types={m.types}
+							dexLength={dexLength}
+						/>
+					))}
+				</Box>
+			</Container>
+			{pokemon.length < dexLength ? (
+				<Box
+					sx={{
+						position: 'sticky',
+						bottom: 0,
+						py: 2,
+						display: 'flex',
+						justifyContent: 'center',
+						background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
+						backdropFilter: 'blur(3px)',
+						borderTop: '0.5px solid rgba(38, 50, 56, 0.2)',
+					}}
+				>
+					<Button variant="contained" onClick={e => getPokemon(arr)}>
 						Load More
 					</Button>
 				</Box>
@@ -229,7 +239,7 @@ const SearchPokedexCards = props => {
 	return (
 		<Box>
 			{pokemon.sort((a,b) => a.id - b.id).map(m => (
-				<PokedexCard
+				<Card
 					key={m.id}
 					id={m.id}
 					name={m.name}
@@ -239,47 +249,6 @@ const SearchPokedexCards = props => {
 				/>
 			))}
 		</Box>
-	)
-}
-
-const PokedexCard = props => {
-	return(
-		<Card
-			type1={props.types[0].type}
-			type2={
-				props.types[1].type !== null
-					? props.types[1].type
-					: props.types[0].type
-			}
-		>
-			<CardContent>
-				<Grid container columnSpacing={2}>
-					<Grid xs={4}>
-						<img src={props.sprite} alt={props.name} style={{ maxWidth: "100%" }} />
-					</Grid>
-					<Grid xs={8}>
-						<Box>
-							<Typography variant="h6" component="h2" fontWeight="medium">
-								<Typography component="span">
-									<Typography component="span">
-										No.
-									</Typography>
-									{formatDexId(props.id, props.dexLength)}
-								</Typography>
-								{props.name}
-							</Typography>
-						</Box>
-						<Box>
-							<Chip size="xsmall" label={props.types[0].type} />
-							{props.types[1].type !== null
-								? <Chip size="xsmall" label={props.types[1].type} />
-								: null
-							}
-						</Box>
-					</Grid>
-				</Grid>
-			</CardContent>
-		</Card>
 	)
 }
 

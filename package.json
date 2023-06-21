@@ -6,38 +6,29 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "sass": "sass --watch src/sass/main.scss src/main.css"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.11.16",
-    "@mui/material": "^5.13.5",
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "latest",
+    "@mui/material": "latest",
     "autosuggest-highlight": "^3.3.4",
-    "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "pokedex-promise-v2": "^4.1.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.12.1",
-    "sass": "^1.63.3",
-    "sort-by": "^1.2.0"
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "^6.13.0"
   },
   "devDependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@rollup/plugin-commonjs": "^21.1.0",
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
-    "@vitejs/plugin-react": "^4.0.0",
-    "eslint": "^8.38.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.3.4",
+    "@vitejs/plugin-react": "latest",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-polyfill-node": "^0.10.2",
-    "vite": "^4.3.9"
+    "sass": "^1.62.1",
+    "vite": "latest"
   }
 }

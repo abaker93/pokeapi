@@ -1,5 +1,7 @@
-import { CssBaseline } from "@mui/material"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
+
+import { ColorModeProvider } from "./utilities/context"
+import { CssBaseline } from '@mui/material'
 
 import Error from './routes/Error'
 import Home from './routes/Home'
@@ -7,6 +9,8 @@ import Notes from './routes/Notes'
 import PokedexContainer from './routes/PokedexContainer'
 import Root from './routes/Root'
 import Pokemon from './routes/Pokemon'
+
+
 
 const router = createBrowserRouter([
 	{
