@@ -61,9 +61,10 @@ const PokedexContainer = () => {
 	}
 
 	useEffect(() => {
+		setLoading(true)
 		setLoadMore({ limit: 20, offset: 0 })
 		getPokedex(dex)
-		// setTimeout(() => setLoading(false), 300)
+		setLoading(false)
 	}, [dex])
 
 	if (loading) {
@@ -156,7 +157,10 @@ const PokedexCards = props => {
 	const handleClick = e => getPokemon(arr)
 
 	useEffect(() => {
-		pokemon.length === 0 ? getPokemon(arr) : null
+		if (pokemon.length === 0) {
+			setLoadMore({ limit: 20, offset: 0 })
+			getPokemon(arr)
+		}
 	}, [arr])
 
 	return (
