@@ -7,30 +7,28 @@ import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
 
 const Header = props => {
 	return (
-		<AppBar position="sticky" color="transparent" enableColorOnDark>
-			<Container>
-				<Toolbar>
-					<Box sx={{ mr: 'auto' }}>
-						<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
-							<MenuSharpIcon />
-						</Button>
-						<IconButton aria-label="logo" color="error">
-							<AdjustSharpIcon />
-						</IconButton>
-					</Box>
-					<Box>
-						<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
-							<SearchSharpIcon />
-						</Button>
-						<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
-							<DarkModeSharpIcon />
-						</Button>
-						<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
-							<SettingsSharpIcon />
-						</Button>
-					</Box>
-				</Toolbar>
-			</Container>
+		<AppBar position="sticky" color="transparent" enableColorOnDark sx={{ background: "#FFFFFF", zIndex: 2000 }}>
+			<Toolbar>
+				<Box sx={{ mr: 'auto' }}>
+					<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
+						<MenuSharpIcon />
+					</Button>
+					<IconButton aria-label="logo" color="error">
+						<AdjustSharpIcon />
+					</IconButton>
+				</Box>
+				<Box>
+					<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
+						<SearchSharpIcon />
+					</Button>
+					<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5, mr: 1 }}>
+						<DarkModeSharpIcon />
+					</Button>
+					<Button variant="outlined" size="small" sx={{ minWidth: "auto", px: 0.5 }}>
+						<SettingsSharpIcon />
+					</Button>
+				</Box>
+			</Toolbar>
 		</AppBar>
 	)
 }

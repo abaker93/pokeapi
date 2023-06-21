@@ -6,8 +6,10 @@ import { matchSorter } from 'match-sorter'
 import { Box, Button, Card, CardContent, Chip, Container, Paper, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
+import Filter from '../components/Filter'
 import Search from '../components/Search'
 import { formatDexId, getNameByLang, getNumByDex } from '../utilities'
+
 
 const P = new Pokedex()
 
@@ -74,51 +76,51 @@ const PokedexContainer = () => {
 	}
 
 	return (
-		<Container maxWidth="xl" sx={{ mt: 2 }}>
-			<Header name={dexName}>
-				{searchOptions.length > 0 ? (
-					<Search
-						searchOptions={searchOptions}
-						searchInput={searchInput}
-						setSearchInput={setSearchInput}
-						searchValue={searchValue}
-						setSearchValue={setSearchValue}
-						dexLength={dexLength}
-					/>
-				) : null}
-			</Header>
-
-			{searchInput
-				? (
-					<SearchPokedexCards
-						arr={matchSorter(searchOptions, searchInput, {keys: ['id', 'name']})}
-						dex={dex}
-						dexLength={dexLength}
-						lang={lang}
-					/>
-				) : (
-					<PokedexCards
-						arr={searchOptions}
-						dex={dex}
-						dexLength={dexLength}
-						lang={lang}
-						loadMore={loadMore} setLoadMore={setLoadMore}
-						pokemon={pokemon} setPokemon={setPokemon}
-					/>
-				)
-			}
-		</Container>
+		<>
+			<Filter />
+			<Container maxWidth="xl" sx={{ mt: 2 }}>
+				<Header name={dexName}>
+					{searchOptions.length > 0 ? (
+						<Search
+							searchOptions={searchOptions}
+							searchInput={searchInput}
+							setSearchInput={setSearchInput}
+							searchValue={searchValue}
+							setSearchValue={setSearchValue}
+							dexLength={dexLength}
+						/>
+					) : null}
+				</Header>
+				{searchInput
+					? (
+						<SearchPokedexCards
+							arr={matchSorter(searchOptions, searchInput, {keys: ['id', 'name']})}
+							dex={dex}
+							dexLength={dexLength}
+							lang={lang}
+						/>
+					) : (
+						<PokedexCards
+							arr={searchOptions}
+							dex={dex}
+							dexLength={dexLength}
+							lang={lang}
+							loadMore={loadMore} setLoadMore={setLoadMore}
+							pokemon={pokemon} setPokemon={setPokemon}
+						/>
+					)
+				}
+			</Container>
+		</>
 	)
 }
 
 const Header = props => {
 	return (
-		<Paper variant="outlined" sx={{ py: 2, px: 3 }}>
-			<Box mb={3}>
-				<Typography variant="h3" component="h1">{props.name} Pokedex</Typography>
-				{props.children}
-			</Box>
-		</Paper>
+		<Box mb={3}>
+			<Typography variant="h3" component="h1">{props.name} Pokédex</Typography>
+			{props.children}
+		</Box>
 	)
 }
 
