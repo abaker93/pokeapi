@@ -1,12 +1,29 @@
-import { Box, Card as MUICard, CardActionArea, CardContent, CardMedia, Chip, Typography } from "@mui/material"
-import Grid from '@mui/material/Unstable_Grid2';
+import { Box, Card as MuiCard, CardActionArea, CardContent, CardMedia, Chip, Typography, makeStyles } from "@mui/material"
+import styled from "@emotion/styled"
 import { formatDexId } from "../../utilities/utilities"
-import { gray, text } from "../../utilities/colors";
+import { gray } from "../../utilities/colors"
+
+const PokedexCard = styled(MuiCard)(() => ({
+	overflow: 'visible',
+	marginBottom: 48,
+	backgroundColor: gray[100],
+	'& .MuiCardActionArea-root': {
+		display: 'flex',
+		justifyContent: 'flex-end',
+	},
+	'& .MuiCardMedia-media': {
+		width: 120,
+		maxWidth: '100%',
+		position: 'absolute',
+		top: '-20px',
+		left: '-16px',
+	},
+}))
 
 const Card = props => {
-	return(
-		<MUICard
-			variant="pokedex"
+	return (
+		<PokedexCard
+			// variant="pokedex"
 			type1={props.types[0].type}
 			type2={
 				props.types[1].type !== null
@@ -14,18 +31,11 @@ const Card = props => {
 					: props.types[0].type
 			}
 		>
-			<CardActionArea sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+			<CardActionArea>
 				<CardMedia
 					component="img"
 					image={props.sprite}
 					alt={`${props.name} official artwork`}
-					sx={{
-						width: '120px',
-						maxWidth: '100%',
-						position: 'absolute',
-						top: '-20px',
-						left: '-16px',
-					}}
 				/>
 				<CardContent sx={{ width: 'calc(100% - 100px)' }}>
 					<Box sx={{ mb: 0.5 }}>
@@ -48,7 +58,7 @@ const Card = props => {
 					</Box>
 				</CardContent>
 			</CardActionArea>
-		</MUICard>
+		</PokedexCard>
 	)
 }
 

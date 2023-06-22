@@ -16,7 +16,7 @@ const P = new Pokedex()
 const PokedexContainer = () => {
 	const lang = useOutletContext()
 	const [loading, setLoading] = useState(false)
-	const [dex, setDex] = useState('kanto')
+	const [dex, setDex] = useState('national')
 	const [dexName, setDexName] = useState('')
 	const [dexLength, setDexLength] = useState(3)
 	const [searchOptions, setSearchOptions] = useState([])
