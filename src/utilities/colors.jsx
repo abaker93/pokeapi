@@ -27,7 +27,7 @@ export const text = {
 	900:	'#0F141B'
 }
 
-export var bug = {
+export let bug = {
 	50:		'#F2F7E6',
 	100:	'#DEECC0',
 	200:	'#CBE19B',
@@ -38,10 +38,10 @@ export var bug = {
 	700:	'#5D9812',
 	800:	'#448109',
 	900:	'#2E6703',
-	alt:	'#ACC933',
+	alt:	'#E4F14B',
 }
 
-export var dark = {
+export let dark = {
 	50:		'#EBEAED',
 	100:	'#CFCCD1',
 	200:	'#B2AEB6',
@@ -55,7 +55,7 @@ export var dark = {
 	alt:	'#707583',
 }
 
-export var dragon = {
+export let dragon = {
 	50:		'#E2EDF8',
 	100:	'#B6D4ED',
 	200:	'#8BBAE3',
@@ -69,7 +69,7 @@ export var dragon = {
 	alt:	'#089CDA',
 }
 
-export var electric = {
+export let electric = {
 	50:		'#FEFAE7',
 	100:	'#FBF1C4',
 	200:	'#F9E9A2',
@@ -83,7 +83,7 @@ export var electric = {
 	alt:	'#F9E47F',
 }
 
-export var fairy = {
+export let fairy = {
 	50:		'#FDF2FC',
 	100:	'#FADFF8',
 	200:	'#F7CCF4',
@@ -97,7 +97,7 @@ export var fairy = {
 	alt:	'#F5A8E6',
 }
 
-export var fighting = {
+export let fighting = {
 	50:		'#F9E8ED',
 	100:	'#F1C7D3',
 	200:	'#E8A5B9',
@@ -111,7 +111,7 @@ export var fighting = {
 	alt:	'#D95A59',
 }
 
-export var fire = {
+export let fire = {
 	50:		'#FFEBDC',
 	100:	'#FFDCC1',
 	200:	'#FFCCA5',
@@ -122,10 +122,10 @@ export var fire = {
 	700:	'#B35F29',
 	800:	'#8C431A',
 	900:	'#662B0E',
-	alt:	'#FFAB49',
+	alt:	'#FFC247',
 }
 
-export var flying = {
+export let flying = {
 	50:		'#E9EEF8',
 	100:	'#D8E0F3',
 	200:	'#C6D3ED',
@@ -139,7 +139,7 @@ export var flying = {
 	alt:	'#CEDDF6',
 }
 
-export var ghost = {
+export let ghost = {
 	50:		'#DCE1EF',
 	100:	'#C1C9E2',
 	200:	'#A5B1D4',
@@ -153,7 +153,7 @@ export var ghost = {
 	alt:	'#7A74D7',
 }
 
-export var grass = {
+export let grass = {
 	50:		'#E1F1DF',
 	100:	'#C8E7C5',
 	200:	'#B0DCAB',
@@ -167,7 +167,7 @@ export var grass = {
 	alt:	'#59C37B',
 }
 
-export var ground = {
+export let ground = {
 	50:		'#F8E4DA',
 	100:	'#F2CFBD',
 	200:	'#ECB9A0',
@@ -181,7 +181,7 @@ export var ground = {
 	alt:	'#D59967',
 }
 
-export var ice = {
+export let ice = {
 	50:		'#E3F5F2',
 	100:	'#CDEDE8',
 	200:	'#B6E6DE',
@@ -195,7 +195,7 @@ export var ice = {
 	alt:	'#9EDDE1',
 }
 
-export var normal = {
+export let normal = {
 	50:		'#E9EBEC',
 	100:	'#D7DBDE',
 	200:	'#C5CBCF',
@@ -206,10 +206,10 @@ export var normal = {
 	700:	'#636B73',
 	800:	'#4D535B',
 	900:	'#383C43',
-	alt:	'#A9A7A0',
+	alt:	'#AAA8A1',
 }
 
-export var poison = {
+export let poison = {
 	50:		'#EEE1F4',
 	100:	'#E1C9EC',
 	200:	'#D3B1E3',
@@ -223,7 +223,7 @@ export var poison = {
 	alt:	'#C56BCC',
 }
 
-export var psychic = {
+export let psychic = {
 	50:		'#FEEEEF',
 	100:	'#FDD5D7',
 	200:	'#FCBCBF',
@@ -237,7 +237,7 @@ export var psychic = {
 	alt:	'#FFA59D',
 }
 
-export var rock = {
+export let rock = {
 	50:		'#F4F0E7',
 	100:	'#EBE5D5',
 	200:	'#E2D9C2',
@@ -251,7 +251,7 @@ export var rock = {
 	alt:	'#DBCF95',
 }
 
-export var steel = {
+export let steel = {
 	50:		'#DEE9EC',
 	100:	'#C3D7DD',
 	200:	'#A9C5CE',
@@ -265,7 +265,7 @@ export var steel = {
 	alt:	'#60AFAD',
 }
 
-export var water = {
+export let water = {
 	50:		'#DBE9F7',
 	100:	'#BFD7F0',
 	200:	'#A2C5EA',

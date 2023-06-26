@@ -5,6 +5,7 @@ import { formatDexId } from "../../utilities/utilities"
 const PokedexCard = styled(MuiCard)(() => ({
 	overflow: 'visible',
 	marginBottom: 32,
+	transition: 'transform cubic-bezier(0.4, 0, 0.2, 1) 0.25s',
 	'& .MuiCardActionArea-root': {
 		display: 'flex',
 		justifyContent: 'flex-end',
@@ -15,6 +16,13 @@ const PokedexCard = styled(MuiCard)(() => ({
 		position: 'absolute',
 		top: '-20px',
 		left: '-16px',
+		transition: 'transform cubic-bezier(0.4, 0, 0.2, 1) 0.25s',
+	},
+	'&:hover': {
+		transform: 'scale(1.05)',
+		'& .MuiCardMedia-media': {
+			transform: 'rotate(5deg) scale(1.2)',
+		},
 	},
 }))
 
@@ -27,6 +35,7 @@ const Card = props => {
 					? props.types[1].type
 					: props.types[0].type
 			}
+			elevation={16}
 		>
 			<CardActionArea>
 				<CardMedia
