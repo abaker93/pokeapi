@@ -95,16 +95,6 @@ let ddTheme = createTheme({
 	shape: { borderRadius: 8, },
 	components: {
 		MuiCard: {
-			// variants: [
-			// 	{
-			// 		props: { variant: 'pokedex', },
-			// 		style: {
-			// 			overflow: 'visible',
-			// 			marginBottom: 48,
-			// 			backgroundColor: gray[100],
-			// 		},
-			// 	},
-			// ],
 			styleOverrides: {
 				root: ({ ownerState }) => ({
 					color: white,
@@ -1438,6 +1428,17 @@ let ddTheme = createTheme({
 				}),
 			},
 		},
+		MuiIconButton: {
+			variants: [
+				{
+					props: { variant: 'outlined', },
+					style: {
+						border: '1px solid rgba(38, 50, 56, 0.2)',
+						borderRadius: 8,
+					},
+				},
+			],
+		}
 	},
 })
 

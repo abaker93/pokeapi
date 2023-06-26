@@ -1,12 +1,10 @@
 import { Box, Card as MuiCard, CardActionArea, CardContent, CardMedia, Chip, Typography, makeStyles } from "@mui/material"
 import styled from "@emotion/styled"
 import { formatDexId } from "../../utilities/utilities"
-import { gray } from "../../utilities/colors"
 
 const PokedexCard = styled(MuiCard)(() => ({
 	overflow: 'visible',
-	marginBottom: 48,
-	backgroundColor: gray[100],
+	marginBottom: 32,
 	'& .MuiCardActionArea-root': {
 		display: 'flex',
 		justifyContent: 'flex-end',
@@ -23,7 +21,6 @@ const PokedexCard = styled(MuiCard)(() => ({
 const Card = props => {
 	return (
 		<PokedexCard
-			// variant="pokedex"
 			type1={props.types[0].type}
 			type2={
 				props.types[1].type !== null

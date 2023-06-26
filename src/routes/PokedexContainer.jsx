@@ -175,7 +175,7 @@ const PokedexCards = props => {
 						justifyContent: 'center',
 						background: 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%)',
 						backdropFilter: 'blur(3px)',
-						borderTop: '0.5px solid rgba(38, 50, 56, 0.2)',
+						boxShadow: '0px -0.5px 0 0 rgba(38, 50, 56, 0.1)',
 					}}
 				>
 					<Button variant="contained" onClick={e => getPokemon(arr)}>
