@@ -1,9 +1,24 @@
-import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, gray, ground, ice, normal, poison, psychic, rock, steel, text, water, white } from "./colors";
+import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water, white } from "./colors";
 
 export const gradientBug = {
-	bug:		`${bug.alt} 0%, #B9D83B 50%, ${bug[500]} 100%`,
-	flying:	`${bug[500]} 0%, #56CDB3 45%, #76CADB 55%, ${flying[500]} 100%`,
-	poison:	`${bug[500]} 0%, #CF8A3F 45%, #C95974 70%, ${poison[500]} 100%`,
+	bug:			`${bug.alt} 0%, #B9D83B 50%, ${bug[500]} 100%`,
+	dark:			`${bug[500]} 0%, ${dark[500]} 100%`,
+	dragon:		`${bug[500]} 0%, ${dragon[500]} 100%`,
+	electric:	`${bug[500]} 0%, ${electric[500]} 100%`,
+	fairy:		`${bug[500]} 0%, ${fairy[500]} 100%`,
+	fighting:	`${bug[500]} 0%, ${fighting[500]} 100%`,
+	fire:			`${bug[500]} 0%, ${fire[500]} 100%`,
+	flying:		`${bug[500]} 0%, #56CDB3 45%, #76CADB 55%, ${flying[500]} 100%`,
+	ghost:		`${bug[500]} 0%, ${ghost[500]} 100%`,
+	grass:		`${bug[500]} 0%, ${grass[500]} 100%`,
+	ground:		`${bug[500]} 0%, ${ground[500]} 100%`,
+	ice:			`${bug[500]} 0%, ${ice[500]} 100%`,
+	normal:		`${bug[500]} 0%, ${normal[500]} 100%`,
+	poison:		`${bug[500]} 0%, #CF8A3F 45%, #C95974 70%, ${poison[500]} 100%`,
+	psychic:	`${bug[500]} 0%, ${psychic[500]} 100%`,
+	rock:			`${bug[500]} 0%, ${rock[500]} 100%`,
+	steel:		`${bug[500]} 0%, ${steel[500]} 100%`,
+	water:		`${bug[500]} 0%, ${water[500]} 100%`,
 }
 
 export const gradientFire = {
