@@ -3,8 +3,9 @@ import { filterByLang, formatDexId } from "../../utilities/utilities"
 import TypeIcon from "../../assets/TypeIcon"
 
 const Header = props => {
-	const { lang, pokemon, species, prev, next } = props
+	const { lang, pokemon, prev, next } = props
 
+	// console.log(pokemon)
 	return (
 		<header>
 			<Box
@@ -13,10 +14,10 @@ const Header = props => {
 					? pokemon.types[1].type.name
 					: pokemon.types[0].type.name}
 			>
-				{filterByLang('name', species.names, 'ja')}
+				{filterByLang('name', pokemon.names, 'ja')}
 				<img
 					src={pokemon.sprites.other['official-artwork'].front_default}
-					alt={filterByLang('name', species.names, lang)}
+					alt={filterByLang('name', pokemon.names, lang)}
 					style={{ width: '200px', }}
 				/>
 				<Box>
@@ -28,9 +29,9 @@ const Header = props => {
 			</Box>
 
 			<Title
-				genera={filterByLang('genus', species.genera, lang)}
+				genera={filterByLang('genus', pokemon.genera, lang)}
 				id={pokemon.id}
-				name={filterByLang('name', species.names, lang)}
+				name={filterByLang('name', pokemon.names, lang)}
 				types={pokemon.types}
 			/>
 		</header>

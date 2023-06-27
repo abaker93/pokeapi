@@ -3,6 +3,8 @@ import { useOutletContext, useParams } from "react-router-dom"
 import Pokedex from 'pokedex-promise-v2'
 import Header from "../components/pokemon/Header"
 import Stats from "../components/pokemon/Stats"
+import Evolution from "../components/pokemon/Evolution"
+import { getIdFromURL } from "../utilities/utilities"
 
 const P = new Pokedex()
 
@@ -14,19 +16,59 @@ const PokemonContainer = props => {
 	const [loading, setLoading] = useState(false)
 	const [dex, setDex] = useState('national')
 	const [pokemon, setPokemon] = useState('')
-	const [species, setSpecies] = useState('')
+	const [evolutionChain, setEvolutionChain] = useState('')
+	const [evolutionPokemon, setEvolutionPokemon] = useState('')
 	const [prev, setPrev] = useState('')
 	const [next, setNext] = useState('')
+
+
+	const getEvolutionPokemon = id => {
+		P.getResource([
+			`/api/v2/pokemon/${id}`,
+			`/api/v2/pokemon-species/${id}`,
+		])
+			.then(data => {
+				setEvolutionPokemon(val => [...val, {
+					...data[0],
+					...data[1],
+				}])
+			})
+	}
 
 
 	const getPokemon = id => {
 		const prevId = id - 1
 		const nextId = id + 1
 
-		P.getPokemonByName(id)
-			.then(data => setPokemon(data))
-		P.getPokemonSpeciesByName(id)
-			.then(data => setSpecies(data))
+		P.getResource([
+			`/api/v2/pokemon/${id}`,
+			`/api/v2/pokemon-species/${id}`,
+		])
+			.then(data => {
+				setPokemon({ ...data[0], ...data[1] })
+				return getIdFromURL(data[1].evolution_chain.url)
+			})
+			.then(id => {
+				P.getEvolutionChainById(id)
+					.then(data => {
+						if (data.chain.species.url) {
+							getEvolutionPokemon(getIdFromURL(data.chain.species.url))
+							
+							data.chain.evolves_to.map(x => {
+								if (x.species.url) {
+									getEvolutionPokemon(getIdFromURL(x.species.url))
+									
+									x.evolves_to.map(y => {
+										if (y.species.url) {
+											getEvolutionPokemon(getIdFromURL(y.species.url))
+										}
+									})
+								}
+							})
+						}
+						setEvolutionChain(data)
+					})
+			})
 		if (prevId > 0) {
 			P.getPokemonByName(prevId)
 				.then(data => setPrev(data))
@@ -34,18 +76,14 @@ const PokemonContainer = props => {
 		if (nextId < 1010) {
 			P.getPokemonByName(nextId)
 				.then(data => setNext(data))
-		}
+		}		
 	}
 
 
 	useEffect(() => {
-		setLoading(true)
 		setDex(props.dex)
 		getPokemon(pokemonId)
-		setLoading(false)
 	}, [props.dex])
-
-	console.log(pokemon, species)
 
 
 	if (loading) {
@@ -55,11 +93,20 @@ const PokemonContainer = props => {
 	}
 
 
-	if (pokemon !== '' && species !== '') {
+	if (pokemon !== '') {
 		return (
 			<>
-				<Header lang={lang} pokemon={pokemon} species={species} next={next} prev={prev} />
+				<Header lang={lang} pokemon={pokemon} next={next} prev={prev} />
 				<Stats stats={pokemon.stats} />
+				{evolutionChain !== '' ? (
+					<Evolution
+						evolutionChain={evolutionChain}
+						evolutionPokemon={evolutionPokemon}
+						lang={lang}
+						pokemon={pokemon}
+					/>
+				) : null}
+				
 			</>
 		)
 	}

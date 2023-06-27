@@ -43,7 +43,7 @@ const Header = props => {
 					<IconButton variant="outlined" size="small" sx={{ mr: 1 }}>
 						<MenuSharpIcon fontSize="small" />
 					</IconButton>
-					<IconButton aria-label="logo" color="error">
+					<IconButton aria-label="logo" color="error" href="/">
 						<AdjustSharpIcon />
 					</IconButton>
 				</Box>

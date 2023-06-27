@@ -48,6 +48,12 @@ export const getNumByDex = (nums, dex) => {
 	return nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
 }
 
+export const getIdFromURL = url => {
+	let id = url.match(/[\/][0-9]+/g);
+	id = id[0].substring(1)
+	return id
+}
+
 export const normalize = value => {
 	const min = 1;
 	const max = 255;
