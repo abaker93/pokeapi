@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useOutletContext, useParams } from "react-router-dom"
 import Pokedex from 'pokedex-promise-v2'
 import Header from "../components/pokemon/Header"
+import Stats from "../components/pokemon/Stats"
 
 const P = new Pokedex()
 
@@ -44,6 +45,8 @@ const PokemonContainer = props => {
 		setLoading(false)
 	}, [props.dex])
 
+	console.log(pokemon, species)
+
 
 	if (loading) {
 		return (
@@ -56,6 +59,7 @@ const PokemonContainer = props => {
 		return (
 			<>
 				<Header lang={lang} pokemon={pokemon} species={species} next={next} prev={prev} />
+				<Stats stats={pokemon.stats} />
 			</>
 		)
 	}

@@ -47,3 +47,10 @@ export const formatDexId = (num, dig) => {
 export const getNumByDex = (nums, dex) => {
 	return nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
 }
+
+export const normalize = value => {
+	const min = 1;
+	const max = 255;
+
+	return ((value - min) * 100) / (max - min);
+};

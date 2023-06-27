@@ -1,4 +1,4 @@
-import { Box, Card as MuiCard, CardActionArea, CardContent, CardMedia, Chip, Typography, makeStyles } from "@mui/material"
+import { Box, Card as MuiCard, CardActionArea, CardContent, CardMedia, Chip, Typography } from "@mui/material"
 import styled from "@emotion/styled"
 import { formatDexId } from "../../utilities/utilities"
 

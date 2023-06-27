@@ -1,8 +1,6 @@
 import { SvgIcon } from "@mui/material";
 
 const TypeIcon = (props) => {
-	console.log(props)
-
 	switch (props.type) {
 		case "bug":
 			return Bug(props);

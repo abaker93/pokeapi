@@ -1,21 +1,12 @@
 import { Box, Chip, Container, Link, Typography } from "@mui/material"
 import { filterByLang, formatDexId } from "../../utilities/utilities"
 import TypeIcon from "../../assets/TypeIcon"
-import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 const Header = props => {
 	const { lang, pokemon, species, prev, next } = props
 
-	// console.log(
-		// 'lang', lang,
-		// 'pokemon', pokemon,
-		// 'species', species,
-		// 'prev', prev,
-		// 'next', next
-	// )
-
 	return (
-		<>
+		<header>
 			<Box
 				type1={pokemon.types[0].type.name}
 				type2={pokemon.types[1]
@@ -42,7 +33,7 @@ const Header = props => {
 				name={filterByLang('name', species.names, lang)}
 				types={pokemon.types}
 			/>
-		</>
+		</header>
 	)
 }
 
@@ -50,7 +41,7 @@ const Nav = props => {
 	const { pokemon } = props
 
 	return (
-		<Link href={`${formatDexId(pokemon.id)}`}>
+		<Link href={`./${formatDexId(pokemon.id)}`}>
 			<img
 				src={pokemon.sprites.other['official-artwork'].front_default}
 				alt={pokemon.name}
@@ -62,13 +53,6 @@ const Nav = props => {
 
 const Title = props => {
 	const { genera, id, name, types } = props
-
-	// console.log(
-	// 	'genera', genera,
-	// 	'id', id,
-	// 	'name', name,
-	// 	'types', types,
-	// )
 
 	return (
 		<Container>

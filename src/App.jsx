@@ -23,10 +23,20 @@ const router = createBrowserRouter([{
 			children: [
 				{ index: true, element: <PokedexContainer dex="national" /> },
 				{ path: 'pokedex/', element: <PokedexContainer dex="national" /> },
-				{ path: 'pokemon/:id', element: <PokemonContainer dex="national" /> },
-			]
+				{ path: 'pokemon/:id/', 
+					children: [
+						{ index: true, element: <PokemonContainer dex="national" /> },
+						{ path: ':variety/', element: <PokemonContainer dex="national" /> },
+					],
+				},
+			],
 		},
-		{ path: 'pokemon/:id/', element: <PokemonContainer dex="national" /> },
+		{ path: 'pokemon/:id/', 
+			children: [
+				{ index: true, element: <PokemonContainer dex="national" /> },
+				{ path: ':variety/', element: <PokemonContainer dex="national" /> },
+			],
+		},
 	],
 }])
 
