@@ -1,3 +1,11 @@
+export const filterByLang = (type, arr, lang) => {
+	let filter
+	filter = arr.filter(f => f.language.name === lang)
+
+	if (type === 'name') return filter.map(m => m.name)[0]
+	if (type === 'genus') return filter.map(m => m.genus)[0]
+}
+
 export const formatDexId = (num, dig) => {
 	if (dig < 10) {
 
@@ -34,10 +42,6 @@ export const formatDexId = (num, dig) => {
 		}
 
 	}
-}
-
-export const getNameByLang = (names, lang) => {
-	return names.filter(f => f.language.name === lang).map(m => m.name)[0]
 }
 
 export const getNumByDex = (nums, dex) => {

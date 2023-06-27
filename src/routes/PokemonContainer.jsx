@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
+import { useOutletContext, useParams } from "react-router-dom"
 import Pokedex from 'pokedex-promise-v2'
-import { useParams } from "react-router-dom"
 import Header from "../components/pokemon/Header"
 
 const P = new Pokedex()
 
 
 const PokemonContainer = props => {
+	const lang = useOutletContext()
 	const pokemonId = parseInt(useParams().id)
+
 	const [loading, setLoading] = useState(false)
 	const [dex, setDex] = useState('national')
 	const [pokemon, setPokemon] = useState('')
@@ -53,7 +55,7 @@ const PokemonContainer = props => {
 	if (pokemon !== '' && species !== '') {
 		return (
 			<>
-				<Header pokemon={pokemon} species={species} next={next} prev={prev} />
+				<Header lang={lang} pokemon={pokemon} species={species} next={next} prev={prev} />
 			</>
 		)
 	}

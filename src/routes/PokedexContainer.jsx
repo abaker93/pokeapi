@@ -8,7 +8,7 @@ import { Box, Button, Container } from '@mui/material'
 import Filter from '../components/Filter'
 import Card from '../components/pokedex/Card'
 import Header from '../components/pokedex/Header'
-import { getNameByLang, getNumByDex } from '../utilities/utilities'
+import { filterByLang, getNumByDex } from '../utilities/utilities'
 
 
 const P = new Pokedex()
@@ -33,7 +33,7 @@ const PokedexContainer = props => {
 				data.forEach(poke => {
 					optArr = [...optArr, {
 						id: getNumByDex(poke.pokedex_numbers, dex),
-						name: getNameByLang(poke.names, lang),
+						name: filterByLang('name', poke.names, lang),
 						url: `/api/v2/pokemon-species/${poke.id}/`
 					}]
 					setDexLength(getNumByDex(poke.pokedex_numbers, dex))
@@ -51,7 +51,7 @@ const PokedexContainer = props => {
 	const getPokedex = dex => {
 		P.getPokedexByName(dex)
 			.then(data => {
-				setDexName(getNameByLang(data.names, lang))
+				setDexName(filterByLang('name', data.names, lang))
 				return data
 			})
 			.then(data => {
@@ -126,7 +126,7 @@ const PokedexCards = props => {
 
 							setPokemon(val => [...val, {
 								id: getNumByDex(species.pokedex_numbers, dex),
-								name: getNameByLang(species.names, lang),
+								name: filterByLang('name', species.names, lang),
 								sprite: poke.sprites.other["official-artwork"].front_default,
 								types: [
 									{slot: 1, type: poke.types[0].type.name},
@@ -203,7 +203,7 @@ const SearchPokedexCards = props => {
 							
 							setPokemon(pokemon => [...pokemon, {
 								id: getNumByDex(species.pokedex_numbers, props.dex),
-								name: getNameByLang(species.names, props.lang),
+								name: filterByLang('name', species.names, props.lang),
 								sprite: poke.sprites.other["official-artwork"].front_default,
 								types: [
 									{slot: 1, type: poke.types[0].type.name},

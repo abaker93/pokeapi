@@ -1,10 +1,18 @@
-import { Box, Link } from "@mui/material"
-import { formatDexId, getNameByLang } from "../../utilities/utilities"
+import { Box, Chip, Container, Link, Typography } from "@mui/material"
+import { filterByLang, formatDexId } from "../../utilities/utilities"
+import TypeIcon from "../../assets/TypeIcon"
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
 const Header = props => {
-	const { children, pokemon, species, prev, next } = props
+	const { lang, pokemon, species, prev, next } = props
 
-	console.log(pokemon, species, prev, next)
+	// console.log(
+		// 'lang', lang,
+		// 'pokemon', pokemon,
+		// 'species', species,
+		// 'prev', prev,
+		// 'next', next
+	// )
 
 	return (
 		<>
@@ -14,10 +22,10 @@ const Header = props => {
 					? pokemon.types[1].type.name
 					: pokemon.types[0].type.name}
 			>
-				{getNameByLang(species.names, 'ja')}
+				{filterByLang('name', species.names, 'ja')}
 				<img
 					src={pokemon.sprites.other['official-artwork'].front_default}
-					alt={getNameByLang(species.names, 'en')}
+					alt={filterByLang('name', species.names, lang)}
 					style={{ width: '200px', }}
 				/>
 				<Box>
@@ -27,7 +35,13 @@ const Header = props => {
 					{next !== '' ? <Nav pokemon={next} /> : null}
 				</Box>
 			</Box>
-			<Title />
+
+			<Title
+				genera={filterByLang('genus', species.genera, lang)}
+				id={pokemon.id}
+				name={filterByLang('name', species.names, lang)}
+				types={pokemon.types}
+			/>
 		</>
 	)
 }
@@ -47,7 +61,33 @@ const Nav = props => {
 }
 
 const Title = props => {
-	return ( <>title</> )
+	const { genera, id, name, types } = props
+
+	console.log(
+		'genera', genera,
+		'id', id,
+		'name', name,
+		'types', types,
+	)
+
+	return (
+		<Container>
+			<Typography variant="h3" component="h1" fontWeight="medium">
+				<Typography component="span" fontWeight="medium" sx={{ mr: 0.5, opacity: 0.7 }}>
+					<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
+						No.
+					</Typography>
+					{formatDexId(id, 1010)}
+				</Typography>
+				{name}
+			</Typography>
+			<Typography variant="subtitle1" component="p" fontWeight="regular" fontStyle="italic">{genera}</Typography>
+			<Box>
+				<Chip icon={<AcUnitIcon />} label="hello world I have an icon" />
+				<Chip icon={<TypeIcon type={types[0].type.name} />} label="hello world how are you today" />
+			</Box>
+		</Container>
+	)
 }
 
 export default Header

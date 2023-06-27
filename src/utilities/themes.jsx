@@ -1452,6 +1452,10 @@ let ddTheme = createTheme({
 export const ddLightTheme = createTheme(ddTheme, {
 	palette: {
 		mode: 'light',
+		background: {
+			default: '#F9F9F9',
+			paper: '#F9f9f9',
+		},
 		text: {
 			primary: text[500],
 			secondary: text[400],

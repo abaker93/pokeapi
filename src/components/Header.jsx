@@ -1,5 +1,5 @@
 import { AppBar, Box, IconButton, Toolbar, useScrollTrigger } from '@mui/material';
-import styled from '@emotion/styled';
+import { alpha, styled } from '@mui/material/styles';
 import AdjustSharpIcon from '@mui/icons-material/AdjustSharp';
 import DarkModeSharpIcon from '@mui/icons-material/DarkModeSharp';
 import MenuSharpIcon from '@mui/icons-material/MenuSharp';
@@ -7,14 +7,14 @@ import SearchSharpIcon from '@mui/icons-material/SearchSharp';
 import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
 import { white } from '../utilities/colors';
 
-const MainHeader = styled(AppBar)(() => ({
-	backgroundColor: white,
+const MainHeader = styled(AppBar)(({ theme }) => ({
+	backgroundColor: theme.palette.background.default,
 	zIndex: 2000,
 	position: 'sticky',
-	boxShadow: '0px 1px 0 0 rgba(38, 50, 56, 0.1)',
+	boxShadow: `0px 1px 0 0 ${alpha(theme.palette.text.primary, 0.1)}`,
 	transition: 'all ease-in-out 0.25s',
 	'&.scroll': {
-		backgroundColor: 'rgba(255, 255, 255, 0.9)',
+		backgroundColor: alpha(theme.palette.background.default, 0.9),
 		backdropFilter: 'blur(3px)',
 	},
 }))
