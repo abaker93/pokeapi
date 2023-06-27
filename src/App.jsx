@@ -5,31 +5,32 @@ import { CssBaseline } from '@mui/material'
 
 import Error from './routes/Error'
 import Home from './routes/Home'
-import Notes from './routes/Notes'
 import PokedexContainer from './routes/PokedexContainer'
+import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
-import Pokemon from './routes/Pokemon'
 
 
 
-const router = createBrowserRouter([
-	{
-		path: '/',
-		element: <Root />,
-		errorElement: <Error />,
-		children: [
-			{ index: true, element: <Home /> },
-			{ path: 'pokedex/', element: <PokedexContainer /> },
-			{
-				path: 'national/',
-				children: [
-					{ index: true, element: <PokedexContainer /> },
-					{ path: 'pokedex/', element: <PokedexContainer /> }
-				]
-			},
-		]
-	}
-])
+const router = createBrowserRouter([{
+	path: '/',
+	element: <Root />,
+	errorElement: <Error />,
+	children: [
+		{ index: true, element: <Home /> },
+		{ path: 'pokedex/', element: <PokedexContainer dex="national" /> },
+		{
+			path: 'national/',
+			children: [
+				{ index: true, element: <PokedexContainer dex="national" /> },
+				{ path: 'pokedex/', element: <PokedexContainer dex="national" /> },
+				{ path: 'pokemon/:id', element: <PokemonContainer dex="national" /> },
+			]
+		},
+		{ path: 'pokemon/:id/', element: <PokemonContainer dex="national" /> },
+	],
+}])
+
+
 
 const App = () => {
 	return (

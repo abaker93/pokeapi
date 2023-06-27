@@ -37,7 +37,7 @@ const Card = props => {
 			}
 			elevation={16}
 		>
-			<CardActionArea>
+			<CardActionArea href={`/pokemon/${formatDexId(props.id)}`}>
 				<CardMedia
 					component="img"
 					image={props.sprite}

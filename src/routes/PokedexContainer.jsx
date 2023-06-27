@@ -13,7 +13,7 @@ import { getNameByLang, getNumByDex } from '../utilities/utilities'
 
 const P = new Pokedex()
 
-const PokedexContainer = () => {
+const PokedexContainer = props => {
 	const lang = useOutletContext()
 	const [loading, setLoading] = useState(false)
 	const [dex, setDex] = useState('national')
@@ -64,6 +64,7 @@ const PokedexContainer = () => {
 
 	useEffect(() => {
 		setLoading(true)
+		setDex(props.dex)
 		setLoadMore({ limit: 20, offset: 0 })
 		getPokedex(dex)
 		setLoading(false)
