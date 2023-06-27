@@ -1367,7 +1367,10 @@ let ddTheme = createTheme({
 				},
 				{
 					props: { type: 'fire', },
-					style: { backgroundColor: fire[500], color: fire.color, },
+					style: {
+						backgroundColor: fire[500],
+						color: fire.color,
+					},
 				},
 				{
 					props: { type: 'flying', },
@@ -1415,6 +1418,9 @@ let ddTheme = createTheme({
 				},
 			],
 			styleOverrides: {
+				icon: {
+					color: 'inherit',
+				},
 				label: ({ ownerState }) => ({
 					...(ownerState.size === 'xsmall' && {
 						paddingLeft: '8px',

@@ -63,12 +63,12 @@ const Nav = props => {
 const Title = props => {
 	const { genera, id, name, types } = props
 
-	console.log(
-		'genera', genera,
-		'id', id,
-		'name', name,
-		'types', types,
-	)
+	// console.log(
+	// 	'genera', genera,
+	// 	'id', id,
+	// 	'name', name,
+	// 	'types', types,
+	// )
 
 	return (
 		<Container>
@@ -83,8 +83,21 @@ const Title = props => {
 			</Typography>
 			<Typography variant="subtitle1" component="p" fontWeight="regular" fontStyle="italic">{genera}</Typography>
 			<Box>
-				<Chip icon={<AcUnitIcon />} label="hello world I have an icon" />
-				<Chip icon={<TypeIcon type={types[0].type.name} />} label="hello world how are you today" />
+				<Chip
+					variant="type"
+					type={types[0].type.name}
+					icon={<TypeIcon type={types[0].type.name} />}
+					label={types[0].type.name}
+				/>
+				{types[1] ? (
+					<Chip
+						variant="type"
+						type={types[1].type.name}
+						icon={<TypeIcon type={types[1].type.name} />}
+						label={types[1].type.name}
+						sx={{ ml: 1.5, }}
+					/>
+				) : null}
 			</Box>
 		</Container>
 	)
