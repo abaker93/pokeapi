@@ -14,7 +14,7 @@ const Evolution = props => {
 	}
 
 	return (
-		<Container>
+		<Container sx={{ mb: 5 }}>
 			{evolutionPokemon.filter(f1 => f1.id == getIdFromURL(evolutionChain.chain.species.url)).map(m1 => (
 				<Grid key={m1.id} container xs>
 					<Grid container xs={12}>

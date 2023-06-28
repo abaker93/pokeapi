@@ -1,3 +1,19 @@
+import { defense } from "./types";
+
+export const calcDefense = (def1, def2, off) => {
+	let calc, val
+
+	if (def2) {
+		calc = defense[def1][off] * defense[def2][off];
+	} else {
+		calc = defense[def1][off];
+	}
+
+	calc === 0.5 ? (val = "½") : calc === 0.25 ? (val = "¼") : (val = calc);
+
+	return val
+}
+
 export const filterByLang = (type, arr, lang) => {
 	let filter
 	filter = arr.filter(f => f.language.name === lang)

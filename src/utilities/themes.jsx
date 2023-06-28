@@ -1342,95 +1342,110 @@ let ddTheme = createTheme({
 					},
 				},
 				{
-					props: { type: 'bug', },
-					style: { backgroundColor: bug[500], color: bug.color, },
-				},
-				{
-					props: { type: 'dark', },
-					style: { backgroundColor: dark[500], color: dark.color, },
-				},
-				{
-					props: { type: 'dragon', },
-					style: { backgroundColor: dragon[500], color: dragon.color, },
-				},
-				{
-					props: { type: 'electric', },
-					style: { backgroundColor: electric[500], color: electric.color, },
-				},
-				{
-					props: { type: 'fairy', },
-					style: { backgroundColor: fairy[500], color: fairy.color, },
-				},
-				{
-					props: { type: 'fighting', },
-					style: { backgroundColor: fighting[500], color: fighting.color, },
-				},
-				{
-					props: { type: 'fire', },
+					props: { direction: 'vertical', },
 					style: {
-						backgroundColor: fire[500],
-						color: fire.color,
-					},
-				},
-				{
-					props: { type: 'flying', },
-					style: { backgroundColor: flying[500], color: flying.color, },
-				},
-				{
-					props: { type: 'ghost', },
-					style: { backgroundColor: ghost[500], color: ghost.color, },
-				},
-				{
-					props: { type: 'grass', },
-					style: { backgroundColor: grass[500], color: grass.color, },
-				},
-				{
-					props: { type: 'ground', },
-					style: { backgroundColor: ground[500], color: ground.color, },
-				},
-				{
-					props: { type: 'ice', },
-					style: { backgroundColor: ice[500], color: ice.color, },
-				},
-				{
-					props: { type: 'normal', },
-					style: { backgroundColor: normal[500], color: normal.color, },
-				},
-				{
-					props: { type: 'poison', },
-					style: { backgroundColor: poison[500], color: poison.color, },
-				},
-				{
-					props: { type: 'psychic', },
-					style: { backgroundColor: psychic[500], color: psychic.color, },
-				},
-				{
-					props: { type: 'rock', },
-					style: { backgroundColor: rock[500], color: rock.color, },
-				},
-				{
-					props: { type: 'steel', },
-					style: { backgroundColor: steel[500], color: steel.color, },
-				},
-				{
-					props: { type: 'water', },
-					style: { backgroundColor: water[500], color: water.color, },
+						flexDirection: 'column',
+						height: 'auto',
+					}
 				},
 			],
 			styleOverrides: {
-				icon: {
+				root: ({ ownerState }) => ({
+					...(ownerState.type === 'bug' && {
+						backgroundColor: bug[500],
+						color: bug.color,
+					}),
+					...(ownerState.type === 'dark' && {
+						backgroundColor: dark[500],
+						color: dark.color,
+					}),
+					...(ownerState.type === 'dragon' && {
+						backgroundColor: dragon[500],
+						color: dragon.color,
+					}),
+					...(ownerState.type === 'electric' && {
+						backgroundColor: electric[500],
+						color: electric.color,
+					}),
+					...(ownerState.type === 'fairy' && {
+						backgroundColor: fairy[500],
+						color: fairy.color,
+					}),
+					...(ownerState.type === 'fighting' && {
+						backgroundColor: fighting[500],
+						color: fighting.color,
+					}),
+					...(ownerState.type === 'fire' && {
+						backgroundColor: fire[500],
+						color: fire.color,
+					}),
+					...(ownerState.type === 'flying' && {
+						backgroundColor: flying[500],
+						color: flying.color,
+					}),
+					...(ownerState.type === 'ghost' && {
+						backgroundColor: ghost[500],
+						color: ghost.color,
+					}),
+					...(ownerState.type === 'grass' && {
+						backgroundColor: grass[500],
+						color: grass.color,
+					}),
+					...(ownerState.type === 'ground' && {
+						backgroundColor: ground[500],
+						color: ground.color,
+					}),
+					...(ownerState.type === 'ice' && {
+						backgroundColor: ice[500],
+						color: ice.color,
+					}),
+					...(ownerState.type === 'normal' && {
+						backgroundColor: normal[500],
+						color: normal.color,
+					}),
+					...(ownerState.type === 'poison' && {
+						backgroundColor: poison[500],
+						color: poison.color,
+					}),
+					...(ownerState.type === 'psychic' && {
+						backgroundColor: psychic[500],
+						color: psychic.color,
+					}),
+					...(ownerState.type === 'rock' && {
+						backgroundColor: rock[500],
+						color: rock.color,
+					}),
+					...(ownerState.type === 'steel' && {
+						backgroundColor: steel[500],
+						color: steel.color,
+					}),
+					...(ownerState.type === 'water' && {
+						backgroundColor: water[500],
+						color: water.color,
+					}),
+				}),
+				icon: ({ ownerState }) => ({
 					color: 'inherit',
-				},
+					...(ownerState.direction === 'vertical' && {
+						marginTop:		4,
+						marginRight:	0,
+						marginLeft:		0,
+					}),
+				}),
 				label: ({ ownerState }) => ({
 					...(ownerState.size === 'xsmall' && {
-						paddingLeft: '8px',
-						paddingRight: '8px',
-						paddingTop: '3px',
+						paddingLeft:	8,
+						paddingRight: 8,
+						paddingTop:		3,
 					}),
 					...(ownerState.variant === 'type' && {
-						fontWeight: 400,
-						letterSpacing: '0.025em',
-						textTransform: 'uppercase'
+						fontWeight:			400,
+						letterSpacing:	'0.025em',
+						textTransform:	'uppercase'
+					}),
+					...(ownerState.direction === 'vertical' && {
+						lineHeight:	'1.2',
+						marginBottom: 2,
 					}),
 				}),
 			},

@@ -7,7 +7,7 @@ const Header = props => {
 
 	// console.log(pokemon)
 	return (
-		<header>
+		<Box component="header" sx={{ mb: 5 }}>
 			<Box
 				type1={pokemon.types[0].type.name}
 				type2={pokemon.types[1]
@@ -34,7 +34,7 @@ const Header = props => {
 				name={filterByLang('name', pokemon.names, lang)}
 				types={pokemon.types}
 			/>
-		</header>
+		</Box>
 	)
 }
 

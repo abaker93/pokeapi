@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { useOutletContext, useParams } from "react-router-dom"
 import Pokedex from 'pokedex-promise-v2'
+
+import Defense from "../components/pokemon/Defense"
+import Evolution from "../components/pokemon/Evolution"
 import Header from "../components/pokemon/Header"
 import Stats from "../components/pokemon/Stats"
-import Evolution from "../components/pokemon/Evolution"
+
 import { getIdFromURL } from "../utilities/utilities"
 
 const P = new Pokedex()
@@ -93,7 +96,7 @@ const PokemonContainer = props => {
 		getPokemon(pokemonId)
 	}, [props.dex])
 
-	// console.log(prev, next)
+	console.log(pokemon)
 
 
 	if (loading) {
@@ -116,6 +119,12 @@ const PokemonContainer = props => {
 						pokemon={pokemon}
 					/>
 				) : null}
+				<Defense
+					lang={lang}
+					pokemon={pokemon}
+					type1={pokemon.types[0].type.name}
+					type2={pokemon.types[1] ? pokemon.types[1].type.name : null}
+				/>
 			</>
 		)
 	}

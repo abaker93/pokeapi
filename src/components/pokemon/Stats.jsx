@@ -24,7 +24,7 @@ const Bar = props => {
 
 	return (
 		<Grid container spacing={1} xs={12} display="flex" alignItems="center">
-			<Grid xs={1} display="flex" justifyContent="end">
+			<Grid xs={1.5} display="flex" justifyContent="end">
 				<Typography variant="h6" component="h3">{label}</Typography>
 			</Grid>
 			<Grid xs>
