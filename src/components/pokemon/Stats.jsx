@@ -1,4 +1,4 @@
-import { Container, LinearProgress, Typography } from "@mui/material"
+import { Box, LinearProgress, Typography } from "@mui/material"
 import Grid from '@mui/material/Unstable_Grid2';
 import { normalize } from "../../utilities/utilities"
 
@@ -6,7 +6,7 @@ const Stats = props => {
 	const { stats } = props
 
 	return (
-		<Container sx={{ mb: 5 }}>
+		<Box sx={{ mb: 5 }}>
 			<Grid container spacing={1}>
 				<Bar label="HP" stat={stats[0].base_stat} />
 				<Bar label="ATT" stat={stats[1].base_stat} />
@@ -15,7 +15,7 @@ const Stats = props => {
 				<Bar label="SDEF" stat={stats[4].base_stat} />
 				<Bar label="SPD" stat={stats[5].base_stat} />
 			</Grid>
-		</Container>
+		</Box>
 	)
 }
 

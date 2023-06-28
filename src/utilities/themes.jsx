@@ -38,32 +38,32 @@ let ddTheme = createTheme({
 		fontWeightMedium: 	500,
 		fontWeightBold:			700,
 		h1: {
-			fontSize: 	'2rem',
-			fontWeight:	700,
-			lineHeight: 1.2,
-		},
-		h2: {
-			fontSize: 	'1.75rem',
-			fontWeight:	700,
-			lineHeight: 1.2,
-		},
-		h3: {
 			fontSize: 	'1.5rem',
 			fontWeight:	700,
 			lineHeight: 1.2,
 		},
+		h2: {
+			fontSize: 	'1.4rem',
+			fontWeight:	700,
+			lineHeight: 1.2,
+		},
+		h3: {
+			fontSize: 	'1.3rem',
+			fontWeight:	700,
+			lineHeight: 1.2,
+		},
 		h4: {
-			fontSize: 	'1.375rem',
+			fontSize: 	'1.2rem',
 			fontWeight:	700,
 			lineHeight: 1.2,
 		},
 		h5: {
-			fontSize: 	'1.25rem',
+			fontSize: 	'1.1rem',
 			fontWeight:	700,
 			lineHeight: 1.2,
 		},
 		h6: {
-			fontSize: 	'1.125rem',
+			fontSize: 	'1rem',
 			fontWeight:	700,
 			lineHeight: 1.2,
 		},
@@ -98,82 +98,65 @@ let ddTheme = createTheme({
 		MuiCard: {
 			styleOverrides: {
 				root: ({ ownerState }) => ({
-					color: white,
 					...(ownerState.type1 === 'bug' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background:	`linear-gradient(45deg, ${gradientBug.bug})`,
-							color:			text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${gradientBug.dark})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${gradientBug.dragon})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${gradientBug.electric})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${gradientBug.fairy})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${gradientBug.fighting})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${gradientBug.fire})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${gradientBug.flying})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${gradientBug.ghost})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${gradientBug.grass})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${gradientBug.ground})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${gradientBug.ice})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${gradientBug.normal})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${gradientBug.poison})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${gradientBug.psychic})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${gradientBug.rock})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${gradientBug.steel})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${gradientBug.water})`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'dark' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${dark[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -238,6 +221,7 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'dragon' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${dragon[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -302,154 +286,121 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'electric' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${electric.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${flying[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${electric[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'fairy' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${bug[alt]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${fairy.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${flying[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${fairy[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'fighting' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${fighting[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -514,154 +465,121 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'fire' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${gradientFire.fire})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${gradientFire.flying})`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'flying' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${flying.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${flying[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'ghost' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${ghost[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -726,6 +644,7 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'grass' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${grass[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -790,6 +709,7 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'ground' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${ground[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -854,80 +774,64 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'ice' && {
+						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${flying[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${ice.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${ice[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'normal' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${normal[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -992,6 +896,7 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'poison' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${poison[500]} 0%, ${bug[500]} 100%)`,
 							color: text[500],
@@ -1056,154 +961,121 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'psychic' && {
+						color: text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${flying[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${psychic.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${rock[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${psychic[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'rock' && {
+						color: text[500],
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${bug[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dark' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${dark[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'dragon' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${dragon[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'electric' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${electric[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fairy' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${fairy[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fighting' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${fighting[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'fire' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${fire[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'flying' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${flying[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${ghost[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'grass' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${grass[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ground' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${ground[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'ice' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${ice[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${normal[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${poison[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${psychic[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'rock' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${rock.alt} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'steel' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${steel[500]} 100%)`,
-							color: text[500],
 						}),
 						...(ownerState.type2 === 'water' && {
 							background: `linear-gradient(45deg, ${rock[500]} 0%, ${water[500]} 100%)`,
-							color: text[500],
 						}),
 					}),
 					...(ownerState.type1 === 'steel' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${steel[500]} 0%, ${bug[500]} 100%)`,
 						}),
@@ -1267,6 +1139,7 @@ let ddTheme = createTheme({
 						}),
 					}),
 					...(ownerState.type1 === 'water' && {
+						color:	white,
 						...(ownerState.type2 === 'bug' && {
 							background: `linear-gradient(45deg, ${water[500]} 0%, ${bug[500]} 100%)`,
 						}),

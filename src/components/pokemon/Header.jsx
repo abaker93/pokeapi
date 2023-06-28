@@ -5,7 +5,6 @@ import TypeIcon from "../../assets/TypeIcon"
 const Header = props => {
 	const { lang, pokemon, prev, next } = props
 
-	// console.log(pokemon)
 	return (
 		<Box component="header" sx={{ mb: 5 }}>
 			<Box
@@ -14,17 +13,17 @@ const Header = props => {
 					? pokemon.types[1].type.name
 					: pokemon.types[0].type.name}
 			>
-				{filterByLang('name', pokemon.names, 'ja')}
+				<Typography variant="japanese" component="span">{filterByLang('name', pokemon.names, 'ja')}</Typography>
 				<img
 					src={pokemon.sprites.other['official-artwork'].front_default}
 					alt={filterByLang('name', pokemon.names, lang)}
 					style={{ width: '200px', }}
 				/>
 				<Box>
-					{prev !== '' ? <Nav pokemon={prev} /> : null}
+					{prev ? <Nav pokemon={prev} /> : null}
 				</Box>
 				<Box>
-					{next !== '' ? <Nav pokemon={next} /> : null}
+					{next ? <Nav pokemon={next} /> : null}
 				</Box>
 			</Box>
 
@@ -57,7 +56,7 @@ const Title = props => {
 
 	return (
 		<Container>
-			<Typography variant="h3" component="h1" fontWeight="medium">
+			<Typography variant="h1" fontWeight="medium">
 				<Typography component="span" fontWeight="medium" sx={{ mr: 0.5, opacity: 0.7 }}>
 					<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
 						No.

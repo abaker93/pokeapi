@@ -31,14 +31,6 @@ const Varieties = props => {
 			})
 	}
 
-	console.log(
-		// 'lang', lang,
-		// 'pokemon', pokemon,
-		// 'species', species,
-		// 'varieties', varieties,
-		'value', value,
-	)
-
 	useEffect(() =>{
 		getPokemonVarieties(species.varieties)
 	}, [species])

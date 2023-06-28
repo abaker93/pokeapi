@@ -1,4 +1,4 @@
-import { Box, Chip, Container, Typography } from "@mui/material"
+import { Box, Chip, Typography } from "@mui/material"
 import Grid from '@mui/material/Unstable_Grid2';
 import { calcDefense, filterByLang } from "../../utilities/utilities"
 import TypeIcon from "../../assets/TypeIcon";
@@ -6,11 +6,13 @@ import { typesArray } from "../../utilities/types";
 
 const Defense = props => {
 	const { lang, pokemon, type1, type2 } = props
+
+	// TODO:	dude... the calcDefense must be so fucked... doesn't match pokemondb AT ALL
 	
 	return (
-		<Container sx={{ mb: 5 }}>
+		<Box sx={{ mb: 5 }}>
 			<Box sx={{ mb: 3 }}>
-				<Typography variant="h3" component="h2">Type Defenses</Typography>
+				<Typography variant="h2">Type Defenses</Typography>
 				<Typography variant="p">The effectiveness of each type on {filterByLang('name', pokemon.names, lang)}</Typography>
 			</Box>
 			
@@ -21,7 +23,7 @@ const Defense = props => {
 					</Grid>
 				))}
 			</Grid>
-		</Container>
+		</Box>
 	)
 }
 
