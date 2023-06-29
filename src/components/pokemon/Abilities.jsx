@@ -1,26 +1,12 @@
-import { Box, Card, CardActionArea, CardContent, Typography, alpha, styled } from "@mui/material"
+import { Box, CardActionArea, CardContent, Typography } from "@mui/material"
 import Grid from '@mui/material/Unstable_Grid2';
-import { text } from '../../utilities/colors'
+import TypeCard from "../../utilities/components/TypeCard";
 import { filterByLang, getColorFromType } from "../../utilities/utilities";
 
-const AbilitiesCard = styled(Card)(({ color }) => ({
-	backgroundColor: alpha(color[100], 0.3),
-	borderColor: color[500],
-	color: color[900],
-	'& .MuiCardContent-root': {
-		padding: 12,
-		'&:last-child': {
-			paddingBottom:	12,
-		}
-	}
-	
-}))
 
 const Abilities = props => {
 	const { abilities, lang, types } = props.state
-
-	console.log(abilities)
-
+	
 	return (
 		<Box sx={{ mb: 5 }}>
 			<Box sx={{ mb: 2 }}>
@@ -29,7 +15,7 @@ const Abilities = props => {
 			<Grid container spacing={1}>
 				{abilities.sort((a,b) => a.slot - b.slot).map((m) => (
 					<Grid key={m.slot} xs={12}>
-						<AbilitiesCard variant="outlined" color={getColorFromType(types)}>
+						<TypeCard variant="outlined" color={getColorFromType(types)}>
 							<CardActionArea href={`/abilities/${m.ability.name}`}>
 								<CardContent>
 									{m.is_hidden ? (
@@ -42,7 +28,7 @@ const Abilities = props => {
 									)}
 								</CardContent>
 							</CardActionArea>
-						</AbilitiesCard>
+						</TypeCard>
 					</Grid>
 				))}
 			</Grid>

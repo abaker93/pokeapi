@@ -83,7 +83,6 @@ const PokemonContainer = props => {
 		])
 			.then(data => {
 				//~~	set pokemon	//
-				// console.log(data[0].types[0].type.name)
 				dispatch({ type: 'pokemon', value: { ...data[0], ...data[1] } })
 				dispatch({ type: 'types', value: data[0].types[0].type.name })
 				return data

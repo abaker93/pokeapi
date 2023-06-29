@@ -62,8 +62,6 @@ export const formatDexId = (num, dig) => {
 }
 
 export const getColorFromType = (type) => {
-	console.log(type)
-
 	const colorMap = {
 		bug:			bug,
 		dark:			dark,
