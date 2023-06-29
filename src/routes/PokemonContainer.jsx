@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useReducer, useState } from "react"
 import { useOutletContext, useParams } from "react-router-dom"
 import Pokedex from 'pokedex-promise-v2'
 import { Container } from "@mui/material"
@@ -11,22 +11,66 @@ import Header from "../components/pokemon/Header"
 import Stats from "../components/pokemon/Stats"
 
 import { getIdFromURL } from "../utilities/utilities"
+import Breeding from "../components/pokemon/Breeding";
 
 const P = new Pokedex()
 
 
-const PokemonContainer = props => {
-	const lang = useOutletContext()
-	const pokemonId = parseInt(useParams().id)
+const createInitialState = props => {
+	const { id, dex, lang } = props
 
-	const [loading, setLoading] = useState(false)
-	const [dex, setDex] = useState('national')
-	const [pokemon, setPokemon] = useState('')
-	const [evolutionChain, setEvolutionChain] = useState('')
-	const [evolutionPokemon, setEvolutionPokemon] = useState([])
-	const [abilities, setAbilities] = useState([])
-	const [prev, setPrev] = useState(null)
-	const [next, setNext] = useState(null)
+	return {
+		dex:				dex,
+		evolution: {
+			chain:		null,
+			pokemon:	null,
+		},
+		id:					id,
+		lang:				lang,
+		types:			null,
+	}
+}
+
+
+const reducer = (state, action) => {
+	const { type, value } = action
+
+	switch (type) {
+		case 'evolution.chain': {
+			return {
+				...state,
+				evolution: {
+					...state.evolution,
+					chain: value,
+				}
+			}
+		}
+		case 'evolution.pokemon': {
+			return {
+				...state,
+				evolution: {
+					...state.evolution,
+					pokemon: value,
+				}
+			}
+		}
+		default: {
+			return { ...state, [type]: value}
+		}
+	}
+}
+
+
+const PokemonContainer = props => {
+	const [state, dispatch] = useReducer(
+		reducer,
+		({
+			id: parseInt(useParams().id),
+			dex:	props.dex,
+			lang:	useOutletContext(),
+		}),
+		createInitialState,
+	)
 
 
 	const getPokemon = id => {
@@ -38,15 +82,17 @@ const PokemonContainer = props => {
 			`/api/v2/pokemon-species/${id}`,
 		])
 			.then(data => {
-				//~~	setPokemon	//
-				setPokemon({ ...data[0], ...data[1] })
+				//~~	set pokemon	//
+				// console.log(data[0].types[0].type.name)
+				dispatch({ type: 'pokemon', value: { ...data[0], ...data[1] } })
+				dispatch({ type: 'types', value: data[0].types[0].type.name })
 				return data
 			})
 			.then(data => {
-				//~~	Get evolutionChain								//
-				//~~	Get evolutionPokemon by chain IDs	//
-				//~~	setEvolutionChain									//
-				//~~	setEvolutionPokemon								//
+				//~~	Get Evolution Chain									//
+				//~~	Get Evolution Pokemon by chain IDs	//
+				//--	set evolution.chain									//
+				//--	set evolution.pokemon								//
 				const id = getIdFromURL(data[1].evolution_chain.url)
 
 				P.getEvolutionChainById(id)
@@ -67,7 +113,7 @@ const PokemonContainer = props => {
 								}
 							})
 						}
-						setEvolutionChain(data)
+						dispatch({ type: 'evolution.chain', value: data })
 						return arr
 					})
 					.then(arr => {
@@ -83,8 +129,7 @@ const PokemonContainer = props => {
 										...data[0],
 										...data[1],
 									}]
-
-									setEvolutionPokemon(evoArr)
+									dispatch({ type: 'evolution.pokemon', value: evoArr })
 								})
 						})
 					})
@@ -94,7 +139,7 @@ const PokemonContainer = props => {
 			})
 			.then(data => {
 				//~~	Get abilities	//
-				//~~	setAbilities	//
+				//--	set abilities	//
 				let arr = []
 
 				data[0].abilities.map(m => {
@@ -109,69 +154,82 @@ const PokemonContainer = props => {
 								is_hidden:	m.is_hidden,
 								slot:				m.slot,
 							}]
-							setAbilities(arr)
+							dispatch({ type: 'abilities', value: arr })
+						})
+						.catch(console.error)
+				})
+				return data
+			})
+			.then(data => {
+				//~~	Get Egg Groups	//
+				//--	set eggGroups		//
+				// console.log(data)
+				let arr = []
+
+				data[1].egg_groups.map(m => {
+					P.getEggGroupByName(getIdFromURL(m.url))
+						.then(data => {
+							// console.log(data)
+							arr = [...arr, {
+								id:			data.id,
+								name:		data.name,
+								names:	data.names,
+							}]
+							dispatch({ type: 'eggGroups', value: arr })
 						})
 						.catch(console.error)
 				})
 			})
 			.catch(console.error)
 
-		//~~	Get Prev Pokemon							//
-		//~~	setPrev												//
-		//~~	catch error & setPrev to null	//
+		//~~	Get Prev Pokemon								//
+		//--	set prev												//
+		//--	catch error & set prev to null	//
 		P.getPokemonByName(prevId)
-			.then(data => setPrev(data))
-			.catch(setPrev(null))
+			.then(data => dispatch({ type: 'prev', value: data }))
+			.catch(dispatch({ type: 'prev', value: null }))
 		
-		//~~	Get Next Pokemon							//
-		//~~	setNext												//
-		//~~	catch error & setNext to null	//
+		//~~	Get Next Pokemon								//
+		//--	set next												//
+		//--	catch error & set next to null	//
 		P.getPokemonByName(nextId)
-			.then(data => setNext(data))
-			.catch(setNext(null))
+			.then(data => dispatch({ type: 'next', value: data }))
+			.catch(dispatch({ type: 'next', value: null }))
 	}
 
 
 	useEffect(() => {
-		setDex(props.dex)
-		getPokemon(pokemonId)
+		getPokemon(state.id)
+	}, [state.id])
+
+	// console.log(state)
 
 
-	}, [props.dex])
-
-
-	if (loading) {
+	if (state.loading) {
 		return (
 			<p>Loading...</p>
 		)
 	}
 
 
-	if (pokemon !== '') {
+	if (state.pokemon) {
 		return (
 			<>
-				<Header lang={lang} pokemon={pokemon} next={next} prev={prev} />
+				<Header state={state} />
+
 				<Container>
-					<Stats stats={pokemon.stats} />
-					{evolutionChain !== '' && evolutionPokemon.length > 0 ? (
-						<Evolution
-							evolutionChain={evolutionChain}
-							evolutionPokemon={evolutionPokemon}
-							lang={lang}
-							pokemon={pokemon}
-						/>
-					) : null}
-					<Defense
-						lang={lang}
-						pokemon={pokemon}
-						type1={pokemon.types[0].type.name}
-						type2={pokemon.types[1] ? pokemon.types[1].type.name : null}
-					/>
-					<Grid container>
+					<Stats state={state} />
+					
+					{state.evolution.chain ? <Evolution state={state} /> : null}
+					
+					<Defense state={state} />
+					
+					<Grid container spacing={2}>
 						<Grid xs={6}>
-							{abilities.length > 0 ? (
-								<Abilities abilities={abilities} lang={lang} pokemon={pokemon} />
-							) : null}
+							{state.abilities ? <Abilities state={state} /> : null}
+						</Grid>
+						<Grid xs={6}>
+							{state.eggGroups ? <Breeding state={state} /> : null}
 						</Grid>
 					</Grid>
 					

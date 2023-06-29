@@ -5,9 +5,9 @@ import TypeIcon from "../../assets/TypeIcon";
 import { typesArray } from "../../utilities/types";
 
 const Defense = props => {
-	const { lang, pokemon, type1, type2 } = props
-
-	// TODO:	dude... the calcDefense must be so fucked... doesn't match pokemondb AT ALL
+	const { lang, pokemon } = props.state
+	
+	// TODO:	dude... the calcDefense is so fucked... doesn't match pokemondb AT ALL
 	
 	return (
 		<Box sx={{ mb: 5 }}>
@@ -19,7 +19,19 @@ const Defense = props => {
 			<Grid container spacing={1.5} columns={9}>
 				{typesArray.map((type, index) => (
 					<Grid xs={1} key={index}>
-						<Chip variant="type" direction="vertical" icon={<TypeIcon type={type} />} type={type} size="small" label={calcDefense(type1, type2, type)} />
+						<Chip
+							variant="type"
+							direction="vertical"
+							icon={<TypeIcon
+							type={type} />}
+							type={type}
+							size="small"
+							label={calcDefense(
+								pokemon.types[0].type.name,
+								pokemon.types[1] ? pokemon.types[1].type.name : null,
+								type,
+							)}
+						/>
 					</Grid>
 				))}
 			</Grid>

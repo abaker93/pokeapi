@@ -3,7 +3,7 @@ import { filterByLang, formatDexId } from "../../utilities/utilities"
 import TypeIcon from "../../assets/TypeIcon"
 
 const Header = props => {
-	const { lang, pokemon, prev, next } = props
+	const { lang, pokemon, prev, next } = props.state
 
 	return (
 		<Box component="header" sx={{ mb: 5 }}>

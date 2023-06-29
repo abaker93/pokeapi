@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { normalize } from "../../utilities/utilities"
 
 const Stats = props => {
-	const { stats } = props
+	const { stats } = props.state.pokemon
 
 	return (
 		<Box sx={{ mb: 5 }}>

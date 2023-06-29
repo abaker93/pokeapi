@@ -1,3 +1,4 @@
+import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from "./colors";
 import { defense } from "./types";
 
 export const calcDefense = (def1, def2, off) => {
@@ -58,6 +59,33 @@ export const formatDexId = (num, dig) => {
 		}
 
 	}
+}
+
+export const getColorFromType = (type) => {
+	console.log(type)
+
+	const colorMap = {
+		bug:			bug,
+		dark:			dark,
+		dragon:		dragon,
+		electric:	electric,
+		fairy:		fairy,
+		fighting:	fighting,
+		fire:			fire,
+		flying:		flying,
+		ghost:		ghost,
+		grass:		grass,
+		ground:		ground,
+		ice:			ice,
+		normal:		normal,
+		poison:		poison,
+		psychic:	psychic,
+		rock:			rock,
+		steel:		steel,
+		water:		water,
+	}
+
+	return colorMap[type]
 }
 
 export const getNumByDex = (nums, dex) => {
