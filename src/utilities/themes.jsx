@@ -28,6 +28,7 @@ let ddTheme = createTheme({
 			main:	grass[600],
 		},
 		divider: gray[100],
+		disabled: text[200],
 	},
 	typography: {
 		fontFamily:		'source-sans-3, "Source Sans Pro", Helvetica, Arial, sans-serif',
@@ -107,6 +108,18 @@ let ddTheme = createTheme({
 	},
 	shape: { borderRadius: 8, },
 	components: {
+		MuiBox: {
+			variants: [
+				{
+					props: { variant: 'pie', },
+					style: {
+						height:	'3rem',
+						width:	'3rem',
+						borderRadius:	'50%',
+					},
+				},
+			],
+		},
 		MuiCard: {
 			styleOverrides: {
 				root: ({ ownerState }) => ({
@@ -1345,7 +1358,7 @@ let ddTheme = createTheme({
 					},
 				},
 			],
-		}
+		},
 	},
 })
 

@@ -1,5 +1,7 @@
 export const black = '#000000'
 export const white = '#FFFFFF'
+export const female = '#FF6DCE'
+export const male = '#3273DE'
 
 export const gray = {
 	50:		'#F3F3F3',

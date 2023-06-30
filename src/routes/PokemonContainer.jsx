@@ -1,19 +1,20 @@
-import { useEffect, useReducer, useState } from "react"
-import { useOutletContext, useParams } from "react-router-dom"
+import { useEffect, useReducer } from 'react'
+import { useOutletContext, useParams } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
-import { Container } from "@mui/material"
-import Grid from '@mui/material/Unstable_Grid2';
+import { Container } from '@mui/material'
+import Grid from '@mui/material/Unstable_Grid2'
 
-import Abilities from "../components/pokemon/Abilities"
-import Breeding from "../components/pokemon/Breeding";
-import Defense from "../components/pokemon/Defense"
-import Evolution from "../components/pokemon/Evolution"
-import Header from "../components/pokemon/Header"
-import Stats from "../components/pokemon/Stats"
-import Training from "../components/pokemon/Training";
+import Abilities from '../components/pokemon/Abilities'
+import Breeding from '../components/pokemon/Breeding'
+import Defense from '../components/pokemon/Defense'
+import Evolution from '../components/pokemon/Evolution'
+import Gender from '../components/pokemon/Gender'
+import Header from '../components/pokemon/Header'
+import Size from '../components/pokemon/Size'
+import Stats from '../components/pokemon/Stats'
+import Training from '../components/pokemon/Training'
 
-import { getIdFromURL } from "../utilities/utilities"
-
+import { getIdFromURL } from '../utilities/utilities'
 
 const P = new Pokedex()
 
@@ -251,18 +252,19 @@ const PokemonContainer = props => {
 					<Defense state={state} />
 					
 					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }}>
-						<Grid xs={1}>
+						<Grid xs={1} sm={1}>
 							{state.abilities ? <Abilities state={state} /> : null}
 						</Grid>
-						<Grid xs={1}>
+						<Grid xs={1} sm={1}>
 							{state.evYield && state.growthRate ? <Training state={state} /> : null}
 						</Grid>
-					</Grid>
-
-					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }}>
-						<Grid xs={1}>
-							<Gender state={state} />
-							<Size state={state} />
+						<Grid container spacing={2} xs={1}>
+							<Grid xs>
+								<Gender state={state} />
+							</Grid>
+							<Grid xs>
+								<Size state={state} />
+							</Grid>
 						</Grid>
 						<Grid xs={1}>
 							{state.eggGroups ? <Breeding state={state} /> : null}

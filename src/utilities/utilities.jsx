@@ -15,6 +15,30 @@ export const calcDefense = (def1, def2, off) => {
 	return val
 }
 
+export const calcMeasurement = (num, type) => {
+	switch (type) {
+		case 'in': {
+			let meas = round2Decimal(num * 3.93701)
+			let feet = Math.floor(meas / 12)
+			let inches = Math.round(meas % 12)
+
+			inches < 10
+				? inches = '0' + inches.toString()
+				: inches.toString()
+
+			return `${feet}' ${inches}"`
+		} case 'cm': {
+			return `${round2Decimal(num * 10)} cm`
+		} case 'lb': {
+			return `${round2Decimal(num * 0.220462)} lbs`
+		} case 'kg': {
+			return `${round2Decimal(num / 10)} kg`
+		} default: {
+			console.log('ERROR:', type, 'is not a valid measurement type.')
+		}
+	}
+}
+
 export const filterByLang = (type, arr, lang) => {
 	let filter
 	filter = arr.filter(f => f.language.name === lang)
@@ -96,9 +120,6 @@ export const getIdFromURL = url => {
 	return id
 }
 
-export const normalize = value => {
-	const min = 1;
-	const max = 255;
+export const normalize = value => ((value - 1) * 100) / (255 - 1)
 
-	return ((value - min) * 100) / (max - min);
-};
+export const round2Decimal = num => Math.round(num * 100) / 100
