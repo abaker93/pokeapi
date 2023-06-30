@@ -8,7 +8,7 @@ const Evolution = props => {
 	if (evolution.chain.chain.evolves_to.length < 1) {
 		return (
 			<Box sx={{ mb: 5 }}>
-				<Typography variant="body1" textAlign="center">{filterByLang('name', pokemon.names, lang)} does not evolve.</Typography>
+				<Typography variant="body1" textAlign="center">{filterByLang('name', pokemon.names, lang)} does not evolve</Typography>
 			</Box>
 		)
 	}

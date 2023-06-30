@@ -3,10 +3,11 @@ import { Box, Tooltip, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
 import { female as femaleColor, male as maleColor } from '../../utilities/colors'
+import { filterByLang } from '../../utilities/utilities'
 
 
 const Gender = props => {
-	const { lang, pokemon, types } = props.state
+	const { lang, pokemon } = props.state
 
 	let female = pokemon.gender_rate / 8
 	const male = (1 - female) * 100
@@ -60,7 +61,7 @@ const Gender = props => {
 					</Grid>
 				</Grid>
 			) : (
-				Genderless
+				<Typography>{filterByLang('name', pokemon.names, lang)} is genderless</Typography>
 			)}
 			
 		</>
