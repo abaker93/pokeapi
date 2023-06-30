@@ -5,13 +5,15 @@ import { Container } from "@mui/material"
 import Grid from '@mui/material/Unstable_Grid2';
 
 import Abilities from "../components/pokemon/Abilities"
+import Breeding from "../components/pokemon/Breeding";
 import Defense from "../components/pokemon/Defense"
 import Evolution from "../components/pokemon/Evolution"
 import Header from "../components/pokemon/Header"
 import Stats from "../components/pokemon/Stats"
+import Training from "../components/pokemon/Training";
 
 import { getIdFromURL } from "../utilities/utilities"
-import Breeding from "../components/pokemon/Breeding";
+
 
 const P = new Pokedex()
 
@@ -25,6 +27,7 @@ const createInitialState = props => {
 			chain:		null,
 			pokemon:	null,
 		},
+		growthRate: null,
 		id:					id,
 		lang:				lang,
 		types:			null,
@@ -92,9 +95,7 @@ const PokemonContainer = props => {
 				//~~	Get Evolution Pokemon by chain IDs	//
 				//--	set evolution.chain									//
 				//--	set evolution.pokemon								//
-				const id = getIdFromURL(data[1].evolution_chain.url)
-
-				P.getEvolutionChainById(id)
+				P.getResource(data[1].evolution_chain.url)
 					.then(data => {
 						let arr = []
 
@@ -162,13 +163,11 @@ const PokemonContainer = props => {
 			.then(data => {
 				//~~	Get Egg Groups	//
 				//--	set eggGroups		//
-				// console.log(data)
 				let arr = []
 
 				data[1].egg_groups.map(m => {
-					P.getEggGroupByName(getIdFromURL(m.url))
+					P.getResource(m.url)
 						.then(data => {
-							// console.log(data)
 							arr = [...arr, {
 								id:			data.id,
 								name:		data.name,
@@ -178,6 +177,34 @@ const PokemonContainer = props => {
 						})
 						.catch(console.error)
 				})
+
+				return data
+			})
+			.then(data => {
+				//~~	Get Stats		//
+				//--	set evYield	//
+				let arr = []
+
+				data[0].stats.filter(f => f.effort > 0).map(m => {
+					P.getResource(m.stat.url)
+						.then(data => {
+							arr = [...arr, {
+								id:			data.id,
+								effort:	m.effort,
+								names:	data.names,
+							}]
+							dispatch({ type: 'evYield', value: arr })
+						})
+						.catch(console.error)
+				})
+
+				return data
+			})
+			.then(data => {
+				//~~	Get Growth Rate	//
+				//--	set growthRate		//
+				P.getGrowthRateByName(data[1].growth_rate.name)
+					.then(data => dispatch({ type: 'growthRate', value: data }))
 			})
 			.catch(console.error)
 
@@ -223,11 +250,21 @@ const PokemonContainer = props => {
 					
 					<Defense state={state} />
 					
-					<Grid container spacing={2}>
-						<Grid xs={6}>
+					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }}>
+						<Grid xs={1}>
 							{state.abilities ? <Abilities state={state} /> : null}
 						</Grid>
-						<Grid xs={6}>
+						<Grid xs={1}>
+							{state.evYield && state.growthRate ? <Training state={state} /> : null}
+						</Grid>
+					</Grid>
+
+					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }}>
+						<Grid xs={1}>
+							<Gender state={state} />
+							<Size state={state} />
+						</Grid>
+						<Grid xs={1}>
 							{state.eggGroups ? <Breeding state={state} /> : null}
 						</Grid>
 					</Grid>

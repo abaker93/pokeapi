@@ -85,6 +85,18 @@ let ddTheme = createTheme({
 			fontWeight:	400,
 			lineHeight: 1.5,
 		},
+		caption: {
+			fontSize: 	'0.75rem',
+			fontWeight:	400,
+			lineHeight: 1.5,
+		},
+		overline: {
+			fontSize: 	'0.625rem',
+			fontWeight:	400,
+			lineHeight: 1.66,
+			letterSpacing:	'0.08333em',
+			textTransform: 'uppercase',
+		},
 		button: {
 			fontWeight:			400,
 			letterSpacing:	'0.025em',

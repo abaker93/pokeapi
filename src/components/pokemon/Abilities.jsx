@@ -8,7 +8,7 @@ const Abilities = props => {
 	const { abilities, lang, types } = props.state
 	
 	return (
-		<Box sx={{ mb: 5 }}>
+		<>
 			<Box sx={{ mb: 2 }}>
 				<Typography variant="h2">Abilities</Typography>
 			</Box>
@@ -32,7 +32,7 @@ const Abilities = props => {
 					</Grid>
 				))}
 			</Grid>
-		</Box>
+		</>
 	)
 }
 

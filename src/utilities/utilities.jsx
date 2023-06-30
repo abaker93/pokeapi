@@ -19,8 +19,8 @@ export const filterByLang = (type, arr, lang) => {
 	let filter
 	filter = arr.filter(f => f.language.name === lang)
 
-	if (type === 'name') return filter.map(m => m.name)[0]
-	if (type === 'genus') return filter.map(m => m.genus)[0]
+	return filter.map(m => m[type])[0]
+	
 }
 
 export const formatDexId = (num, dig) => {

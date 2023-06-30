@@ -13,7 +13,7 @@ const Breeding = props => {
 	// console.log(eggGroups)
 	
 	return (
-		<Box sx={{ mb: 5 }}>
+		<>
 			<Box sx={{ mb: 2 }}>
 				<Typography variant="h2">Egg Group{eggGroups.length > 1 ? 's' : null}</Typography>
 			</Box>
@@ -48,7 +48,7 @@ const Breeding = props => {
 					</Typography>
 				</Typography>
 			</Box>
-		</Box>
+		</>
 	)
 }
 
