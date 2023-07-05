@@ -1,4 +1,4 @@
-import { Box, Chip, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material"
+import { Box, Chip, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material"
 import Pokedex from 'pokedex-promise-v2'
 import { filterByLang, getColorFromType } from "../../utilities/utilities"
 
@@ -15,7 +15,15 @@ const Training = props => {
 
 
 	const tableData = [
-		createData('EV yield', evYield.map(m => ( <Chip key={m.id} component="span" size="xsmall" label={`${m.effort} ${filterByLang('name', m.names, lang)}`} /> ))),
+		createData('EV yield', evYield.map(m => (
+			<Chip
+				key={m.id}
+				component="span"
+				size="xsmall"
+				label={`${m.effort} ${filterByLang('name', m.names, lang)}`}
+				sx={{ mr: 1 }}
+			/>
+		))),
 		createData('Catch Rate', pokemon.capture_rate),
 		createData('Base Experience', pokemon.base_experience),
 		createData('Base Friendship', pokemon.base_happiness),			 // TODO:	add note about friendship = happiness
