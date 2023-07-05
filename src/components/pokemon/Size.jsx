@@ -4,9 +4,7 @@ import { calcMeasurement } from '../../utilities/utilities'
 
 
 const Size = props => {
-	const { lang, pokemon, types } = props.state
-
-	console.log(props.state)
+	const { pokemon } = props.state
 	
 	return (
 		<>

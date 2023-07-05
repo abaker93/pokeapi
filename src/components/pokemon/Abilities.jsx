@@ -15,13 +15,13 @@ const Abilities = props => {
 			<Grid container spacing={1}>
 				{abilities.sort((a,b) => a.slot - b.slot).map((m) => (
 					<Grid key={m.slot} xs={12}>
-						<TypeCard variant="outlined" color={getColorFromType(types)}>
+						<TypeCard variant="outlined" color={getColorFromType(types[0])}>
 							<CardActionArea href={`/abilities/${m.ability.name}`}>
 								<CardContent>
 									{m.is_hidden ? (
 										<>
 											<Typography variant="body1" sx={{ mb: '-5px' }}>{filterByLang('name', m.ability.names, lang)}</Typography>
-											<Typography variant="caption" fontStyle="italic" color={getColorFromType(types)[500]} sx={{ ml: 1 }}>Hidden Ability</Typography>
+											<Typography variant="caption" fontStyle="italic" color={getColorFromType(types[0])[500]} sx={{ ml: 1 }}>Hidden Ability</Typography>
 										</>
 									) : (
 										<Typography variant="body1">{filterByLang('name', m.ability.names, lang)}</Typography>

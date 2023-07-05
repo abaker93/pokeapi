@@ -88,7 +88,13 @@ const PokemonContainer = props => {
 			.then(data => {
 				//~~	set pokemon	//
 				dispatch({ type: 'pokemon', value: { ...data[0], ...data[1] } })
-				dispatch({ type: 'types', value: data[0].types[0].type.name })
+				dispatch({
+					type: 'types',
+					value: [
+						data[0].types[0].type.name,
+						data[0].types[1] ? data[0].types[1].type.name : data[0].types[0].type.name,
+					]
+				})
 				return data
 			})
 			.then(data => {

@@ -1,6 +1,6 @@
-import { createTheme } from "@mui/material";
-import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, gray, ground, ice, normal, poison, psychic, rock, steel, text, water, white } from "./colors";
-import { gradientBug, gradientFire, gradientGrass, gradientNormal, gradientWater } from "./gradients";
+import { createTheme } from '@mui/material'
+import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, gray, ground, ice, normal, poison, psychic, rock, steel, text, water, white } from './colors'
+import { gradient } from './gradient'
 
 //	~~~~~~~~~~~~~~~~~~~~	//
 //	--	BASE THEME		--	//
@@ -126,58 +126,58 @@ let ddTheme = createTheme({
 					...(ownerState.type1 === 'bug' && {
 						color:	text[500],
 						...(ownerState.type2 === 'bug' && {
-							background:	`linear-gradient(45deg, ${gradientBug.bug})`,
+							background:	`linear-gradient(45deg, ${gradient.bug.bug})`,
 						}),
 						...(ownerState.type2 === 'dark' && {
-							background: `linear-gradient(45deg, ${gradientBug.dark})`,
+							background: `linear-gradient(45deg, ${gradient.bug.dark})`,
 						}),
 						...(ownerState.type2 === 'dragon' && {
-							background: `linear-gradient(45deg, ${gradientBug.dragon})`,
+							background: `linear-gradient(45deg, ${gradient.bug.dragon})`,
 						}),
 						...(ownerState.type2 === 'electric' && {
-							background: `linear-gradient(45deg, ${gradientBug.electric})`,
+							background: `linear-gradient(45deg, ${gradient.bug.electric})`,
 						}),
 						...(ownerState.type2 === 'fairy' && {
-							background: `linear-gradient(45deg, ${gradientBug.fairy})`,
+							background: `linear-gradient(45deg, ${gradient.bug.fairy})`,
 						}),
 						...(ownerState.type2 === 'fighting' && {
-							background: `linear-gradient(45deg, ${gradientBug.fighting})`,
+							background: `linear-gradient(45deg, ${gradient.bug.fighting})`,
 						}),
 						...(ownerState.type2 === 'fire' && {
-							background: `linear-gradient(45deg, ${gradientBug.fire})`,
+							background: `linear-gradient(45deg, ${gradient.bug.fire})`,
 						}),
 						...(ownerState.type2 === 'flying' && {
-							background: `linear-gradient(45deg, ${gradientBug.flying})`,
+							background: `linear-gradient(45deg, ${gradient.bug.flying})`,
 						}),
 						...(ownerState.type2 === 'ghost' && {
-							background: `linear-gradient(45deg, ${gradientBug.ghost})`,
+							background: `linear-gradient(45deg, ${gradient.bug.ghost})`,
 						}),
 						...(ownerState.type2 === 'grass' && {
-							background: `linear-gradient(45deg, ${gradientBug.grass})`,
+							background: `linear-gradient(45deg, ${gradient.bug.grass})`,
 						}),
 						...(ownerState.type2 === 'ground' && {
-							background: `linear-gradient(45deg, ${gradientBug.ground})`,
+							background: `linear-gradient(45deg, ${gradient.bug.ground})`,
 						}),
 						...(ownerState.type2 === 'ice' && {
-							background: `linear-gradient(45deg, ${gradientBug.ice})`,
+							background: `linear-gradient(45deg, ${gradient.bug.ice})`,
 						}),
 						...(ownerState.type2 === 'normal' && {
-							background: `linear-gradient(45deg, ${gradientBug.normal})`,
+							background: `linear-gradient(45deg, ${gradient.bug.normal})`,
 						}),
 						...(ownerState.type2 === 'poison' && {
-							background: `linear-gradient(45deg, ${gradientBug.poison})`,
+							background: `linear-gradient(45deg, ${gradient.bug.poison})`,
 						}),
 						...(ownerState.type2 === 'psychic' && {
-							background: `linear-gradient(45deg, ${gradientBug.psychic})`,
+							background: `linear-gradient(45deg, ${gradient.bug.psychic})`,
 						}),
 						...(ownerState.type2 === 'rock' && {
-							background: `linear-gradient(45deg, ${gradientBug.rock})`,
+							background: `linear-gradient(45deg, ${gradient.bug.rock})`,
 						}),
 						...(ownerState.type2 === 'steel' && {
-							background: `linear-gradient(45deg, ${gradientBug.steel})`,
+							background: `linear-gradient(45deg, ${gradient.bug.steel})`,
 						}),
 						...(ownerState.type2 === 'water' && {
-							background: `linear-gradient(45deg, ${gradientBug.water})`,
+							background: `linear-gradient(45deg, ${gradient.bug.water})`,
 						}),
 					}),
 					...(ownerState.type1 === 'dark' && {
@@ -510,10 +510,10 @@ let ddTheme = createTheme({
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${fighting[500]} 100%)`,
 						}),
 						...(ownerState.type2 === 'fire' && {
-							background: `linear-gradient(45deg, ${gradientFire.fire})`,
+							background: `linear-gradient(45deg, ${gradient.fire.fire})`,
 						}),
 						...(ownerState.type2 === 'flying' && {
-							background: `linear-gradient(45deg, ${gradientFire.flying})`,
+							background: `linear-gradient(45deg, ${gradient.fire.flying})`,
 						}),
 						...(ownerState.type2 === 'ghost' && {
 							background: `linear-gradient(45deg, ${fire[500]} 0%, ${ghost[500]} 100%)`,
@@ -716,7 +716,7 @@ let ddTheme = createTheme({
 							background: `linear-gradient(45deg, ${grass[500]} 0%, ${normal[500]} 100%)`,
 						}),
 						...(ownerState.type2 === 'poison' && {
-							background: `linear-gradient(45deg, ${gradientGrass.poison})`,
+							background: `linear-gradient(45deg, ${gradient.grass.poison})`,
 						}),
 						...(ownerState.type2 === 'psychic' && {
 							background: `linear-gradient(45deg, ${grass[500]} 0%, ${psychic[500]} 100%)`,
@@ -900,7 +900,7 @@ let ddTheme = createTheme({
 							color: text[500],
 						}),
 						...(ownerState.type2 === 'normal' && {
-							background: `linear-gradient(45deg, ${gradientNormal.normal})`,
+							background: `linear-gradient(45deg, ${gradient.normal.normal})`,
 						}),
 						...(ownerState.type2 === 'poison' && {
 							background: `linear-gradient(45deg, ${normal[500]} 0%, ${poison[500]} 100%)`,
@@ -1224,7 +1224,7 @@ let ddTheme = createTheme({
 							background: `linear-gradient(45deg, ${water[500]} 0%, ${steel[500]} 100%)`,
 						}),
 						...(ownerState.type2 === 'water' && {
-							background: `linear-gradient(45deg, ${gradientWater.water})`,
+							background: `linear-gradient(45deg, ${gradient.water.water})`,
 						}),
 					}),
 				}),

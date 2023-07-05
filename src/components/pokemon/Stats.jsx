@@ -11,12 +11,12 @@ const Stats = props => {
 	return (
 		<Box sx={{ mb: 5 }}>
 			<Grid container spacing={1}>
-				<Bar label="HP" stat={pokemon.stats[0].base_stat} color={getColorFromType(types)} />
-				<Bar label="ATT" stat={pokemon.stats[1].base_stat} color={getColorFromType(types)} />
-				<Bar label="DEF" stat={pokemon.stats[2].base_stat} color={getColorFromType(types)} />
-				<Bar label="SATT" stat={pokemon.stats[3].base_stat} color={getColorFromType(types)} />
-				<Bar label="SDEF" stat={pokemon.stats[4].base_stat} color={getColorFromType(types)} />
-				<Bar label="SPD" stat={pokemon.stats[5].base_stat} color={getColorFromType(types)} />
+				<Bar label="HP" stat={pokemon.stats[0].base_stat} types={types} />
+				<Bar label="ATT" stat={pokemon.stats[1].base_stat} types={types} />
+				<Bar label="DEF" stat={pokemon.stats[2].base_stat} types={types} />
+				<Bar label="SATT" stat={pokemon.stats[3].base_stat} types={types} />
+				<Bar label="SDEF" stat={pokemon.stats[4].base_stat} types={types} />
+				<Bar label="SPD" stat={pokemon.stats[5].base_stat} types={types} />
 			</Grid>
 		</Box>
 	)
@@ -24,7 +24,7 @@ const Stats = props => {
 
 
 const Bar = props => {
-	const { color, label, stat } = props
+	const { types, label, stat } = props
 
 	return (
 		<Grid container spacing={1} xs={12} display="flex" alignItems="center">
@@ -32,7 +32,7 @@ const Bar = props => {
 				<Typography variant="h6" component="h3">{label}</Typography>
 			</Grid>
 			<Grid xs>
-				<StatBar variant="determinate" type={color} value={normalize(stat)} />
+				<StatBar variant="determinate" types={types} value={normalize(stat)} />
 			</Grid>
 			<Grid xs={1}>
 				<Typography component="p">{stat}</Typography>

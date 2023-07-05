@@ -20,13 +20,13 @@ const Breeding = props => {
 			<Grid container spacing={1} sx={{ mb: 2 }}>
 				{eggGroups.map((m) => (
 					<Grid key={m.id} xs={12}>
-						<TypeCard variant="outlined" color={getColorFromType(types)}>
+						<TypeCard variant="outlined" color={getColorFromType(types[0])}>
 							<CardActionArea href={`/egg-groups/${m.name}`}>
 								<CardContent>
 									{m.name === 'no-eggs' ? (
 										<>
 											<Typography variant="body1" sx={{ mb: '-5px' }}>{filterByLang('name', m.names, lang)}</Typography>
-											<Typography variant="caption" fontStyle="italic" color={getColorFromType(types)[500]} sx={{ ml: 1 }}>{filterByLang('name', pokemon.names, lang)} can't breed</Typography>
+											<Typography variant="caption" fontStyle="italic" color={getColorFromType(types[0])[500]} sx={{ ml: 1 }}>{filterByLang('name', pokemon.names, lang)} can't breed</Typography>
 										</>
 									) : (
 										<Typography variant="body1">{filterByLang('name', m.names, lang)}</Typography>
