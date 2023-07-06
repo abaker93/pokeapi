@@ -1,187 +1,68 @@
+import { useEffect, useState } from 'react';
 import { Box, Container, Tab, Tabs, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
+
 import { gameDataByPokemon } from '../../utilities/games';
-import { useState } from 'react';
-import { filterByLang, formatDexId, getNumByDex } from '../../utilities/utilities';
+import { formatDexId } from '../../utilities/utilities';
 
 const FlavorText = props => {
-	const { lang, pokemon } = props.state
-
-	const pokedexNumbers = pokemon.pokedex_numbers
+	const { pokemon } = props.state
+	const data = gameDataByPokemon(props)
 
 	const [genVal, setGenVal] = useState({
 		gen:			1,
-		gen_i:		true,
-		gen_ii:		true,
-		gen_iii:	true,
-		gen_iv:		true,
-		gen_v:		true,
-		gen_vi:		true,
-		gen_vii:	true,
-		gen_viii:	true,
-		gen_ix:		true,
+		gen_i:		false,
+		gen_ii:		false,
+		gen_iii:	false,
+		gen_iv:		false,
+		gen_v:		false,
+		gen_vi:		false,
+		gen_vii:	false,
+		gen_viii:	false,
+		gen_ix:		false,
 	})
 
-	const data = gameDataByPokemon(props)
+	const g = {
+		1:	data.gen_i.games.red.text || data.gen_i.games.blue.text || data.gen_i.games.yellow.text ? true : false,
+		2:	data.gen_ii.games.gold.text || data.gen_ii.games.silver.text || data.gen_ii.games.crystal.text ? true : false,
+		3:	data.gen_iii.games.ruby.text || data.gen_iii.games.sapphire.text || data.gen_iii.games.emerald.text || data.gen_iii.games.firered.text || data.gen_iii.games.leafgreen.text ? true : false,
+		4:	data.gen_iv.games.diamond.text || data.gen_iv.games.pearl.text || data.gen_iv.games.platinum.text || data.gen_iv.games.heartgold.text || data.gen_iv.games.soulsilver.text ? true : false,
+		5:	data.gen_v.games.black.text || data.gen_v.games.white.text || data.gen_v.games.black_2.text || data.gen_v.games.white_2.text ? true : false,
+		6:	data.gen_vi.games.x.text || data.gen_vi.games.y.text || data.gen_vi.games.omega_ruby.text || data.gen_vi.games.alpha_sapphire.text ? true : false,
+		7:	data.gen_vii.games.sun.text || data.gen_vii.games.moon.text || data.gen_vii.games.ultra_sun.text || data.gen_vii.games.ultra_moon.text || data.gen_vii.games.lets_go_pikachu.text || data.gen_vii.games.lets_go_eevee.text ? true : false,
+		8:	data.gen_viii.games.sword.text || data.gen_viii.games.shield.text || data.gen_ix.games.brilliant_diamond.text || data.gen_ix.games.shining_pearl.text || data.gen_ix.games.legends_arceus.text ? true : false,
+		9:	data.gen_ix.games.scarlet.text || data.gen_ix.games.violet.text ? true : false,
+	}
 
-	console.log(data)
+	const getGenVal = () => {
+		if (g[1]) { setGenVal(prev => ({ ...prev, gen: 1, })) }
+		else if (g[2]) { setGenVal(prev => ({ ...prev, gen: 2, })) }
+		else if (g[3]) { setGenVal(prev => ({ ...prev, gen: 3, })) }
+		else if (g[4]) { setGenVal(prev => ({ ...prev, gen: 4, })) }
+		else if (g[5]) { setGenVal(prev => ({ ...prev, gen: 5, })) }
+		else if (g[6]) { setGenVal(prev => ({ ...prev, gen: 6, })) } 
+		else if (g[7]) { setGenVal(prev => ({ ...prev, gen: 7, })) }
+		else if (g[8]) { setGenVal(prev => ({ ...prev, gen: 8, })) }
+		else if (g[9]) { setGenVal(prev => ({ ...prev, gen: 9, })) }
 
-	// const games = {
-	// 	red: {
-	// 		num:	gamesArray[0].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'red'), lang)
-	// 	},
-	// 	blue: {
-	// 		num:	gamesArray[0].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'blue'), lang)
-	// 	},
-	// 	yellow: {
-	// 		num:	gamesArray[0].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'yellow'), lang)
-	// 	},
-	// 	gold: {
-	// 		num:	gamesArray[1].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'gold'), lang)
-	// 	},
-	// 	silver: {
-	// 		num:	gamesArray[1].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'silver'), lang)
-	// 	},
-	// 	crystal: {
-	// 		num:	gamesArray[1].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'crystal'), lang)
-	// 	},
-	// 	ruby: {
-	// 		num:	gamesArray[2].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'ruby'), lang)
-	// 	},
-	// 	sapphire: {
-	// 		num:	gamesArray[2].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'sapphire'), lang)
-	// 	},
-	// 	emerald: {
-	// 		num:	gamesArray[2].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'emerald'), lang)
-	// 	},
-	// 	firered: {
-	// 		num:	gamesArray[2].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'firered'), lang)
-	// 	},
-	// 	leafgreen: {
-	// 		num:	gamesArray[2].games[4].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'leafgreen'), lang)
-	// 	},
-	// 	diamond: {
-	// 		num:	gamesArray[3].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'diamond'), lang)
-	// 	},
-	// 	pearl: {
-	// 		num:	gamesArray[3].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'pearl'), lang)
-	// 	},
-	// 	platinum: {
-	// 		num:	gamesArray[3].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'platinum'), lang)
-	// 	},
-	// 	heartgold: {
-	// 		num:	gamesArray[3].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'heartgold'), lang)
-	// 	},
-	// 	soulsilver: {
-	// 		num:	gamesArray[3].games[4].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'soulsilver'), lang)
-	// 	},
-	// 	black: {
-	// 		num:	gamesArray[4].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'black'), lang)
-	// 	},
-	// 	white: {
-	// 		num:	gamesArray[4].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'white'), lang)
-	// 	},
-	// 	black_2: {
-	// 		num:	gamesArray[4].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'black-2'), lang)
-	// 	},
-	// 	white_2: {
-	// 		num:	gamesArray[4].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'white-2'), lang)
-	// 	},
-	// 	x: {
-	// 		num:	gamesArray[5].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'x'), lang)
-	// 	},
-	// 	y: {
-	// 		num:	gamesArray[5].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'y'), lang)
-	// 	},
-	// 	omega_ruby: {
-	// 		num:	gamesArray[5].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'omega-ruby'), lang)
-	// 	},
-	// 	alpha_sapphire: {
-	// 		num:	gamesArray[5].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'alpha-sapphire'), lang)
-	// 	},
-	// 	sun: {
-	// 		num:	gamesArray[6].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'sun'), lang)
-	// 	},
-	// 	moon: {
-	// 		num:	gamesArray[6].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'moon'), lang)
-	// 	},
-	// 	ultra_sun: {
-	// 		num:	gamesArray[6].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'ultra-sun'), lang)
-	// 	},
-	// 	ultra_moon: {
-	// 		num:	gamesArray[6].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'ultra-moon'), lang)
-	// 	},
-	// 	lets_go_pikachu: {
-	// 		num:	gamesArray[6].games[4].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'lets-go-pikachu'), lang)
-	// 	},
-	// 	lets_go_eevee: {
-	// 		num:	gamesArray[6].games[5].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'lets-go-eevee'), lang)
-	// 	},
-	// 	sword: {
-	// 		num:	gamesArray[7].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'sword-shield'), lang)
-	// 	},
-	// 	shield: {
-	// 		num:	gamesArray[7].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'sword-shield'), lang)
-	// 	},
-	// 	brilliant_diamond: {
-	// 		num:	gamesArray[7].games[2].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'brilliant-diamond'), lang)
-	// 	},
-	// 	shining_pearl: {
-	// 		num:	gamesArray[7].games[3].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'shining-pearl'), lang)
-	// 	},
-	// 	legends_arceus: {
-	// 		num:	gamesArray[7].games[4].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'legends-arceus'), lang)
-	// 	},
-	// 	scarlet: {	
-	// 		num:	gamesArray[8].games[0].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'scarlet'), lang)
-	// 	},
-	// 	violet: {
-	// 		num:	gamesArray[8].games[1].pokedex.map(dex => getNumByDex(pokedexNumbers, dex)),
-	// 		text:	filterByLang('flavor_text', pokemon.flavor_text_entries.filter(f => f.version.name === 'violet'), lang)
-	// 	},
-	// }
+		if (g[1]) { setGenVal(prev => ({ ...prev, gen_i: true })) }
+		if (g[2]) { setGenVal(prev => ({ ...prev, gen_ii: true })) }
+		if (g[3]) { setGenVal(prev => ({ ...prev, gen_iii: true })) }
+		if (g[4]) { setGenVal(prev => ({ ...prev, gen_iv: true })) }
+		if (g[5]) { setGenVal(prev => ({ ...prev, gen_v: true })) }
+		if (g[6]) { setGenVal(prev => ({ ...prev, gen_vi: true })) }
+		if (g[7]) { setGenVal(prev => ({ ...prev, gen_vii: true })) }
+		if (g[8]) { setGenVal(prev => ({ ...prev, gen_viii: true })) }
+		if (g[9]) { setGenVal(prev => ({ ...prev, gen_ix: true })) }
+	}
 
-	// console.log(games)
+	useEffect(() => {
+		getGenVal()
+	}, [pokemon])
 
 	return (
 		<Box sx={{ mb: 5 }}>
-			<Box sx={{ mb: 3 }}>
+			<Box sx={{ mb: 2 }}>
 				<Typography variant="h2">Pokédex entries</Typography>
 			</Box>
 			<Box>
@@ -197,7 +78,6 @@ const FlavorText = props => {
 						genVal[data[gen].name] && (
 							<Tab
 								key={data[gen].id}
-								onChange={(e, val)}
 								label={data[gen].label}
 								value={data[gen].id}
 								id={`flavortext_tab_${data[gen].id}`}
@@ -205,6 +85,7 @@ const FlavorText = props => {
 							/>
 						)
 					))}
+
 				</Tabs>
 
 				{Object.keys(data).map(gen => (
@@ -221,9 +102,39 @@ const FlavorText = props => {
 								<Box>
 									{Object.keys(data[gen].games).map(game => (
 										data[gen].games[game].text && (
-											<Box key={data[gen].games[game].id} sx={{ mb: 3 }}>
-												<Typography variant="h4">{data[gen].games[game].label}</Typography>
-												</Box>
+											<Grid key={data[gen].games[game].id} container columns={1} sx={{ mb: 3 }}>
+												<Grid container xs>
+													<Grid xs>
+														<Typography variant="h4">
+															{data[gen].games[game].label}
+															{Object.keys(data[gen].games[game].pokedexes).map(dex => (
+																data[gen].games[game].pokedexes[dex].num && (
+																	Object.keys(data[gen].games[game].pokedexes).length > 1 && (
+																		<Typography component="span" fontSize={16} fontWeight="medium" sx={{ ml: 1, opacity: 0.7 }}>
+																			{data[gen].games[game].pokedexes[dex].label}
+																		</Typography>
+																	)
+																)
+															))}
+														</Typography>
+													</Grid>
+													<Grid xs="auto">
+														{Object.keys(data[gen].games[game].pokedexes).map(dex => (
+															data[gen].games[game].pokedexes[dex].num && (
+																<Typography key={data[gen].games[game].pokedexes[dex].id} component="span" fontWeight="medium" sx={{ opacity: 0.7 }}>
+																	<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
+																		No.
+																	</Typography>
+																	{formatDexId(data[gen].games[game].pokedexes[dex].num)}
+																</Typography>
+															)
+														))}
+													</Grid>
+												</Grid>
+												<Grid>
+													<Typography>{data[gen].games[game].text.replace(/\s/g, " ")}</Typography>
+												</Grid>
+											</Grid>
 										)
 									))}
 								</Box>
@@ -231,47 +142,6 @@ const FlavorText = props => {
 						</Container>
 					)
 				))}
-
-				{/* {gamesArray.map(gen => (
-					generations[gen.id] ? (
-						<Container
-							key={gen.id}
-							role="tabpanel"
-							hidden={generations.gen !== gen.id}
-							id={`flavortext_panel_${gen.id}`}
-							aria-labelledby={props.ariaLabelledBy}
-							sx={{ mt: 3 }}
-						> 
-							{generations.gen === gen.id && (
-								gen.games.map(game => (
-									games[game.id].text && (
-										<Box key={game.id}>
-
-											<Typography variant="h4">{game.name}</Typography>
-											
-											{games[game.id].num.map((m,i) => (
-												m && (
-													<Typography key={i} component="span" fontWeight="medium" sx={{ mr: 0.5, opacity: 0.7 }}>
-														<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
-															No.
-														</Typography>
-														{formatDexId(m)}
-													</Typography>
-												)
-											))}
-
-											{games[game.id].text && (
-												<Typography>{games[game.id].text}</Typography>
-											)}
-
-										</Box>
-									)
-								))
-							)}
-						</Container>
-					) : null
-				))} */}
-
 			</Box>
 		</Box>
 	)

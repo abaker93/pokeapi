@@ -257,7 +257,7 @@ const PokemonContainer = props => {
 					
 					<Defense state={state} />
 					
-					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }}>
+					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }} sx={{ mb: 5 }}>
 						<Grid xs={1} sm={1}>
 							{state.abilities ? <Abilities state={state} /> : null}
 						</Grid>
