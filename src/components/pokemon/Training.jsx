@@ -1,9 +1,5 @@
 import { Box, Chip, Table, TableBody, TableCell, TableRow, Typography } from "@mui/material"
-import Pokedex from 'pokedex-promise-v2'
 import { filterByLang, getColorFromType } from "../../utilities/utilities"
-
-const P = new Pokedex()
-
 
 const Training = props => {
 	const { evYield, growthRate, lang, pokemon, types } = props.state

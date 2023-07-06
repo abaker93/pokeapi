@@ -111,7 +111,9 @@ export const getColorFromType = (type) => {
 }
 
 export const getNumByDex = (nums, dex) => {
-	return nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
+	const num = nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
+
+	return num ? num : null
 }
 
 export const getIdFromURL = url => {

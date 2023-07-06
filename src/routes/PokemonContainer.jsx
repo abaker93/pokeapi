@@ -8,6 +8,7 @@ import Abilities from '../components/pokemon/Abilities'
 import Breeding from '../components/pokemon/Breeding'
 import Defense from '../components/pokemon/Defense'
 import Evolution from '../components/pokemon/Evolution'
+import FlavorText from '../components/pokemon/FlavorText'
 import Gender from '../components/pokemon/Gender'
 import Header from '../components/pokemon/Header'
 import Size from '../components/pokemon/Size'
@@ -244,7 +245,6 @@ const PokemonContainer = props => {
 		)
 	}
 
-
 	if (state.pokemon) {
 		return (
 			<>
@@ -276,6 +276,8 @@ const PokemonContainer = props => {
 							{state.eggGroups ? <Breeding state={state} /> : null}
 						</Grid>
 					</Grid>
+
+					<FlavorText state={state} />
 					
 				</Container>
 			</>

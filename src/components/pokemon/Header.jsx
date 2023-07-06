@@ -61,7 +61,7 @@ const Title = props => {
 					<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
 						No.
 					</Typography>
-					{formatDexId(id, 1010)}
+					{formatDexId(id)}
 				</Typography>
 				{name}
 			</Typography>
