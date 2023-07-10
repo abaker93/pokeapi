@@ -1,13 +1,20 @@
 import { filterByLang, getNumByDex } from './utilities'
 
-export const gameDataByPokemon = (props) => {
-	const { lang, pokemon } = props.state
-
+export const gameDataByPokemon = props => {
+	const { encounters, lang, pokemon } = props.state
 	const pokedexNumbers = pokemon.pokedex_numbers
+
 	const filterFlavorText = game => {
 		let text = pokemon.flavor_text_entries.filter(f => f.version.name === game)
 		return filterByLang('flavor_text', text, lang)
 	}
+
+	const filterEncounters = game => {
+		let enc = encounters.filter(f => f.version_details.some(s => s.version.name === game))
+		return enc
+	}
+
+
 
 	const data = {
 		gen_i: {
@@ -20,6 +27,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'red',
 					label: 'Red',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -34,6 +42,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'blue',
 					label: 'Blue',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -48,6 +57,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'yellow',
 					label: 'Yellow',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -69,6 +79,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'gold',
 					label: 'Gold',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						johto: {
 							id: 1,
@@ -83,6 +94,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'silver',
 					label: 'Silver',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						johto: {
 							id: 1,
@@ -97,6 +109,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'crystal',
 					label: 'Crystal',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						johto: {
 							id: 1,
@@ -118,6 +131,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'ruby',
 					label: 'Ruby',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hoenn: {
 							id: 1,
@@ -132,6 +146,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'sapphire',
 					label: 'Sapphire',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hoenn: {
 							id: 1,
@@ -146,6 +161,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'emerald',
 					label: 'Emerald',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hoenn: {
 							id: 1,
@@ -160,6 +176,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'firered',
 					label: 'FireRed',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -174,6 +191,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'leafgreen',
 					label: 'LeafGreen',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -195,6 +213,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'diamond',
 					label: 'Diamond',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						sinnoh: {
 							id: 1,
@@ -209,6 +228,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'pearl',
 					label: 'Pearl',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						sinnoh: {
 							id: 1,
@@ -223,6 +243,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'platinum',
 					label: 'Platinum',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						sinnoh: {
 							id: 1,
@@ -237,6 +258,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'heartgold',
 					label: 'HeartGold',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						johto: {
 							id: 1,
@@ -251,6 +273,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'soulsilver',
 					label: 'SoulSilver',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						johto: {
 							id: 1,
@@ -272,6 +295,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'black',
 					label: 'Black',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						unova: {
 							id: 1,
@@ -286,6 +310,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'white',
 					label: 'White',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						unova: {
 							id: 1,
@@ -300,6 +325,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'black-2',
 					label: 'Black 2',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						pokedexes: {
 							unova: {
@@ -318,6 +344,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'white-2',
 					label: 'White 2',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						unova: {
 							id: 1,
@@ -339,6 +366,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'x',
 					label: 'X',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kalos_central: {
 							id: 1,
@@ -365,6 +393,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'y',
 					label: 'Y',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kalos_central: {
 							id: 1,
@@ -391,6 +420,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'omega-ruby',
 					label: 'Omega Ruby',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hoenn: {
 							id: 1,
@@ -405,6 +435,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'alpha-sapphire',
 					label: 'Alpha Sapphire',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hoenn: {
 							id: 1,
@@ -426,6 +457,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'sun',
 					label: 'Sun',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						alola: {
 							id: 1,
@@ -464,6 +496,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'moon',
 					label: 'Moon',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						alola: {
 							id: 1,
@@ -502,6 +535,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'ultra-sun',
 					label: 'Ultra Sun',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						alola: {
 							id: 1,
@@ -540,6 +574,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'ultra-moon',
 					label: 'Ultra Moon',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						alola: {
 							id: 1,
@@ -578,6 +613,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'lets-go-pikachu',
 					label: `Let's Go Pikachu`,
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -592,6 +628,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'lets-go-eevee',
 					label: `Let's Go Eevee`,
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						kanto: {
 							id: 1,
@@ -613,6 +650,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'sword',
 					label: 'Sword',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						galar: {
 							id: 1,
@@ -639,6 +677,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'shield',
 					label: 'Shield',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						galar: {
 							id: 1,
@@ -665,6 +704,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'brilliant-diamond',
 					label: 'Brilliant Diamond',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						sinnoh: {
 							id: 1,
@@ -679,6 +719,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'shining-pearl',
 					label: 'Shining Pearl',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						sinnoh: {
 							id: 1,
@@ -693,6 +734,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'legends-arceus',
 					label: 'Legends: Arceus',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						hisui: {
 							id: 1,
@@ -714,6 +756,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'scarlet',
 					label: 'Scarlet',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						paldea: {
 							id: 1,
@@ -728,6 +771,7 @@ export const gameDataByPokemon = (props) => {
 					name: 'violet',
 					label: 'Violet',
 					get text() { return filterFlavorText(this.name) },
+					get encounters() { return filterEncounters(this.name) },
 					pokedexes: {
 						paldea: {
 							id: 1,

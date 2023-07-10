@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { Box, Container, Tab, Tabs, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
-import { gameDataByPokemon } from '../../utilities/games'
+import { gameDataByPokemon } from "../../utilities/games"
 import { formatDexId, getColorFromGame } from '../../utilities/utilities'
 
 
-const FlavorText = props => {
+const FlavorTextEncounters = props => {
 	const data = gameDataByPokemon(props)
+	console.log(data)
 
 	const [genVal, setGenVal] = useState({
 		gen:			1,
@@ -23,51 +24,51 @@ const FlavorText = props => {
 	})
 
 	const g = {
-		1:	data.gen_i.games.red.text
-				|| data.gen_i.games.blue.text
-				|| data.gen_i.games.yellow.text
+		1:	data.gen_i.games.red.text || data.gen_i.games.red.encounters
+				|| data.gen_i.games.blue.text || data.gen_i.games.blue.encounters
+				|| data.gen_i.games.yellow.text || data.gen_i.games.yellow.encounters
 					? true : false,
-		2:	data.gen_ii.games.gold.text
-				|| data.gen_ii.games.silver.text
-				|| data.gen_ii.games.crystal.text
+		2:	data.gen_ii.games.gold.encounters
+				|| data.gen_ii.games.silver.encounters
+				|| data.gen_ii.games.crystal.encounters
 					? true : false,
-		3:	data.gen_iii.games.ruby.text
-				|| data.gen_iii.games.sapphire.text
-				|| data.gen_iii.games.emerald.text
-				|| data.gen_iii.games.firered.text
-				|| data.gen_iii.games.leafgreen.text
+		3:	data.gen_iii.games.ruby.encounters
+				|| data.gen_iii.games.sapphire.encounters
+				|| data.gen_iii.games.emerald.encounters
+				|| data.gen_iii.games.firered.encounters
+				|| data.gen_iii.games.leafgreen.encounters
 					? true : false,
-		4:	data.gen_iv.games.diamond.text
-				|| data.gen_iv.games.pearl.text
-				|| data.gen_iv.games.platinum.text
-				|| data.gen_iv.games.heartgold.text
-				|| data.gen_iv.games.soulsilver.text
+		4:	data.gen_iv.games.diamond.encounters
+				|| data.gen_iv.games.pearl.encounters
+				|| data.gen_iv.games.platinum.encounters
+				|| data.gen_iv.games.heartgold.encounters
+				|| data.gen_iv.games.soulsilver.encounters
 					? true : false,
-		5:	data.gen_v.games.black.text
-				|| data.gen_v.games.white.text
-				|| data.gen_v.games.black_2.text
-				|| data.gen_v.games.white_2.text
+		5:	data.gen_v.games.black.encounters
+				|| data.gen_v.games.white.encounters
+				|| data.gen_v.games.black_2.encounters
+				|| data.gen_v.games.white_2.encounters
 					? true : false,
-		6:	data.gen_vi.games.x.text
-				|| data.gen_vi.games.y.text
-				|| data.gen_vi.games.omega_ruby.text
-				|| data.gen_vi.games.alpha_sapphire.text
+		6:	data.gen_vi.games.x.encounters
+				|| data.gen_vi.games.y.encounters
+				|| data.gen_vi.games.omega_ruby.encounters
+				|| data.gen_vi.games.alpha_sapphire.encounters
 					? true : false,
-		7:	data.gen_vii.games.sun.text
-				|| data.gen_vii.games.moon.text
-				|| data.gen_vii.games.ultra_sun.text
-				|| data.gen_vii.games.ultra_moon.text
-				|| data.gen_vii.games.lets_go_pikachu.text
-				|| data.gen_vii.games.lets_go_eevee.text
+		7:	data.gen_vii.games.sun.encounters
+				|| data.gen_vii.games.moon.encounters
+				|| data.gen_vii.games.ultra_sun.encounters
+				|| data.gen_vii.games.ultra_moon.encounters
+				|| data.gen_vii.games.lets_go_pikachu.encounters
+				|| data.gen_vii.games.lets_go_eevee.encounters
 					? true : false,
-		8:	data.gen_viii.games.sword.text
-				|| data.gen_viii.games.shield.text
-				|| data.gen_viii.games.brilliant_diamond.text
-				|| data.gen_viii.games.shining_pearl.text
-				|| data.gen_viii.games.legends_arceus.text
+		8:	data.gen_viii.games.sword.encounters
+				|| data.gen_viii.games.shield.encounters
+				|| data.gen_ix.games.brilliant_diamond.encounters
+				|| data.gen_ix.games.shining_pearl.encounters
+				|| data.gen_ix.games.legends_arceus.encounters
 					? true : false,
-		9:	data.gen_ix.games.scarlet.text
-				|| data.gen_ix.games.violet.text
+		9:	data.gen_ix.games.scarlet.encounters
+				|| data.gen_ix.games.violet.encounters
 					? true : false,
 	}
 
@@ -138,39 +139,42 @@ const FlavorText = props => {
 							{genVal.gen === data[gen].id && (
 								<Box>
 									{Object.keys(data[gen].games).map(game => (
-										data[gen].games[game].text && (
+										data[gen].games[game].text || data[gen].games[game].encounters ? (
 											<Grid key={data[gen].games[game].id} container columns={1} sx={{ mb: 3 }}>
 												<Grid container xs={1}>
-													<Typography variant="h4" color={getColorFromGame(data[gen].games[game].name)}>
-														{data[gen].games[game].label}
-													</Typography>
-												</Grid>
-												
-												{Object.keys(data[gen].games[game].pokedexes).map(dex => (
-													data[gen].games[game].pokedexes[dex].num && (
-														<Grid key={data[gen].games[game].pokedexes[dex].id} container xs={1}>
-															<Grid xs sx={{ pl: 2 }}>
-																<Typography variant="span" fontWeight="medium" color={getColorFromGame(data[gen].games[game].name)} sx={{ opacity: 0.7 }}>
-																	{data[gen].games[game].pokedexes[dex].label}
-																</Typography>
-															</Grid>
-															<Grid xs="auto">
+													<Grid xs>
+														<Typography variant="h4" color={getColorFromGame(data[gen].games[game].name)}>
+															{data[gen].games[game].label}
+															
+															{Object.keys(data[gen].games[game].pokedexes).map(dex => (
+																data[gen].games[game].pokedexes[dex].num && (
+																	Object.keys(data[gen].games[game].pokedexes).length > 1 && (
+																		<Typography component="span" fontSize={16} fontWeight="medium" sx={{ ml: 1, opacity: 0.6 }}>
+																			{data[gen].games[game].pokedexes[dex].label}
+																		</Typography>
+																	)
+																)
+															))}
+														</Typography>
+													</Grid>
+													<Grid xs="auto">
+														{Object.keys(data[gen].games[game].pokedexes).map(dex => (
+															data[gen].games[game].pokedexes[dex].num && (
 																<Typography key={data[gen].games[game].pokedexes[dex].id} component="span" fontWeight="medium" sx={{ opacity: 0.7 }}>
 																	<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>
 																		No.
 																	</Typography>
-																	{formatDexId(data[gen].games[game].pokedexes[dex].num, 999)}
+																	{formatDexId(data[gen].games[game].pokedexes[dex].num)}
 																</Typography>
-															</Grid>
-														</Grid>
-													)
-												))}
-
+															)
+														))}
+													</Grid>
+												</Grid>
 												<Grid container xs={1}>
 													<Typography>{data[gen].games[game].text.replace(/\s/g, " ")}</Typography>
 												</Grid>
 											</Grid>
-										)
+										) : null
 									))}
 								</Box>
 							)}
@@ -182,4 +186,4 @@ const FlavorText = props => {
 	)
 }
 
-export default FlavorText
+export default FlavorTextEncounters

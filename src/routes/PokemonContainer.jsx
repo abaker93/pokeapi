@@ -9,6 +9,7 @@ import Breeding from '../components/pokemon/Breeding'
 import Defense from '../components/pokemon/Defense'
 import Evolution from '../components/pokemon/Evolution'
 import FlavorText from '../components/pokemon/FlavorText'
+import Encounters from '../components/pokemon/Encounters'
 import Gender from '../components/pokemon/Gender'
 import Header from '../components/pokemon/Header'
 import Size from '../components/pokemon/Size'
@@ -16,6 +17,7 @@ import Stats from '../components/pokemon/Stats'
 import Training from '../components/pokemon/Training'
 
 import { getIdFromURL } from '../utilities/utilities'
+
 
 const P = new Pokedex()
 
@@ -29,7 +31,6 @@ const createInitialState = props => {
 			chain:		null,
 			pokemon:	null,
 		},
-		growthRate: null,
 		id:					id,
 		lang:				lang,
 		types:			null,
@@ -70,7 +71,7 @@ const PokemonContainer = props => {
 	const [state, dispatch] = useReducer(
 		reducer,
 		({
-			id: parseInt(useParams().id),
+			id:		parseInt(useParams().id),
 			dex:	props.dex,
 			lang:	useOutletContext(),
 		}),
@@ -209,12 +210,21 @@ const PokemonContainer = props => {
 				return data
 			})
 			.then(data => {
-				//~~	Get Growth Rate	//
+				//~~	Get Growth Rate		//
 				//--	set growthRate		//
 				P.getGrowthRateByName(data[1].growth_rate.name)
 					.then(data => dispatch({ type: 'growthRate', value: data }))
+
+				return data
+			})
+			.then(data => {
+				//~~	Get Encounter Locations		//
+				//--	set encounters		//
+				P.getResource(data[0].location_area_encounters)
+					.then(data => dispatch({ type: 'encounters', value: data }))
 			})
 			.catch(console.error)
+
 
 		//~~	Get Prev Pokemon								//
 		//--	set prev												//
@@ -248,12 +258,12 @@ const PokemonContainer = props => {
 	if (state.pokemon) {
 		return (
 			<>
-				<Header state={state} />
+				{/* <Header state={state} /> */}
 
 				<Container>
-					<Stats state={state} />
+					{/* <Stats state={state} />
 					
-					{state.evolution.chain ? <Evolution state={state} /> : null}
+					{state.evolution.chain && <Evolution state={state} />}
 					
 					<Defense state={state} />
 					
@@ -275,9 +285,14 @@ const PokemonContainer = props => {
 						<Grid xs={1}>
 							{state.eggGroups ? <Breeding state={state} /> : null}
 						</Grid>
-					</Grid>
+					</Grid> */}
 
-					<FlavorText state={state} />
+					{state.encounters && (
+						<>
+							<FlavorText state={state} />
+							<Encounters state={state} />
+						</>
+					)}
 					
 				</Container>
 			</>
