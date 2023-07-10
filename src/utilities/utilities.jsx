@@ -1,5 +1,6 @@
-import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from "./colors";
-import { defense } from "./types";
+import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from './colors'
+import { game_red, game_black, game_blue, game_crystal, game_diamond, game_eevee, game_emerald, game_gold, game_green, game_moon, game_pearl, game_silver, game_sun, game_yellow } from './colors'
+import { defense } from "./types"
 
 export const calcDefense = (def1, def2, off) => {
 	let calc, val
@@ -85,7 +86,7 @@ export const formatDexId = (num, dig) => {
 	}
 }
 
-export const getColorFromType = (type) => {
+export const getColorFromType = type => {
 	const colorMap = {
 		bug:			bug,
 		dark:			dark,
@@ -108,6 +109,50 @@ export const getColorFromType = (type) => {
 	}
 
 	return colorMap[type]
+}
+
+export const getColorFromGame = game => {
+	const colorMap = {
+		red:									game_red,
+		blue:									game_blue,
+		yellow:								game_yellow,
+		gold:									game_gold,
+		silver:								game_silver,
+		crystal:							game_crystal,
+		ruby:									game_red,
+		sapphire:							game_blue,
+		emerald:							game_emerald,
+		firered:							game_red,
+		leafgreen:						game_green,
+		diamond:							game_diamond,
+		pearl:								game_pearl,
+		platinum:							game_silver,
+		heartgold:						game_gold,
+		soulsilver:						game_silver,
+		black:								game_black,
+		white:								game_silver,
+		'black-2':						game_black,
+		'white-2':						game_silver,
+		x:										game_blue,
+		y:										game_red,
+		'omega-ruby':					game_red,
+		'alpha-sapphire':			game_blue,
+		sun:									game_sun,
+		moon:									game_moon,
+		'ultra-sun':					game_sun,
+		'ultra-moon':					game_moon,
+		'lets-go-pikachu':		game_yellow,
+		'lets-go-eevee':			game_eevee,
+		sword:								game_blue,
+		shield:								game_red,
+		'brilliant-diamond':	game_diamond,
+		'shining-pearl':			game_pearl,
+		'legends-arceus':			game_green,
+		scarlet:							game_red,
+		violet:								game_moon,
+	}
+
+	return colorMap[game]
 }
 
 export const getNumByDex = (nums, dex) => {

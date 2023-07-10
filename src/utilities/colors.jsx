@@ -1,7 +1,9 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~	Base Colors  ~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 export const black = '#000000'
 export const white = '#FFFFFF'
-export const female = '#FF6DCE'
-export const male = '#3273DE'
 
 export const gray = {
 	50:		'#F3F3F3',
@@ -28,6 +30,25 @@ export const text = {
 	800:	'#141B23',
 	900:	'#0F141B'
 }
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~	Gender Colors  ~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export const female = '#FF6DCE'
+export const male = '#3273DE'
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~	Type Colors  ~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 export let bug = {
 	50:		'#F2F7E6',
@@ -281,21 +302,44 @@ export let water = {
 	alt:	'#7DCADE',
 }
 
-bug				= { ...bug,				color: bug[900] };
-dark			= { ...dark,			color: dark[50] };
-dragon		= { ...dragon,		color: dragon[50] };
-electric	= { ...electric,	color: electric[900] };
-fairy 		= { ...fairy,			color: fairy[900] };
-fighting	= { ...fighting,	color: fighting[50] };
-fire			= { ...fire,			color: fire[800] };
-flying		= { ...flying,		color: flying[900] };
-ghost			= { ...ghost,			color: ghost[50] };
-grass			= { ...grass,			color: grass[50] };
-ground		= { ...ground,		color: ground[50] };
-ice				= { ...ice,				color: ice[900] };
-normal		= { ...normal,		color: normal[50] };
-poison		= { ...poison,		color: poison[50] };
-psychic		= { ...psychic,		color: psychic[800] };
-rock			= { ...rock,			color: rock[900] };
-steel			= { ...steel,			color: steel[50] };
-water			= { ...water,			color: water[50] };
+bug				= { ...bug,				color: bug[900] }
+dark			= { ...dark,			color: dark[50] }
+dragon		= { ...dragon,		color: dragon[50] }
+electric	= { ...electric,	color: electric[900] }
+fairy 		= { ...fairy,			color: fairy[900] }
+fighting	= { ...fighting,	color: fighting[50] }
+fire			= { ...fire,			color: fire[800] }
+flying		= { ...flying,		color: flying[900] }
+ghost			= { ...ghost,			color: ghost[50] }
+grass			= { ...grass,			color: grass[50] }
+ground		= { ...ground,		color: ground[50] }
+ice				= { ...ice,				color: ice[900] }
+normal		= { ...normal,		color: normal[50] }
+poison		= { ...poison,		color: poison[50] }
+psychic		= { ...psychic,		color: psychic[800] }
+rock			= { ...rock,			color: rock[900] }
+steel			= { ...steel,			color: steel[50] }
+water			= { ...water,			color: water[50] }
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~	Game Colors  ~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export const game_red =			'#C03028'
+export const game_blue =		'#5D81D6'
+export const game_yellow =	'#D6B11f'
+export const game_gold =		'#AD9551'
+export const game_silver =	'#9797AB'
+export const game_crystal =	'#87BFBF'
+export const game_green =		'#65A843'
+export const game_emerald =	'#909E1B'
+export const game_diamond =	'#8471BD'
+export const game_pearl =		'#DE4F7A'
+export const game_black =		'#574438'
+export const game_sun =			'#DB8624'
+export const game_moon =		'#7038F8'
+export const game_eevee =		'#AC8639'

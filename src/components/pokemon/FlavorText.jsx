@@ -3,7 +3,7 @@ import { Box, Container, Tab, Tabs, Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 
 import { gameDataByPokemon } from '../../utilities/games';
-import { formatDexId } from '../../utilities/utilities';
+import { formatDexId, getColorFromGame } from '../../utilities/utilities';
 
 const FlavorText = props => {
 	const { pokemon } = props.state
@@ -103,14 +103,14 @@ const FlavorText = props => {
 									{Object.keys(data[gen].games).map(game => (
 										data[gen].games[game].text && (
 											<Grid key={data[gen].games[game].id} container columns={1} sx={{ mb: 3 }}>
-												<Grid container xs>
+												<Grid container xs={1}>
 													<Grid xs>
-														<Typography variant="h4">
+														<Typography variant="h4" color={getColorFromGame(data[gen].games[game].name)}>
 															{data[gen].games[game].label}
 															{Object.keys(data[gen].games[game].pokedexes).map(dex => (
 																data[gen].games[game].pokedexes[dex].num && (
 																	Object.keys(data[gen].games[game].pokedexes).length > 1 && (
-																		<Typography component="span" fontSize={16} fontWeight="medium" sx={{ ml: 1, opacity: 0.7 }}>
+																		<Typography component="span" fontSize={16} fontWeight="medium" sx={{ ml: 1, opacity: 0.6 }}>
 																			{data[gen].games[game].pokedexes[dex].label}
 																		</Typography>
 																	)
@@ -131,7 +131,7 @@ const FlavorText = props => {
 														))}
 													</Grid>
 												</Grid>
-												<Grid>
+												<Grid container xs={1}>
 													<Typography>{data[gen].games[game].text.replace(/\s/g, " ")}</Typography>
 												</Grid>
 											</Grid>
