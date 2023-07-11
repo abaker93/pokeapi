@@ -6,14 +6,14 @@ import Grid from '@mui/material/Unstable_Grid2'
 
 
 import { gameDataByPokemon } from "../../utilities/games"
-import { filterByLang, getColorFromGame } from '../../utilities/utilities'
-import { PokemonTab } from '../../utilities/components/PokemonTab'
+import { filterByLang, getColorFromGame, getColorFromType } from '../../utilities/utilities'
+import PokemonTab from '../../utilities/components/PokemonTab'
 
 const P = new Pokedex()
 
 
 const Encounters = props => {
-	const { lang, pokemon } = props.state
+	const { lang, pokemon, types } = props.state
 	const data = gameDataByPokemon(props)
 
 	const [genVal, setGenVal] = useState({
@@ -116,12 +116,15 @@ const Encounters = props => {
 					variant="scrollable"
 					scrollButtons="auto"
 					aria-label="encounters sorted by generation and game"
+					TabIndicatorProps={{ style: { display: 'none' } }}
+					sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
 				>
 
 					{Object.keys(data).map(gen => (
 						genVal[data[gen].name] && (
 							<PokemonTab
 								key={data[gen].id}
+								color={getColorFromType(types[0])}
 								label={data[gen].label}
 								value={data[gen].id}
 								id={`encounters_tab_${data[gen].id}`}
