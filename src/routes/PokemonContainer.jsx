@@ -262,11 +262,11 @@ const PokemonContainer = props => {
 				{/* <Header state={state} /> */}
 
 				<Container>
-					{/* <Stats state={state} />
+					<Stats state={state} />
 					
-					{state.evolution.chain && <Evolution state={state} />}
+					{/* {state.evolution.chain && <Evolution state={state} />} */}
 					
-					<Defense state={state} />
+					{/* <Defense state={state} /> */}
 					
 					<Grid container spacing={{ xs: 5, sm: 2 }} columns={{ xs: 1, sm: 2 }} sx={{ mb: 5 }}>
 						<Grid xs={1} sm={1}>
@@ -275,7 +275,7 @@ const PokemonContainer = props => {
 						<Grid xs={1} sm={1}>
 							{state.evYield && state.growthRate ? <Training state={state} /> : null}
 						</Grid>
-						<Grid container spacing={2} xs={1}>
+						{/* <Grid container spacing={2} xs={1}>
 							<Grid xs>
 								<Gender state={state} />
 							</Grid>
@@ -285,8 +285,8 @@ const PokemonContainer = props => {
 						</Grid>
 						<Grid xs={1}>
 							{state.eggGroups ? <Breeding state={state} /> : null}
-						</Grid>
-					</Grid> */}
+						</Grid> */}
+					</Grid>
 
 					{/* <FlavorText state={state} /> */}
 

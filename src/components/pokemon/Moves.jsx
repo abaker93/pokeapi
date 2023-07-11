@@ -189,7 +189,7 @@ const Moves = props => {
 							hidden={genVal.gen !== data[gen].id}
 							id={`moves_gen_panel${data[gen].id}`}
 							aria-labelledby={`moves_gen_tab${data[gen].id}`}
-							sx={{ mt: 3 }}
+							sx={{ mt: 1 }}
 						>
 							{genVal.gen === data[gen].id && (
 								<Box>
@@ -229,7 +229,7 @@ const Moves = props => {
 															<Box>
 																<Typography variant="h3">Moves learnt by level up</Typography>
 																
-																<TableContainer>
+																<TableContainer sx={{ mt: 3 }}>
 																	<Table aria-label={`moves learnt in ${data[gen].version_group[group].label} by level up`}>
 																		<TableHead>
 																			<TableRow sx={{

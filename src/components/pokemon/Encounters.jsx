@@ -4,8 +4,10 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Container, Tab, Tabs, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
+
 import { gameDataByPokemon } from "../../utilities/games"
 import { filterByLang, getColorFromGame } from '../../utilities/utilities'
+import { PokemonTab } from '../../utilities/components/PokemonTab'
 
 const P = new Pokedex()
 
@@ -118,7 +120,7 @@ const Encounters = props => {
 
 					{Object.keys(data).map(gen => (
 						genVal[data[gen].name] && (
-							<Tab
+							<PokemonTab
 								key={data[gen].id}
 								label={data[gen].label}
 								value={data[gen].id}
