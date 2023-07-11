@@ -17,6 +17,7 @@ import Stats from '../components/pokemon/Stats'
 import Training from '../components/pokemon/Training'
 
 import { getIdFromURL } from '../utilities/utilities'
+import Moves from '../components/pokemon/Moves'
 
 
 const P = new Pokedex()
@@ -246,7 +247,7 @@ const PokemonContainer = props => {
 		getPokemon(state.id)
 	}, [state.id])
 
-	// console.log(state)
+	// console.log(state.pokemon)
 
 
 	if (state.loading) {
@@ -287,13 +288,12 @@ const PokemonContainer = props => {
 						</Grid>
 					</Grid> */}
 
-					{state.encounters && (
-						<>
-							<FlavorText state={state} />
-							<Encounters state={state} />
-						</>
-					)}
-					
+					{/* <FlavorText state={state} /> */}
+
+					{state.encounters && <Encounters state={state} />}
+
+					<Moves state={state} />
+
 				</Container>
 			</>
 		)

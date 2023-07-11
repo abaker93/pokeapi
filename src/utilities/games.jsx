@@ -1,19 +1,48 @@
+import Pokedex from 'pokedex-promise-v2'
+
 import { filterByLang, getNumByDex } from './utilities'
+
+const P = new Pokedex()
+
 
 export const gameDataByPokemon = props => {
 	const { encounters, lang, pokemon } = props.state
 	const pokedexNumbers = pokemon.pokedex_numbers
-
-	const filterFlavorText = game => {
-		let text = pokemon.flavor_text_entries.filter(f => f.version.name === game)
-		return filterByLang('flavor_text', text, lang)
-	}
 
 	const filterEncounters = game => {
 		let enc = encounters.filter(f => f.version_details.some(s => s.version.name === game))
 		return enc
 	}
 
+	const filterFlavorText = game => {
+		let text = pokemon.flavor_text_entries.filter(f => f.version.name === game)
+		return filterByLang('flavor_text', text, lang)
+	}
+
+	const filterMoves = (version, type) => {
+		let moves = pokemon.moves
+		moves = moves.filter(f => f.version_group_details.some(s => s.version_group.name === version))
+		moves = moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === type))
+
+		let movesArr = []
+
+		moves.map(m => {
+			const versionDetails = m.version_group_details.filter(f => f.version_group.name === version).filter(f => f.move_learn_method.name === type)
+
+			versionDetails.map(v => {
+				movesArr.push({
+					move: m.move,
+					version_details: v,
+				})
+			})
+		})
+
+		type === 'level-up' && (
+			movesArr = movesArr.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at)
+		)
+
+		return movesArr
+	}
 
 
 	const data = {
@@ -21,49 +50,67 @@ export const gameDataByPokemon = props => {
 			id: 1,
 			name: 'gen_i',
 			label: 'Gen I',
-			games: {
-				red: {
+			version_group: {
+				red_blue: {
 					id: 1,
-					name: 'red',
-					label: 'Red',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
+					name: 'red-blue',
+					label: 'Red/Blue',
+					get moves_level() { return filterMoves(this.name, 'level-up') },
+					get moves_machine() { return filterMoves(this.name, 'machine') },
+					games: {
+						red: {
 							id: 1,
-							name: 'kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'red',
+							label: 'Red',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
-				},
-				blue: {
-					id: 2,
-					name: 'blue',
-					label: 'Blue',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+						blue: {
+							id: 2,
+							name: 'blue',
+							label: 'Blue',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
 				yellow: {
-					id: 3,
+					id: 2,
 					name: 'yellow',
 					label: 'Yellow',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					get moves_level() { return filterMoves(this.name, 'level-up') },
+					get moves_machine() { return filterMoves(this.name, 'machine') },
+					games: {
+						yellow: {
+							id: 3,
+							name: 'yellow',
+							label: 'Yellow',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -73,49 +120,73 @@ export const gameDataByPokemon = props => {
 			id: 2,
 			name: 'gen_ii',
 			label: 'Gen II',
-			games: {
-				gold: {
+			version_group: {
+				gold_silver: {
 					id: 1,
-					name: 'gold',
-					label: 'Gold',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						johto: {
-							id: 1,
-							name: 'original-johto',
-							label: 'Johto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+					name: 'gold-silver',
+					label: 'Gold/Silver',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				silver: {
-					id: 2,
-					name: 'silver',
-					label: 'Silver',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						johto: {
+					games: {
+						gold: {
 							id: 1,
-							name: 'original-johto',
-							label: 'Johto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'gold',
+							label: 'Gold',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								johto: {
+									id: 1,
+									name: 'original-johto',
+									label: 'Johto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+						silver: {
+							id: 2,
+							name: 'silver',
+							label: 'Silver',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								johto: {
+									id: 1,
+									name: 'original-johto',
+									label: 'Johto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
 				crystal: {
-					id: 3,
+					id: 2,
 					name: 'crystal',
 					label: 'Crystal',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						johto: {
-							id: 1,
-							name: 'original-johto',
-							label: 'Johto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						crystal: {
+							id: 3,
+							name: 'crystal',
+							label: 'Crystal',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								johto: {
+									id: 1,
+									name: 'original-johto',
+									label: 'Johto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -125,79 +196,115 @@ export const gameDataByPokemon = props => {
 			id: 3,
 			name: 'gen_iii',
 			label: 'Gen III',
-			games: {
-				ruby: {
+			version_group: {
+				ruby_sapphire: {
 					id: 1,
-					name: 'ruby',
-					label: 'Ruby',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hoenn: {
-							id: 1,
-							name: 'hoenn',
-							label: 'Hoenn',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+					name: 'ruby-sapphire',
+					label: 'Ruby/Sapphire',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				sapphire: {
-					id: 2,
-					name: 'sapphire',
-					label: 'Sapphire',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hoenn: {
+					games: {
+						ruby: {
 							id: 1,
-							name: 'hoenn',
-							label: 'Hoenn',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'ruby',
+							label: 'Ruby',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hoenn: {
+									id: 1,
+									name: 'hoenn',
+									label: 'Hoenn',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+						sapphire: {
+							id: 2,
+							name: 'sapphire',
+							label: 'Sapphire',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hoenn: {
+									id: 1,
+									name: 'hoenn',
+									label: 'Hoenn',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
 				emerald: {
-					id: 3,
+					id: 2,
 					name: 'emerald',
 					label: 'Emerald',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hoenn: {
-							id: 1,
-							name: 'hoenn',
-							label: 'Hoenn',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						emerald: {
+							id: 3,
+							name: 'emerald',
+							label: 'Emerald',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hoenn: {
+									id: 1,
+									name: 'hoenn',
+									label: 'Hoenn',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				firered: {
-					id: 4,
-					name: 'firered',
-					label: 'FireRed',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+				firered_leafgreen: {
+					id: 3,
+					name: 'firered-leafgreen',
+					label: 'FireRed/LeafGreen',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				leafgreen: {
-					id: 5,
-					name: 'leafgreen',
-					label: 'LeafGreen',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					games: {
+						firered: {
+							id: 4,
+							name: 'firered',
+							label: 'FireRed',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+						leafgreen: {
+							id: 5,
+							name: 'leafgreen',
+							label: 'LeafGreen',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -207,81 +314,117 @@ export const gameDataByPokemon = props => {
 			id: 4,
 			name: 'gen_iv',
 			label: 'Gen IV',
-			games: {
-				diamond: {
+			version_group: {
+				diamond_pearl: {
 					id: 1,
-					name: 'diamond',
-					label: 'Diamond',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						sinnoh: {
-							id: 1,
-							name: 'original-sinnoh',
-							label: 'Sinnoh',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+					name: 'diamond-pearl',
+					label: 'Diamond/Pearl',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				pearl: {
-					id: 2,
-					name: 'pearl',
-					label: 'Pearl',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						sinnoh: {
+					games: {
+						diamond: {
 							id: 1,
-							name: 'original-sinnoh',
-							label: 'Sinnoh',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'diamond',
+							label: 'Diamond',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								sinnoh: {
+									id: 1,
+									name: 'original-sinnoh',
+									label: 'Sinnoh',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+						pearl: {
+							id: 2,
+							name: 'pearl',
+							label: 'Pearl',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								sinnoh: {
+									id: 1,
+									name: 'original-sinnoh',
+									label: 'Sinnoh',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
 				platinum: {
-					id: 3,
+					id: 2,
 					name: 'platinum',
 					label: 'Platinum',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						sinnoh: {
-							id: 1,
-							name: 'extended-sinnoh',
-							label: 'Sinnoh',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						platinum: {
+							id: 3,
+							name: 'platinum',
+							label: 'Platinum',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								sinnoh: {
+									id: 1,
+									name: 'extended-sinnoh',
+									label: 'Sinnoh',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				heartgold: {
-					id: 4,
-					name: 'heartgold',
-					label: 'HeartGold',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						johto: {
-							id: 1,
-							name: 'updated-johto',
-							label: 'Johto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+				heartgold_soulsilver: {
+					id: 3,
+					name: 'heartgold-soulsilver',
+					label: 'HeartGold/SoulSilver',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				soulsilver: {
-					id: 5,
-					name: 'soulsilver',
-					label: 'SoulSilver',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						johto: {
-							id: 1,
-							name: 'updated-johto',
-							label: 'Johto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					games: {
+						heartgold: {
+							id: 4,
+							name: 'heartgold',
+							label: 'HeartGold',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								johto: {
+									id: 1,
+									name: 'updated-johto',
+									label: 'Johto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
+						soulsilver: {
+							id: 5,
+							name: 'soulsilver',
+							label: 'SoulSilver',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								johto: {
+									id: 1,
+									name: 'updated-johto',
+									label: 'Johto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+					}
 				},
 			},
 		},
@@ -289,68 +432,92 @@ export const gameDataByPokemon = props => {
 			id: 5,
 			name: 'gen_v',
 			label: 'Gen V',
-			games: {
-				black: {
+			version_group: {
+				black_white: {
 					id: 1,
-					name: 'black',
-					label: 'Black',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						unova: {
-							id: 1,
-							name: 'original-unova',
-							label: 'Unova',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+					name: 'black-white',
+					label: 'Black/White',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				white: {
-					id: 2,
-					name: 'white',
-					label: 'White',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						unova: {
+					games: {
+						black: {
 							id: 1,
-							name: 'original-unova',
-							label: 'Unova',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'black',
+							label: 'Black',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								unova: {
+									id: 1,
+									name: 'original-unova',
+									label: 'Unova',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
-				},
-				black_2: {
-					id: 3,
-					name: 'black-2',
-					label: 'Black 2',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						pokedexes: {
-							unova: {
-								id: 1,
-								name: 'updated-unova',
-								label: 'Unova',
-								get num() {
-									return getNumByDex(pokedexNumbers, this.name)
+						white: {
+							id: 2,
+							name: 'white',
+							label: 'White',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								unova: {
+									id: 1,
+									name: 'original-unova',
+									label: 'Unova',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
 								},
 							},
 						},
 					},
 				},
-				white_2: {
-					id: 4,
-					name: 'white-2',
-					label: 'White 2',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						unova: {
-							id: 1,
-							name: 'updated-unova',
-							label: 'Unova',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+				black_2_white_2: {
+					id: 2,
+					name: 'black-2-white-2',
+					label: 'Black 2/White 2',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						black_2: {
+							id: 3,
+							name: 'black-2',
+							label: 'Black 2',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								pokedexes: {
+									unova: {
+										id: 1,
+										name: 'updated-unova',
+										label: 'Unova',
+										get num() {
+											return getNumByDex(pokedexNumbers, this.name)
+										},
+									},
+								},
+							},
+						},
+						white_2: {
+							id: 4,
+							name: 'white-2',
+							label: 'White 2',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								unova: {
+									id: 1,
+									name: 'updated-unova',
+									label: 'Unova',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -360,88 +527,112 @@ export const gameDataByPokemon = props => {
 			id: 6,
 			name: 'gen_vi',
 			label: 'Gen VI',
-			games: {
-				x: {
+			version_group: {
+				x_y: {
 					id: 1,
-					name: 'x',
-					label: 'X',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kalos_central: {
+					name: 'x-y',
+					label: 'X/Y',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						x: {
 							id: 1,
-							name: 'kalos-central',
-							label: 'Central Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'x',
+							label: 'X',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kalos_central: {
+									id: 1,
+									name: 'kalos-central',
+									label: 'Central Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								kalos_coastal: {
+									id: 2,
+									name: 'kalos-coastal',
+									label: 'Coastal Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								kalos_mountain: {
+									id: 3,
+									name: 'kalos-mountain',
+									label: 'Mountain Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-						kalos_coastal: {
+						y: {
 							id: 2,
-							name: 'kalos-coastal',
-							label: 'Coastal Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						kalos_mountain: {
-							id: 3,
-							name: 'kalos-mountain',
-							label: 'Mountain Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'y',
+							label: 'Y',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kalos_central: {
+									id: 1,
+									name: 'kalos-central',
+									label: 'Central Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								kalos_coastal: {
+									id: 2,
+									name: 'kalos-coastal',
+									label: 'Coastal Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								kalos_mountain: {
+									id: 3,
+									name: 'kalos-mountain',
+									label: 'Mountain Kalos',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				y: {
+				omega_ruby_alpha_sapphire: {
 					id: 2,
-					name: 'y',
-					label: 'Y',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kalos_central: {
-							id: 1,
-							name: 'kalos-central',
-							label: 'Central Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						kalos_coastal: {
-							id: 2,
-							name: 'kalos-coastal',
-							label: 'Coastal Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						kalos_mountain: {
+					name: 'omega-ruby-alpha-sapphire',
+					label: 'Omega Ruby/Alpha Sapphire',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						omega_ruby: {
 							id: 3,
-							name: 'kalos-mountain',
-							label: 'Mountain Kalos',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'omega-ruby',
+							label: 'Omega Ruby',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hoenn: {
+									id: 1,
+									name: 'updated-hoenn',
+									label: 'Hoenn',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
-				},
-				omega_ruby: {
-					id: 3,
-					name: 'omega-ruby',
-					label: 'Omega Ruby',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hoenn: {
-							id: 1,
-							name: 'updated-hoenn',
-							label: 'Hoenn',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-					},
-				},
-				alpha_sapphire: {
-					id: 4,
-					name: 'alpha-sapphire',
-					label: 'Alpha Sapphire',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hoenn: {
-							id: 1,
-							name: 'updated-hoenn',
-							label: 'Hoenn',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+						alpha_sapphire: {
+							id: 4,
+							name: 'alpha-sapphire',
+							label: 'Alpha Sapphire',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hoenn: {
+									id: 1,
+									name: 'updated-hoenn',
+									label: 'Hoenn',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -451,190 +642,226 @@ export const gameDataByPokemon = props => {
 			id: 7,
 			name: 'gen_vii',
 			label: 'Gen VII',
-			games: {
-				sun: {
+			version_group: {
+				sun_moon: {
 					id: 1,
-					name: 'sun',
-					label: 'Sun',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						alola: {
+					name: 'sun-moon',
+					label: 'Sun/Moon',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						sun: {
 							id: 1,
-							name: 'original-alola',
-							label: 'Alola',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'sun',
+							label: 'Sun',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								alola: {
+									id: 1,
+									name: 'original-alola',
+									label: 'Alola',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								melemele: {
+									id: 2,
+									name: 'original-melemele',
+									label: 'Melemele',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								akala: {
+									id: 3,
+									name: 'original-akala',
+									label: 'Akala',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								ulaula: {
+									id: 4,
+									name: 'original-ulaula',
+									label: 'Ulaula',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								poni: {
+									id: 5,
+									name: 'original-poni',
+									label: 'Poni',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-						melemele: {
+						moon: {
 							id: 2,
-							name: 'original-melemele',
-							label: 'Melemele',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						akala: {
-							id: 3,
-							name: 'original-akala',
-							label: 'Akala',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						ulaula: {
-							id: 4,
-							name: 'original-ulaula',
-							label: 'Ulaula',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						poni: {
-							id: 5,
-							name: 'original-poni',
-							label: 'Poni',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'moon',
+							label: 'Moon',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								alola: {
+									id: 1,
+									name: 'original-alola',
+									label: 'Alola',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								melemele: {
+									id: 2,
+									name: 'original-melemele',
+									label: 'Melemele',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								akala: {
+									id: 3,
+									name: 'original-akala',
+									label: 'Akala',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								ulaula: {
+									id: 4,
+									name: 'original-ulaula',
+									label: 'Ulaula',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								poni: {
+									id: 5,
+									name: 'original-poni',
+									label: 'Poni',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				moon: {
+				ultra_sun_ultra_moon: {
 					id: 2,
-					name: 'moon',
-					label: 'Moon',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						alola: {
-							id: 1,
-							name: 'original-alola',
-							label: 'Alola',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						melemele: {
-							id: 2,
-							name: 'original-melemele',
-							label: 'Melemele',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						akala: {
+					name: 'ultra-sun-ultra-moon',
+					label: 'Ultra Sun/Ultra Moon',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						ultra_sun: {
 							id: 3,
-							name: 'original-akala',
-							label: 'Akala',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'ultra-sun',
+							label: 'Ultra Sun',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								alola: {
+									id: 1,
+									name: 'updated-alola',
+									label: 'Alola',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								melemele: {
+									id: 2,
+									name: 'updated-melemele',
+									label: 'Melemele',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								akala: {
+									id: 3,
+									name: 'updated-akala',
+									label: 'Akala',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								ulaula: {
+									id: 4,
+									name: 'updated-ulaula',
+									label: 'Ulaula',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								poni: {
+									id: 5,
+									name: 'updated-poni',
+									label: 'Poni',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-						ulaula: {
+						ultra_moon: {
 							id: 4,
-							name: 'original-ulaula',
-							label: 'Ulaula',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						poni: {
-							id: 5,
-							name: 'original-poni',
-							label: 'Poni',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'ultra-moon',
+							label: 'Ultra Moon',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								alola: {
+									id: 1,
+									name: 'updated-alola',
+									label: 'Alola',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								melemele: {
+									id: 2,
+									name: 'updated-melemele',
+									label: 'Melemele',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								akala: {
+									id: 3,
+									name: 'updated-akala',
+									label: 'Akala',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								ulaula: {
+									id: 4,
+									name: 'updated-ulaula',
+									label: 'Ulaula',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								poni: {
+									id: 5,
+									name: 'updated-poni',
+									label: 'Poni',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				ultra_sun: {
+				lets_go_pikachu_lets_go_eevee: {
 					id: 3,
-					name: 'ultra-sun',
-					label: 'Ultra Sun',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						alola: {
-							id: 1,
-							name: 'updated-alola',
-							label: 'Alola',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						melemele: {
-							id: 2,
-							name: 'updated-melemele',
-							label: 'Melemele',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						akala: {
-							id: 3,
-							name: 'updated-akala',
-							label: 'Akala',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						ulaula: {
-							id: 4,
-							name: 'updated-ulaula',
-							label: 'Ulaula',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						poni: {
+					name: 'lets-go-pikachu-lets-go-eevee',
+					label: `Let's Go Pikachu/Let's Go Eevee`,
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						lets_go_pikachu: {
 							id: 5,
-							name: 'updated-poni',
-							label: 'Poni',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'lets-go-pikachu',
+							label: `Let's Go Pikachu`,
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'letsgo-kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
-				},
-				ultra_moon: {
-					id: 4,
-					name: 'ultra-moon',
-					label: 'Ultra Moon',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						alola: {
-							id: 1,
-							name: 'updated-alola',
-							label: 'Alola',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						melemele: {
-							id: 2,
-							name: 'updated-melemele',
-							label: 'Melemele',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						akala: {
-							id: 3,
-							name: 'updated-akala',
-							label: 'Akala',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						ulaula: {
-							id: 4,
-							name: 'updated-ulaula',
-							label: 'Ulaula',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						poni: {
-							id: 5,
-							name: 'updated-poni',
-							label: 'Poni',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-					},
-				},
-				lets_go_pikachu: {
-					id: 5,
-					name: 'lets-go-pikachu',
-					label: `Let's Go Pikachu`,
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'letsgo-kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-					},
-				},
-				lets_go_eevee: {
-					id: 6,
-					name: 'lets-go-eevee',
-					label: `Let's Go Eevee`,
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						kanto: {
-							id: 1,
-							name: 'letsgo-kanto',
-							label: 'Kanto',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+						lets_go_eevee: {
+							id: 6,
+							name: 'lets-go-eevee',
+							label: `Let's Go Eevee`,
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								kanto: {
+									id: 1,
+									name: 'letsgo-kanto',
+									label: 'Kanto',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -644,103 +871,139 @@ export const gameDataByPokemon = props => {
 			id: 8,
 			name: 'gen_viii',
 			label: 'Gen VIII',
-			games: {
-				sword: {
+			version_group: {
+				sword_shield: {
 					id: 1,
-					name: 'sword',
-					label: 'Sword',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						galar: {
+					name: 'sword-shield',
+					label: 'Sword/Shield',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						sword: {
 							id: 1,
-							name: 'galar',
-							label: 'Galar',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'sword',
+							label: 'Sword',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								galar: {
+									id: 1,
+									name: 'galar',
+									label: 'Galar',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								isle_of_armor: {
+									id: 2,
+									name: 'isle-of-armor',
+									label: 'Isle of Armor',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								crown_tundra: {
+									id: 3,
+									name: 'crown-tundra',
+									label: 'Crown Tundra',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-						isle_of_armor: {
+						shield: {
 							id: 2,
-							name: 'isle-of-armor',
-							label: 'Isle of Armor',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						crown_tundra: {
-							id: 3,
-							name: 'crown-tundra',
-							label: 'Crown Tundra',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'shield',
+							label: 'Shield',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								galar: {
+									id: 1,
+									name: 'galar',
+									label: 'Galar',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								isle_of_armor: {
+									id: 2,
+									name: 'isle-of-armor',
+									label: 'Isle of Armor',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+								crown_tundra: {
+									id: 3,
+									name: 'crown-tundra',
+									label: 'Crown Tundra',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
-				shield: {
+				brilliant_diamond_shining_pearl: {
 					id: 2,
-					name: 'shield',
-					label: 'Shield',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						galar: {
-							id: 1,
-							name: 'galar',
-							label: 'Galar',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						isle_of_armor: {
-							id: 2,
-							name: 'isle-of-armor',
-							label: 'Isle of Armor',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-						crown_tundra: {
+					name: 'brilliant-diamond-shining-pearl',
+					label: 'Brilliant Diamond/Shining Pearl',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						brilliant_diamond: {
 							id: 3,
-							name: 'crown-tundra',
-							label: 'Crown Tundra',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'brilliant-diamond',
+							label: 'Brilliant Diamond',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								sinnoh: {
+									id: 1,
+									name: 'updated-sinnoh',
+									label: 'Sinnoh',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
-					},
-				},
-				brilliant_diamond: {
-					id: 3,
-					name: 'brilliant-diamond',
-					label: 'Brilliant Diamond',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						sinnoh: {
-							id: 1,
-							name: 'updated-sinnoh',
-							label: 'Sinnoh',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
-					},
-				},
-				shining_pearl: {
-					id: 4,
-					name: 'shining-pearl',
-					label: 'Shining Pearl',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						sinnoh: {
-							id: 1,
-							name: 'updated-sinnoh',
-							label: 'Sinnoh',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+						shining_pearl: {
+							id: 4,
+							name: 'shining-pearl',
+							label: 'Shining Pearl',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								sinnoh: {
+									id: 1,
+									name: 'updated-sinnoh',
+									label: 'Sinnoh',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
 				legends_arceus: {
-					id: 5,
+					id: 3,
 					name: 'legends-arceus',
 					label: 'Legends: Arceus',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						hisui: {
-							id: 1,
-							name: 'hisui',
-							label: 'Hisui',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
+					},
+					games: {
+						legends_arceus: {
+							id: 5,
+							name: 'legends-arceus',
+							label: 'Legends: Arceus',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								hisui: {
+									id: 1,
+									name: 'hisui',
+									label: 'Hisui',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},
@@ -750,34 +1013,46 @@ export const gameDataByPokemon = props => {
 			id: 9,
 			name: 'gen_ix',
 			label: 'Gen IX',
-			games: {
-				scarlet: {
+			version_group: {
+				scarlet_violet: {
 					id: 1,
-					name: 'scarlet',
-					label: 'Scarlet',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						paldea: {
-							id: 1,
-							name: 'paldea',
-							label: 'Paldea',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
-						},
+					name: 'scarlet-violet',
+					label: 'Scarlet/Violet',
+					moves: {
+						get level() {},
+						get hm() {},
+						get tm() {},
 					},
-				},
-				violet: {
-					id: 2,
-					name: 'violet',
-					label: 'Violet',
-					get text() { return filterFlavorText(this.name) },
-					get encounters() { return filterEncounters(this.name) },
-					pokedexes: {
-						paldea: {
+					games: {
+						scarlet: {
 							id: 1,
-							name: 'paldea',
-							label: 'Paldea',
-							get num() { return getNumByDex(pokedexNumbers, this.name) },
+							name: 'scarlet',
+							label: 'Scarlet',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								paldea: {
+									id: 1,
+									name: 'paldea',
+									label: 'Paldea',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
+						},
+						violet: {
+							id: 2,
+							name: 'violet',
+							label: 'Violet',
+							get text() { return filterFlavorText(this.name) },
+							get encounters() { return filterEncounters(this.name) },
+							pokedexes: {
+								paldea: {
+									id: 1,
+									name: 'paldea',
+									label: 'Paldea',
+									get num() { return getNumByDex(pokedexNumbers, this.name) },
+								},
+							},
 						},
 					},
 				},

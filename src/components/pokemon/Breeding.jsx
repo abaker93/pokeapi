@@ -10,8 +10,6 @@ const Breeding = props => {
 
 	const eggCycleSteps = 275
 	
-	// console.log(eggGroups)
-	
 	return (
 		<>
 			<Box sx={{ mb: 2 }}>
