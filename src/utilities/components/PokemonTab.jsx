@@ -1,12 +1,13 @@
 import { Tab, alpha, styled } from '@mui/material'
-import { gray, text, white } from '../colors'
 
-const PokemonTab = styled(Tab)(({ theme, color }) => ({
+const PokemonTab = styled(Tab, {
+	shouldForwardProp: prop => prop !== 'color'
+})(({ theme, color }) => ({
 	minWidth: '48px',
 	backgroundColor: alpha(color[100], 0.3),
-	borderTop: `1px solid ${color[500]}`,
-	borderLeft: `1px solid ${color[500]}`,
-	borderRight: `1px solid ${color[500]}`,
+	borderTop: `1px solid ${color[400]}`,
+	borderLeft: `1px solid ${color[400]}`,
+	borderRight: `1px solid ${color[400]}`,
 	borderBottom: `1px solid ${theme.palette.background.default}`,
 	color: color[700],
 	padding: '0 13px',
@@ -17,9 +18,9 @@ const PokemonTab = styled(Tab)(({ theme, color }) => ({
 	'&.Mui-selected': {
 		backgroundColor: theme.palette.background.default,
 		color: color[900],
-		borderTop: `1px solid ${color[700]}`,
-		borderLeft: `1px solid ${color[700]}`,
-		borderRight: `1px solid ${color[700]}`,
+		borderTop: `1px solid ${color[600]}`,
+		borderLeft: `1px solid ${color[600]}`,
+		borderRight: `1px solid ${color[600]}`,
 		borderBottom: `1px solid ${theme.palette.background.default}`,
 		zIndex: 1,
 	},

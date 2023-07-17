@@ -4,10 +4,11 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Container, Tab, Tabs, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
+import PokemonTabs from '../../utilities/components/PokemonTabs'
+import PokemonTab from '../../utilities/components/PokemonTab'
 
 import { gameDataByPokemon } from "../../utilities/games"
 import { filterByLang, getColorFromGame, getColorFromType } from '../../utilities/utilities'
-import PokemonTab from '../../utilities/components/PokemonTab'
 
 const P = new Pokedex()
 
@@ -110,25 +111,14 @@ const Encounters = props => {
 				<Typography variant="h2">Where to find {filterByLang('name', pokemon.names, lang)}</Typography>
 			</Box>
 			<Box>
-				<Tabs
+				<PokemonTabs
 					value={genVal.gen}
 					onChange={(e, val) => setGenVal(prev => ({ ...prev, gen: val }))}
 					variant="scrollable"
 					scrollButtons="auto"
 					aria-label="encounters sorted by generation and game"
 					TabIndicatorProps={{ style: { display: 'none' } }}
-					sx={{
-						position: 'relative',
-						'&::after': {
-							content: '""',
-							position: 'absolute',
-							bottom: 0,
-							left: 0,
-							height: '1px',
-							width: '100%',
-							backgroundColor: getColorFromType(types[0])[700],
-						}
-					}}
+					color={getColorFromType(types[0])}
 				>
 
 					{Object.keys(data).map(gen => (
@@ -144,7 +134,7 @@ const Encounters = props => {
 						)
 					))}
 
-				</Tabs>
+				</PokemonTabs>
 
 				{Object.keys(data).map(gen => (
 					genVal[data[gen].name] && (
