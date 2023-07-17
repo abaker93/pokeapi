@@ -20,6 +20,8 @@ export const gameDataByPokemon = props => {
 	}
 
 	const filterMoves = (version, type) => {
+		// console.log(version, type)
+
 		let moves = pokemon.moves
 		moves = moves.filter(f => f.version_group_details.some(s => s.version_group.name === version))
 		moves = moves.filter(f => f.version_group_details.some(s => s.move_learn_method.name === type))
@@ -44,6 +46,37 @@ export const gameDataByPokemon = props => {
 		return movesArr
 	}
 
+	const filterStuff = name => {
+		const level = filterMoves(name, 'level-up')
+		const egg = filterMoves(name, 'egg')
+		const tutor = filterMoves(name, 'tutor')
+		const machine = filterMoves(name, 'machine')
+		const stadium_surfing_pikachu = filterMoves(name, 'stadium-surfing-pikachu')
+		const light_ball_egg = filterMoves(name, 'light-ball-egg')
+		const colosseum_purification = filterMoves(name, 'colosseum-purification')
+		const xd_shadow = filterMoves(name, 'xd-shadow')
+		const xd_purification = filterMoves(name, 'xd-purification')
+		const form_change = filterMoves(name, 'form-change')
+		const zygarde_cube = filterMoves(name, 'zygarde-cube')
+
+		let moves = {}
+
+		level.length > 0 && ( moves = { ...moves, level: level } )
+		egg.length > 0 && ( moves = { ...moves, egg: egg } )
+		tutor.length > 0 && ( moves = { ...moves, tutor: tutor } )
+		machine.length > 0 && ( moves = { ...moves, machine: machine } )
+		stadium_surfing_pikachu.length > 0 && ( moves = { ...moves, stadium_surfing_pikachu: stadium_surfing_pikachu } )
+		light_ball_egg.length > 0 && ( moves = { ...moves, light_ball_egg: light_ball_egg } )
+		colosseum_purification.length > 0 && ( moves = { ...moves, colosseum_purification: colosseum_purification } )
+		xd_shadow.length > 0 && ( moves = { ...moves, xd_shadow: xd_shadow } )
+		xd_purification.length > 0 && ( moves = { ...moves, xd_purification: xd_purification } )
+		form_change.length > 0 && ( moves = { ...moves, form_change: form_change } )
+		zygarde_cube.length > 0 && ( moves = { ...moves, zygarde_cube: zygarde_cube } )
+
+		console.log(moves)
+		return moves
+	}
+
 
 	const data = {
 		gen_i: {
@@ -55,8 +88,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'red-blue',
 					label: 'Red/Blue',
-					get moves_level() { return filterMoves(this.name, 'level-up') },
-					get moves_machine() { return filterMoves(this.name, 'machine') },
+					get moves() { return filterStuff(this.name) },
 					games: {
 						red: {
 							id: 1,
@@ -94,8 +126,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'yellow',
 					label: 'Yellow',
-					get moves_level() { return filterMoves(this.name, 'level-up') },
-					get moves_machine() { return filterMoves(this.name, 'machine') },
+					get moves() { return filterStuff(this.name) },
 					games: {
 						yellow: {
 							id: 3,
@@ -125,11 +156,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'gold-silver',
 					label: 'Gold/Silver',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						gold: {
 							id: 1,
@@ -167,11 +194,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'crystal',
 					label: 'Crystal',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						crystal: {
 							id: 3,
@@ -201,11 +224,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'ruby-sapphire',
 					label: 'Ruby/Sapphire',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						ruby: {
 							id: 1,
@@ -243,11 +262,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'emerald',
 					label: 'Emerald',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						emerald: {
 							id: 3,
@@ -270,11 +285,7 @@ export const gameDataByPokemon = props => {
 					id: 3,
 					name: 'firered-leafgreen',
 					label: 'FireRed/LeafGreen',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						firered: {
 							id: 4,
@@ -319,11 +330,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'diamond-pearl',
 					label: 'Diamond/Pearl',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						diamond: {
 							id: 1,
@@ -361,11 +368,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'platinum',
 					label: 'Platinum',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						platinum: {
 							id: 3,
@@ -388,11 +391,7 @@ export const gameDataByPokemon = props => {
 					id: 3,
 					name: 'heartgold-soulsilver',
 					label: 'HeartGold/SoulSilver',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						heartgold: {
 							id: 4,
@@ -437,11 +436,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'black-white',
 					label: 'Black/White',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						black: {
 							id: 1,
@@ -479,11 +474,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'black-2-white-2',
 					label: 'Black 2/White 2',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						black_2: {
 							id: 3,
@@ -532,11 +523,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'x-y',
 					label: 'X/Y',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						x: {
 							id: 1,
@@ -598,11 +585,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'omega-ruby-alpha-sapphire',
 					label: 'Omega Ruby/Alpha Sapphire',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						omega_ruby: {
 							id: 3,
@@ -647,11 +630,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'sun-moon',
 					label: 'Sun/Moon',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						sun: {
 							id: 1,
@@ -737,11 +716,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'ultra-sun-ultra-moon',
 					label: 'Ultra Sun/Ultra Moon',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						ultra_sun: {
 							id: 3,
@@ -827,11 +802,7 @@ export const gameDataByPokemon = props => {
 					id: 3,
 					name: 'lets-go-pikachu-lets-go-eevee',
 					label: `Let's Go Pikachu/Let's Go Eevee`,
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						lets_go_pikachu: {
 							id: 5,
@@ -876,11 +847,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'sword-shield',
 					label: 'Sword/Shield',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						sword: {
 							id: 1,
@@ -942,11 +909,7 @@ export const gameDataByPokemon = props => {
 					id: 2,
 					name: 'brilliant-diamond-shining-pearl',
 					label: 'Brilliant Diamond/Shining Pearl',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						brilliant_diamond: {
 							id: 3,
@@ -984,11 +947,7 @@ export const gameDataByPokemon = props => {
 					id: 3,
 					name: 'legends-arceus',
 					label: 'Legends: Arceus',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						legends_arceus: {
 							id: 5,
@@ -1018,11 +977,7 @@ export const gameDataByPokemon = props => {
 					id: 1,
 					name: 'scarlet-violet',
 					label: 'Scarlet/Violet',
-					moves: {
-						get level() {},
-						get hm() {},
-						get tm() {},
-					},
+					get moves() { return filterStuff(this.name) },
 					games: {
 						scarlet: {
 							id: 1,

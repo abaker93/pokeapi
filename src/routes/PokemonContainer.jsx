@@ -288,7 +288,7 @@ const PokemonContainer = props => {
 						</Grid> */}
 					</Grid>
 
-					{/* <FlavorText state={state} /> */}
+					<FlavorText state={state} />
 
 					{state.encounters && <Encounters state={state} />}
 

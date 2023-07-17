@@ -117,7 +117,18 @@ const Encounters = props => {
 					scrollButtons="auto"
 					aria-label="encounters sorted by generation and game"
 					TabIndicatorProps={{ style: { display: 'none' } }}
-					sx={{ borderBottom: '1px solid rgba(0, 0, 0, 0.12)' }}
+					sx={{
+						position: 'relative',
+						'&::after': {
+							content: '""',
+							position: 'absolute',
+							bottom: 0,
+							left: 0,
+							height: '1px',
+							width: '100%',
+							backgroundColor: getColorFromType(types[0])[700],
+						}
+					}}
 				>
 
 					{Object.keys(data).map(gen => (

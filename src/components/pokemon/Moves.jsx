@@ -8,6 +8,7 @@ import { gameDataByPokemon } from "../../utilities/games"
 import { filterByLang, getColorFromType } from '../../utilities/utilities'
 import { gray } from "../../utilities/colors"
 import { Physical, Special, Status } from "../../assets/MoveIcon"
+import PokemonTab from "../../utilities/components/PokemonTab"
 
 const P = new Pokedex()
 
@@ -17,10 +18,12 @@ const Moves = props => {
 	const pokemonName = filterByLang('name', pokemon.names, lang)
 	const data = gameDataByPokemon(props)
 
+	// console.log(data.gen_iii.version_group.firered_leafgreen.moves)
+
 	const [genVal, setGenVal] = useState({
 		gen:			1,
 		gen_i:		true,
-		gen_ii:		false,
+		gen_ii:		true,
 		gen_iii:	false,
 		gen_iv:		false,
 		gen_v:		false,
@@ -34,24 +37,24 @@ const Moves = props => {
 		version:													1,
 		'red-blue':												true,
 		yellow:														true,
-		gold_silver:											false,
-		crystal:													false,
-		ruby_sapphire:										false,
-		emerald:													false,
-		firered_leafgreen:								false,
-		diamond_pearl:										false,
-		platinum:													false,
-		heartgold_soulsilver:							false,
-		black_white:											false,
-		black_2_white_2:									false,
-		x_y:															false,
-		omega_ruby_alpha_sapphire:				false,
-		sun_moon:													false,
-		ultra_sun_ultra_moon:							false,
-		sword_shield:											false,
-		brilliant_diamond_shining_pearl:	false,
-		legends_arceus:										false,
-		scarlet_violet:										false,
+		'gold-silver':										true,
+		crystal:													true,
+		// ruby_sapphire:										false,
+		// emerald:													false,
+		// firered_leafgreen:								false,
+		// diamond_pearl:										false,
+		// platinum:													false,
+		// heartgold_soulsilver:							false,
+		// black_white:											false,
+		// black_2_white_2:									false,
+		// x_y:															false,
+		// omega_ruby_alpha_sapphire:				false,
+		// sun_moon:													false,
+		// ultra_sun_ultra_moon:							false,
+		// sword_shield:											false,
+		// brilliant_diamond_shining_pearl:	false,
+		// legends_arceus:										false,
+		// scarlet_violet:										false,
 	})
 
 
@@ -83,9 +86,9 @@ const Moves = props => {
 		1:	v.red_blue
 				|| v.yellow
 					? true : false,
-		// 2:	v.gold_silver
-		// 		|| v.crystal
-		// 			? true : false,
+		2:	v.gold_silver
+				|| v.crystal
+					? true : false,
 		// 3:	data.gen_iii.games.ruby.text
 		// 		|| data.gen_iii.games.sapphire.text
 		// 		|| data.gen_iii.games.emerald.text
@@ -162,16 +165,33 @@ const Moves = props => {
 			<Box>
 				<Tabs
 					value={genVal.gen}
-					onChange={(e, val) => setGenVal(prev => ({ ...prev, gen: val }))}
+					onChange={(e, val) => {
+						setGenVal(prev => ({ ...prev, gen: val }))
+						setVersionVal(prev => ({ ...prev, version: 1 }))
+					}}
 					variant="scrollable"
 					scrollButtons="auto"
 					aria-label="moves sorted by generation"
+					TabIndicatorProps={{ style: { display: 'none' } }}
+					sx={{
+						position: 'relative',
+						'&::after': {
+							content: '""',
+							position: 'absolute',
+							bottom: 0,
+							left: 0,
+							height: '1px',
+							width: '100%',
+							backgroundColor: getColorFromType(types[0])[700],
+						}
+					}}
 				>
 
 					{Object.keys(data).map(gen => (
 						genVal[data[gen].name] && (
-							<Tab
+							<PokemonTab
 								key={data[gen].id}
+								color={getColorFromType(types[0])}
 								label={data[gen].label}
 								value={data[gen].id}
 								id={`moves_gen_tab${data[gen].id}`}
@@ -199,11 +219,25 @@ const Moves = props => {
 										variant="scrollable"
 										scrollButtons="auto"
 										aria-label="moves sorted by game"
+										TabIndicatorProps={{ style: { display: 'none' } }}
+										sx={{
+											position: 'relative',
+											'&::after': {
+												content: '""',
+												position: 'absolute',
+												bottom: 0,
+												left: 0,
+												height: '1px',
+												width: '100%',
+												backgroundColor: getColorFromType(types[0])[700],
+											}
+										}}
 									>
 										{Object.keys(data[gen].version_group).map(group => (
 											versionVal[data[gen].version_group[group].name] && (
-												<Tab
+												<PokemonTab
 													key={data[gen].version_group[group].id}
+													color={getColorFromType(types[0])}
 													label={data[gen].version_group[group].label}
 													value={data[gen].version_group[group].id}
 													id={`moves_group_tab${data[gen].version_group[group].id}`}
@@ -225,7 +259,7 @@ const Moves = props => {
 											>
 												{versionVal.version === data[gen].version_group[group].id && (
 													<Box>
-														{data[gen].version_group[group].moves_level.length > 0 && (
+														{data[gen].version_group[group].moves.level && (
 															<Box>
 																<Typography variant="h3">Moves learnt by level up</Typography>
 																
@@ -248,7 +282,7 @@ const Moves = props => {
 																			</TableRow>
 																		</TableHead>
 																		<TableBody>
-																			{data[gen].version_group[group].moves_level.map((m, i) => (
+																			{data[gen].version_group[group].moves.level.map((m, i) => (
 																				<MoveTableRow
 																					key={i}
 																					move={m}
@@ -289,8 +323,6 @@ const MoveTableRow = props => {
 	useEffect(() => {
 		getMoveData(move.move.name)
 	}, [move])
-
-	// console.log(moveData)
 
 	return moveData && (
 		type === 'level-up' && (
