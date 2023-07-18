@@ -37,44 +37,95 @@ export const gameDataByPokemon = props => {
 			})
 		})
 
-		type === 'level-up' && (
-			movesArr = movesArr.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at)
-		)
+		// type === 'level-up' && (
+		// 	movesArr = movesArr.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at)
+		// )
 
 		return movesArr
 	}
 
 	const movesBuilder = group => {
+		let moves = {}
+		let id = 1
+
 		const level = filterMoves(group, 'level-up')
 		const egg = filterMoves(group, 'egg')
 		const tutor = filterMoves(group, 'tutor')
 		const machine = filterMoves(group, 'machine')
-		const stadium_surfing_pikachu = filterMoves(group, 'stadium-surfing-pikachu')
-		const light_ball_egg = filterMoves(group, 'light-ball-egg')
-		const colosseum_purification = filterMoves(group, 'colosseum-purification')
-		const xd_shadow = filterMoves(group, 'xd-shadow')
-		const xd_purification = filterMoves(group, 'xd-purification')
-		const form_change = filterMoves(group, 'form-change')
-		const zygarde_cube = filterMoves(group, 'zygarde-cube')
-
-		let moves = {}
+		// const stadium_surfing_pikachu = filterMoves(group, 'stadium-surfing-pikachu')
+		// const light_ball_egg = filterMoves(group, 'light-ball-egg')
+		// const colosseum_purification = filterMoves(group, 'colosseum-purification')
+		// const xd_shadow = filterMoves(group, 'xd-shadow')
+		// const xd_purification = filterMoves(group, 'xd-purification')
+		// const form_change = filterMoves(group, 'form-change')
+		// const zygarde_cube = filterMoves(group, 'zygarde-cube')
 
 		level.length > 0 && ( moves = { ...moves, level: {
-			id: 1,
+			id: id,
 			name: 'level',
 			label: 'Level Up',
 			moves: level,
-		} } )
-		egg.length > 0 && ( moves = { ...moves, egg: egg } )
-		tutor.length > 0 && ( moves = { ...moves, tutor: tutor } )
-		machine.length > 0 && ( moves = { ...moves, machine: machine } )
-		stadium_surfing_pikachu.length > 0 && ( moves = { ...moves, stadium_surfing_pikachu: stadium_surfing_pikachu } )
-		light_ball_egg.length > 0 && ( moves = { ...moves, light_ball_egg: light_ball_egg } )
-		colosseum_purification.length > 0 && ( moves = { ...moves, colosseum_purification: colosseum_purification } )
-		xd_shadow.length > 0 && ( moves = { ...moves, xd_shadow: xd_shadow } )
-		xd_purification.length > 0 && ( moves = { ...moves, xd_purification: xd_purification } )
-		form_change.length > 0 && ( moves = { ...moves, form_change: form_change } )
-		zygarde_cube.length > 0 && ( moves = { ...moves, zygarde_cube: zygarde_cube } )
+		}}, id++ )
+		egg.length > 0 && ( moves = { ...moves, egg: {
+			id: id,
+			name: 'egg',
+			label: 'Egg Moves',
+			moves: egg,
+		}}, id++ )
+		tutor.length > 0 && ( moves = { ...moves, tutor: {
+			id: id,
+			name: 'tutor',
+			label: 'Move Tutor',
+			moves: tutor,
+		}}, id++ )
+		machine.length > 0 && ( moves = { ...moves, machine: {
+			id: id,
+			name: 'machine',
+			label: 'Machine',
+			moves: machine,
+		}}, id++ )
+		// stadium_surfing_pikachu.length > 0 && ( moves = { ...moves, stadium_surfing_pikachu: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// light_ball_egg.length > 0 && ( moves = { ...moves, light_ball_egg: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// colosseum_purification.length > 0 && ( moves = { ...moves, colosseum_purification: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// xd_shadow.length > 0 && ( moves = { ...moves, xd_shadow: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// xd_purification.length > 0 && ( moves = { ...moves, xd_purification: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// form_change.length > 0 && ( moves = { ...moves, form_change: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
+		// zygarde_cube.length > 0 && ( moves = { ...moves, zygarde_cube: {
+		// 	id: id,
+		// 	name: 'level',
+		// 	label: 'Level Up',
+		// 	moves: level,
+		// }}, id++ )
 
 		return moves
 	}
