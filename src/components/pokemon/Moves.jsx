@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react"
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Chip, Link, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, alpha } from '@mui/material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Box, Chip, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import PokemonTabs from "../../utilities/components/PokemonTabs"
 import PokemonTab from "../../utilities/components/PokemonTab"
 
@@ -19,12 +18,10 @@ const Moves = props => {
 	const pokemonColor = getColorFromType(types[0])
 	const data = gameDataByPokemon(props)
 
-	// console.log(data.gen_i.version_group.red_blue.moves)
-
 	const [genVal, setGenVal] = useState({
 		gen:			1,
-		gen_i:		true,
-		gen_ii:		true,
+		gen_i:		false,
+		gen_ii:		false,
 		gen_iii:	false,
 		gen_iv:		false,
 		gen_v:		false,
@@ -37,15 +34,161 @@ const Moves = props => {
 	const [groupVal, setGroupVal] = useState({
 		gen_i: {
 			group: 1,
-			'red-blue': true,
-			yellow: true,
+			'red-blue': false,
+			yellow: false,
 		},
 		gen_ii: {
 			group: 1,
-			'gold-silver': true,
-			crystal: true,
+			'gold-silver': false,
+			crystal: false,
+		},
+		gen_iii: {
+			group: 1,
+			'ruby-sapphire': false,
+			emerald: false,
+			'firered-leafgreen': false,
+		},
+		gen_iv: {
+			group: 1,
+			'diamond-pearl': false,
+			platinum: false,
+			'heartgold-soulsilver': false,
+		},
+		gen_v: {
+			group: 1,
+			'black-white': false,
+			'black-2-white-2': false,
+		},
+		gen_vi: {
+			group: 1,
+			'x-y': false,
+			'omega-ruby-alpha-sapphire': false,
+		},
+		gen_vii: {
+			group: 1,
+			'sun-moon': false,
+			'ultra-sun-ultra-moon': false,
+			'lets-go-pikachu-lets-go-eevee': false,
+		},
+		gen_viii: {
+			group: 1,
+			'sword-shield': false,
+			'brilliant-diamond-shining-pearl': false,
+			'legends-arceus': false,
+		},
+		gen_ix: {
+			group: 1,
+			'scarlet-violet': false,
 		},
 	})
+
+	const vg = {
+		rb:		Object.keys(data.gen_i.version_group.red_blue.moves).length > 0,
+		y:		Object.keys(data.gen_i.version_group.yellow.moves).length > 0,
+		gs:		Object.keys(data.gen_ii.version_group.gold_silver.moves).length > 0,
+		c:		Object.keys(data.gen_ii.version_group.crystal.moves).length > 0,
+		rs:		Object.keys(data.gen_iii.version_group.ruby_sapphire.moves).length > 0,
+		e:		Object.keys(data.gen_iii.version_group.emerald.moves).length > 0,
+		fl:		Object.keys(data.gen_iii.version_group.firered_leafgreen.moves).length > 0,
+		dp:		Object.keys(data.gen_iv.version_group.diamond_pearl.moves).length > 0,
+		p:		Object.keys(data.gen_iv.version_group.platinum.moves).length > 0,
+		hs:		Object.keys(data.gen_iv.version_group.heartgold_soulsilver.moves).length > 0,
+		bw:		Object.keys(data.gen_v.version_group.black_white.moves).length > 0,
+		bw2:	Object.keys(data.gen_v.version_group.black_2_white_2.moves).length > 0,
+		xy:		Object.keys(data.gen_vi.version_group.x_y.moves).length > 0,
+		oa:		Object.keys(data.gen_vi.version_group.omega_ruby_alpha_sapphire.moves).length > 0,
+		sm:		Object.keys(data.gen_vii.version_group.sun_moon.moves).length > 0,
+		usm:	Object.keys(data.gen_vii.version_group.ultra_sun_ultra_moon.moves).length > 0,
+		lgpe:	Object.keys(data.gen_vii.version_group.lets_go_pikachu_lets_go_eevee.moves).length > 0,
+		ss:		Object.keys(data.gen_viii.version_group.sword_shield.moves).length > 0,
+		bs:		Object.keys(data.gen_viii.version_group.brilliant_diamond_shining_pearl.moves).length > 0,
+		la:		Object.keys(data.gen_viii.version_group.legends_arceus.moves).length > 0,
+		sv:		Object.keys(data.gen_ix.version_group.scarlet_violet.moves).length > 0,
+	}
+
+	const g = {
+		1:	vg.rb || vg.y ? true : false,
+		2:	vg.gs || vg.c ? true : false,
+		3:	vg.rs || vg.e || vg.fl ? true : false,
+		4:	vg.dp || vg.p || vg.hs ? true : false,
+		5:	vg.bw || vg.bw2 ? true : false,
+		6:	vg.xy || vg.oa ? true : false,
+		7:	vg.sm || vg.usm || vg.lgpe ? true : false,
+		8:	vg.ss || vg.bs || vg.la ? true : false,
+		9:	vg.sv ? true : false,
+	}
+
+	const getGenVal = () => {
+		if (g[1]) { setGenVal(prev => ({ ...prev, gen: 1 })) }
+		else if (g[2]) { setGenVal(prev => ({ ...prev, gen: 2 })) }
+		else if (g[3]) { setGenVal(prev => ({ ...prev, gen: 3 })) }
+		else if (g[4]) { setGenVal(prev => ({ ...prev, gen: 4 })) }
+		else if (g[5]) { setGenVal(prev => ({ ...prev, gen: 5 })) }
+		else if (g[6]) { setGenVal(prev => ({ ...prev, gen: 6 })) }
+		else if (g[7]) { setGenVal(prev => ({ ...prev, gen: 7 })) }
+		else if (g[8]) { setGenVal(prev => ({ ...prev, gen: 8 })) }
+		else if (g[9]) { setGenVal(prev => ({ ...prev, gen: 9 })) }
+
+		if (g[1]) { setGenVal(prev => ({ ...prev, gen_i: true })) }
+		if (g[2]) { setGenVal(prev => ({ ...prev, gen_ii: true })) }
+		if (g[3]) { setGenVal(prev => ({ ...prev, gen_iii: true })) }
+		if (g[4]) { setGenVal(prev => ({ ...prev, gen_iv: true })) }
+		if (g[5]) { setGenVal(prev => ({ ...prev, gen_v: true })) }
+		if (g[6]) { setGenVal(prev => ({ ...prev, gen_vi: true })) }
+		if (g[7]) { setGenVal(prev => ({ ...prev, gen_vii: true })) }
+		if (g[8]) { setGenVal(prev => ({ ...prev, gen_viii: true })) }
+		if (g[9]) { setGenVal(prev => ({ ...prev, gen_ix: true })) }
+
+		if (vg.rb)				{ setGroupVal(prev => ({ ...prev, gen_i: { ...prev.gen_i, group: 1 } })) }
+		else if (vg.y)		{ setGroupVal(prev => ({ ...prev, gen_i: { ...prev.gen_i, group: 2 } })) }
+		if (vg.gs)				{ setGroupVal(prev => ({ ...prev, gen_ii: { ...prev.gen_ii, group: 1 } })) }
+		else if (vg.c)		{ setGroupVal(prev => ({ ...prev, gen_ii: { ...prev.gen_ii, group: 2 } })) }
+		if (vg.rs)				{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, group: 1 } })) }
+		else if (vg.e)		{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, group: 2 } })) }
+		else if (vg.fl)		{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, group: 3 } })) }
+		if (vg.dp)				{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, group: 1 } })) }
+		else if (vg.p)		{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, group: 2 } })) }
+		else if (vg.hs)		{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, group: 3 } })) }
+		if (vg.bw)				{ setGroupVal(prev => ({ ...prev, gen_v: { ...prev.gen_v, group: 1 } })) }
+		else if (vg.bw2)	{ setGroupVal(prev => ({ ...prev, gen_v: { ...prev.gen_v, group: 2 } })) }
+		if (vg.xy)				{ setGroupVal(prev => ({ ...prev, gen_vi: { ...prev.gen_vi, group: 1 } })) }
+		else if (vg.oa)		{ setGroupVal(prev => ({ ...prev, gen_vi: { ...prev.gen_vi, group: 2 } })) }
+		if (vg.sm)				{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, group: 1 } })) }
+		else if (vg.usm)	{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, group: 2 } })) }
+		else if (vg.lgpe)	{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, group: 3 } })) }
+		if (vg.ss)				{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, group: 1 } })) }
+		else if (vg.bs)		{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, group: 2 } })) }
+		else if (vg.la)		{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, group: 3 } })) }
+		if (vg.sv)				{ setGroupVal(prev => ({ ...prev, gen_ix: { ...prev.gen_ix, group: 1 } })) }
+
+		if (vg.rb)		{ setGroupVal(prev => ({ ...prev, gen_i: { ...prev.gen_i, 'red-blue': true } })) }
+		if (vg.y)			{ setGroupVal(prev => ({ ...prev, gen_i: { ...prev.gen_i, yellow: true } })) }
+		if (vg.gs)		{ setGroupVal(prev => ({ ...prev, gen_ii: { ...prev.gen_ii, 'gold-silver': true } })) }
+		if (vg.c)			{ setGroupVal(prev => ({ ...prev, gen_ii: { ...prev.gen_ii, crystal: true } })) }
+		if (vg.rs)		{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, 'ruby-sapphire': true } })) }
+		if (vg.e)			{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, emerald: true } })) }
+		if (vg.fl)		{ setGroupVal(prev => ({ ...prev, gen_iii: { ...prev.gen_iii, 'firered-leafgreen': true } })) }
+		if (vg.dp)		{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, 'diamond-pearl': true } })) }
+		if (vg.p)			{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, platinum: true } })) }
+		if (vg.hs)		{ setGroupVal(prev => ({ ...prev, gen_iv: { ...prev.gen_iv, 'heartgold-soulsilver': true } })) }
+		if (vg.bw)		{ setGroupVal(prev => ({ ...prev, gen_v: { ...prev.gen_v, 'black-white': true } })) }
+		if (vg.bw2)		{ setGroupVal(prev => ({ ...prev, gen_v: { ...prev.gen_v, 'black-2-white-2': true } })) }
+		if (vg.xy)		{ setGroupVal(prev => ({ ...prev, gen_vi: { ...prev.gen_vi, 'x-y': true } })) }
+		if (vg.oa)		{ setGroupVal(prev => ({ ...prev, gen_vi: { ...prev.gen_vi, 'omega-ruby-alpha-sapphire': true } })) }
+		if (vg.sm)		{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, 'sun-moon': true } })) }
+		if (vg.usm)		{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, 'ultra-sun-ultra-moon': true } })) }
+		if (vg.lgpe)	{ setGroupVal(prev => ({ ...prev, gen_vii: { ...prev.gen_vii, 'lets-go-pikachu-lets-go-eevee': true } })) }
+		if (vg.ss)		{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, 'sword-shield': true } })) }
+		if (vg.bs)		{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, 'brilliant-diamond-shining-pearl': true } })) }
+		if (vg.la)		{ setGroupVal(prev => ({ ...prev, gen_viii: { ...prev.gen_viii, 'legends-arceus': true } })) }
+		if (vg.sv)		{ setGroupVal(prev => ({ ...prev, gen_ix: { ...prev.gen_ix, 'scarlet-violet': true } })) }
+	}
+
+	useEffect(() => {
+		getGenVal()
+	}, [props])
+
+	console.log(genVal, groupVal, g, vg)
 
 	return (
 		<Box sx={{ mb: 5 }}>
@@ -261,8 +404,6 @@ const MovesTable = props => {
 		setMoveData([])
 		getMoveData(moves.moves)
 	}, [])
-
-	// console.log(moveData)
 
 	if (moveData.length > 0) {
 		
