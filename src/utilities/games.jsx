@@ -37,10 +37,6 @@ export const gameDataByPokemon = props => {
 			})
 		})
 
-		// type === 'level-up' && (
-		// 	movesArr = movesArr.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at)
-		// )
-
 		return movesArr
 	}
 
@@ -66,12 +62,12 @@ export const gameDataByPokemon = props => {
 			label: 'Level Up',
 			moves: level,
 		}}, id++ )
-		egg.length > 0 && ( moves = { ...moves, egg: {
-			id: id,
-			name: 'egg',
-			label: 'Egg Moves',
-			moves: egg,
-		}}, id++ )
+		// egg.length > 0 && ( moves = { ...moves, egg: {
+		// 	id: id,
+		// 	name: 'egg',
+		// 	label: 'Egg Moves',
+		// 	moves: egg,
+		// }}, id++ )
 		tutor.length > 0 && ( moves = { ...moves, tutor: {
 			id: id,
 			name: 'tutor',
@@ -84,42 +80,51 @@ export const gameDataByPokemon = props => {
 			label: 'Machine',
 			moves: machine,
 		}}, id++ )
+
+
+		//! Pikachu
 		// stadium_surfing_pikachu.length > 0 && ( moves = { ...moves, stadium_surfing_pikachu: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Pichu
 		// light_ball_egg.length > 0 && ( moves = { ...moves, light_ball_egg: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Pokemon Colosseum
 		// colosseum_purification.length > 0 && ( moves = { ...moves, colosseum_purification: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Pokemon XD - Shadow Pokemon
 		// xd_shadow.length > 0 && ( moves = { ...moves, xd_shadow: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Pokemon XD - Purified Pokemon
 		// xd_purification.length > 0 && ( moves = { ...moves, xd_purification: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Rotom
 		// form_change.length > 0 && ( moves = { ...moves, form_change: {
 		// 	id: id,
 		// 	name: 'level',
 		// 	label: 'Level Up',
 		// 	moves: level,
 		// }}, id++ )
+		//! Sun/Moon - Ultra Sun/Ultra Moon
 		// zygarde_cube.length > 0 && ( moves = { ...moves, zygarde_cube: {
 		// 	id: id,
 		// 	name: 'level',

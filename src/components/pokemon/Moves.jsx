@@ -7,7 +7,7 @@ import PokemonTab from "../../utilities/components/PokemonTab"
 
 import { gameDataByPokemon } from "../../utilities/games"
 import { filterByLang, getColorFromType } from '../../utilities/utilities'
-import { gray } from "../../utilities/colors"
+import { gray, text } from "../../utilities/colors"
 import { Physical, Special, Status } from "../../assets/MoveIcon"
 
 const P = new Pokedex()
@@ -107,7 +107,8 @@ const Moves = props => {
 	}
 
 	const g = {
-		1:	vg.rb || vg.y ? true : false,
+		// 1:	vg.rb || vg.y ? true : false,
+		1: false,
 		2:	vg.gs || vg.c ? true : false,
 		3:	vg.rs || vg.e || vg.fl ? true : false,
 		4:	vg.dp || vg.p || vg.hs ? true : false,
@@ -188,8 +189,6 @@ const Moves = props => {
 		getGenVal()
 	}, [props])
 
-	console.log(genVal, groupVal, g, vg)
-
 	return (
 		<Box sx={{ mb: 5 }}>
 			<Box sx={{ mb: 2 }}>
@@ -222,17 +221,18 @@ const Moves = props => {
 									{Object.keys(data[gen].version_group).map(group => (
 										groupVal[data[gen].name][data[gen].version_group[group].name] && (
 											<GroupPanel
-												key={data[gen].version_group[group].id}
+												key={`${data[gen].id}${data[gen].version_group[group].id}`}
 												data={data[gen].version_group[group]}
 												gen={data[gen].name}
 												groupVal={groupVal}
 											>
 												{Object.keys(data[gen].version_group[group].moves).map(method => (
 													<MovesTable
-														group={data[gen].version_group[group].name}
+														group={data[gen].version_group[group]}
 														moves={data[gen].version_group[group].moves[method]}
 														color={pokemonColor}
 														lang={lang}
+														name={pokemonName}
 													/>
 												))}
 											</GroupPanel>
@@ -343,7 +343,7 @@ const GroupPanel = props => {
 }
 
 const MovesTable = props => {
-	const { group, moves }	= props
+	const { group, moves, name }	= props
 	const [moveData, setMoveData] = useState([])
 	const [machines, setMachines] = useState({
 		hm: false,
@@ -356,7 +356,7 @@ const MovesTable = props => {
 				.then(move => {
 					if (moves.name === 'machine') {
 
-						P.getResource(move.machines.filter(f => f.version_group.name === group)[0].machine.url)
+						P.getResource(move.machines.filter(f => f.version_group.name === group.name)[0].machine.url)
 							.then(machine => {
 								P.getResource(machine.item.url)
 									.then(item => {
@@ -413,7 +413,8 @@ const MovesTable = props => {
 					machines.tm ? (
 						<>
 							<Box key={`${moves.id}-hm`} sx={{ mt: 3 }}>
-								<Typography variant="h3">Moves learnt by HM</Typography>
+								<Typography variant="h3" mb={0.5}>Moves learnt by HM</Typography>
+								<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Hidden Machines in Pokémon {group.label}:</Typography>
 								<TableContainer sx={{ mt: 1 }}>
 									<Table aria-label={`moves learnt in ${group.label} by HM`}>
 										<MovesTableHead subcategory="hm" {...props} />
@@ -422,7 +423,8 @@ const MovesTable = props => {
 								</TableContainer>
 							</Box>
 							<Box key={`${moves.id}-tm`} sx={{ mt: 3 }}>
-								<Typography variant="h3">Moves learnt by TM</Typography>
+								<Typography variant="h3" mb={0.5}>Moves learnt by TM</Typography>
+								<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Technical Machines in Pokémon {group.label}:</Typography>
 								<TableContainer sx={{ mt: 1 }}>
 									<Table aria-label={`moves learnt in ${group.label} by TM`}>
 										<MovesTableHead subcategory="tm" {...props} />
@@ -433,8 +435,8 @@ const MovesTable = props => {
 						</>
 					) : (
 						<Box key={`${moves.id}-hm`} sx={{ mt: 3 }}>
-							<Typography variant="h3">Moves learnt by HM</Typography>
-
+							<Typography variant="h3" mb={0.5}>Moves learnt by HM</Typography>
+							<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Hidden Machines in Pokémon {group.label}:</Typography>
 							<TableContainer sx={{ mt: 1 }}>
 								<Table aria-label={`moves learnt in ${group.label} by HM`}>
 									<MovesTableHead subcategory="hm" {...props} />
@@ -446,8 +448,8 @@ const MovesTable = props => {
 				) : (
 					machines.tm ? (
 						<Box key={`${moves.id}-tm`} sx={{ mt: 3 }}>
-							<Typography variant="h3">Moves learnt by TM</Typography>
-
+							<Typography variant="h3" mb={0.5}>Moves learnt by TM</Typography>
+							<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Technical Machines in Pokémon {group.label}:</Typography>
 							<TableContainer sx={{ mt: 1 }}>
 								<Table aria-label={`moves learnt in ${group.label} by TM`}>
 									<MovesTableHead subcategory="tm" {...props} />
@@ -462,8 +464,13 @@ const MovesTable = props => {
 
 		return (
 			<Box key={moves.id} sx={{ mt: 3 }}>
-				<Typography variant="h3">Moves learnt by {moves.label}</Typography>
-
+				<Typography variant="h3" mb={0.5}>Moves learnt by {moves.label}</Typography>
+				{moves.name === 'level' && (
+					<Typography variant="body2" color={text[300]} mb={1}>{name} learns the followiung moves in Pokémon {group.label} at the levels specified:</Typography>
+				)}
+				{moves.name === 'tutor' && (
+					<Typography variant="body2" color={text[300]} mb={1}>{name} can be taught these moves in Pokémon {group.label} from move tutors:</Typography>
+				)}
 				<TableContainer sx={{ mt: 1 }}>
 					<Table aria-label={`moves learnt in ${group.label} by ${moves.label}`}>
 						<MovesTableHead {...props} />
@@ -496,7 +503,7 @@ const MovesTableHead = props => {
 					<TableCell>Move</TableCell>
 					<TableCell>Type</TableCell>
 					<TableCell>Cat.</TableCell>
-					<TableCell>Power</TableCell>
+					<TableCell>Pwr.</TableCell>
 					<TableCell>Acc.</TableCell>
 					<TableCell>PP</TableCell>
 				</TableRow>
@@ -512,7 +519,22 @@ const MovesTableHead = props => {
 					<TableCell>Move</TableCell>
 					<TableCell>Type</TableCell>
 					<TableCell>Cat.</TableCell>
-					<TableCell>Power</TableCell>
+					<TableCell>Pwr.</TableCell>
+					<TableCell>Acc.</TableCell>
+					<TableCell>PP</TableCell>
+				</TableRow>
+			</TableHead>
+		)
+	}
+
+	if (category === 'tutor') {
+		return (
+			<TableHead>
+				<TableRow sx={styles}>
+					<TableCell>Move</TableCell>
+					<TableCell>Type</TableCell>
+					<TableCell>Cat.</TableCell>
+					<TableCell>Pwr.</TableCell>
 					<TableCell>Acc.</TableCell>
 					<TableCell>PP</TableCell>
 				</TableRow>
@@ -544,7 +566,7 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at || filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} component={Link} href={`/move/${move.name}`} underline="none" hover sx={rowStyle}>
+						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} hover sx={rowStyle}>
 							<TableCell sx={{ textAlign: 'right' }}>
 								{move.version_details.level_learned_at}
 							</TableCell>
@@ -592,10 +614,54 @@ const MoveTableRows = props => {
 					.filter(f => f[subcategory])
 					.sort((a, b) => a[subcategory].name.localeCompare(b[subcategory].name))
 					.map(move => (
-						<TableRow key={move.id} component={Link} href={`/move/${move.name}`} underline="none" hover sx={rowStyle}>
+						<TableRow key={move.id} hover sx={rowStyle}>
 							<TableCell sx={{ textAlign: 'right' }}>
 								{filterByLang('name', move[subcategory].names, lang)}
 							</TableCell>
+							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
+								{filterByLang('name', move.names, lang)}
+							</TableCell>
+							<TableCell>
+								<Chip
+									size="small"
+									variant="type"
+									type={move.type.name}
+									label={move.type.name}
+									sx={{ width: '100%' }}
+								/>
+							</TableCell>
+							<TableCell sx={{
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}>
+								{move.damage_class.name === 'physical' && <Physical />}
+								{move.damage_class.name === 'special' && <Special />}
+								{move.damage_class.name === 'status' && <Status />}
+							</TableCell>
+							<TableCell>
+								{move.power ? move.power : <Typography>&mdash;</Typography>}
+							</TableCell>
+							<TableCell>
+								{move.accuracy ? move.accuracy : <Typography>&mdash;</Typography>}
+							</TableCell>
+							<TableCell>
+								{move.pp ? move.pp : <Typography>&mdash;</Typography>}
+							</TableCell>
+						</TableRow>
+					))
+				}
+			</TableBody>
+		)
+	}
+
+	if (category === 'tutor') {
+		return (
+			<TableBody>
+				{moveData
+					.sort((a, b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
+					.map(move => (
+						<TableRow key={move.id} hover sx={rowStyle}>
 							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
 								{filterByLang('name', move.names, lang)}
 							</TableCell>
