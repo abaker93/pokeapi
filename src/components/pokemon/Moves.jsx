@@ -107,8 +107,7 @@ const Moves = props => {
 	}
 
 	const g = {
-		// 1:	vg.rb || vg.y ? true : false,
-		1: false,
+		1:	vg.rb || vg.y ? true : false,
 		2:	vg.gs || vg.c ? true : false,
 		3:	vg.rs || vg.e || vg.fl ? true : false,
 		4:	vg.dp || vg.p || vg.hs ? true : false,

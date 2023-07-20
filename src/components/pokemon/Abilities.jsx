@@ -6,6 +6,8 @@ import { filterByLang, getColorFromType } from "../../utilities/utilities";
 
 const Abilities = props => {
 	const { abilities, lang, types } = props.state
+
+	// TODO: Add short ability description as a tooltip
 	
 	return (
 		<>
@@ -16,7 +18,7 @@ const Abilities = props => {
 				{abilities.sort((a,b) => a.slot - b.slot).map((m) => (
 					<Grid key={m.slot} xs={12}>
 						<TypeCard variant="outlined" color={getColorFromType(types[0])}>
-							<CardActionArea href={`/abilities/${m.ability.name}`}>
+							<CardActionArea href={`/ability/${m.ability.name}`}>
 								<CardContent>
 									{m.is_hidden ? (
 										<>

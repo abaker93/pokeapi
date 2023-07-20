@@ -8,17 +8,17 @@ const Size = props => {
 	
 	return (
 		<>
-			<Grid container>
-				<Grid xs>
+			<Grid container columns={2}>
+				<Grid xs={1} sm={2} md={1}>
 					<Box sx={{ mb: 2 }}>
 						<Typography variant="h2">Height</Typography>
 					</Box>
 					<Box sx={{ mb: 2 }}>
 						<Typography>{calcMeasurement(pokemon.height, 'in')}</Typography>
-						<Typography>{calcMeasurement(pokemon.height, 'cm')}</Typography>
+						<Typography>{calcMeasurement(pokemon.height, 'm')}</Typography>
 					</Box>
 				</Grid>
-				<Grid xs>
+				<Grid xs={1} sm={2} md={1}>
 					<Box sx={{ mb: 2 }}>
 						<Typography variant="h2">Weight</Typography>
 					</Box>

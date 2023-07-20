@@ -19,7 +19,6 @@ import Training from '../components/pokemon/Training'
 import { getIdFromURL } from '../utilities/utilities'
 import Moves from '../components/pokemon/Moves'
 
-
 const P = new Pokedex()
 
 

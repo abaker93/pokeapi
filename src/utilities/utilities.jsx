@@ -24,13 +24,20 @@ export const calcMeasurement = (num, type) => {
 			let feet = Math.floor(meas / 12)
 			let inches = Math.round(meas % 12)
 
-			inches < 10
-				? inches = '0' + inches.toString()
-				: inches.toString()
+			if (inches === 12) {
+				feet++
+				inches = 0
+			}
+
+			if (inches < 10) {
+				inches = '0' + inches.toString()
+			} else {
+				inches.toString()
+			}
 
 			return `${feet}' ${inches}"`
-		} case 'cm': {
-			return `${round2Decimal(num * 10)} cm`
+		} case 'm': {
+			return `${round2Decimal(num / 10)} m`
 		} case 'lb': {
 			return `${round2Decimal(num * 0.220462)} lbs`
 		} case 'kg': {

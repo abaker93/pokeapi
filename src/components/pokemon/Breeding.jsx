@@ -19,7 +19,7 @@ const Breeding = props => {
 				{eggGroups.map((m) => (
 					<Grid key={m.id} xs={12}>
 						<TypeCard variant="outlined" color={getColorFromType(types[0])}>
-							<CardActionArea href={`/egg-groups/${m.name}`}>
+							<CardActionArea href={`/egg-group/${m.name}`}>
 								<CardContent>
 									{m.name === 'no-eggs' ? (
 										<>

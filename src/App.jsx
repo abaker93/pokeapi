@@ -8,6 +8,7 @@ import Home from './routes/Home'
 import PokedexContainer from './routes/PokedexContainer'
 import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
+import AbilityContainer from "./routes/AbilityContainer"
 
 
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter([{
 				{ path: ':variety/', element: <PokemonContainer dex="national" /> },
 			],
 		},
+		{ path: 'ability/:name/', element: <AbilityContainer />, },
 	],
 }])
 
