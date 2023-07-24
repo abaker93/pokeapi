@@ -4,9 +4,8 @@ import Pokedex from 'pokedex-promise-v2'
 
 import { Box, Breadcrumbs, Container, Link, Table, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 
-import { filterByLang, getColorFromGame } from '../utilities/utilities'
-import { game_blue, game_red, game_yellow, gray, text } from '../utilities/colors'
-import { Description } from '@mui/icons-material'
+import { filterByLang, formatDexId, getColorFromGame } from '../utilities/utilities'
+import { gray, text } from '../utilities/colors'
 
 const P = new Pokedex()
 
@@ -17,24 +16,64 @@ const AbilityContainer = props => {
 
 	const [loading, setLoading] = useState(true)
 	const [abilityData, setAbilityData] = useState()
+	const [abilityPokemon, setAbilityPokemon] = useState([])
 
 	const getAbilityData = ability => {
 		P.getAbilityByName(ability)
 			.then(data => {
 				setAbilityData(data)
+				return data
+			})
+			.then(data => {
+				data.pokemon.map(p => {
+
+					P.getPokemonByName(p.pokemon.name)
+					.then(poke => {
+
+						P.getPokemonSpeciesByName(poke.species.name)
+							.then(species => {
+
+								P.getPokemonFormByName(poke.forms[0].name)
+									.then(form => {
+
+
+
+										setAbilityPokemon(prev => [...prev, {
+											id: 				poke.id,
+											abilities: 	poke.abilities,
+											form_names:	form.names.length > 0 ? form.names : form.form_names,
+											is_hidden:	p.is_hidden,
+											names:			species.names,
+											num:				formatDexId(species.pokedex_numbers.filter(f => f.pokedex.name === 'national')[0].entry_number, 1000),
+											sprite:			form.sprites.front_default ? form.sprites.front_default : poke.sprites.front_default,
+										}])
+									}).catch(console.error)
+							}).catch(console.error)
+					}).catch(console.error)
+				})
 			})
 			.catch(console.error)
 	}
 
 	useEffect(() => {
-		if (!abilityData) { getAbilityData(ability) }
-		else { setLoading(false) }
+		if (!abilityData) {
+			setLoading(true)
+			setAbilityPokemon([])
+			getAbilityData(ability)
+		}
 	}, [ability, abilityData])
+
+	useEffect(() => {
+		if (abilityData && abilityPokemon.length === abilityData.pokemon.length) {
+			setLoading(false)
+		}
+	}, [abilityPokemon])
 	
-	// console.log(abilityData)
+	// console.log(loading, abilityData, abilityPokemon)
 
 
 	if (loading) {
+		// TODO: add loading skeleton
 		return (
 			<Typography>Loading...</Typography>
 		)
@@ -52,7 +91,27 @@ const AbilityContainer = props => {
 
 				<Descriptions data={abilityData} lang={lang} />
 
-				<Pokemon data={abilityData} lang={lang} />
+				<AbilityTable name={filterByLang('name', abilityData.names, lang)}>
+					{abilityPokemon
+						.filter(f => f.is_hidden === false)
+						.sort((a,b) => a.num - b.num || a.id - b.id)
+						.map(m => (
+							<AbilityRow key={m.id} ability={abilityData.name} lang={lang} pokemon={m} />
+						))
+					}
+				</AbilityTable>
+
+				<HiddenTable name={filterByLang('name', abilityData.names, lang)}>
+					{abilityPokemon
+						.filter(f => f.is_hidden === true)
+						.sort((a,b) => a.num - b.num || a.id - b.id)
+						.map(m => (
+							<HiddenRow key={m.id} lang={lang} pokemon={m} />
+						))
+					}
+				</HiddenTable>
+
+				<Translations ability={abilityData} lang={lang} />
 			</Container>
 		</>
 	)	
@@ -252,101 +311,250 @@ const Descriptions = props => {
 	)
 }
 
-const Pokemon = props => {
-	const { data, lang } = props
+const AbilityTable = props => {
+	const { children, name } = props
 
-	const abilities = data.pokemon.filter(f => f.is_hidden === false)
-	const hiddenAbilities = data.pokemon.filter(f => f.is_hidden === true)
+	return (
+		<Box mb={5}>
+			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon with the {name} ability</Typography>
+			<Table aria-label={`pokémon with ${name}`}>
+				<TableHead>
+					<TableRow sx={{
+						'& td, & th': {
+							padding: 1,
+							backgroundColor: alpha(gray[100], 0.4),
+							borderBottom: `1px solid ${gray[300]}`
+						}
+					}}>
+						<TableCell>#</TableCell>
+						<TableCell>Name</TableCell>
+						<TableCell>Second Ability</TableCell>
+						<TableCell>Hidden Ability</TableCell>
+					</TableRow>
+				</TableHead>
+				<TableBody>
+					{children}
+				</TableBody>
+			</Table>
+		</Box>
+	)
+}
 
-	const [abilityPokemon, setAbilityPokemon] = useState([])
-	const [hiddenAbilityPokemon, setHiddenAbilityPokemon] = useState([])
+const AbilityRow = props => {
+	const { ability, lang, pokemon } = props
+	const pokemonName = filterByLang('name', pokemon.names, 'en')
 
-	const getPokemon = (pokemon, type) => {
-		pokemon.map(m => {
-			P.getPokemonByName(m.pokemon.name)
-				.then(poke => {
+	const [loading, setLoading]	= useState(true)
+	const [abilities, setAbilities] = useState([])
 
-					P.getPokemonSpeciesByName(poke.species.name)
-						.then(species => {
-
-							P.getPokemonFormByName(poke.forms[0].name)
-								.then(form => {
-									// console.log(poke, species, form)
-
-									type === 'abilities' && setAbilityPokemon(prev => [...prev, {
-										abilities: poke.abilities,
-										id: poke.id,
-										is_default: poke.is_default,
-										name: poke.name,
-										sprites: poke.sprites,
-										species_id: species.id,
-										species_name: species.names,
-										names: species.names,
-										pokedex_numbers: species.pokedex_numbers,
-										form_name: form.name,
-										form_names: form.names,
-										form_order: form.form_order,
-										form_id: form.id,
-										form_sprites: form.sprites,
-									}])
-
-									type === 'hidden' && setHiddenAbilityPokemon(prev => [...prev, {
-										abilities: poke.abilities,
-										id: poke.id,
-										is_default: poke.is_default,
-										name: poke.name,
-										sprites: poke.sprites,
-										species_id: species.id,
-										species_name: species.names,
-										names: species.names,
-										pokedex_numbers: species.pokedex_numbers,
-										form_name: form.name,
-										form_names: form.names,
-										form_order: form.form_order,
-										form_id: form.id,
-										form_sprites: form.sprites,
-									}])
-								})
-
-						})
-
-					// type === 'abilities' && setAbilityPokemon(prev => [...prev, poke])
-					// type === 'hidden' && setHiddenAbilityPokemon(prev => [...prev, poke])
-
+	const getAbilities = abilities => {
+		abilities.map(m => {
+			P.getAbilityByName(m.ability.name)
+				.then(data => {
+					setAbilities(prev => [...prev, {
+						is_hidden:	m.is_hidden,
+						name:				data.name,
+						names:			data.names,
+						slot:				m.slot,
+					}])
 				})
 				.catch(console.error)
 		})
 	}
 
 	useEffect(() => {
-		setAbilityPokemon([])
-		setHiddenAbilityPokemon([])
-		getPokemon(abilities, 'abilities')
-		getPokemon(hiddenAbilities, 'hidden')
-	}, [data])
+		if (abilities.length < 1) {
+			getAbilities(pokemon.abilities)
+		} else if (abilities.length === pokemon.abilities.length) {
+			setLoading(false)
+		}
+	}, [pokemon, abilities])
 
-	console.log(abilityPokemon, hiddenAbilityPokemon)
+	// console.log(pokemonName, abilities )
+
+	if (loading) {
+		// TODO: add loading skeleton
+		return (
+			<TableRow><TableCell>Loading...</TableCell></TableRow>
+		)
+	}
+
+	return (
+		<TableRow hover sx={{ 'td, th': { borderBottomColor: 'divider' }, '&:last-child td, &:last-child th': { border: 0 } }}>
+			<TableCell size="small" sx={{ alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					{pokemon.sprite && (
+						<img src={pokemon.sprite} alt={pokemonName} style={{ width: '50px', height: '50px' }} />
+					)}
+					<Typography variant="span" sx={{ ml: 1 }}>{pokemon.num}</Typography>
+				</Box>
+			</TableCell>
+			<TableCell size="small" sx={{ lineHeight: '1' }}>
+				<Link href={`/pokemon/${pokemon.num}`} underline="hover"><Typography>{pokemonName}</Typography></Link>
+				{pokemon.form_names.length > 0 && (
+					<Typography variant="caption" lineHeight={1}>{filterByLang('name', pokemon.form_names, 'en')}</Typography>
+				)}
+			</TableCell>
+			<TableCell size="small">
+				{abilities.filter(f => f.is_hidden === false && f.name !== ability).length > 0 ? (
+					abilities
+						.filter(f => f.is_hidden === false && f.name !== ability)
+						.sort((a,b) => a.slot - b.slot)
+						.map(m => (
+							<Link key={m.name} href={`/ability/${m.name}`} underline="hover">
+								<Typography>{filterByLang('name', m.names, lang)}</Typography>
+							</Link>
+						))
+				) : (
+					<Typography>&mdash;</Typography>
+				)}
+			</TableCell>
+			<TableCell size="small">
+				{abilities.filter(f => f.is_hidden === true).length > 0 ? (
+					abilities.filter(f => f.is_hidden === true).map(m => (
+						<Link key={m.name} href={`/ability/${m.name}`} underline="hover">
+							<Typography>{filterByLang('name', m.names, lang)}</Typography>
+						</Link>
+					))
+				) : (
+					<Typography>&mdash;</Typography>
+				)}
+			</TableCell>
+		</TableRow>
+	)
+}
+
+const HiddenTable = props => {
+	const { children, name } = props
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon with {filterByLang('name', data.names, lang)}</Typography>
-			<Table aria-label={`pokémon with ${filterByLang('name', data.names, lang)}`}>
+			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon with the {name} hidden ability</Typography>
+			<Table aria-label={`pokémon with ${name}`}>
 				<TableHead>
-					<TableRow>
+					<TableRow sx={{
+						'& td, & th': {
+							padding: 1,
+							backgroundColor: alpha(gray[100], 0.4),
+							borderBottom: `1px solid ${gray[300]}`
+						}
+					}}>
 						<TableCell>#</TableCell>
 						<TableCell>Name</TableCell>
-						<TableCell>2nd Ability</TableCell>
-						<TableCell>Hidden Ability</TableCell>
+						<TableCell>Abilities</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{abilities.map(m => (
-						<TableRow key={m.pokemon.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell>
-								#
+					{children}
+				</TableBody>
+			</Table>
+		</Box>
+	)
+}
+
+const HiddenRow = props => {
+	const { ability, lang, pokemon } = props
+	const pokemonName = filterByLang('name', pokemon.names, 'en')
+
+	const [loading, setLoading]	= useState(true)
+	const [abilities, setAbilities] = useState([])
+
+	const getAbilities = abilities => {
+		abilities.map(m => {
+			P.getAbilityByName(m.ability.name)
+				.then(data => {
+					setAbilities(prev => [...prev, {
+						is_hidden:	m.is_hidden,
+						name:				data.name,
+						names:			data.names,
+						slot:				m.slot,
+					}])
+				})
+				.catch(console.error)
+		})
+	}
+
+	useEffect(() => {
+		if (abilities.length < 1) {
+			getAbilities(pokemon.abilities)
+		} else if (abilities.length === pokemon.abilities.length) {
+			setLoading(false)
+		}
+	}, [pokemon, abilities])
+
+	if (loading) {
+		// TODO: add loading skeleton
+		return (
+			<TableRow><TableCell>Loading...</TableCell></TableRow>
+		)
+	}
+
+	return (
+		<TableRow hover sx={{ 'td, th': { borderBottomColor: 'divider' }, '&:last-child td, &:last-child th': { border: 0 } }}>
+			<TableCell size="small" sx={{ alignItems: 'center' }}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					{pokemon.sprite && (
+						<img src={pokemon.sprite} alt={pokemonName} style={{ width: '50px', height: '50px' }} />
+					)}
+					<Typography variant="span" sx={{ ml: 1 }}>{pokemon.num}</Typography>
+				</Box>
+			</TableCell>
+			<TableCell size="small" sx={{ lineHeight: '1' }}>
+				<Link href={`/pokemon/${pokemon.num}`} underline="hover"><Typography>{pokemonName}</Typography></Link>
+				{pokemon.form_names.length > 0 && (
+					<Typography variant="caption" lineHeight={1}>{filterByLang('name', pokemon.form_names, 'en')}</Typography>
+				)}
+			</TableCell>
+			<TableCell size="small">
+				{abilities.filter(f => f.is_hidden === false && f.name !== ability).length > 0 ? (
+					abilities
+						.filter(f => f.is_hidden === false && f.name !== ability)
+						.sort((a,b) => a.slot - b.slot)
+						.map(m => (
+							<Link key={m.name} href={`/ability/${m.name}`} underline="hover">
+								<Typography>{filterByLang('name', m.names, lang)}</Typography>
+							</Link>
+						))
+				) : (
+					<Typography>&mdash;</Typography>
+				)}
+			</TableCell>
+		</TableRow>
+	)
+}
+
+const Translations = props => {
+	const { ability, lang } = props
+	let rows = []
+
+	const createData = (language, name) => { return { language, name } }
+
+	const getLanguageName = language => {
+		let [name, setName] = useState()
+
+		P.getLanguageByName(language)
+			.then(data => { setName(filterByLang('name', data.names, lang)) })
+
+		return name
+	}
+
+	ability.names.map(m => {
+		rows.push(createData(getLanguageName(m.language.name), m.name))
+	})
+
+	return (
+		<Box mb={5}>
+			<Typography variant="h2">Translations</Typography>
+			
+			<Table aria-label={`translations of ${ability.name}`}>
+				<TableBody>
+					{rows.filter(f => f.language && f.name).sort((a,b) => a.language.localeCompare(b.language)).map(row => (
+						<TableRow key={row.language} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableCell size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right', }}>
+								<Typography variant="body2" fontWeight="medium">{row.language}</Typography>
 							</TableCell>
-							<TableCell>
-								{m.pokemon.name}
+							<TableCell size="small" sx={{ pl: 1, pr: 0, borderBottomColor: 'divider' }}>
+								<Typography>{row.name}</Typography>
 							</TableCell>
 						</TableRow>
 					))}
