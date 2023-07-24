@@ -3,13 +3,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { ColorModeProvider } from "./utilities/context"
 import { CssBaseline } from '@mui/material'
 
+import AbilityContainer from "./routes/AbilityContainer"
+import EggGroupContainer from "./routes/EggGroupContainer"
 import Error from './routes/Error'
 import Home from './routes/Home'
 import PokedexContainer from './routes/PokedexContainer'
 import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
-import AbilityContainer from "./routes/AbilityContainer"
-
 
 
 const router = createBrowserRouter([{
@@ -39,6 +39,7 @@ const router = createBrowserRouter([{
 			],
 		},
 		{ path: 'ability/:name/', element: <AbilityContainer />, },
+		{ path: 'egg-group/:name/', element: <EggGroupContainer />, },
 	],
 }])
 

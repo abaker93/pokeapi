@@ -3,6 +3,7 @@ import { useOutletContext, useParams } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 
 import { Box, Breadcrumbs, Container, Link, Table, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
+import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
 import { filterByLang, formatDexId, getColorFromGame } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
@@ -153,8 +154,10 @@ const Header = props => {
 				</Container>
 			</Box>
 			
-			<Container>
-				<Typography variant="h1" textAlign="center">{name}</Typography>
+			<Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+				<Link underline="none" href="/ability/"><Typography variant="h1" component="p" color={text[200]} fontSize="1.25rem">Abilities</Typography></Link>
+				<ArrowRightSharpIcon sx={{ fill: text[200] }} />
+				<Typography variant="h1" textAlign="center" color="primary.main">{name}</Typography>
 			</Container>
 		</Box>
 	)
