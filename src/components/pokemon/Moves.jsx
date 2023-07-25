@@ -565,14 +565,14 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at || filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} hover sx={rowStyle}>
-							<TableCell sx={{ textAlign: 'right' }}>
-								{move.version_details.level_learned_at}
+						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} component={Link} href={`/move/${move.name}`} underline="none" hover sx={rowStyle}>
+							<TableCell size="small" sx={{ textAlign: 'right' }}>
+								<Typography>{move.version_details.level_learned_at}</Typography>
 							</TableCell>
-							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
-								{filterByLang('name', move.names, lang)}
+							<TableCell size="small" sx={{ fontWeight: 'medium', fontSize: 16 }}>
+								<Typography fontWeight="bold">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								<Chip
 									size="small"
 									variant="type"
@@ -581,7 +581,7 @@ const MoveTableRows = props => {
 									sx={{ width: '100%' }}
 								/>
 							</TableCell>
-							<TableCell sx={{
+							<TableCell size="small" sx={{
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center',
@@ -590,13 +590,13 @@ const MoveTableRows = props => {
 								{move.damage_class.name === 'special' && <Special />}
 								{move.damage_class.name === 'status' && <Status />}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.power ? move.power : <Typography>&mdash;</Typography>}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.accuracy ? move.accuracy : <Typography>&mdash;</Typography>}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.pp ? move.pp : <Typography>&mdash;</Typography>}
 							</TableCell>
 						</TableRow>
@@ -613,14 +613,14 @@ const MoveTableRows = props => {
 					.filter(f => f[subcategory])
 					.sort((a, b) => a[subcategory].name.localeCompare(b[subcategory].name))
 					.map(move => (
-						<TableRow key={move.id} hover sx={rowStyle}>
-							<TableCell sx={{ textAlign: 'right' }}>
-								{filterByLang('name', move[subcategory].names, lang)}
+						<TableRow key={move.id} component="Link" href={`/move/${move.name}`} hover sx={rowStyle}>
+							<TableCell size="small" sx={{ textAlign: 'right' }}>
+								<Typography>{filterByLang('name', move[subcategory].names, lang)}</Typography>
 							</TableCell>
-							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
-								{filterByLang('name', move.names, lang)}
+							<TableCell size="small">
+								<Typography fontWeight="bold">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								<Chip
 									size="small"
 									variant="type"
@@ -629,7 +629,7 @@ const MoveTableRows = props => {
 									sx={{ width: '100%' }}
 								/>
 							</TableCell>
-							<TableCell sx={{
+							<TableCell size="small" sx={{
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center',
@@ -638,13 +638,13 @@ const MoveTableRows = props => {
 								{move.damage_class.name === 'special' && <Special />}
 								{move.damage_class.name === 'status' && <Status />}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.power ? move.power : <Typography>&mdash;</Typography>}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.accuracy ? move.accuracy : <Typography>&mdash;</Typography>}
 							</TableCell>
-							<TableCell>
+							<TableCell size="small">
 								{move.pp ? move.pp : <Typography>&mdash;</Typography>}
 							</TableCell>
 						</TableRow>
@@ -660,9 +660,9 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={move.id} hover sx={rowStyle}>
+						<TableRow key={move.id} component="Link" href={`/move/${move.name}`} hover sx={rowStyle}>
 							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
-								{filterByLang('name', move.names, lang)}
+								<Typography fontWeight="medium">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>
 							<TableCell>
 								<Chip

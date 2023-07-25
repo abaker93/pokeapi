@@ -152,7 +152,7 @@ const Table = props => {
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon with the {name} ability</Typography>
+			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon in the {name} egg group</Typography>
 			<MuiTable aria-label={`pokémon with ${name}`}>
 				<TableHead>
 					<TableRow sx={{
