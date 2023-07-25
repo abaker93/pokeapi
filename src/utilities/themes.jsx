@@ -36,7 +36,7 @@ let ddTheme = createTheme({
 		htmlFontSize:	16,
 		fontWeightLight:		300,
 		fontWeightRegular:	400,
-		fontWeightMedium: 	500,
+		fontWeightMedium: 	600,
 		fontWeightBold:			700,
 		h1: {
 			fontSize: 	'1.5rem',
@@ -70,11 +70,11 @@ let ddTheme = createTheme({
 		},
 		subtitle1: {
 			fontSize:		'1rem',
-			fontWeight:	500,
+			fontWeight:	600,
 		},
 		subtitle2: {
 			fontSize: 	'0.875rem',
-			fontWeight: 500,
+			fontWeight: 600,
 		},
 		body1: {
 			fontSize: 	'1rem',

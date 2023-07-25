@@ -5,9 +5,8 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId, getColorFromGame } from '../utilities/utilities'
+import { filterByLang, formatDexId } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
-import TypeIcon from '../assets/TypeIcon';
 
 const P = new Pokedex()
 

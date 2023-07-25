@@ -7,6 +7,7 @@ import AbilityContainer from "./routes/AbilityContainer"
 import EggGroupContainer from "./routes/EggGroupContainer"
 import Error from './routes/Error'
 import Home from './routes/Home'
+import MoveContainer from "./routes/MoveContainer"
 import PokedexContainer from './routes/PokedexContainer'
 import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
@@ -40,6 +41,7 @@ const router = createBrowserRouter([{
 		},
 		{ path: 'ability/:name/', element: <AbilityContainer />, },
 		{ path: 'egg-group/:name/', element: <EggGroupContainer />, },
+		{ path: 'move/:name/', element: <MoveContainer />, },
 	],
 }])
 

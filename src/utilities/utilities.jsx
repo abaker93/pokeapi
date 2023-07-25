@@ -1,4 +1,3 @@
-import { Physical, Special, Status } from '../assets/MoveIcon'
 import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from './colors'
 import { game_red, game_black, game_blue, game_crystal, game_diamond, game_eevee, game_emerald, game_gold, game_green, game_moon, game_pearl, game_silver, game_sun, game_yellow } from './colors'
 import { defense } from "./types"
@@ -161,6 +160,34 @@ export const getColorFromGame = game => {
 	}
 
 	return colorMap[game]
+}
+
+export const getGenFromGame = game => {
+	const genMap = {
+		'red-blue':													1,
+		yellow:															1,
+		'gold-silver':											2,
+		crystal:														2,
+		'ruby-sapphire':										3,
+		emerald:														3,
+		'firered-leafgreen':								3,
+		'diamond-pearl':										4,
+		platinum:														4,
+		'heartgold-soulsilver':							4,
+		'black-white':											5,
+		'black-2-white-2':									5,
+		'x-y':															6,
+		'omega-ruby-alpha-sapphire':				6,
+		'sun-moon':													7,
+		'ultra-sun-ultra-moon':							7,
+		'lets-go-pikachu-lets-go-eevee':		7,
+		'sword-shield':											8,
+		'brilliant-diamond-shining-pearl':	8,
+		'legends-arceus':										8,
+		'scarlet-violet':										9,
+	}
+
+	return genMap[game]
 }
 
 export const getNumByDex = (nums, dex) => {

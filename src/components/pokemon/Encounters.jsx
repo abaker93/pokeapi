@@ -193,11 +193,7 @@ const LocationArea = props => {
 
 	}, [location])
 
-	return (
-		<>
-			{name}
-		</>
-	)
+	return name
 }
 
 export default Encounters

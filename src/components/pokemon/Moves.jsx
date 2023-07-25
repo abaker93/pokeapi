@@ -487,7 +487,7 @@ const MovesTableHead = props => {
 	const category = moves.name
 
 	const styles = {
-		'& td, & th': {
+		'td, th': {
 			padding: 1,
 			backgroundColor: alpha(gray[100], 0.4),
 			borderBottom: `1px solid ${gray[300]}`,
