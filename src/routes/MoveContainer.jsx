@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, getGenFromGame, getGenNumFromName } from '../utilities/utilities'
+import { filterByLang, getColorFromGame, getGenFromGame, getGenNumFromName } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
 
 import TypeIcon from '../assets/TypeIcon';
@@ -20,6 +20,7 @@ const MoveContainer = () => {
 
 	const [loading, setLoading] = useState(true)
 	const [moveData, setMoveData] = useState()
+	const [moveName, setMoveName] = useState()
 	const [movePokemon, setMovePokemon] = useState([])
 
 	const getMoveData = move => {
@@ -36,11 +37,17 @@ const MoveContainer = () => {
 			setMovePokemon([])
 			getMoveData(move)
 		}
-
-		else { setLoading(false) }
+		
+		if (moveData && !moveName) {
+			setMoveName(filterByLang('name', moveData.names, lang))
+		} 
 	}, [move, moveData])
 
-	//console.log(moveData)
+	useEffect(() => {
+		if (moveData && moveName) { setLoading(false) }
+	}, [moveName])
+
+	console.log(moveData)
 
 
 	if (loading) {
@@ -52,18 +59,20 @@ const MoveContainer = () => {
 
 	return (
 		<>
-			<Header name={filterByLang('name', moveData.names, lang)} />
+			<Header moveName={moveName} />
 
 			<Container>
-				<Data lang={lang} move={moveData} />
-				<Effects lang={lang} move={moveData} />
+				<Data lang={lang} move={moveData} moveName={moveName} />
+				<Effects lang={lang} move={moveData} moveName={moveName} />
+				<Descriptions lang={lang} move={moveData} />
+				<Translations lang={lang} move={moveData} />
 			</Container>
 		</>
 	)	
 }
 
 const Header = props => {
-	const { name } = props
+	const { moveName } = props
 
 	return (
 		<Box component="header" mb={5}>
@@ -92,7 +101,7 @@ const Header = props => {
 							fontWeight="medium"
 							color="primary.main"
 						>
-							{name}
+							{moveName}
 						</Typography>
 					</Breadcrumbs>
 				</Container>
@@ -101,15 +110,14 @@ const Header = props => {
 			<Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 				<Link underline="none" href="/moves/"><Typography variant="h1" component="p" color={text[200]} fontSize="1.25rem">Moves</Typography></Link>
 				<ArrowRightSharpIcon sx={{ fill: text[200] }} />
-				<Typography variant="h1" textAlign="center" color="primary.main">{name}</Typography>
+				<Typography variant="h1" textAlign="center" color="primary.main">{moveName}</Typography>
 			</Container>
 		</Box>
 	)
 }
 
 const Data = props => {
-	const { lang, move } = props
-	const moveName = filterByLang('name', move.names, lang)
+	const { lang, move, moveName } = props
 
 	const [loading, setLoading] = useState(true)
 	const [generation, setGeneration]	= useState()
@@ -142,12 +150,12 @@ const Data = props => {
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" mb={2}>{moveName} data</Typography>
+			<Typography variant="h2" mb={2}>Data on {moveName}</Typography>
 			<MuiTable aria-label={`${move.name} move data`}>
 				<TableBody>
 					<TableRow sx={rowStyle}>
 						<TableCell size="small" component="th">
-							<Typography variant="body2" fontWeight="bold">Type</Typography>
+							<Typography variant="body2" fontWeight="medium">Type</Typography>
 						</TableCell>
 						<TableCell size="small">
 							<Chip
@@ -222,8 +230,7 @@ const Data = props => {
 }
 
 const Effects = props => {
-	const { lang, move } = props
-	const moveName = filterByLang('name', move.names, lang)
+	const { lang, move, moveName } = props
 
 	const [pastValues, setPastValues] = useState([])
 
@@ -262,27 +269,219 @@ const Effects = props => {
 	return (
 		<Box mb={5}>
 			<Box mb={3}>
-				<Typography variant="h2" mb={2}>Effects</Typography>
+				<Typography variant="h2" mb={2}>Effects of {moveName}</Typography>
 				<Typography>{getEffectEntry(move.effect_entries, lang)}</Typography>
 			</Box>
 
 			{pastValues.length > 0 && (
 				<Box mb={3}>
 					<Typography variant="h3" mb={1}>Past Values</Typography>
-					{pastValues.map(m => (
-						<>
+					{pastValues.map((m,i) => (
+						<Box key={i}>
 							<Typography variant="h4">{m.generationText}</Typography>
 							<Typography component="ul" mb={2}>
-								{m.values.map(v => (
-									<Typography component="li">
+								{m.values.map((v, j) => (
+									<Typography key={j} component="li">
 										<Typography component="span" fontWeight="medium">{moveName}</Typography> {v}
 									</Typography>
 								))}
 							</Typography>
-						</>
+						</Box>
 					))}
 				</Box>
 			)}
+		</Box>
+	)
+}
+
+const Descriptions = props => {
+	const { lang, move } = props
+	const flavor_text = move.flavor_text_entries.filter(f => f.language.name === lang)
+
+	const version_groups = [
+		{
+			name: 'gen-i',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('red')}>Red</Typography> / <Typography variant="span" color={getColorFromGame('blue')}>Blue</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium" color={getColorFromGame('yellow')}>Yellow</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'red-blue')[0] ? flavor_text.filter(f => f.version_group.name === 'red-blue')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-ii',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('gold')}>Gold</Typography> / <Typography variant="span" color={getColorFromGame('silver')}>Silver</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium" color={getColorFromGame('crystal')}>Crystal</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'gold-silver')[0] ? flavor_text.filter(f => f.version_group.name === 'gold-silver')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-iii',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('ruby')}>Ruby</Typography> / <Typography variant="span" color={getColorFromGame('sapphire')}>Sapphire</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium" color={getColorFromGame('emerald')}>Emerald</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('firered')}>FireRed</Typography> / <Typography variant="span" color={getColorFromGame('leafgreen')}>LeafGreen</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'ruby-sapphire')[0] ? flavor_text.filter(f => f.version_group.name === 'ruby-sapphire')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-iv',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('diamond')}>Diamond</Typography> / <Typography variant="span" color={getColorFromGame('pearl')}>Pearl</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium" color={getColorFromGame('platinum')}>Platinum</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('heartgold')}>HeartGold</Typography> / <Typography variant="span" color={getColorFromGame('soulsilver')}>SoulSilver</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'diamond-pearl')[0] ? flavor_text.filter(f => f.version_group.name === 'diamond-pearl')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-v',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('black')}>Black</Typography> / <Typography variant="span" color={getColorFromGame('white')}>White</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('black-2')}>Black 2</Typography> / <Typography variant="span" color={getColorFromGame('white-2')}>White 2</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'black-white')[0] ? flavor_text.filter(f => f.version_group.name === 'black-white')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-vi',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('x')}>X</Typography> / <Typography variant="span" color={getColorFromGame('y')}>Y</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('omega-ruby')}>Omega Ruby</Typography> / <Typography variant="span" color={getColorFromGame('alpha-sapphire')}>Alpha Sapphire</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'x-y')[0] ? flavor_text.filter(f => f.version_group.name === 'x-y')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-vii',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('sun')}>Sun</Typography> / <Typography variant="span" color={getColorFromGame('moon')}>Moon</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('ultra-sun')}>Ultra Sun</Typography> / <Typography variant="span" color={getColorFromGame('ultra-moon')}>Ultra Moon</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'sun-moon')[0] ? flavor_text.filter(f => f.version_group.name === 'sun-moon')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-viii',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('sword')}>Sword</Typography> / <Typography variant="span" color={getColorFromGame('shield')}>Shield</Typography>
+					</Typography>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('brilliant-diamond')}>Brilliant Diamond</Typography> / <Typography variant="span" color={getColorFromGame('shining-pearl')}>Shining Pearl</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'sword-shield')[0] ? flavor_text.filter(f => f.version_group.name === 'sword-shield')[0].flavor_text : null }
+		},
+		{
+			name: 'gen-ix',
+			label: (
+				<>
+					<Typography variant="body2" fontWeight="medium">
+						<Typography variant="span" color={getColorFromGame('scarlet')}>Scarlet</Typography> / <Typography variant="span" color={getColorFromGame('violet')}>Violet</Typography>
+					</Typography>
+				</>
+			),
+			get flavor_text() { return flavor_text.filter(f => f.version_group.name === 'scarlet-violet')[0] ? flavor_text.filter(f => f.version_group.name === 'scarlet-violet')[0].flavor_text : null }
+		},
+	]
+
+	return (
+		<Box mb={5}>
+			<Typography variant="h2" sx={{ mb: 2 }}>Game Descriptions</Typography>
+			<MuiTable aria-label="flavor text by game">
+				<TableBody>
+					{version_groups.map(m => (
+						m.flavor_text && (
+							<TableRow key={m.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+								<TableCell component="th" size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right', }}>
+									{m.label}
+								</TableCell>
+								<TableCell size="small" sx={{ pl: 1, pr: 0, borderBottomColor: 'divider' }}>
+									<Typography>{m.flavor_text}</Typography>
+								</TableCell>
+							</TableRow>
+						)
+					))}
+				</TableBody>
+			</MuiTable>
+		</Box>
+	)
+}
+
+const Translations = props => {
+	const { lang, move, moveName } = props
+	let rows = []
+
+	const createData = (language, name) => { return { language, name } }
+
+	const getLanguageName = language => {
+		const [name, setName] = useState()
+
+		P.getLanguageByName(language)
+			.then(data => { setName(filterByLang('name', data.names, lang)) })
+
+		return name
+	}
+
+	move.names.map(m => {
+		rows.push(createData(getLanguageName(m.language.name), m.name))
+	})
+
+	return (
+		<Box mb={5}>
+			<Typography variant="h2" sx={{ mb: 2 }}>Translations</Typography>
+			
+			<MuiTable aria-label={`translations of ${move.name}`}>
+				<TableBody>
+					{rows.filter(f => f.language && f.name).sort((a,b) => a.language.localeCompare(b.language)).map(row => (
+						<TableRow key={row.language} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+							<TableCell size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right', }}>
+								<Typography variant="body2" fontWeight="medium">{row.language}</Typography>
+							</TableCell>
+							<TableCell size="small" sx={{ pl: 1, pr: 0, borderBottomColor: 'divider' }}>
+								<Typography>{row.name}</Typography>
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</MuiTable>
 		</Box>
 	)
 }
@@ -398,45 +597,6 @@ const Row = props => {
 	)
 }
 
-const Translations = props => {
-	const { eggGroup, lang } = props
-	let rows = []
 
-	const createData = (language, name) => { return { language, name } }
-
-	const getLanguageName = language => {
-		let [name, setName] = useState()
-
-		P.getLanguageByName(language)
-			.then(data => { setName(filterByLang('name', data.names, lang)) })
-
-		return name
-	}
-
-	eggGroup.names.map(m => {
-		rows.push(createData(getLanguageName(m.language.name), m.name))
-	})
-
-	return (
-		<Box mb={5}>
-			<Typography variant="h2">Translations</Typography>
-			
-			<MuiTable aria-label={`translations of ${eggGroup.name}`}>
-				<TableBody>
-					{rows.filter(f => f.language && f.name).sort((a,b) => a.language.localeCompare(b.language)).map(row => (
-						<TableRow key={row.language} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-							<TableCell size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right', }}>
-								<Typography variant="body2" fontWeight="medium">{row.language}</Typography>
-							</TableCell>
-							<TableCell size="small" sx={{ pl: 1, pr: 0, borderBottomColor: 'divider' }}>
-								<Typography>{row.name}</Typography>
-							</TableCell>
-						</TableRow>
-					))}
-				</TableBody>
-			</MuiTable>
-		</Box>
-	)
-}
 
 export default MoveContainer
