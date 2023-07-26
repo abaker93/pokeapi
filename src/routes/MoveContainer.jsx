@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId, getGenFromGame } from '../utilities/utilities'
+import { filterByLang, getGenFromGame, getGenNumFromName } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
 
 import TypeIcon from '../assets/TypeIcon';
@@ -14,7 +14,7 @@ import { Physical, Special, Status } from '../assets/MoveIcon';
 const P = new Pokedex()
 
 
-const MoveContainer = props => {
+const MoveContainer = () => {
 	const move = useParams().name
 	const lang = useOutletContext()
 
@@ -40,7 +40,7 @@ const MoveContainer = props => {
 		else { setLoading(false) }
 	}, [move, moveData])
 
-	console.log(moveData)
+	//console.log(moveData)
 
 
 	if (loading) {
@@ -55,8 +55,7 @@ const MoveContainer = props => {
 			<Header name={filterByLang('name', moveData.names, lang)} />
 
 			<Container>
-				<Data move={moveData} />
-
+				<Data lang={lang} move={moveData} />
 				<Effects lang={lang} move={moveData} />
 			</Container>
 		</>
@@ -109,7 +108,11 @@ const Header = props => {
 }
 
 const Data = props => {
-	const { move } = props
+	const { lang, move } = props
+	const moveName = filterByLang('name', move.names, lang)
+
+	const [loading, setLoading] = useState(true)
+	const [generation, setGeneration]	= useState()
 
 	const rowStyle = {
 		'th': { textAlign: 'right', fontWeight: 'bold' },
@@ -117,9 +120,29 @@ const Data = props => {
 		'tr:last-child td, tr:last-child th': { border: 0 }
 	}
 
+	const getGeneration = gen => {
+		P.getGenerationByName(gen)
+			.then(data => setGeneration(data))
+	}
+
+	useEffect(() => {
+		if (!generation) {
+			setLoading(true)
+			getGeneration(move.generation.name)
+		}
+		else { setLoading(false) }
+	}, [move, generation])
+
+	if (loading) {
+		// TODO: add loading skeleton
+		return (
+			<Typography>Loading...</Typography>
+		)
+	}
+
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" mb={2}>Move Data</Typography>
+			<Typography variant="h2" mb={2}>{moveName} data</Typography>
 			<MuiTable aria-label={`${move.name} move data`}>
 				<TableBody>
 					<TableRow sx={rowStyle}>
@@ -189,7 +212,7 @@ const Data = props => {
 							<Typography variant="body2" fontWeight="medium">Introduced</Typography>
 						</TableCell>
 						<TableCell size="small">
-							<Typography>{move.generation.name}</Typography>
+							<Typography>{filterByLang('name', generation.names, lang)}</Typography>
 						</TableCell>
 					</TableRow>
 				</TableBody>
@@ -201,34 +224,33 @@ const Data = props => {
 const Effects = props => {
 	const { lang, move } = props
 	const moveName = filterByLang('name', move.names, lang)
-	const effectEntry = filterByLang('effect', move.effect_entries, lang).length > filterByLang('short_effect', move.effect_entries, lang).length ? filterByLang('effect', move.effect_entries, lang) : filterByLang('short_effect', move.effect_entries, lang)
 
 	const [pastValues, setPastValues] = useState([])
 
-	const listStyle = {
-		'& > *:not(:last-child)::after': { content: '", "' },
-		'& > *:nth-last-child(2)::after': { content: '", and "' },
+	const getEffectEntry = (entries, lang) => {
+		return filterByLang('effect', entries, lang).length > filterByLang('short_effect', entries, lang).length ? filterByLang('effect', entries, lang) : filterByLang('short_effect', entries, lang)
 	}
 
 	const getPastValues = arr => {
-		let genNum = 1
+		let genNum = getGenNumFromName(move.generation.name)
 
 		arr.forEach(value => {
-			const gen = getGenFromGame(value.version_group.name)
-			const genText = gen-1 > genNum ? `s ${genNum}-${gen-1}` : ` ${gen-1}`
+			const generation = getGenFromGame(value.version_group.name)
+			const generationText = generation-1 > genNum
+				? `In Generations ${genNum}-${generation-1}`
+				: `In Generation ${generation-1}`
+
+			let pastValue = []
+			value.type && pastValue.push(`is a ${value.type.name}-type move.`)
+			value.accuracy && pastValue.push(`has ${value.accuracy}% accuracy.`)
+			value.power && pastValue.push(`has ${value.power} base power.`)
 
 			setPastValues(prev => [...prev, {
-				accuracy: value.accuracy ? `${value.accuracy}% accuracy` : null,
-				effect_chance: value.effect_chance ? `${value.effect_chance}% effect chance` : null,
-				effect_entries: value.effect_entries ? filterByLang('short_effect', value.effect_entries, lang) : null,
-				generation: gen,
-				generationText: genText,
-				power: value.power ? `${value.power} base power` : null,
-				pp: value.pp ? `${value.pp} PP` : null,
-				type: value.type ? `is a ${value.type.name}-type move` : null,
+				generationText: generationText,
+				values: pastValue
 			}])
 
-			genNum = gen
+			genNum = generation
 		})
 	}
 
@@ -237,34 +259,27 @@ const Effects = props => {
 		getPastValues(move.past_values)
 	}, [move])
 
-	// TODO: finish the sentence logic (e.g. "In Generation 1-4, Tackle is a fire-type move and has 35 base power.")
 	return (
 		<Box mb={5}>
-			<Box mb={5}>
+			<Box mb={3}>
 				<Typography variant="h2" mb={2}>Effects</Typography>
-				<Typography>{effectEntry}</Typography>
+				<Typography>{getEffectEntry(move.effect_entries, lang)}</Typography>
 			</Box>
 
-			{move.past_values.length > 0 && (
-				<Box mb={5}>
-					<Typography variant="h3" mb={2}>Past Values</Typography>
+			{pastValues.length > 0 && (
+				<Box mb={3}>
+					<Typography variant="h3" mb={1}>Past Values</Typography>
 					{pastValues.map(m => (
-						<Typography key={m.generation}>
-							<span>In Generation{m.generationText}, </span>
-							<Typography variant="span" fontWeight="medium">{moveName} </Typography>
-							{m.type}
-							{m.accuracy || m.power || m.pp ? (
-								<>
-									<span>has </span>
-									<Typography variant="span" sx={listStyle}>
-										{m.power && <span>{m.power}</span>}
-										{m.accuracy && <span>{m.accuracy}</span>}
-										{m.pp && <span>{m.pp}</span>}
+						<>
+							<Typography variant="h4">{m.generationText}</Typography>
+							<Typography component="ul" mb={2}>
+								{m.values.map(v => (
+									<Typography component="li">
+										<Typography component="span" fontWeight="medium">{moveName}</Typography> {v}
 									</Typography>
-								</>
-							) : null}
-							.
-						</Typography>
+								))}
+							</Typography>
+						</>
 					))}
 				</Box>
 			)}

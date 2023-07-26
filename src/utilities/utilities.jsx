@@ -190,6 +190,22 @@ export const getGenFromGame = game => {
 	return genMap[game]
 }
 
+export const getGenNumFromName = name => {
+	const genMap = {
+		'generation-i':			1,
+		'generation-ii':		2,
+		'generation-iii':		3,
+		'generation-iv':		4,
+		'generation-v':			5,
+		'generation-vi':		6,
+		'generation-vii':		7,
+		'generation-viii':	8,
+		'generation-ix':		9,
+	}
+
+	return genMap[name]
+}
+
 export const getNumByDex = (nums, dex) => {
 	const num = nums.filter(f => f.pokedex.name === dex).map(m => m.entry_number)[0]
 
