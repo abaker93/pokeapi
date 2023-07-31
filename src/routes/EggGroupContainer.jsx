@@ -11,7 +11,7 @@ import { gray, text } from '../utilities/colors'
 const P = new Pokedex()
 
 
-const EggGroupContainer = props => {
+const EggGroupContainer = () => {
 	const eggGroup = useParams().name
 	const lang = useOutletContext()
 

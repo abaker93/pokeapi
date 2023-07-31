@@ -549,7 +549,7 @@ const MoveTableRows = props => {
 	const rowStyle = {
 		borderBottom: `1px solid ${gray[100]}`,
 		
-		'& td, & th': { border: 0, padding: 1, },
+		'& > td, & > th': { border: 0, padding: 1, },
 		
 		'&:last-child': { border: 0 },
 		

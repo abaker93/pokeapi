@@ -218,6 +218,36 @@ export const getIdFromURL = url => {
 	return id
 }
 
+export const getVersionGroupByName = name => {
+	const groupMap = {
+		'red-blue':													'Red/Blue',
+		yellow:															'Yellow',
+		'gold-silver':											'Gold/Silver',
+		crystal:														'Crystal',
+		'ruby-sapphire':										'Ruby/Sapphire',
+		emerald:														'Emerald',
+		'firered-leafgreen':								'FireRed/LeafGreen',
+		'diamond-pearl':										'Diamond/Pearl',
+		platinum:														'Platinum',
+		'heartgold-soulsilver':							'HeartGold/SoulSilver',
+		'black-white':											'Black/White',
+		'colosseum':												'Colosseum',
+		'xd':																'XD',
+		'black-2-white-2':									'Black 2/White 2',
+		'x-y':															'X/Y',
+		'omega-ruby-alpha-sapphire':				'Omega Ruby/Alpha Sapphire',
+		'sun-moon':													'Sun/Moon',
+		'ultra-sun-ultra-moon':							'Ultra Sun/Ultra Moon',
+		'lets-go-pikachu-lets-go-eevee':		"Let's Go Pikachu/Let's Go Eevee",
+		'sword-shield':											'Sword/Shield',
+		'brilliant-diamond-shining-pearl':	'Brilliant Diamond/Shining Pearl',
+		'legends-arceus':										'Legends Arceus',
+		'scarlet-violet':										'Scarlet/Violet'
+	}
+
+	return groupMap[name]
+}
+
 export const normalize = value => ((value - 1) * 100) / (255 - 1)
 
 export const round2Decimal = num => Math.round(num * 100) / 100

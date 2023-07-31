@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, getColorFromGame, getGenFromGame, getGenNumFromName } from '../utilities/utilities'
+import { filterByLang, formatDexId, getColorFromGame, getGenFromGame, getGenNumFromName, getVersionGroupByName } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
 
 import TypeIcon from '../assets/TypeIcon';
@@ -27,6 +27,34 @@ const MoveContainer = () => {
 		P.getMoveByName(move)
 			.then(data => {
 				setMoveData(data)
+				return data
+			})
+			.then(data => {
+				data.learned_by_pokemon.map(p => {
+
+					P.getPokemonByName(p.name)
+						.then(poke => {
+
+							P.getPokemonSpeciesByName(poke.species.name)
+								.then(species => {
+
+									P.getPokemonFormByName(poke.forms[0].name)
+										.then(form => {
+
+											setMovePokemon(prev => [...prev, {
+												id: 				poke.id,
+												form_name:	form.form_name,
+												form_names:	form.names.length > 0 ? form.names : form.form_names,
+												names:			species.names,
+												num:				formatDexId(species.pokedex_numbers.filter(f => f.pokedex.name === 'national')[0].entry_number, 1000),
+												sprite:			form.sprites.front_default ? form.sprites.front_default : poke.sprites.front_default,
+												types: 			poke.types,
+												moves:			poke.moves.filter(f => f.move.name === move).filter(f => f.version_group_details.some(s => s.move_learn_method.name === 'level-up')),
+											}])
+										})
+								})
+						})
+				})
 			})
 			.catch(console.error)
 	}
@@ -47,7 +75,7 @@ const MoveContainer = () => {
 		if (moveData && moveName) { setLoading(false) }
 	}, [moveName])
 
-	console.log(moveData)
+	// console.log(moveData)
 
 
 	if (loading) {
@@ -66,6 +94,16 @@ const MoveContainer = () => {
 				<Effects lang={lang} move={moveData} moveName={moveName} />
 				<Descriptions lang={lang} move={moveData} />
 				<Translations lang={lang} move={moveData} />
+
+				<Table moveName={moveName}>
+					{movePokemon
+						.filter(f => f.moves.length > 0)
+						.sort((a,b) => a.num - b.num || a.id - b.id)
+						.map(m => (
+							<Row key={m.id} lang={lang} pokemon={m} />
+						))
+					}
+				</Table>
 			</Container>
 		</>
 	)	
@@ -424,7 +462,7 @@ const Descriptions = props => {
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" sx={{ mb: 2 }}>Game Descriptions</Typography>
+			<Typography variant="h2" sx={{ mb: 2 }}>Game descriptions</Typography>
 			<MuiTable aria-label="flavor text by game">
 				<TableBody>
 					{version_groups.map(m => (
@@ -487,12 +525,12 @@ const Translations = props => {
 }
 
 const Table = props => {
-	const { children, name } = props
+	const { children, moveName } = props
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon in the {name} egg group</Typography>
-			<MuiTable aria-label={`pokémon with ${name}`}>
+			<Typography variant="h2" sx={{ mb: 2 }}>Pokémon that learn {moveName} by level up</Typography>
+			<MuiTable aria-label={`pokémon that learn ${moveName} by level-up`}>
 				<TableHead>
 					<TableRow sx={{
 						'& td, & th': {
@@ -501,10 +539,8 @@ const Table = props => {
 							borderBottom: `1px solid ${gray[300]}`
 						}
 					}}>
-						<TableCell>#</TableCell>
-						<TableCell>Name</TableCell>
-						<TableCell>Type</TableCell>
-						<TableCell>Other Group</TableCell>
+						<TableCell>Pokémon</TableCell>
+						<TableCell>Level</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -516,65 +552,38 @@ const Table = props => {
 }
 
 const Row = props => {
-	const { eggGroup, lang, pokemon } = props
-	const pokemonName = filterByLang('name', pokemon.names, 'en')
+	const { lang, pokemon } = props
+	const pokemonName = filterByLang('name', pokemon.names, lang)
 
-	const [loading, setLoading]	= useState(true)
-	const [groups, setGroups] = useState([])
-
-	const getGroups = groups => {
-		groups.map(m => {
-			P.getEggGroupByName(m.name)
-				.then(data => {
-					setGroups(prev => [...prev, {
-						name:		data.name,
-						names:	data.names,
-					}])
-				})
-				.catch(console.error)
-		})
-	}
-
-	useEffect(() => {
-		if (groups.length < 1) {
-			getGroups(pokemon.egg_groups)
-		} else if (groups.length === pokemon.egg_groups.length) {
-			setLoading(false)
-		}
-	}, [pokemon, groups])
-
-	console.log(pokemonName, groups)
-
-	if (loading) {
-		// TODO: add loading skeleton
-		return (
-			<TableRow><TableCell>Loading...</TableCell></TableRow>
-		)
-	}
+	console.log(pokemon)
 
 	return (
-		<TableRow hover sx={{ 'td, th': { borderBottomColor: 'divider' }, '&:last-child td, &:last-child th': { border: 0 } }}>
-			<TableCell size="small" sx={{ alignItems: 'center' }}>
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					{pokemon.sprite && (
-						<img src={pokemon.sprite} alt={pokemonName} style={{ width: '50px', height: '50px' }} />
-					)}
-					<Typography variant="span" sx={{ ml: 1 }}>{pokemon.num}</Typography>
-				</Box>
-			</TableCell>
-			<TableCell size="small" sx={{ lineHeight: '1' }}>
-				<Link href={`/pokemon/${pokemon.num}`} underline="hover"><Typography>{pokemonName}</Typography></Link>
-				{pokemon.form_names.length > 0 && (
-					<Typography variant="caption" lineHeight={1}>{filterByLang('name', pokemon.form_names, 'en')}</Typography>
-				)}
-			</TableCell>
+		<TableRow
+			component={Link}
+			href={`/pokemon/${pokemon.num}`}
+			underline="none"
+			hover
+			sx={{
+				'& > td, & > th': { borderBottomColor: 'divider' },
+				'&:last-child > td, &:last-child > th': { border: 0 }
+			}}
+		>
 			<TableCell size="small">
+				{pokemon.sprite && (
+					<img src={pokemon.sprite} alt={pokemonName} style={{ width: '50px', height: '50px' }} />
+				)}
+				<Typography component="h3" fontWeight="medium" sx={{ mb: 1 }}>
+					<Typography variant="span" color={text[300]} fontSize="0.85em" sx={{ mr: 0.75 }}>{pokemon.num}</Typography>
+					{pokemonName}
+					{pokemon.form_names.length > 0 && (
+						<Typography variant="caption" component="p" lineHeight={1}>{filterByLang('name', pokemon.form_names, lang)}</Typography>
+					)}
+				</Typography>
 				<Chip
 					variant="type"
 					size="small"
 					type={pokemon.types[0].type.name}
 					label={pokemon.types[0].type.name}
-					sx={{ width: '100%' }}
 				/>
 				{pokemon.types[1] ? (
 					<Chip
@@ -582,16 +591,30 @@ const Row = props => {
 						size="small"
 						type={pokemon.types[1].type.name}
 						label={pokemon.types[1].type.name}
-						sx={{ mt: 0.25, width: '100%' }}
+						sx={{ ml: 1 }}
 					/>
 				) : null}
 			</TableCell>
 			<TableCell size="small">
-				{groups.filter(f => f.name !== eggGroup).map(m => (
-					<Link key={m.name} href={`/ability/${m.name}`} underline="hover">
-						<Typography>{filterByLang('name', m.names, lang)}</Typography>
-					</Link>
-				))}
+				<MuiTable>
+					<TableBody>
+						{pokemon.moves.map(m => (
+							m.version_group_details.map((v,i) => (
+								v.move_learn_method.name === 'level-up' && (
+									<TableRow key={i} sx={{ '& > td, & > th': { borderBottomColor: 'divider' }, '&:last-child > td, &:last-child > th': { border: 0 } }}>
+										<TableCell sx={{ py: 0, pl: 0, pr: 0.5, lineHeight: 1.2 }}>
+											<Typography variant="caption" lineHeight={1.2}>{getVersionGroupByName(v.version_group.name)}</Typography>
+										</TableCell>
+										<TableCell sx={{ width: 30, p: 0, lineHeight: 1.2 }}>
+											<Typography variant="caption" lineHeight={1.2}>{v.level_learned_at}</Typography>
+										</TableCell>
+									</TableRow>
+								)
+							))
+						))}
+					</TableBody>
+				</MuiTable>
+				
 			</TableCell>
 		</TableRow>
 	)
