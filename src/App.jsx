@@ -7,10 +7,13 @@ import AbilityContainer from "./routes/AbilityContainer"
 import EggGroupContainer from "./routes/EggGroupContainer"
 import Error from './routes/Error'
 import Home from './routes/Home'
+import LocationContainer from "./routes/LocationContainer"
 import MoveContainer from "./routes/MoveContainer"
 import PokedexContainer from './routes/PokedexContainer'
 import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
+import Styles from "./routes/Styles"
+
 
 
 const router = createBrowserRouter([{
@@ -42,6 +45,9 @@ const router = createBrowserRouter([{
 		{ path: 'ability/:name/', element: <AbilityContainer />, },
 		{ path: 'egg-group/:name/', element: <EggGroupContainer />, },
 		{ path: 'move/:name/', element: <MoveContainer />, },
+		{ path: 'location/:name/', element: <LocationContainer />, },
+
+		{ path: 'styles/', element: <Styles /> },
 	],
 }])
 

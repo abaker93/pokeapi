@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Container, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Container, Link, Tab, Tabs, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
 import PokemonTabs from '../../utilities/components/PokemonTabs'
@@ -9,6 +9,7 @@ import PokemonTab from '../../utilities/components/PokemonTab'
 
 import { gameDataByPokemon } from "../../utilities/games"
 import { filterByLang, getColorFromGame, getColorFromType } from '../../utilities/utilities'
+import { text } from '../../utilities/colors'
 
 const P = new Pokedex()
 
@@ -162,7 +163,9 @@ const Encounters = props => {
 													<Grid container xs={1}>
 														{data[gen].version_group[group].games[game].encounters.map((m, i) => (
 															<Typography key={m.location_area.name} variant="span">
-																<LocationArea lang={lang} location={m.location_area.name} />
+																<Link underline="hover" href={`/location/${m.location_area.name}`} color={text[500]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
+																	<LocationArea lang={lang} location={m.location_area.name} />
+																</Link>
 																{data[gen].version_group[group].games[game].encounters.length - 1 !== i && <Typography variant="span" sx={{ mr: 0.5 }}>,</Typography>}
 															</Typography>
 														))}
@@ -188,7 +191,15 @@ const LocationArea = props => {
 	useEffect(() => {
 		P.getLocationAreaByName(location)
 			.then(data => {
-				setName(filterByLang('name', data.names, lang))
+				let n = filterByLang('name', data.names, lang)
+
+				if (n.includes('Road')) {
+					if (n.includes('Victory') || n.includes('Kindle') || n.includes('Versant')) {
+					} else {
+						n = n.replace('Road', 'Route')
+					}
+				}
+				setName(n)
 			})
 
 	}, [location])
