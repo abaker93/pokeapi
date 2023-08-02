@@ -151,7 +151,7 @@ const Encounters = props => {
 								<Box>
 									{Object.keys(data[gen].version_group).map(group => (
 										Object.keys(data[gen].version_group[group].games).map(game => (
-											data[gen].version_group[group].games[game].encounters.length > 0 && (
+											data[gen].version_group[group].games[game].encounters.length > 0 ? (
 												<Grid key={data[gen].version_group[group].games[game].id} container columns={1} sx={{ mb: 3 }}>
 													<Grid container xs={1}>
 														<Grid xs>
@@ -161,14 +161,41 @@ const Encounters = props => {
 														</Grid>
 													</Grid>
 													<Grid container xs={1}>
-														{data[gen].version_group[group].games[game].encounters.map((m, i) => (
-															<Typography key={m.id} variant="span">
-																<Link underline="hover" href={`/location/${m.name}`} color={text[500]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
-																	<LocationArea lang={lang} names={m.names} />
-																</Link>
-																{data[gen].version_group[group].games[game].encounters.length - 1 !== i && <Typography variant="span" sx={{ mr: 0.5 }}>,</Typography>}
+														{data[gen].version_group[group].games[game].encounters
+															.filter(f => filterByLang('name', f.names, lang).includes('Route'))
+															.sort((a,b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang), undefined, { numeric: true, sensitivity: 'base' }))
+															.map(m => (
+																<Typography key={m.id} variant="span" sx={{ '&:not(:last-child)::after': { content: '","', mr: 1 } }}>
+																	<Link href={`/location/${m.name}`} underline="hover" color={text[300]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
+																		{filterByLang('name', m.names, lang)}
+																	</Link>
+																</Typography>
+															))
+														}
+														{data[gen].version_group[group].games[game].encounters
+															.filter(f => !filterByLang('name', f.names, lang).includes('Route'))
+															.sort((a,b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang), undefined, { numeric: true, sensitivity: 'base' }))
+															.map(m => (
+																<Typography key={m.id} variant="span" sx={{ '&:not(:last-child)::after': { content: '","', mr: 1 } }}>
+																	<Link href={`/location/${m.name}`} underline="hover" color={text[300]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
+																		{filterByLang('name', m.names, lang)}
+																	</Link>
+																</Typography>
+															))
+														}
+													</Grid>
+												</Grid>
+											) : (
+												<Grid key={data[gen].version_group[group].games[game].id} container columns={1} sx={{ mb: 3 }}>
+													<Grid container xs={1}>
+														<Grid xs>
+															<Typography variant="h4" color={getColorFromGame(data[gen].version_group[group].games[game].name)}>
+																{data[gen].version_group[group].games[game].label}
 															</Typography>
-														))}
+														</Grid>
+													</Grid>
+													<Grid container xs={1}>
+														<Typography variant="span">Trade/migrate from another game</Typography>
 													</Grid>
 												</Grid>
 											)
@@ -182,28 +209,6 @@ const Encounters = props => {
 			</Box>
 		</Box>
 	)
-}
-
-const LocationArea = props => {
-	const { lang, names } = props
-	const [name, setName] = useState('')
-
-	useEffect(() => {
-		let n = filterByLang('name', names, lang)
-
-		if (n.includes('Road')) {
-			if (n.includes('Victory') || n.includes('Kindle') || n.includes('Versant')) {
-				setName(n)
-			} else {
-				n = n.replace('Road', 'Route')
-				setName(n)
-			}
-		} else {
-			setName(n)
-		}
-	}, [location])
-
-	return name
 }
 
 export default Encounters
