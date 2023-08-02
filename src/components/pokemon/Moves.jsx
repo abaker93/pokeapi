@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 import Pokedex from 'pokedex-promise-v2'
 
 import { Box, Chip, Link, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, alpha } from '@mui/material'
-import PokemonTabs from "../../utilities/components/PokemonTabs"
-import PokemonTab from "../../utilities/components/PokemonTab"
+import PokemonTabs from '../../utilities/components/PokemonTabs'
+import PokemonTab from '../../utilities/components/PokemonTab'
 
-import { gameDataByPokemon } from "../../utilities/games"
+import { gameDataByPokemon } from '../../utilities/games'
 import { filterByLang, getColorFromType } from '../../utilities/utilities'
-import { gray, text } from "../../utilities/colors"
-import { Physical, Special, Status } from "../../assets/MoveIcon"
+import { gray, text } from '../../utilities/colors'
+import { Physical, Special, Status } from '../../assets/MoveIcon'
 
 const P = new Pokedex()
 
@@ -225,8 +225,9 @@ const Moves = props => {
 												gen={data[gen].name}
 												groupVal={groupVal}
 											>
-												{Object.keys(data[gen].version_group[group].moves).map(method => (
+												{Object.keys(data[gen].version_group[group].moves).map((method,i) => (
 													<MovesTable
+														key={i}
 														group={data[gen].version_group[group]}
 														moves={data[gen].version_group[group].moves[method]}
 														color={pokemonColor}
@@ -565,12 +566,12 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at || filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} component={Link} href={`/move/${move.name}`} underline="none" hover sx={rowStyle}>
+						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} hover sx={rowStyle}>
 							<TableCell size="small" sx={{ textAlign: 'right' }}>
-								<Typography>{move.version_details.level_learned_at}</Typography>
+								<Link href={`/move/${move.name}`} underline="none">{move.version_details.level_learned_at}</Link>
 							</TableCell>
 							<TableCell size="small" sx={{ fontWeight: 'medium', fontSize: 16 }}>
-								<Typography fontWeight="bold">{filterByLang('name', move.names, lang)}</Typography>
+								<Link fontWeight="bold" href={`/move/${move.name}`} underline="none">{filterByLang('name', move.names, lang)}</Link>
 							</TableCell>
 							<TableCell size="small">
 								<Chip
@@ -613,7 +614,7 @@ const MoveTableRows = props => {
 					.filter(f => f[subcategory])
 					.sort((a, b) => a[subcategory].name.localeCompare(b[subcategory].name))
 					.map(move => (
-						<TableRow key={move.id} component="Link" href={`/move/${move.name}`} hover sx={rowStyle}>
+						<TableRow key={move.id} sx={rowStyle}>
 							<TableCell size="small" sx={{ textAlign: 'right' }}>
 								<Typography>{filterByLang('name', move[subcategory].names, lang)}</Typography>
 							</TableCell>
@@ -660,7 +661,7 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={move.id} component="Link" href={`/move/${move.name}`} hover sx={rowStyle}>
+						<TableRow key={move.id} sx={rowStyle}>
 							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
 								<Typography fontWeight="medium">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Container, Link, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Container, Link, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
 import PokemonTabs from '../../utilities/components/PokemonTabs'
@@ -162,9 +162,9 @@ const Encounters = props => {
 													</Grid>
 													<Grid container xs={1}>
 														{data[gen].version_group[group].games[game].encounters.map((m, i) => (
-															<Typography key={m.location_area.name} variant="span">
-																<Link underline="hover" href={`/location/${m.location_area.name}`} color={text[500]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
-																	<LocationArea lang={lang} location={m.location_area.name} />
+															<Typography key={m.id} variant="span">
+																<Link underline="hover" href={`/location/${m.name}`} color={text[500]} sx={{ '&:hover': { color: getColorFromType(types[0])[600] } }}>
+																	<LocationArea lang={lang} names={m.names} />
 																</Link>
 																{data[gen].version_group[group].games[game].encounters.length - 1 !== i && <Typography variant="span" sx={{ mr: 0.5 }}>,</Typography>}
 															</Typography>
@@ -185,23 +185,22 @@ const Encounters = props => {
 }
 
 const LocationArea = props => {
-	const { lang, location } = props
+	const { lang, names } = props
 	const [name, setName] = useState('')
 
 	useEffect(() => {
-		P.getLocationAreaByName(location)
-			.then(data => {
-				let n = filterByLang('name', data.names, lang)
+		let n = filterByLang('name', names, lang)
 
-				if (n.includes('Road')) {
-					if (n.includes('Victory') || n.includes('Kindle') || n.includes('Versant')) {
-					} else {
-						n = n.replace('Road', 'Route')
-					}
-				}
+		if (n.includes('Road')) {
+			if (n.includes('Victory') || n.includes('Kindle') || n.includes('Versant')) {
 				setName(n)
-			})
-
+			} else {
+				n = n.replace('Road', 'Route')
+				setName(n)
+			}
+		} else {
+			setName(n)
+		}
 	}, [location])
 
 	return name

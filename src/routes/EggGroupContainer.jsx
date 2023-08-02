@@ -2,18 +2,21 @@ import { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
+import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, Paper, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
 import { filterByLang, formatDexId } from '../utilities/utilities'
-import { gray, text } from '../utilities/colors'
+import { gray, poison, text } from '../utilities/colors'
 
 const P = new Pokedex()
 
 
-const EggGroupContainer = () => {
-	const eggGroup = useParams().name
+const EggGroupContainer = props => {
 	const lang = useOutletContext()
+	let eggGroup
+	
+	if (props.group) { eggGroup = props.group }
+	else { eggGroup = useParams().name }
 
 	const [loading, setLoading] = useState(true)
 	const [eggData, setEggData] = useState()
@@ -69,8 +72,6 @@ const EggGroupContainer = () => {
 			setLoading(false)
 		}
 	}, [eggPokemon])
-	
-	console.log(loading, eggData, eggPokemon)
 
 
 	if (loading) {
@@ -85,6 +86,12 @@ const EggGroupContainer = () => {
 			<Header name={filterByLang('name', eggData.names, lang)} />
 
 			<Container>
+				{eggGroup === 'ground' && (
+					<Paper elevation={1} sx={{ backgroundColor: alpha(poison[100], 0.4), p: 2, my: 5 }}>
+						<Typography>The <strong>Field</strong> egg group was known as <strong>Ground</strong> before Generation IV (Pokémon Diamond & Pearl).</Typography>
+					</Paper>
+				)}
+
 				<Table name={filterByLang('name', eggData.names, lang)}>
 					{eggPokemon
 						.filter(f => f.form_name !== 'totem-alola' && f.form_name !== 'gmax' && f.form_name !== 'mega' && f.form_name !== 'starter' && f.form_name !== 'world-cap')
@@ -107,38 +114,21 @@ const Header = props => {
 	return (
 		<Box component="header" mb={5}>
 			<Box p={1} mb={5} sx={{
-				background: alpha(gray[100], 0.3),
+				background: alpha(gray[100], 0.4),
 				borderBottom: "2px solid",
 				borderColor: "primary.main",
 			}}>
 				<Container>
 					<Breadcrumbs color={text[300]} aria-label="breadcrumb">
-						<Link
-							underline="hover"
-							color="inherit"
-							href="/"
-						>
-							Drifloon Database
-						</Link>
-						<Link
-							underline="hover"
-							color="inherit"
-							href="/egg-group/"
-						>
-							Egg Groups
-						</Link>
-						<Typography
-							fontWeight="medium"
-							color="primary.main"
-						>
-							{name}
-						</Typography>
+						<Link underline="hover" color="inherit" href="/">Drifloon Database</Link>
+						<Link underline="hover" color="inherit" href="/egg-group/">Egg Groups</Link>
+						<Typography fontWeight="medium" color="primary.main">{name}</Typography>
 					</Breadcrumbs>
 				</Container>
 			</Box>
 			
 			<Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-				<Link underline="none" href="/egg-group/"><Typography variant="h1" component="p" color={text[200]} fontSize="1.25rem">Egg Groups</Typography></Link>
+				<Link variant="h3" href="/egg-group/" underline="hover" color={text[200]}>Egg Groups</Link>
 				<ArrowRightSharpIcon sx={{ fill: text[200] }} />
 				<Typography variant="h1" textAlign="center" color="primary.main">{name}</Typography>
 			</Container>
@@ -202,8 +192,6 @@ const Row = props => {
 			setLoading(false)
 		}
 	}, [pokemon, groups])
-
-	console.log(pokemonName, groups)
 
 	if (loading) {
 		// TODO: add loading skeleton

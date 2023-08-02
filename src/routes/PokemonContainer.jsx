@@ -27,6 +27,7 @@ const createInitialState = props => {
 
 	return {
 		dex:				dex,
+		encounters:	null,
 		evolution: {
 			chain:		null,
 			pokemon:	null,
@@ -221,7 +222,29 @@ const PokemonContainer = props => {
 				//~~	Get Encounter Locations		//
 				//--	set encounters		//
 				P.getResource(data[0].location_area_encounters)
-					.then(data => dispatch({ type: 'encounters', value: data }))
+					.then(data => {
+						let arr = []
+
+						data.map(m => {
+							P.getLocationAreaByName(m.location_area.name)
+								.then(area => {
+									P.getLocationByName(area.location.name)
+										.then(location => {
+											arr = [...arr, {
+												id: location.id,
+												name: location.name,
+												names: location.names,
+												version_details: m.version_details,
+											}]
+
+											arr = arr.filter((v,i,a) => a.findIndex(t => (t.id === v.id)) === i)
+
+											dispatch({ type: 'encounters', value: arr })
+										})
+								})
+						})
+						return data
+					})
 			})
 			.catch(console.error)
 
@@ -246,7 +269,7 @@ const PokemonContainer = props => {
 		getPokemon(state.id)
 	}, [state.id])
 
-	// console.log(state.pokemon)
+	// console.log(state)
 
 
 	if (state.loading) {

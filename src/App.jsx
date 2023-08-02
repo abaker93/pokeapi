@@ -43,7 +43,12 @@ const router = createBrowserRouter([{
 			],
 		},
 		{ path: 'ability/:name/', element: <AbilityContainer />, },
-		{ path: 'egg-group/:name/', element: <EggGroupContainer />, },
+		{ path: 'egg-group/',
+			children: [
+				{ path: 'field/', element: <EggGroupContainer group="ground" /> },
+				{ path: ':name/', element: <EggGroupContainer /> },
+			],
+		},
 		{ path: 'move/:name/', element: <MoveContainer />, },
 		{ path: 'location/:name/', element: <LocationContainer />, },
 

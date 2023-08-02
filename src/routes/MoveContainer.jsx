@@ -115,38 +115,21 @@ const Header = props => {
 	return (
 		<Box component="header" mb={5}>
 			<Box p={1} mb={5} sx={{
-				background: alpha(gray[100], 0.3),
+				background: alpha(gray[100], 0.4),
 				borderBottom: "2px solid",
 				borderColor: "primary.main",
 			}}>
 				<Container>
 					<Breadcrumbs color={text[300]} aria-label="breadcrumb">
-						<Link
-							underline="hover"
-							color="inherit"
-							href="/"
-						>
-							Drifloon Database
-						</Link>
-						<Link
-							underline="hover"
-							color="inherit"
-							href="/move/"
-						>
-							Moves
-						</Link>
-						<Typography
-							fontWeight="medium"
-							color="primary.main"
-						>
-							{moveName}
-						</Typography>
+						<Link underline="hover" color="inherit" href="/">Drifloon Database</Link>
+						<Link underline="hover" color="inherit" href="/move/">Moves</Link>
+						<Typography fontWeight="medium" color="primary.main">{moveName}</Typography>
 					</Breadcrumbs>
 				</Container>
 			</Box>
 			
 			<Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-				<Link underline="none" href="/moves/"><Typography variant="h1" component="p" color={text[200]} fontSize="1.25rem">Moves</Typography></Link>
+				<Link variant="h3" href="/move/" underline="hover" color={text[200]}>Moves</Link>
 				<ArrowRightSharpIcon sx={{ fill: text[200] }} />
 				<Typography variant="h1" textAlign="center" color="primary.main">{moveName}</Typography>
 			</Container>
@@ -554,9 +537,7 @@ const Table = props => {
 const Row = props => {
 	const { lang, pokemon } = props
 	const pokemonName = filterByLang('name', pokemon.names, lang)
-
-	console.log(pokemon)
-
+	
 	return (
 		<TableRow
 			component={Link}
