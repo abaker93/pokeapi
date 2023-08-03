@@ -547,7 +547,7 @@ const Translations = props => {
 
 	return (
 		<Box mb={5}>
-			<Typography variant="h2">Translations</Typography>
+			<Typography variant="h2" sx={{ mb: 2 }}>Translations</Typography>
 			
 			<Table aria-label={`translations of ${ability.name}`}>
 				<TableBody>
