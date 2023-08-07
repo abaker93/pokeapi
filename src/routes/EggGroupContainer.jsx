@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, Paper, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId } from '../utilities/utilities'
+import { filterByLang, formatDexId, siteTitle } from '../utilities/utilities'
 import { gray, poison, text } from '../utilities/colors'
 
 const P = new Pokedex()
@@ -120,7 +120,7 @@ const Header = props => {
 			}}>
 				<Container>
 					<Breadcrumbs color={text[300]} aria-label="breadcrumb">
-						<Link underline="hover" color="inherit" href="/">Drifloon Database</Link>
+						<Link underline="hover" color="inherit" href="/">{siteTitle}</Link>
 						<Link underline="hover" color="inherit" href="/egg-group/">Egg Groups</Link>
 						<Typography fontWeight="medium" color="primary.main">{name}</Typography>
 					</Breadcrumbs>

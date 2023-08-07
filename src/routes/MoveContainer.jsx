@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId, getColorFromGame, getGenFromGame, getGenNumFromName, getVersionGroupByName } from '../utilities/utilities'
+import { filterByLang, formatDexId, getColorFromGame, getGenFromGame, getGenNumFromName, getVersionGroupByName, siteTitle } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
 
 import TypeIcon from '../assets/TypeIcon';
@@ -121,7 +121,7 @@ const Header = props => {
 			}}>
 				<Container>
 					<Breadcrumbs color={text[300]} aria-label="breadcrumb">
-						<Link underline="hover" color="inherit" href="/">Drifloon Database</Link>
+						<Link underline="hover" color="inherit" href="/">{siteTitle}</Link>
 						<Link underline="hover" color="inherit" href="/move/">Moves</Link>
 						<Typography fontWeight="medium" color="primary.main">{moveName}</Typography>
 					</Breadcrumbs>

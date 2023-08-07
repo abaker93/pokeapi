@@ -48,16 +48,19 @@ export const generationsArray = [
 						id: 1,
 						name: 'red',
 						label: 'Red',
+						short_label: 'R',
 					},
 					{
 						id: 2,
 						name: 'blue',
 						label: 'Blue',
+						short_label: 'B',
 					},
 					{
 						id: 3,
 						name: 'yellow',
 						label: 'Yellow',
+						short_label: 'Y',
 					},
 				]
 			}
@@ -78,16 +81,19 @@ export const generationsArray = [
 						id: 1,
 						name: 'gold',
 						label: 'Gold',
+						short_label: 'G',
 					},
 					{
 						id: 2,
 						name: 'silver',
 						label: 'Silver',
+						short_label: 'S',
 					},
 					{
 						id: 3,
 						name: 'crystal',
 						label: 'Crystal',
+						short_label: 'C',
 					},
 				]
 			}
@@ -108,16 +114,19 @@ export const generationsArray = [
 						id: 1,
 						name: 'ruby',
 						label: 'Ruby',
+						short_label: 'R',
 					},
 					{
 						id: 2,
 						name: 'sapphire',
 						label: 'Sapphire',
+						short_label: 'S',
 					},
 					{
 						id: 3,
 						name: 'emerald',
 						label: 'Emerald',
+						short_label: 'E',
 					},
 				]
 			},
@@ -130,11 +139,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'firered',
 						label: 'FireRed',
+						short_label: 'FR',
 					},
 					{
 						id: 2,
 						name: 'leafgreen',
 						label: 'LeafGreen',
+						short_label: 'LG',
 					},
 				]
 			}
@@ -155,16 +166,19 @@ export const generationsArray = [
 						id: 1,
 						name: 'diamond',
 						label: 'Diamond',
+						short_label: 'D',
 					},
 					{
 						id: 2,
 						name: 'pearl',
 						label: 'Pearl',
+						short_label: 'P',
 					},
 					{
 						id: 3,
 						name: 'platinum',
 						label: 'Platinum',
+						short_label: 'Pt',
 					},
 				]
 			},
@@ -177,11 +191,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'heartgold',
 						label: 'HeartGold',
+						short_label: 'HG',
 					},
 					{
 						id: 2,
 						name: 'soulsilver',
 						label: 'SoulSilver',
+						short_label: 'SS',
 					},
 				]
 			}
@@ -195,35 +211,32 @@ export const generationsArray = [
 		location_groups: [
 			{
 				id: 1,
-				name: 'black_white',
-				label: 'Black/White',
+				name: 'black_white_black_2_white_2',
+				label: 'Black/White/Black 2/White 2',
 				games: [
 					{
 						id: 1,
 						name: 'black',
 						label: 'Black',
+						short_label: 'B',
 					},
 					{
 						id: 2,
 						name: 'white',
 						label: 'White',
+						short_label: 'W',
 					},
-				]
-			},
-			{
-				id: 2,
-				name: 'black_2_white_2',
-				label: 'Black 2/White 2',
-				games: [
 					{
-						id: 1,
+						id: 3,
 						name: 'black_2',
 						label: 'Black 2',
+						short_label: 'B2',
 					},
 					{
-						id: 2,
+						id: 4,
 						name: 'white_2',
 						label: 'White 2',
+						short_label: 'W2',
 					},
 				]
 			}
@@ -244,11 +257,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'x',
 						label: 'X',
+						short_label: 'X',
 					},
 					{
 						id: 2,
 						name: 'y',
 						label: 'Y',
+						short_label: 'Y',
 					},
 				]
 			},
@@ -261,11 +276,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'omega_ruby',
 						label: 'Omega Ruby',
+						short_label: 'OR',
 					},
 					{
 						id: 2,
 						name: 'alpha_sapphire',
 						label: 'Alpha Sapphire',
+						short_label: 'AS',
 					},
 				]
 			}
@@ -279,35 +296,32 @@ export const generationsArray = [
 		location_groups: [
 			{
 				id: 1,
-				name: 'sun_moon',
-				label: 'Sun/Moon',
+				name: 'sun_moon_ultra_sun_ultra_moon',
+				label: 'Sun/Moon/Ultra Sun/Ultra Moon',
 				games: [
 					{
 						id: 1,
 						name: 'sun',
 						label: 'Sun',
+						short_label: 'S',
 					},
 					{
 						id: 2,
 						name: 'moon',
 						label: 'Moon',
+						short_label: 'M',
 					},
-				],
-			},
-			{
-				id: 2,
-				name: 'ultra_sun_ultra_moon',
-				label: 'Ultra Sun/Ultra Moon',
-				games: [
 					{
-						id: 1,
+						id: 3,
 						name: 'ultra_sun',
 						label: 'Ultra Sun',
+						short_label: 'US',
 					},
 					{
-						id: 2,
+						id: 4,
 						name: 'ultra_moon',
 						label: 'Ultra Moon',
+						short_label: 'UM',
 					},
 				],
 			},
@@ -328,11 +342,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'sword',
 						label: 'Sword',
+						short_label: 'Sw',
 					},
 					{
 						id: 2,
 						name: 'shield',
 						label: 'Shield',
+						short_label: 'Sh',
 					},
 				],
 			},
@@ -345,11 +361,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'brilliant_diamond',
 						label: 'Brilliant Diamond',
+						short_label: 'BD',
 					},
 					{
 						id: 2,
 						name: 'shining_pearl',
 						label: 'Shining Pearl',
+						short_label: 'SP',
 					},
 				],
 			},
@@ -362,6 +380,7 @@ export const generationsArray = [
 						id: 1,
 						name: 'legends_arceus',
 						label: 'Legends: Arceus',
+						short_label: 'LA',
 					},
 				],
 			},
@@ -382,11 +401,13 @@ export const generationsArray = [
 						id: 1,
 						name: 'scarlet',
 						label: 'Scarlet',
+						short_label: 'S',
 					},
 					{
 						id: 2,
 						name: 'violet',
 						label: 'Violet',
+						short_label: 'V',
 					},
 				],
 			},

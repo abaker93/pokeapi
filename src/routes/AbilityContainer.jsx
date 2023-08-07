@@ -5,7 +5,7 @@ import Pokedex from 'pokedex-promise-v2'
 import { Box, Breadcrumbs, Container, Link, Table, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId, getColorFromGame } from '../utilities/utilities'
+import { filterByLang, formatDexId, getColorFromGame, siteTitle } from '../utilities/utilities'
 import { gray, text } from '../utilities/colors'
 
 const P = new Pokedex()
@@ -36,9 +36,6 @@ const AbilityContainer = props => {
 
 								P.getPokemonFormByName(poke.forms[0].name)
 									.then(form => {
-
-
-
 										setAbilityPokemon(prev => [...prev, {
 											id: 				poke.id,
 											abilities: 	poke.abilities,
@@ -135,7 +132,7 @@ const Header = props => {
 							color="inherit"
 							href="/"
 						>
-							Drifloon Database
+							{siteTitle}
 						</Link>
 						<Link
 							underline="hover"

@@ -2,6 +2,8 @@ import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, gras
 import { game_red, game_black, game_blue, game_crystal, game_diamond, game_eevee, game_emerald, game_gold, game_green, game_moon, game_pearl, game_silver, game_sun, game_yellow } from './colors'
 import { defense } from "./types"
 
+export const siteTitle = "Drifloon Database"
+
 export const calcDefense = (def1, def2, off) => {
 	let calc, val
 
