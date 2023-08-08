@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Breadcrumbs, Container, Link, Table as MuiTable, TableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
+import { Box, Breadcrumbs, Container, Link, Table as MuiTable, TableBody as MuiTableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
 import { filterByLang, formatDexId, getColorFromGame, siteTitle } from '../utilities/utilities'
@@ -58,7 +58,7 @@ const LocationContainer = () => {
 		if (locationData && areasData.length === locationData.areas.length) {
 			setLoading(false)
 		}
-	}, [locationData, areasData])
+	}, [loading, locationData, areasData])
 
 
 	if (loading) {
@@ -77,6 +77,7 @@ const LocationContainer = () => {
 				{generationsArray.map(gen => (
 					<Generation key={gen.id} areasData={areasData} gen={gen} lang={lang} />
 				))}
+				{/* <Generation areasData={areasData} gen={generationsArray[0]} lang={lang} /> */}
 
 				<Translations data={locationData} lang={lang} />
 			</Container>
@@ -129,27 +130,17 @@ const Generation = props => {
 			area.pokemon_encounters.map(poke => {
 				// nidoran male
 				let versions = []
-				let groupsArr = []
 				gen.location_groups.map(group => {
 					// red/blue/yellow
 					group.games.map(game => {
 						// red
 						poke.version_details.map(version => {
 							// red
-							if (version.version.name === game.name) {
-								versions.push(version)
-								groupsArr.push(group.name)
-							}
+							version.version.name === game.name && versions.push(version)
 						})
 					})
 				})
-				
-				groupsArr = groupsArr.filter((v,i,a) => a.findIndex(t => (t === v)) === i)
-
-				if (versions.length && groupsArr.length) {
-					pokemon.push({ ...poke, version_details: versions, groups: groupsArr })
-				}
-				// setGroups(groupsArr)
+				versions.length && pokemon.push({ ...poke, version_details: versions })
 			})
 			pokemon.length && arr.push({ ...area, pokemon_encounters: pokemon })
 		})
@@ -221,12 +212,12 @@ const Area = props => {
 			<>
 				<Typography variant="h3" sx={{ mb: 2 }}>{filterByLang('name', area.names, lang)}</Typography>
 				{methods
-					.sort((a, b) => a.id - b.id)
+					.sort((a,b) => a.id - b.id)
 					.map(method => (
 						<Table key={method.id} lang={lang} method={method}>
-							{method.pokemon_encounters.map(pokemon => (
-								<Row key={pokemon.pokemon.name} gen={gen} lang={lang} method={method} pokemon={pokemon} />
-							))}
+							<TableBody gen={gen} lang={lang} pokemon={method.pokemon_encounters}>
+								<Row gen={gen} lang={lang} method={method} />
+							</TableBody>
 						</Table>
 					))
 				}
@@ -252,87 +243,214 @@ const Table = props => {
 							borderBottom: `1px solid ${gray[300]}`
 						}
 					}}>
-						<TableCell>#</TableCell>
-						<TableCell>Name</TableCell>
+						<TableCell>Pokémon</TableCell>
 						<TableCell>Games</TableCell>
 						<TableCell>Rarity</TableCell>
 						<TableCell>Levels</TableCell>
 						<TableCell>Details</TableCell>
 					</TableRow>
 				</TableHead>
-				<TableBody>
-					{children}
-				</TableBody>
+				{children}
 			</MuiTable>
 		</Box>
 	)
 }
 
-const Row = props => {
-	const { gen, lang, pokemon } = props
+const TableBody = props => {
+	const { children, gen, lang, pokemon } = props
+	const [pokemonData, setPokemonData] = useState([])
 
-	const [loading, setLoading]	= useState(true)
-	const [pokemonData, setPokemonData] = useState()
-	const [games, setGames] = useState()
+	const renderChildren = poke => {
+		let group = []
 
-	const group = gen.location_groups.filter(group => pokemon.groups.includes(group.name))[0]
-
-	const getPokemon = () => {
-		P.getPokemonByName(pokemon.pokemon.name)
-			.then(poke => {
-				P.getPokemonSpeciesByName(poke.species.name)
-					.then(species => {
-						P.getPokemonFormByName(poke.forms[0].name)
-							.then(form => {
-								setPokemonData({
-									id:				poke.id,
-									formName:	form.names.length > 0 ? filterByLang('name', form.names, lang) : filterByLang('name', form.form_names, lang),
-									name:			filterByLang('name', species.names, lang),
-									num:			formatDexId(species.pokedex_numbers.filter(f => f.pokedex.name === 'national')[0].entry_number),
-									sprite:		form.sprites.front_default ? form.sprites.front_default : poke.sprites.front_default,
-								})
-							}).catch(console.error)
-					}).catch(console.error)
-			}).catch(console.error)
-	}
-
-	const getGames = () => {
-		// TODO: separate based on encounter details
-		let games = {}
-		group.games.map(game => {
-			games = {...games, [game.name]: false}
-
-			pokemon.version_details.map(version => {
-				if (version.version.name === game.name) {
-					games[game.name] = true
-				}
+		gen.location_groups.map(g => {
+			poke.version_details.map(v => {
+				g.games.map(game => {
+					v.version.name === game.name && group.push(g)
+				})
 			})
 		})
 
-		setGames(games)
+		group = group[0]
+		return React.Children.map(children, child => {
+			return React.cloneElement(child, {
+				group:		group,
+				pokemon:	poke,
+			})
+		})
+	}
+
+	const getPokemon = () => {
+		pokemon.map(p => {
+			P.getPokemonByName(p.pokemon.name)
+				.then(poke => {
+					P.getPokemonSpeciesByName(poke.species.name)
+						.then(species => {
+							P.getPokemonFormByName(poke.forms[0].name)
+								.then(form => {
+									setPokemonData(prev => [...prev, {
+										id:								poke.id,
+										formName:					form.names.length > 0 ? filterByLang('name', form.names, lang) : filterByLang('name', form.form_names, lang),
+										name:							filterByLang('name', species.names, lang),
+										num:							formatDexId(species.pokedex_numbers.filter(f => f.pokedex.name === 'national')[0].entry_number),
+										sprite:						form.sprites.front_default ? form.sprites.front_default : poke.sprites.front_default,
+										version_details:	p.version_details,
+									}])
+								}).catch(console.error)
+						}).catch(console.error)
+				}).catch(console.error)
+		})
 	}
 
 	useEffect(() => {
-		if (!games) {
-			setLoading(true)
-			getGames()
+		if (!pokemonData.length) {
+			setPokemonData([])
+			getPokemon()
 		}
 	}, [])
 
-	useEffect(() => {
-		if (!pokemonData) {
-			setLoading(true)
-			getPokemon()
+	// console.log(pokemonData)
+
+	// TODO:	work on sort by rarity, then by game, then by level, then by name
+	if (pokemonData.length) {
+		return (
+			<MuiTableBody>
+				{pokemonData
+					// .sort((a,b) => a.num.localeCompare(b.num) || a.id - b.id || a.name.localeCompare(b.name))
+					.map(poke => renderChildren(poke))
+				}
+			</MuiTableBody>
+		)
+	}
+}
+
+const Row = props => {
+	const { gen, group, lang, method, pokemon } = props
+
+	// console.log(props)
+
+	const [loading, setLoading]	= useState(true)
+	const [variations, setVariations] = useState([])
+
+	// const calcChance = chance => {
+	// 	switch (chance) {
+	// 		case chance >= 60:
+	// 			return 'Very Common'
+	// 			break
+	// 		case chance >= 50: 
+	// 			return 'Common'
+	// 			break
+	// 		case chance >= 35:
+	// 			return 'Uncommon'
+	// 			break
+	// 		case chance >= 5:
+	// 			return 'Rare'
+	// 			break
+	// 		default:
+	// 			return 'Very Rare'
+	// 	}
+	// }
+
+	const compareEncounters = enc => {
+		// TODO: probably need to do something to compare condition_values
+
+		let encArr = [{
+			id: 0,
+			chance: 0,
+			condition_values: enc[0].condition_values,
+			max_level: 0,
+			method: enc[0].method,
+			min_level: 999,
+		}]
+
+		enc.map((e,i) => {
+			let addArr = true
+
+			encArr.map((a,j) => {
+				if (a.method.name === e.method.name) {
+					addArr = false
+					encArr[j].chance += e.chance
+					e.min_level < a.min_level && (encArr[j].min_level = e.min_level)
+					e.max_level > a.max_level && (encArr[j].max_level = e.max_level)
+				}
+			})
+
+			if (addArr) {
+				encArr.push({
+					id: i,
+					chance: e.chance,
+					condition_values: e.condition_values,
+					max_level: e.max_level,
+					method: e.method,
+					min_level: e.min_level,
+				})
+			}
+		})
+
+		return (encArr)
+	}
+
+	const getVariations = () => {
+		let varArr = []
+		
+		if (varArr.length === 0) {
+			const encounterArr = compareEncounters(pokemon.version_details[0].encounter_details)
+			encounterArr.map((e,i) => {
+				varArr.push({
+					id: i,
+					condition_values: e.condition_values,
+					max_chance: e.chance,
+					max_level: e.max_level,
+					method: e.method,
+					min_level: e.min_level,
+					version: [pokemon.version_details[0].version.name],
+				})
+			})
 		}
-	}, [pokemonData])
+
+		pokemon.version_details.map(v => {
+			const encounterArr = compareEncounters(v.encounter_details)
+			let addArr = true
+			encounterArr.map(e => {
+				varArr.map((a,i) => {
+					if (
+						a.max_chance === e.chance
+						&& a.max_level === e.max_level
+						&& a.method.name === e.method.name
+						&& a.min_level === e.min_level
+					) {
+						addArr = false
+						varArr[i].version.includes(v.version.name) || varArr[i].version.push(v.version.name)
+					}
+				})
+			})
+
+			addArr && encounterArr.map(e => {
+				varArr.push({
+					id: varArr.length,
+					condition_values: e.condition_values,
+					max_chance: e.chance,
+					max_level: e.max_level,
+					method: e.method,
+					min_level: e.min_level,
+					version: [v.version.name],
+				})
+			})
+		})
+
+		setVariations(varArr)
+	}
 
 	useEffect(() => {
-		if (pokemonData && games) {
+		if (!variations.length) {
+			setLoading(true)
+			getVariations()
+		} else {
 			setLoading(false)
 		}
-	}, [pokemonData, games])
+	}, [variations])
 
-	// console.log(pokemon, pokemonData)
+	// console.log(variations)
 
 
 	if (loading) {
@@ -343,47 +461,48 @@ const Row = props => {
 	}
 
 	return (
-		<TableRow sx={{
-			borderBottom: 'none',
-			'& > td, & > th': { borderBottomColor: 'divider' },
-			'&:last-child > td, &:last-child > th': { border: 0 }
-		}}>
-			<TableCell size="small" sx={{ alignItems: 'center' }}>
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					{pokemonData.sprite && (
-						<img src={pokemonData.sprite} alt={pokemonData.name} style={{ width: '50px', height: '50px' }} />
-					)}
-					<Typography variant="span" sx={{ ml: 1 }}>{pokemonData.num}</Typography>
-				</Box>
-			</TableCell>
-			<TableCell size="small" sx={{ lineHeight: '1' }}>
-				<Typography component="h3" fontWeight="medium">
-					{pokemonData.name}
-					{pokemonData.formName && (
-						<Typography variant="caption" component="p" lineHeight={1}>{pokemonData.formName}</Typography>
-					)}
-				</Typography>
-			</TableCell>
-			<TableCell size="small" sx={{ p: 0 }}>
-				<MuiTable sx={{ height: 62 }}>
-					<TableBody>
-						<TableRow>
-							{group.games.map(m => (
-								<TableCell key={m.id} sx={{
-									borderBottom: 'none',
-									px: 2,
-									background: games[m.name] && getColorFromGame(m.name),
-									color: games[m.name] || text[200],
-								}}>
-									{m.short_label}
-								</TableCell>
-							))}
-						</TableRow>
-					</TableBody>
-				</MuiTable>
-				
-			</TableCell>
-		</TableRow>
+		variations.sort((a,b) => a.max_chance - b.max_chance).map(variation => (
+			<TableRow key={variation.id} sx={{
+				borderBottom: 'none',
+				'& > td, & > th': { borderBottomColor: 'divider' },
+				'&:last-child > td, &:last-child > th': { border: 0 }
+			}}>
+				<TableCell size="small" sx={{ alignItems: 'center' }}>
+					<Box sx={{ display: 'flex', alignItems: 'center' }}>
+						{pokemon.sprite && (
+							<img src={pokemon.sprite} alt={pokemon.name} style={{ width: '50px', height: '50px' }} />
+						)}
+						<Typography variant="span">{pokemon.num}</Typography>
+						<Typography component="h3" fontWeight="medium" sx={{ ml: 1}}>
+							{pokemon.name}
+							{pokemon.formName && (
+								<Typography variant="caption" component="p" lineHeight={1}>{pokemon.formName}</Typography>
+							)}
+						</Typography>
+					</Box>
+					
+				</TableCell>
+				<TableCell size="small" sx={{ p: 0 }}>
+					<MuiTable sx={{ height: 62 }}>
+						<MuiTableBody>
+							<TableRow>
+								{group.games.map(m => (
+									<TableCell key={m.id} sx={{
+										borderBottom:	'none',
+										px:						2,
+										background:		variation.version.includes(m.name) && getColorFromGame(m.name),
+										color:				variation.version.includes(m.name) || text[200],
+										fontWeight:		variation.version.includes(m.name) && 'bold',
+									}}>
+										{m.short_label}
+									</TableCell>
+								))}
+							</TableRow>
+						</MuiTableBody>
+					</MuiTable>
+				</TableCell>
+			</TableRow>
+		))
 	)
 }
 
@@ -411,7 +530,7 @@ const Translations = props => {
 			<Typography variant="h2" sx={{ mb: 2 }}>Translations</Typography>
 			
 			<MuiTable aria-label={`translations of ${data.name}`}>
-				<TableBody>
+				<MuiTableBody>
 					{rows.filter(f => f.language && f.name).sort((a,b) => a.language.localeCompare(b.language)).map(row => (
 						<TableRow key={row.language} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 							<TableCell size="small" width={80} sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right', }}>
@@ -422,7 +541,7 @@ const Translations = props => {
 							</TableCell>
 						</TableRow>
 					))}
-				</TableBody>
+				</MuiTableBody>
 			</MuiTable>
 		</Box>
 	)
