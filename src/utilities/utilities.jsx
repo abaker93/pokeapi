@@ -1,5 +1,6 @@
 import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from './colors'
 import { game_red, game_black, game_blue, game_crystal, game_diamond, game_eevee, game_emerald, game_gold, game_green, game_moon, game_pearl, game_silver, game_sun, game_yellow } from './colors'
+import { very_common, common, uncommon, rare, very_rare } from './colors'
 import { defense } from "./types"
 
 export const siteTitle = "Drifloon Database"
@@ -162,6 +163,14 @@ export const getColorFromGame = game => {
 	}
 
 	return colorMap[game]
+}
+
+export const getColorFromPercentage = perc => {
+	if (perc > 33) return very_common
+	if (perc > 20) return common
+	if (perc > 10) return uncommon
+	if (perc > 5) return rare
+	return very_rare
 }
 
 export const getGenFromGame = game => {

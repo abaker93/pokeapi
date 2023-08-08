@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from 'react-router-dom'
 import Pokedex from 'pokedex-promise-v2'
 
-import { Box, Breadcrumbs, Container, Link, Table as MuiTable, TableBody as MuiTableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
+import { Box, Breadcrumbs, Chip, Container, Link, Table as MuiTable, TableBody as MuiTableBody, TableCell, TableHead, TableRow, Typography, alpha } from '@mui/material'
 import ArrowRightSharpIcon from '@mui/icons-material/ArrowRightSharp';
 
-import { filterByLang, formatDexId, getColorFromGame, siteTitle } from '../utilities/utilities'
-import { gray, text } from '../utilities/colors'
+import { filterByLang, formatDexId, getColorFromGame, getColorFromPercentage, siteTitle } from '../utilities/utilities'
+import { gray, text, white } from '../utilities/colors'
 import { encounterMethods, generationsArray } from '../utilities/arrays';
 
 const P = new Pokedex()
@@ -327,7 +327,7 @@ const TableBody = props => {
 const Row = props => {
 	const { gen, group, lang, method, pokemon } = props
 
-	// console.log(props)
+	// console.log(pokemon)
 
 	const [loading, setLoading]	= useState(true)
 	const [variations, setVariations] = useState([])
@@ -500,6 +500,17 @@ const Row = props => {
 							</TableRow>
 						</MuiTableBody>
 					</MuiTable>
+				</TableCell>
+				<TableCell>
+					<Chip
+						label={`${variation.max_chance}%`}
+						sx={{
+							width: '100%',
+							borderRadius: 0.5,
+							background: getColorFromPercentage(variation.max_chance),
+							color: white,
+						}}
+					/>
 				</TableCell>
 			</TableRow>
 		))

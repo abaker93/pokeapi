@@ -343,3 +343,17 @@ export const game_black =		'#574438'
 export const game_sun =			'#DB8624'
 export const game_moon =		'#7038F8'
 export const game_eevee =		'#AC8639'
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~	Rarity Colors  ~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+export const very_common =	'#41B56E'
+export const common =				'#A0E513'
+export const uncommon =			'#FFDD57'
+export const rare =					'#FF7F10'
+export const very_rare =		'#F34344'
