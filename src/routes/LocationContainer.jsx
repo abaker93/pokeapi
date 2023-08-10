@@ -247,7 +247,7 @@ const Table = props => {
 						<TableCell>Games</TableCell>
 						<TableCell>Rarity</TableCell>
 						<TableCell>Levels</TableCell>
-						<TableCell>Details</TableCell>
+						{/* <TableCell>Details</TableCell> */}
 					</TableRow>
 				</TableHead>
 				{children}
@@ -450,7 +450,7 @@ const Row = props => {
 		}
 	}, [variations])
 
-	// console.log(variations)
+	console.log(variations)
 
 
 	if (loading) {
@@ -488,11 +488,15 @@ const Row = props => {
 							<TableRow>
 								{group.games.map(m => (
 									<TableCell key={m.id} sx={{
-										borderBottom:	'none',
-										px:						2,
-										background:		variation.version.includes(m.name) && getColorFromGame(m.name),
-										color:				variation.version.includes(m.name) || text[200],
-										fontWeight:		variation.version.includes(m.name) && 'bold',
+										borderBottom:			'none',
+										borderLeft:				'1px solid',
+										borderLeftColor:	'divider',
+										borderRight:			'1px solid',
+										borderRightColor: 'divider',
+										px:								2,
+										background:				variation.version.includes(m.name) && getColorFromGame(m.name),
+										color:						variation.version.includes(m.name) || text[200],
+										fontWeight:				variation.version.includes(m.name) && 'bold',
 									}}>
 										{m.short_label}
 									</TableCell>
@@ -505,12 +509,18 @@ const Row = props => {
 					<Chip
 						label={`${variation.max_chance}%`}
 						sx={{
+							height: 26,
 							width: '100%',
 							borderRadius: 0.5,
 							background: getColorFromPercentage(variation.max_chance),
 							color: white,
+							'& .MuiChip-label': { px: 1 },
 						}}
 					/>
+				</TableCell>
+				<TableCell>
+					{variation.min_level}
+					{variation.max_level !== variation.min_level && `-${variation.max_level}`}
 				</TableCell>
 			</TableRow>
 		))
