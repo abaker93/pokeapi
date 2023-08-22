@@ -13,20 +13,22 @@ const Header = props => {
 
 	const prevNextStyles = {
 		position:	'absolute',
-		bottom:		'-40px',
-		height:		'100px',
+		bottom:		'-60px',
+		height:		'120px',
 		zIndex:		1,
-		filter:		'grayscale(1) contrast(0) brightness(0) opacity(0.2)',
+		filter:		'grayscale(1) contrast(0) brightness(0) opacity(0.12)',
 		'&:hover': {
 			filter:		'none',
 			transition: 'ease-in-out 0.2s',
 		},
 	}
 
-	const waveStyles = {
-		position:	'absolute',
-		bottom:		'-1px',
-		opacity: 0.7,
+	const waveStyles = o => {
+		return {
+			position:	'absolute',
+			bottom:		'-1px',
+			opacity:	o,
+		}
 	}
 
 	return (
@@ -57,7 +59,7 @@ const Header = props => {
 				<img
 					src={pokemon.sprites.other['official-artwork'].front_default}
 					alt={filterByLang('name', pokemon.names, lang)}
-					style={{ height: '100%', zIndex: 1 }}
+					style={{ height: '100%', zIndex: 1, marginTop: '50px' }}
 				/>
 				<Box sx={[prevNextStyles, { left: '-30px', '&:hover': { left: 0 } }]}>
 					{prev ? <Nav pokemon={prev} /> : null}
@@ -70,10 +72,10 @@ const Header = props => {
 					height:		'100%',
 					width:		'100%',
 				}}>
-					<Wave1 style={waveStyles} color="#F9F9F9" />
-					<Wave2 style={waveStyles} color="#F9F9F9" />
-					<Wave3 style={waveStyles} color="#F9F9F9" />
-					<Wave4 style={waveStyles} color="#F9F9F9" />
+					<Wave1 style={waveStyles(1)} color="#F9F9F9" />
+					<Wave2 style={waveStyles(0.7)} color="#F9F9F9" />
+					<Wave3 style={waveStyles(0.7)} color="#F9F9F9" />
+					<Wave4 style={waveStyles(0.7)} color="#F9F9F9" />
 				</Box>
 			</Box>
 
@@ -105,7 +107,7 @@ const Title = props => {
 	const { genera, id, name, types } = props
 
 	return (
-		<Container>
+		<Container sx={{ mt: 5, textAlign: 'center' }}>
 			<Typography variant="h1" fontWeight="medium">
 				<Typography component="span" fontWeight="medium" sx={{ mr: 0.5, opacity: 0.7 }}>
 					<Typography component="span" fontSize={12} fontWeight="medium" textTransform="uppercase" sx={{ mr: 0.25 }}>

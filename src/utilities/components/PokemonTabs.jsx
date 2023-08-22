@@ -10,7 +10,7 @@ const PokemonTabs = styled(Tabs, {
 		position: 'absolute',
 		bottom: 0,
 		left: 0,
-		height: '0.5px',
+		height: '1px',
 		width: '100%',
 		backgroundColor: color[600],
 	}
