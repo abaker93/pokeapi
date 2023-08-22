@@ -125,7 +125,7 @@ const Title = props => {
 					icon={<TypeIcon type={types[0].type.name} />}
 					label={types[0].type.name}
 				/>
-				{types[1] ? (
+				{types[1] && (
 					<Chip
 						variant="type"
 						type={types[1].type.name}
@@ -133,7 +133,7 @@ const Title = props => {
 						label={types[1].type.name}
 						sx={{ ml: 1.5, }}
 					/>
-				) : null}
+				)}
 			</Box>
 		</Container>
 	)
