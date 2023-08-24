@@ -28,7 +28,7 @@ const Evolution = props => {
 
 	return (
 		<Box sx={{ mb: 5 }}>
-			<Grid container xs>
+			<Grid container xs justifyContent="center">
 				<Grid container xs columns={evolution.level === 2 ? 5 : 8}>
 					<Grid xs={2} display="flex" alignItems="center">
 						{evolution.pokemon.filter(f1 => f1.id == getIdFromURL(evolution.chain.chain.species.url)).map(m1 => (

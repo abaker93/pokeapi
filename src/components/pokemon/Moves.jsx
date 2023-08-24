@@ -416,7 +416,7 @@ const MovesTable = props => {
 								<Typography variant="h3" mb={0.5}>Moves learnt by HM</Typography>
 								<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Hidden Machines in Pokémon {group.label}:</Typography>
 								<TableContainer sx={{ mt: 1 }}>
-									<Table aria-label={`moves learnt in ${group.label} by HM`}>
+									<Table stickyHeader aria-label={`moves learnt in ${group.label} by HM`}>
 										<MovesTableHead subcategory="hm" {...props} />
 										<MoveTableRows subcategory="hm" moveData={moveData} {...props} />
 									</Table>
@@ -426,7 +426,7 @@ const MovesTable = props => {
 								<Typography variant="h3" mb={0.5}>Moves learnt by TM</Typography>
 								<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Technical Machines in Pokémon {group.label}:</Typography>
 								<TableContainer sx={{ mt: 1 }}>
-									<Table aria-label={`moves learnt in ${group.label} by TM`}>
+									<Table stickyHeader aria-label={`moves learnt in ${group.label} by TM`}>
 										<MovesTableHead subcategory="tm" {...props} />
 										<MoveTableRows subcategory="tm" moveData={moveData} {...props} />
 									</Table>
@@ -438,7 +438,7 @@ const MovesTable = props => {
 							<Typography variant="h3" mb={0.5}>Moves learnt by HM</Typography>
 							<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Hidden Machines in Pokémon {group.label}:</Typography>
 							<TableContainer sx={{ mt: 1 }}>
-								<Table aria-label={`moves learnt in ${group.label} by HM`}>
+								<Table stickyHeader aria-label={`moves learnt in ${group.label} by HM`}>
 									<MovesTableHead subcategory="hm" {...props} />
 									<MoveTableRows subcategory="hm" moveData={moveData} {...props} />
 								</Table>
@@ -451,7 +451,7 @@ const MovesTable = props => {
 							<Typography variant="h3" mb={0.5}>Moves learnt by TM</Typography>
 							<Typography variant="body2" fontStyle="italic" color={text[300]} mb={1}>{name} is compatible with these Technical Machines in Pokémon {group.label}:</Typography>
 							<TableContainer sx={{ mt: 1 }}>
-								<Table aria-label={`moves learnt in ${group.label} by TM`}>
+								<Table stickyHeader aria-label={`moves learnt in ${group.label} by TM`}>
 									<MovesTableHead subcategory="tm" {...props} />
 									<MoveTableRows subcategory="tm" moveData={moveData} {...props} />
 								</Table>
@@ -472,7 +472,7 @@ const MovesTable = props => {
 					<Typography variant="body2" color={text[300]} mb={1}>{name} can be taught these moves in Pokémon {group.label} from move tutors:</Typography>
 				)}
 				<TableContainer sx={{ mt: 1 }}>
-					<Table aria-label={`moves learnt in ${group.label} by ${moves.label}`}>
+					<Table stickyHeader aria-label={`moves learnt in ${group.label} by ${moves.label}`}>
 						<MovesTableHead {...props} />
 						<MoveTableRows moveData={moveData} {...props} />
 					</Table>
@@ -556,7 +556,7 @@ const MoveTableRows = props => {
 		
 		'&.MuiTableRow-hover:hover': {
 			backgroundColor: alpha(color[100], 0.5),
-			cursor: 'pointer',
+			// cursor: 'pointer',
 		}
 	}
 
@@ -566,12 +566,19 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => a.version_details.level_learned_at - b.version_details.level_learned_at || filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={`${move.id}-${move.version_details.level_learned_at}`} hover sx={rowStyle}>
+						<TableRow
+							key={`${move.id}-${move.version_details.level_learned_at}`}
+							component={Link}
+							href={`/move/${move.name}`}
+							underline="none"
+							hover
+							sx={rowStyle}
+						>
 							<TableCell size="small" sx={{ textAlign: 'right' }}>
-								<Link href={`/move/${move.name}`} underline="none">{move.version_details.level_learned_at}</Link>
+								{move.version_details.level_learned_at}
 							</TableCell>
 							<TableCell size="small" sx={{ fontWeight: 'medium', fontSize: 16 }}>
-								<Link fontWeight="bold" href={`/move/${move.name}`} underline="none">{filterByLang('name', move.names, lang)}</Link>
+								<Typography fontWeight="bold">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>
 							<TableCell size="small">
 								<Chip
@@ -614,7 +621,14 @@ const MoveTableRows = props => {
 					.filter(f => f[subcategory])
 					.sort((a, b) => a[subcategory].name.localeCompare(b[subcategory].name))
 					.map(move => (
-						<TableRow key={move.id} sx={rowStyle}>
+						<TableRow
+							key={move.id}
+							component={Link}
+							href={`/move/${move.name}`}
+							underline="none"
+							hover
+							sx={rowStyle}
+						>
 							<TableCell size="small" sx={{ textAlign: 'right' }}>
 								<Typography>{filterByLang('name', move[subcategory].names, lang)}</Typography>
 							</TableCell>
@@ -661,7 +675,14 @@ const MoveTableRows = props => {
 				{moveData
 					.sort((a, b) => filterByLang('name', a.names, lang).localeCompare(filterByLang('name', b.names, lang)))
 					.map(move => (
-						<TableRow key={move.id} sx={rowStyle}>
+						<TableRow
+							key={move.id}
+							component={Link}
+							href={`/move/${move.name}`}
+							underline="none"
+							hover
+							sx={rowStyle}
+						>
 							<TableCell sx={{ fontWeight: 'medium', fontSize: 16 }}>
 								<Typography fontWeight="medium">{filterByLang('name', move.names, lang)}</Typography>
 							</TableCell>

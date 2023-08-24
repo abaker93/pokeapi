@@ -2,17 +2,20 @@ import { FemaleSharp, MaleSharp } from '@mui/icons-material'
 import { Box, Tooltip, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
-import { female as femaleColor, male as maleColor } from '../../utilities/colors'
-import { filterByLang } from '../../utilities/utilities'
+// import { female as femaleColor, male as maleColor } from '../../utilities/colors'
+import { filterByLang, getColorFromType } from '../../utilities/utilities'
 
 
 const Gender = props => {
-	const { lang, pokemon } = props.state
+	const { lang, pokemon, types } = props.state
 
 	let female = pokemon.gender_rate / 8
 	const male = (1 - female) * 100
 	female = female * 100
 	const genderless = female < 0 || male < 0
+
+	const maleColor = types[0] !== types[1] ? getColorFromType(types[0])[500] : getColorFromType(types[0])[700]
+	const femaleColor = types[0] !== types[1] ? getColorFromType(types[1])[500] : getColorFromType(types[0])[500]
 	
 	return (
 		<>

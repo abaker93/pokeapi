@@ -32,7 +32,7 @@ const Header = props => {
 	}
 
 	return (
-		<Box component="header" sx={{ mb: 5 }}>
+		<Box component="header" sx={{ mb: 5, overflow: 'hidden' }}>
 			<Box sx={{
 				position:				'relative',
 				display:				'flex',
@@ -61,10 +61,10 @@ const Header = props => {
 					alt={filterByLang('name', pokemon.names, lang)}
 					style={{ height: '100%', zIndex: 1, marginTop: '50px' }}
 				/>
-				<Box sx={[prevNextStyles, { left: '-30px', '&:hover': { left: 0 } }]}>
+				<Box sx={[prevNextStyles, { left: '-15vw', '&:hover': { left: 0 } }]}>
 					{prev ? <Nav pokemon={prev} /> : null}
 				</Box>
-				<Box sx={[prevNextStyles, { right: '-30px', '&:hover': { right: 0 } }]}>
+				<Box sx={[prevNextStyles, { right: '-15vw', '&:hover': { right: 0 } }]}>
 					{next ? <Nav pokemon={next} /> : null}
 				</Box>
 				<Box sx={{
@@ -97,7 +97,7 @@ const Nav = props => {
 			<img
 				src={pokemon.sprites.other['official-artwork'].front_default}
 				alt={pokemon.name}
-				style={{ height: '100px', }}
+				style={{ height: '30vw', }}
 			/>
 		</Link>
 	)
