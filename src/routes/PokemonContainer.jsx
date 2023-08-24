@@ -30,6 +30,7 @@ const createInitialState = props => {
 		encounters:	null,
 		evolution: {
 			chain:		null,
+			level:		null,
 			pokemon:	null,
 		},
 		id:					id,
@@ -49,6 +50,15 @@ const reducer = (state, action) => {
 				evolution: {
 					...state.evolution,
 					chain: value,
+				}
+			}
+		}
+		case 'evolution.level': {
+			return {
+				...state,
+				evolution: {
+					...state.evolution,
+					level: value,
 				}
 			}
 		}
@@ -107,6 +117,7 @@ const PokemonContainer = props => {
 				//--	set evolution.pokemon								//
 				P.getResource(data[1].evolution_chain.url)
 					.then(data => {
+						let lvl = 1
 						let arr = []
 
 						if (data.chain.species.url) {
@@ -114,16 +125,19 @@ const PokemonContainer = props => {
 							data.chain.evolves_to.map(x => {
 								if (x.species.url) {
 									arr.push(getIdFromURL(x.species.url))
+									if (lvl < 2) { lvl = 2 }
 									
 									x.evolves_to.map(y => {
 										if (y.species.url) {
 											arr.push(getIdFromURL(y.species.url))
+											if (lvl < 3) { lvl = 3 }
 										}
 									})
 								}
 							})
 						}
 						dispatch({ type: 'evolution.chain', value: data })
+						dispatch({ type: 'evolution.level', value: lvl })
 						return arr
 					})
 					.then(arr => {

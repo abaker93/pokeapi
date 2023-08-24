@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Pokedex from 'pokedex-promise-v2'
-import { Box, Chip, Link, Typography } from "@mui/material"
+import { Box, Chip, Link, Tooltip, Typography } from "@mui/material"
 import Grid from '@mui/material/Unstable_Grid2';
 import { filterByLang, formatDexId, getColorFromType, getIdFromURL, getNumByDex } from "../../utilities/utilities"
 import { text } from "../../utilities/colors";
+import FemaleSharpIcon from '@mui/icons-material/FemaleSharp';
+import MaleSharpIcon from '@mui/icons-material/MaleSharp';
+import NightlightSharpIcon from '@mui/icons-material/NightlightSharp';
+import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp';
+import WbTwilightSharpIcon from '@mui/icons-material/WbTwilightSharp';
 
 const P = new Pokedex()
 
@@ -11,9 +16,9 @@ const P = new Pokedex()
 const Evolution = props => {
 	const { evolution, lang, pokemon, types } = props.state
 
-	// console.log(evolution)
+	console.log(evolution)
 
-	if (evolution.chain.chain.evolves_to.length < 1) {
+	if (evolution.level === 1) {
 		return (
 			<Box sx={{ mb: 5 }}>
 				<Typography variant="body1" textAlign="center">{filterByLang('name', pokemon.names, lang)} does not evolve</Typography>
@@ -24,7 +29,7 @@ const Evolution = props => {
 	return (
 		<Box sx={{ mb: 5 }}>
 			<Grid container xs>
-				<Grid container xs columns={8}>
+				<Grid container xs columns={evolution.level === 2 ? 5 : 8}>
 					<Grid xs={2} display="flex" alignItems="center">
 						{evolution.pokemon.filter(f1 => f1.id == getIdFromURL(evolution.chain.chain.species.url)).map(m1 => (
 							<Link key={m1.id} href={`${formatDexId(m1.id)}`} underline="none">
@@ -42,10 +47,10 @@ const Evolution = props => {
 						))}
 					</Grid>
 
-					{evolution.chain.chain.evolves_to.length > 0 && (
-						<Grid xs={6}>
+					{evolution.level > 1 && (
+						<Grid xs={evolution.level === 2 ? 3 : 6}>
 							{evolution.chain.chain.evolves_to.map(l2 => (
-								<Grid key={getIdFromURL(l2.species.url)} container xs columns={6} sx={{ ':not(:first-of-type)': { pt: 3 } }}>
+								<Grid key={getIdFromURL(l2.species.url)} container xs columns={evolution.level === 2 ? 3 : 6} sx={{ ':not(:first-of-type)': { pt: 3 } }}>
 									<Grid xs={1} sx={{ alignSelf: 'center' }}>
 										<EvoConditions color={getColorFromType(types[0])[700]} conditions={l2.evolution_details} lang={lang} />
 									</Grid>
@@ -66,7 +71,7 @@ const Evolution = props => {
 										))}
 									</Grid>
 									
-									{l2.evolves_to.length > 0 && (
+									{evolution.level > 2 && (
 										<Grid xs={3}>
 											{l2.evolves_to.map(l3 => (
 												<Grid key={getIdFromURL(l3.species.url)} container xs columns={3} sx={{ ':not(:first-of-type)': { pt: 3 } }}>
@@ -172,27 +177,82 @@ const EvoConditions = props => {
 	return (
 		<Box sx={styles}>
 			{conditions.map((c,i) => (
-				<Typography key={i} variant="caption" sx={{ lineHeight: 1 }}>
-					{c.trigger.name == 'level-up'
-						? `LVL ${c.min_level}`
-						: c.trigger.name == 'trade'
-							? c.held_item
-								? <>Trade holding <Link href={`/item/${c.held_item.name}`} color={color} underline="hover">{getItemName(c.held_item.name, lang)}</Link></>
-								: `Trade`
-							: c.trigger.name == 'use-item'
-								? <Link href={`/item/${c.item.name}`} color={color} underline="hover">{getItemName(c.item.name, lang)}</Link>
-								: `${c.trigger.name}`
-					}
-				</Typography>
+				<React.Fragment key={i}>
+					<Typography
+						variant="caption"
+						sx={{
+							lineHeight: 1,
+							'&>.trigger:not(:last-of-type)::after': { content: '" "' },
+							'&>*:not(.trigger):not(:last-of-type)::after': { content: '", "' },
+						}}
+					>
+						{(c.trigger.name === 'level-up' && !c.min_level) && ( <Typography variant="caption" className="trigger">Level up</Typography> )}
+						{c.trigger.name === 'trade' && ( <Typography variant="caption" className="trigger">Trade</Typography> )}
+
+						{c.time_of_day === 'day' && (
+							<Typography variant="caption" className="trigger">
+								<Tooltip followCursor title="Daytime">
+									<WbSunnySharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} />
+								</Tooltip>
+							</Typography>
+						)}
+						{c.time_of_day === 'night' && (
+							<Typography variant="caption" className="trigger">
+								<Tooltip followCursor title="Nighttime">
+									<NightlightSharpIcon sx={{ fontSize: '1em', mb: '-2px', color: text[400] }} />
+								</Tooltip>
+							</Typography>
+						)}
+						{c.time_of_day === 'dusk' && (
+							<Typography variant="caption" className="trigger">
+								<Tooltip followCursor title="Dusk">
+									<WbTwilightSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} />
+								</Tooltip>
+							</Typography>
+						)}
+
+						{c.gender === 1 && ( <Typography variant="caption"><FemaleSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} /></Typography> )}
+						{c.gender === 2 && ( <Typography variant="caption"><MaleSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} /></Typography> )}
+
+						{c.item && ( <Typography variant="caption"><Link href={`/item/${c.item.name}`}>{getItem(c.item.name, lang)}</Link></Typography> )}
+
+						{c.min_level && ( <Typography variant="caption" sx={{ whiteSpace: 'nowrap' }}>LVL {c.min_level}</Typography> )}
+
+						{c.trade_species && ( <Typography variant="caption">for <Link href={`/pokemon/${c.trade_species.name}`} color={color} underline="hover">{c.trade_species.name}</Link></Typography> )}
+						{c.held_item && ( <Typography variant="caption">holding <Link href={`/item/${c.held_item.name}`}>{getItem(c.held_item.name, lang)}</Link></Typography> )}
+
+						{c.known_move && ( <Typography variant="caption">while knowing <Link href={`/move/${c.known_move.name}`} color={color} underline="hover">{c.known_move.name}</Link></Typography> )}
+						{c.known_move_type && ( <Typography variant="caption">after {c.known_move_type.name}-type move learned</Typography> )}
+
+						{c.min_affection && ( <Typography variant="caption">with {getAffectionHearts(c.min_affection)} affection</Typography> )}
+						{c.min_beauty && ( <Typography variant="caption">with {getAffectionHearts(c.min_beauty)} beauty</Typography> )}
+						{c.min_happiness && ( <Typography variant="caption">with high friendship</Typography> )}
+
+						{c.location && ( <Typography variant="caption">at <Link href={`/location/${c.location.name}`} color={color} underline="hover">{getLocationName(c.location.name, lang)}</Link></Typography> )}
+
+						{c.needs_overworld_rain && ( <Typography variant="caption">during rain</Typography> )}
+
+						{c.party_species && ( <Typography variant="caption">with <Link href={`/pokemon/${c.party_species.name}`} color={color} underline="hover">{c.party_species.name}</Link> in party</Typography> )}
+						{c.party_type && ( <Typography variant="caption">with {c.party_type.name}-type Pokémon in party</Typography> )}
+						
+						{c.relative_physical_stats === 1 && ( <Typography variant="caption">Att &gt; Def</Typography> )}
+						{c.relative_physical_stats === -1 && ( <Typography variant="caption">Att &lt; Def</Typography> )}
+						{c.relative_physical_stats === 0 && ( <Typography variant="caption">Att = Def</Typography> )}
+
+					</Typography>
+					{i < conditions.length - 1 && (
+						<Typography variant="caption" sx={{ lineHeight: 1, display: 'block', fontStyle: 'italic', color: text[200] }}>&mdash; or &mdash;</Typography>
+					)}
+				</React.Fragment>
 			))}
 		</Box>
 	)
 }
 
-const getItemName = (i, lang) => {
+const getItem = (i, lang) => {
 	const [item, setItem] = useState()
-	const [name, setName] = useState()
-
+	const [name, setName] = useState('')
+  
 	useEffect(() => {
 		P.getItemByName(i)
 			.then(data => setItem(data))
@@ -203,7 +263,38 @@ const getItemName = (i, lang) => {
 		item && setName(filterByLang('name', item.names, lang))
 	}, [item])
 
+	// console.log(item)
+
+	if (item && name) {
+		return (
+			<Tooltip followCursor title={name}>
+				<img src={item.sprites.default} alt={item.name} />
+			</Tooltip>
+		)
+	}
+}
+
+const getLocationName = (l, lang) => {
+	const [location, setLocation] = useState()
+	const [name, setName] = useState('')
+
+	useEffect(() => {
+		P.getLocationByName(l)
+			.then(data => setLocation(data))
+			.catch(err => console.log(err))
+	}, [])
+
+	useEffect(() => {
+		location && setName(filterByLang('name', location.names, lang))
+	}, [location])
+
 	return name
+}
+
+const getAffectionHearts = (a) => {
+	let hearts = ''
+	for (let i = 0; i < a; i++) { hearts += '♥' }
+	return hearts
 }
 
 export default Evolution
