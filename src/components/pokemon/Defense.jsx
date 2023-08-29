@@ -22,8 +22,7 @@ const Defense = props => {
 						<Chip
 							variant="type"
 							direction="vertical"
-							icon={<TypeIcon
-							type={type} />}
+							icon={<TypeIcon type={type} />}
 							type={type}
 							size="small"
 							label={calcDefense(

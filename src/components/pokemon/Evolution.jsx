@@ -4,6 +4,7 @@ import { Box, Chip, Link, Tooltip, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2'
 
 import ArrowRightAltSharpIcon from '@mui/icons-material/ArrowRightAltSharp'
+import AutorenewSharpIcon from '@mui/icons-material/AutorenewSharp';
 import FemaleSharpIcon from '@mui/icons-material/FemaleSharp'
 import MaleSharpIcon from '@mui/icons-material/MaleSharp'
 import NightlightSharpIcon from '@mui/icons-material/NightlightSharp'
@@ -11,9 +12,10 @@ import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp'
 import WbTwilightSharpIcon from '@mui/icons-material/WbTwilightSharp'
 
 import { filterByLang, formatDexId, getColorFromType, getIdFromURL, getNumByDex } from '../../utilities/utilities'
-import { electric, female, male, text } from '../../utilities/colors'
-import { FavoriteSharp } from '@mui/icons-material'
-import { LevelUp, Trade } from '../../assets/Icons'
+import { female, male, text } from '../../utilities/colors'
+import { AddSharp, FavoriteBorderSharp, FavoriteSharp } from '@mui/icons-material'
+import { LevelUp, Rain, Trade } from '../../assets/Icons'
+import TypeIcon from '../../assets/TypeIcon'
 
 
 
@@ -23,7 +25,7 @@ const P = new Pokedex()
 const Evolution = props => {
 	const { evolution, lang, pokemon, types } = props.state
 
-	console.log(evolution)
+	// console.log(evolution)
 
 	if (evolution.level === 1) {
 		return (
@@ -155,6 +157,8 @@ const EvoConditions = props => {
 
 	const [conditionsArr, setConditionsArr] = useState([])
 
+	// console.log(conditions)
+
 	useEffect(() => {
 		setConditionsArr([])
 		
@@ -164,32 +168,243 @@ const EvoConditions = props => {
 		conditions.map(c => {
 			if (cond.length) { cond = [] }
 
-			if (c.trigger.name === 'level-up' && !c.min_level) {
-				cond.push(<Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.5em' }} /></Tooltip>)
+			if (c.trigger.name === 'level-up' && !c.location && !c.min_level) {
+				cond.push({
+					condition:	'level',
+					type:				'level',
+					content:		<Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
 			}
-			if (c.trigger.name === 'trade') {
-				cond.push(<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '1.5em' }} /></Tooltip>)
+
+			if (c.trigger.name === 'trade' && !c.trade_species) {
+				cond.push({
+					condition:	'trade',
+					type:				'trade',
+					content:		<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
 			}
-			if (c.gender) {
-				if (c.gender === 1) {
-					cond.push(<Tooltip followCursor title="Female"><FemaleSharpIcon sx={{ fontSize: '1.5em', color: female }} /></Tooltip>)
-				}
-				if (c.gender === 2) {
-					cond.push(<Tooltip followCursor title="Male"><MaleSharpIcon sx={{ fontSize: '1.5em', color: male }} /></Tooltip>)
-				}
+
+			if (c.min_level) {
+				cond.push({
+					condition:	'level',
+					type:				c.min_level,
+					content:		<Typography variant="caption">LVL {c.min_level}</Typography>
+				})
 			}
+
+			if (c.gender === 1) {
+				cond.push({
+					condition:	'gender',
+					type:				'female',
+					content:		<Tooltip followCursor title="Female"><FemaleSharpIcon sx={{ fontSize: '1.5em', color: female }} /></Tooltip>
+				})
+			}
+			if (c.gender === 2) {
+				cond.push({
+					condition:	'gender',
+					type:				'male',
+					content:		<Tooltip followCursor title="Male"><MaleSharpIcon sx={{ fontSize: '1.5em', color: male }} /></Tooltip>
+				})
+			}
+
 			if (c.held_item) {
-				cond.push(<ItemImg i={c.held_item.name} lang={lang} held />)
+				cond.push({
+					condition:	'held-item',
+					type:				c.held_item.name,
+					content:		<ItemImg item={c.held_item.name} lang={lang} held />
+				})
 			}
 
 			if (c.item) {
-				cond.push(<ItemImg i={c.item.name} lang={lang} />)
+				cond.push({
+					condition:	'item',
+					type:				c.item.name,
+					content:		<ItemImg item={c.item.name} lang={lang} />
+				})
 			}
 
-			arr.push(cond)
+			if (c.known_move) {
+				cond.push({
+					condition:	'move',
+					type:				c.known_move.name,
+					content:		<Typography variant="caption">while knowing <Link href={`/move/${c.known_move.name}`} color={color} underline="hover">{c.known_move.name}</Link></Typography>
+				})
+			}
+
+			if (c.known_move_type) {
+				cond.push({
+					condition:	'type',
+					type:				c.known_move_type.name,
+					content:		<TypeIcon type={c.known_move_type.name} />
+				})
+			}
+
+			if (c.location) {
+				if (c.location.name === 'eterna-forest' || c.location.name === 'pinwheel-forest' || c.location.name === 'kalos-route-20' || c.location.name === 'petalburg-woods' || c.location.name === 'lush-jungle' || c.location.name === 'the-heartwood') {
+					cond.push({
+						condition: 'location',
+						type: 'mossy-rock',
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Mossy Rock</Typography>
+					})
+				}
+				if (c.location.name === 'sinnoh-route-217' || c.location.name === 'twist-mountain' || c.location.name === 'frost-cavern' || c.location.name === 'shoal-cave' || c.location.name === 'mount-lanakila' || c.location.name === 'icepeak-cavern') {
+					cond.push({
+						condition: 'location',
+						type: 'icy-rock',
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Icy Rock</Typography>
+					})
+				}
+				if (c.location.name === 'mt-coronet' || c.location.name === 'chargestone-cave' || c.location.name === 'kalos-route-13' || c.location.name === 'new-mauville' || c.location.name === 'vast-poni-canyon' || c.location.name === 'blush-mountain' || c.location.name === 'coronet-highlands') {
+					cond.push({
+						condition: 'location',
+						type: 'magnetic-fields',
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Magnetic Fields</Typography>
+					})
+				}
+			}
+
+			if (c.min_affection) {
+				cond.push({
+					condition:	'affection',
+					type:				c.min_affection,
+					content:		<Tooltip
+												followCursor
+												title={
+													<>
+														<Typography fontSize="1em">{c.min_affection} Affection</Typography>
+														<Typography fontSize="0.75em">(Gen 6-7)</Typography>
+													</>
+												}
+											>
+												<Typography variant="span" whiteSpace="nowrap">{getAffectionHearts(c.min_affection)}</Typography>
+											</Tooltip>
+				})
+			}
+
+			if (c.min_beauty) {
+				cond.push({
+					condition:	'beauty',
+					type:				c.min_beauty,
+					content:		<Typography variant="caption">{c.min_beauty} Beauty</Typography>
+				})
+			}
+
+			if (c.min_happiness) {
+				cond.push({
+					condition:	'happiness',
+					type:				c.min_happiness,
+					content:		<Tooltip followCursor title="High Friendship"><FavoriteSharp sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
+			}
+
+			if (c.party_species) {
+				cond.push({
+					condition:	'party',
+					type:				c.party_species.name,
+					content:		<CondPokemon color={color} pokemon={c.party_species.name} lang={lang} />
+				})
+			}
+
+			if (c.party_type) {
+				cond.push({
+					condition:	'party',
+					type:				c.party_type.name,
+					content:		<TypeIcon type={c.party_type.name} />
+				})
+			}
+
+			if (c.relative_physical_stats === 1) {
+				cond.push({
+					condition:	'stats',
+					type:				'greater',
+					content:		<Typography variant="caption" whiteSpace="nowrap">ATT &gt; DEF</Typography>
+				})
+			}
+			if (c.relative_physical_stats === 0) {
+				cond.push({
+					condition:	'stats',
+					type:				'equal',
+					content:		<Typography variant="caption" whiteSpace="nowrap">ATT = DEF</Typography>
+				})
+			}
+			if (c.relative_physical_stats === -1) {
+				cond.push({
+					condition:	'stats',
+					type:				'less',
+					content:		<Typography variant="caption" whiteSpace="nowrap">ATT &lt; DEF</Typography>
+				})
+			}
+
+			if (c.time_of_day === 'night') {
+				cond.push({
+					condition:	'time',
+					type:				'night',
+					content:		<Tooltip followCursor title="at Night"><NightlightSharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
+			}
+			if (c.time_of_day === 'day') {
+				cond.push({
+					condition:	'time',
+					type:				'day',
+					content:		<Tooltip followCursor title="during the Day"><WbSunnySharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
+			}
+			if (c.time_of_day === 'dusk') {
+				cond.push({
+					condition:	'time',
+					type:				'dusk',
+					content:		<Tooltip followCursor title="at Dusk"><WbTwilightSharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
+			}
+
+			if (c.trade_species) {
+				cond.push({
+					condition:	'trade',
+					type:				c.trade_species.name,
+					content:		<CondPokemon color={color} pokemon={c.trade_species.name} lang={lang} trade />
+				})
+			}
+
+			if (c.turn_upside_down) {
+				cond.push({
+					condition:	'upsidedown',
+					type:				'upsidedown',
+					content:		<Tooltip followCursor title="hold device upside down"><AutorenewSharpIcon /></Tooltip>
+				})
+			}
+
+			if (c.needs_overworld_rain) {
+				cond.push({
+					condition:	'weather',
+					type:				'rain',
+					content:		<Tooltip followCursor title="Rain"><Rain sx={{ fontSize: '1.5em' }} /></Tooltip>
+				})
+			}
+
+			const pushUnique = () => {
+				let match = false
+
+				if (arr.length > 0) {
+					arr.forEach(arr2 => {
+						let count = 0
+						arr2.forEach(arrObj => {
+							cond.forEach(condObj => {
+								console.log(arrObj, condObj)
+								if (arrObj.condition === condObj.condition && arrObj.type === condObj.type) {
+									count++
+								}
+							})
+						})
+						if (count === arr2.length) { match = true }
+					})
+				}
+
+				if (!match) { arr.push(cond) }
+			}
+
+			pushUnique()
 		})
 
-		console.log(arr)
 		setConditionsArr(arr)
 	}, [])
 
@@ -206,14 +421,16 @@ const EvoConditions = props => {
 			<Box><ArrowRightAltSharpIcon /></Box>
 			{conditionsArr.map((c1,i1) => (
 				<React.Fragment key={i1}>
-					{c1.map((c2,i2) => (
-						<React.Fragment key={i2}>
-							{c2}
-							{i2 < c1.length - 1 && (
-								<Typography variant="caption" sx={{ lineHeight: 1 }}>+</Typography>
-							)}
-						</React.Fragment>
-					))}
+					<Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+						{c1.map((c2,i2) => (
+							<React.Fragment key={i2}>
+								{c2.content}
+								{i2 < c1.length - 1 && (
+									<AddSharp sx={{ color: text[200], fontSize: '1.2em' }} />
+								)}
+							</React.Fragment>
+						))}
+					</Box>
 					{i1 < conditionsArr.length - 1 && (
 						<Typography variant="caption" sx={{ lineHeight: 1, display: 'block', fontStyle: 'italic', color: text[200] }}>&mdash; or &mdash;</Typography>
 					)}
@@ -221,131 +438,69 @@ const EvoConditions = props => {
 			))}
 		</Box>
 	)
-
-	// return (
-	// 	<Box sx={styles}>
-	// 		<Box><ArrowRightAltSharpIcon /></Box>
-	// 		{conditions.map((c,i) => (
-				
-	// 			<React.Fragment key={i}>
-	// 				<Typography
-	// 					variant="caption"
-	// 					sx={{
-	// 						lineHeight: 1,
-	// 						'&>.trigger:not(:last-of-type)::after': { content: '" "' },
-	// 						'&>*:not(.trigger):not(:last-of-type)::after': { content: '", "' },
-	// 					}}
-	// 				>
-	// 					{(c.trigger.name === 'level-up' && !c.min_level) && ( <Typography variant="caption" className="trigger">Level up</Typography> )}
-	// 					{c.trigger.name === 'trade' && ( <Typography variant="caption" className="trigger">Trade</Typography> )}
-
-	// 					{c.time_of_day === 'day' && (
-	// 						<Typography variant="caption" className="trigger">
-	// 							<Tooltip followCursor title="Daytime">
-	// 								<WbSunnySharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: electric[500], stroke: electric[800] }} />
-	// 							</Tooltip>
-	// 						</Typography>
-	// 					)}
-	// 					{c.time_of_day === 'night' && (
-	// 						<Typography variant="caption" className="trigger">
-	// 							<Tooltip followCursor title="Nighttime">
-	// 								<NightlightSharpIcon sx={{ fontSize: '1em', mb: '-2px', color: electric[500], stroke: electric[800] }} />
-	// 							</Tooltip>
-	// 						</Typography>
-	// 					)}
-	// 					{c.time_of_day === 'dusk' && (
-	// 						<Typography variant="caption" className="trigger">
-	// 							<Tooltip followCursor title="Dusk">
-	// 								<WbTwilightSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: electric[500], stroke: electric[800] }} />
-	// 							</Tooltip>
-	// 						</Typography>
-	// 					)}
-
-	// 					{c.gender === 1 && ( <Typography variant="caption"><FemaleSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} /></Typography> )}
-	// 					{c.gender === 2 && ( <Typography variant="caption"><MaleSharpIcon sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} /></Typography> )}
-
-	// 					{c.item && ( <Typography variant="caption"><Link href={`/item/${c.item.name}`}>{getItem(c.item.name, lang)}</Link></Typography> )}
-
-	// 					{c.min_level && ( <Typography variant="caption" sx={{ whiteSpace: 'nowrap' }}>LVL {c.min_level}</Typography> )}
-
-	// 					{c.trade_species && ( <Typography variant="caption">for <Link href={`/pokemon/${c.trade_species.name}`} color={color} underline="hover">{c.trade_species.name}</Link></Typography> )}
-	// 					{c.held_item && ( <Typography variant="caption">holding <Link href={`/item/${c.held_item.name}`}>{getItem(c.held_item.name, lang)}</Link></Typography> )}
-
-	// 					{c.known_move && ( <Typography variant="caption">while knowing <Link href={`/move/${c.known_move.name}`} color={color} underline="hover">{c.known_move.name}</Link></Typography> )}
-	// 					{c.known_move_type && ( <Typography variant="caption">after {c.known_move_type.name}-type move learned</Typography> )}
-
-	// 					{c.min_affection && ( <Typography variant="caption">with <Typography variant="caption" whiteSpace="nowrap">{getAffectionHearts(c.min_affection)}</Typography> affection</Typography> )}
-	// 					{c.min_beauty && ( <Typography variant="caption">with {getAffectionHearts(c.min_beauty)} beauty</Typography> )}
-	// 					{c.min_happiness && ( <Typography variant="caption">with high friendship</Typography> )}
-
-	// 					{c.location && ( <Typography variant="caption">at <Link href={`/location/${c.location.name}`} color={color} underline="hover">{getLocationName(c.location.name, lang)}</Link></Typography> )}
-
-	// 					{c.needs_overworld_rain && ( <Typography variant="caption">during rain</Typography> )}
-
-	// 					{c.party_species && ( <Typography variant="caption">with <Link href={`/pokemon/${c.party_species.name}`} color={color} underline="hover">{c.party_species.name}</Link> in party</Typography> )}
-	// 					{c.party_type && ( <Typography variant="caption">with {c.party_type.name}-type Pokémon in party</Typography> )}
-						
-	// 					{c.relative_physical_stats === 1 && ( <Typography variant="caption">Att &gt; Def</Typography> )}
-	// 					{c.relative_physical_stats === -1 && ( <Typography variant="caption">Att &lt; Def</Typography> )}
-	// 					{c.relative_physical_stats === 0 && ( <Typography variant="caption">Att = Def</Typography> )}
-
-	// 				</Typography>
-	// 				{i < conditions.length - 1 && (
-	// 					<Typography variant="caption" sx={{ lineHeight: 1, display: 'block', fontStyle: 'italic', color: text[200] }}>&mdash; or &mdash;</Typography>
-	// 				)}
-	// 			</React.Fragment>
-	// 		))}
-	// 	</Box>
-	// )
 }
 
 const ItemImg = props => {
-	const { held, i, lang } = props
-
-	const [item, setItem] = useState()
+	const { held, item, lang } = props
+	const [condItem, setCondItem] = useState()
 	const [name, setName] = useState('')
   
 	useEffect(() => {
-		P.getItemByName(i)
-			.then(data => setItem(data))
+		P.getItemByName(item)
+			.then(data => setCondItem(data))
 			.catch(err => console.log(err))
 	}, [])
 
 	useEffect(() => {
-		item && setName(filterByLang('name', item.names, lang))
-	}, [item])
+		condItem && setName(filterByLang('name', condItem.names, lang))
+	}, [condItem])
 
-	// console.log(item)
-
-	if (item && name) {
+	if (condItem && name) {
 		return (
 			<Tooltip followCursor title={held ? `while holding ${name}` : `use ${name}`}>
-				<img src={item.sprites.default} alt={item.name} />
+				<img src={condItem.sprites.default} alt={condItem.name} />
 			</Tooltip>
 		)
 	}
 }
 
-const getLocationName = (l, lang) => {
-	const [location, setLocation] = useState()
-	const [name, setName] = useState('')
+const CondPokemon = props => {
+	const { color, pokemon, lang, trade } = props
+	const [condPokemon, setCondPokemon] = useState()
+	const [name, setName] = useState()
 
 	useEffect(() => {
-		P.getLocationByName(l)
-			.then(data => setLocation(data))
-			.catch(err => console.log(err))
+		P.getPokemonByName(pokemon)
+			.then(data => {
+				P.getPokemonSpeciesByName(data.species.name)
+					.then(data => setCondPokemon(data))
+			})
 	}, [])
 
 	useEffect(() => {
-		location && setName(filterByLang('name', location.names, lang))
-	}, [location])
+		condPokemon && setName(filterByLang('name', condPokemon.names, lang))
+	}, [condPokemon])
 
-	return name
+	if (condPokemon && name) {
+		if (!trade) {
+			return (
+				<Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
+					<Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color} fontWeight="medium">{name}</Link> in party
+				</Typography>
+			)
+		} else {
+			return (
+				<Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
+					<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '2em' }} /></Tooltip> with <Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color} fontWeight="medium">{name}</Link>
+				</Typography>
+			)
+		}
+	}
 }
 
 const getAffectionHearts = (a) => {
 	let hearts = []
-	for (let i = 0; i < a; i++) { hearts.push(<FavoriteSharp key={i} sx={{ fontSize: '1.1em', mb: '-3px', color: text[400] }} />) }
+	for (let i = 0; i < a; i++) { hearts.push(<FavoriteBorderSharp key={i} sx={{ fontSize: '1.5em' }} />) }
 	return hearts
 }
 
