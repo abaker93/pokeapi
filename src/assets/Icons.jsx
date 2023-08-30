@@ -1,5 +1,5 @@
 import { createSvgIcon } from '@mui/material'
-import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, text, water } from '../utilities/colors'
+import { bug, dragon, electric, fairy, fire, grass, ground, ice, normal, poison, psychic, rock, steel, text, water } from '../utilities/colors'
 
 
 export const LevelUp = createSvgIcon(

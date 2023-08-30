@@ -66,8 +66,6 @@ const AbilityContainer = props => {
 			setLoading(false)
 		}
 	}, [abilityPokemon])
-	
-	// console.log(loading, abilityData, abilityPokemon)
 
 
 	if (loading) {

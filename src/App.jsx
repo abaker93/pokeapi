@@ -13,7 +13,7 @@ import PokedexContainer from './routes/PokedexContainer'
 import PokemonContainer from './routes/PokemonContainer'
 import Root from './routes/Root'
 import Styles from "./routes/Styles"
-
+import ItemContainer from "./routes/ItemContainer"
 
 
 const router = createBrowserRouter([{
@@ -49,8 +49,9 @@ const router = createBrowserRouter([{
 				{ path: ':name/', element: <EggGroupContainer /> },
 			],
 		},
-		{ path: 'move/:name/', element: <MoveContainer />, },
+		{ path: 'item/:name/', element: <ItemContainer />, },
 		{ path: 'location/:name/', element: <LocationContainer />, },
+		{ path: 'move/:name/', element: <MoveContainer />, },
 
 		{ path: 'styles/', element: <Styles /> },
 	],

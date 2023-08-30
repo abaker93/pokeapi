@@ -456,7 +456,9 @@ const ItemImg = props => {
 	if (condItem && name) {
 		return (
 			<Tooltip followCursor title={held ? `while holding ${name}` : `use ${name}`}>
-				<img height="24px" src={condItem.sprites.default} alt={condItem.name} />
+				<Link href={`/item/${item}`}>
+					<img height="24px" src={condItem.sprites.default} alt={condItem.name} />
+				</Link>
 			</Tooltip>
 		)
 	}
