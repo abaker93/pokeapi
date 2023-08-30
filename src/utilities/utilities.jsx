@@ -1,3 +1,4 @@
+import { Bug, BugTM, Dark, DarkTM, Dragon, DragonTM, Electric, ElectricTM, Fairy, FairyTM, Fighting, FightingTM, Fire, FireTM, Flying, FlyingTM, Ghost, GhostTM, Grass, GrassTM, Ground, GroundTM, Ice, IceTM, Normal, NormalTM, Poison, PoisonTM, Psychic, PsychicTM, Rock, RockTM, Steel, SteelTM, Water, WaterTM } from '../assets/Icons'
 import { bug, dark, dragon, electric, fairy, fighting, fire, flying, ghost, grass, ground, ice, normal, poison, psychic, rock, steel, water } from './colors'
 import { game_red, game_black, game_blue, game_crystal, game_diamond, game_eevee, game_emerald, game_gold, game_green, game_moon, game_pearl, game_silver, game_sun, game_yellow } from './colors'
 import { very_common, common, uncommon, rare, very_rare } from './colors'
@@ -227,6 +228,56 @@ export const getIdFromURL = url => {
 	let id = url.match(/[\/][0-9]+/g);
 	id = id[0].substring(1)
 	return id
+}
+
+export const getIconFromType = (type, sx) => {
+	const iconMap = {
+		bug:			<Bug sx={sx} />,
+		dark:			<Dark sx={sx} />,
+		dragon:		<Dragon sx={sx} />,
+		electric:	<Electric sx={sx} />,
+		fairy:		<Fairy sx={sx} />,
+		fighting:	<Fighting sx={sx} />,
+		fire:			<Fire sx={sx} />,
+		flying:		<Flying sx={sx} />,
+		ghost:		<Ghost sx={sx} />,
+		grass:		<Grass sx={sx} />,
+		ground:		<Ground sx={sx} />,
+		ice:			<Ice sx={sx} />,
+		normal:		<Normal sx={sx} />,
+		poison:		<Poison sx={sx} />,
+		psychic:	<Psychic sx={sx} />,
+		rock:			<Rock sx={sx} />,
+		steel:		<Steel sx={sx} />,
+		water:		<Water sx={sx} />,
+	}
+
+	return iconMap[type]
+}
+
+export const getTMFromType = (type, sx) => {
+	const iconMap = {
+		bug:			<BugTM sx={sx} />,
+		dark:			<DarkTM sx={sx} />,
+		dragon:		<DragonTM sx={sx} />,
+		electric:	<ElectricTM sx={sx} />,
+		fairy:		<FairyTM sx={sx} />,
+		fighting:	<FightingTM sx={sx} />,
+		fire:			<FireTM sx={sx} />,
+		flying:		<FlyingTM sx={sx} />,
+		ghost:		<GhostTM sx={sx} />,
+		grass:		<GrassTM sx={sx} />,
+		ground:		<GroundTM sx={sx} />,
+		ice:			<IceTM sx={sx} />,
+		normal:		<NormalTM sx={sx} />,
+		poison:		<PoisonTM sx={sx} />,
+		psychic:	<PsychicTM sx={sx} />,
+		rock:			<RockTM sx={sx} />,
+		steel:		<SteelTM sx={sx} />,
+		water:		<WaterTM sx={sx} />,
+	}
+
+	return iconMap[type]
 }
 
 export const getVersionGroupByName = name => {

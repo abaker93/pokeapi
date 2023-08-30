@@ -11,13 +11,10 @@ import NightlightSharpIcon from '@mui/icons-material/NightlightSharp'
 import WbSunnySharpIcon from '@mui/icons-material/WbSunnySharp'
 import WbTwilightSharpIcon from '@mui/icons-material/WbTwilightSharp'
 
-import { filterByLang, formatDexId, getColorFromType, getIdFromURL, getNumByDex } from '../../utilities/utilities'
-import { female, male, text } from '../../utilities/colors'
+import { filterByLang, formatDexId, getColorFromType, getIconFromType, getIdFromURL, getNumByDex, getTMFromType } from '../../utilities/utilities'
+import { electric, fairy, female, fire, ice, male, poison, psychic, text, water } from '../../utilities/colors'
 import { AddSharp, FavoriteBorderSharp, FavoriteSharp } from '@mui/icons-material'
 import { LevelUp, Rain, Trade } from '../../assets/Icons'
-import TypeIcon from '../../assets/TypeIcon'
-
-
 
 const P = new Pokedex()
 
@@ -157,7 +154,6 @@ const EvoConditions = props => {
 
 	const [conditionsArr, setConditionsArr] = useState([])
 
-	// console.log(conditions)
 
 	useEffect(() => {
 		setConditionsArr([])
@@ -172,15 +168,14 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'level',
 					type:				'level',
-					content:		<Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.2rem', color: fire[600] }} /></Tooltip>
 				})
 			}
-
 			if (c.trigger.name === 'trade' && !c.trade_species) {
 				cond.push({
 					condition:	'trade',
 					type:				'trade',
-					content:		<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '1.2rem', color: water[400] }} /></Tooltip>
 				})
 			}
 
@@ -188,7 +183,7 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'level',
 					type:				c.min_level,
-					content:		<Typography variant="caption">LVL {c.min_level}</Typography>
+					content:		<Typography variant="caption" fontWeight="medium">LVL {c.min_level}</Typography>
 				})
 			}
 
@@ -196,14 +191,14 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'gender',
 					type:				'female',
-					content:		<Tooltip followCursor title="Female"><FemaleSharpIcon sx={{ fontSize: '1.5em', color: female }} /></Tooltip>
+					content:		<Tooltip followCursor title="Female"><FemaleSharpIcon sx={{ fontSize: '1.2rem', color: female }} /></Tooltip>
 				})
 			}
 			if (c.gender === 2) {
 				cond.push({
 					condition:	'gender',
 					type:				'male',
-					content:		<Tooltip followCursor title="Male"><MaleSharpIcon sx={{ fontSize: '1.5em', color: male }} /></Tooltip>
+					content:		<Tooltip followCursor title="Male"><MaleSharpIcon sx={{ fontSize: '1.2em', color: male }} /></Tooltip>
 				})
 			}
 
@@ -235,7 +230,9 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'type',
 					type:				c.known_move_type.name,
-					content:		<TypeIcon type={c.known_move_type.name} />
+					content:		<Tooltip followCursor title={`after learning a ${c.known_move_type.name}-type move`}>
+												{getTMFromType(c.known_move_type.name, [{ fontSize: '1.2rem' }])}
+											</Tooltip>
 				})
 			}
 
@@ -244,21 +241,21 @@ const EvoConditions = props => {
 					cond.push({
 						condition: 'location',
 						type: 'mossy-rock',
-						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Mossy Rock</Typography>
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1, fontWeight: 'medium' }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.2rem', color: fire[600] }} /></Tooltip> near Mossy Rock</Typography>
 					})
 				}
 				if (c.location.name === 'sinnoh-route-217' || c.location.name === 'twist-mountain' || c.location.name === 'frost-cavern' || c.location.name === 'shoal-cave' || c.location.name === 'mount-lanakila' || c.location.name === 'icepeak-cavern') {
 					cond.push({
 						condition: 'location',
 						type: 'icy-rock',
-						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Icy Rock</Typography>
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1, fontWeight: 'medium' }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.2rem', color: fire[600] }} /></Tooltip> near Icy Rock</Typography>
 					})
 				}
 				if (c.location.name === 'mt-coronet' || c.location.name === 'chargestone-cave' || c.location.name === 'kalos-route-13' || c.location.name === 'new-mauville' || c.location.name === 'vast-poni-canyon' || c.location.name === 'blush-mountain' || c.location.name === 'coronet-highlands') {
 					cond.push({
 						condition: 'location',
 						type: 'magnetic-fields',
-						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '2em' }} /></Tooltip> at Magnetic Fields</Typography>
+						content: <Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1, fontWeight: 'medium' }}><Tooltip followCursor title="Level Up"><LevelUp sx={{ fontSize: '1.2rem', color: fire[600] }} /></Tooltip> at Magnetic Fields</Typography>
 					})
 				}
 			}
@@ -293,7 +290,7 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'happiness',
 					type:				c.min_happiness,
-					content:		<Tooltip followCursor title="High Friendship"><FavoriteSharp sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="High Friendship"><FavoriteSharp sx={{ fontSize: '1.2rem', color: psychic[300], stroke: psychic[600] }} /></Tooltip>
 				})
 			}
 
@@ -306,10 +303,13 @@ const EvoConditions = props => {
 			}
 
 			if (c.party_type) {
+				const typeColor = getColorFromType(c.party_type.name)
 				cond.push({
 					condition:	'party',
 					type:				c.party_type.name,
-					content:		<TypeIcon type={c.party_type.name} />
+					content:		<Tooltip followCursor title={`with ${c.party_type.name}-type in party`}>
+												{getIconFromType(c.party_type.name, [{ color: typeColor[500], stroke: typeColor[700], fontSize: '1.2rem' }])}
+											</Tooltip>
 				})
 			}
 
@@ -317,21 +317,21 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'stats',
 					type:				'greater',
-					content:		<Typography variant="caption" whiteSpace="nowrap">ATT &gt; DEF</Typography>
+					content:		<Typography variant="caption" whiteSpace="nowrap" fontWeight="medium">ATT &gt; DEF</Typography>
 				})
 			}
 			if (c.relative_physical_stats === 0) {
 				cond.push({
 					condition:	'stats',
 					type:				'equal',
-					content:		<Typography variant="caption" whiteSpace="nowrap">ATT = DEF</Typography>
+					content:		<Typography variant="caption" whiteSpace="nowrap" fontWeight="medium">ATT = DEF</Typography>
 				})
 			}
 			if (c.relative_physical_stats === -1) {
 				cond.push({
 					condition:	'stats',
 					type:				'less',
-					content:		<Typography variant="caption" whiteSpace="nowrap">ATT &lt; DEF</Typography>
+					content:		<Typography variant="caption" whiteSpace="nowrap" fontWeight="medium">ATT &lt; DEF</Typography>
 				})
 			}
 
@@ -339,21 +339,21 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'time',
 					type:				'night',
-					content:		<Tooltip followCursor title="at Night"><NightlightSharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="at Night"><NightlightSharpIcon sx={{ fontSize: '1.2rem', color: electric[300], stroke: electric[700] }} /></Tooltip>
 				})
 			}
 			if (c.time_of_day === 'day') {
 				cond.push({
 					condition:	'time',
 					type:				'day',
-					content:		<Tooltip followCursor title="during the Day"><WbSunnySharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="during the Day"><WbSunnySharpIcon sx={{ fontSize: '1.2rem', color: electric[300], stroke: electric[700] }} /></Tooltip>
 				})
 			}
 			if (c.time_of_day === 'dusk') {
 				cond.push({
 					condition:	'time',
 					type:				'dusk',
-					content:		<Tooltip followCursor title="at Dusk"><WbTwilightSharpIcon sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="at Dusk"><WbTwilightSharpIcon sx={{ fontSize: '1.2rem', color: electric[300], stroke: electric[700] }} /></Tooltip>
 				})
 			}
 
@@ -369,7 +369,7 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'upsidedown',
 					type:				'upsidedown',
-					content:		<Tooltip followCursor title="hold device upside down"><AutorenewSharpIcon /></Tooltip>
+					content:		<Tooltip followCursor title="hold device upside down"><AutorenewSharpIcon sx={{ fontSize: '1.2rem', color: poison[200], stroke: poison[500] }} /></Tooltip>
 				})
 			}
 
@@ -377,7 +377,7 @@ const EvoConditions = props => {
 				cond.push({
 					condition:	'weather',
 					type:				'rain',
-					content:		<Tooltip followCursor title="Rain"><Rain sx={{ fontSize: '1.5em' }} /></Tooltip>
+					content:		<Tooltip followCursor title="while raining"><Rain sx={{ fontSize: '1.2rem', color: ice[300], stroke: ice[600] }} /></Tooltip>
 				})
 			}
 
@@ -389,7 +389,6 @@ const EvoConditions = props => {
 						let count = 0
 						arr2.forEach(arrObj => {
 							cond.forEach(condObj => {
-								console.log(arrObj, condObj)
 								if (arrObj.condition === condObj.condition && arrObj.type === condObj.type) {
 									count++
 								}
@@ -401,7 +400,6 @@ const EvoConditions = props => {
 
 				if (!match) { arr.push(cond) }
 			}
-
 			pushUnique()
 		})
 
@@ -432,7 +430,7 @@ const EvoConditions = props => {
 						))}
 					</Box>
 					{i1 < conditionsArr.length - 1 && (
-						<Typography variant="caption" sx={{ lineHeight: 1, display: 'block', fontStyle: 'italic', color: text[200] }}>&mdash; or &mdash;</Typography>
+						<Typography variant="caption" sx={{ py: 1, lineHeight: 1, display: 'block', fontStyle: 'italic', color: text[200] }}>&mdash; or &mdash;</Typography>
 					)}
 				</React.Fragment>
 			))}
@@ -458,7 +456,7 @@ const ItemImg = props => {
 	if (condItem && name) {
 		return (
 			<Tooltip followCursor title={held ? `while holding ${name}` : `use ${name}`}>
-				<img src={condItem.sprites.default} alt={condItem.name} />
+				<img height="24px" src={condItem.sprites.default} alt={condItem.name} />
 			</Tooltip>
 		)
 	}
@@ -484,14 +482,14 @@ const CondPokemon = props => {
 	if (condPokemon && name) {
 		if (!trade) {
 			return (
-				<Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
-					<Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color} fontWeight="medium">{name}</Link> in party
+				<Typography variant="caption" fontWeight="medium" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
+					<Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color}>{name}</Link> in party
 				</Typography>
 			)
 		} else {
 			return (
-				<Typography variant="caption" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
-					<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '2em' }} /></Tooltip> with <Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color} fontWeight="medium">{name}</Link>
+				<Typography variant="caption" fontWeight="medium" sx={{ display: 'flex', alignItems: 'center', columnGap: 1 }}>
+					<Tooltip followCursor title="Trade"><Trade sx={{ fontSize: '2em' }} /></Tooltip> with <Link href={`/pokemon/${formatDexId(condPokemon.id)}`} underline="hover" color={color}>{name}</Link>
 				</Typography>
 			)
 		}
@@ -500,7 +498,7 @@ const CondPokemon = props => {
 
 const getAffectionHearts = (a) => {
 	let hearts = []
-	for (let i = 0; i < a; i++) { hearts.push(<FavoriteBorderSharp key={i} sx={{ fontSize: '1.5em' }} />) }
+	for (let i = 0; i < a; i++) { hearts.push(<FavoriteBorderSharp key={i} sx={{ fontSize: '1.2rem', color: fairy[300], stroke: fairy[500] }} />) }
 	return hearts
 }
 

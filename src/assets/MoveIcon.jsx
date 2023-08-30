@@ -1,4 +1,4 @@
-import { SvgIcon } from '@mui/material'
+import { createSvgIcon, SvgIcon } from '@mui/material'
 
 export const Physical = props => {
 	return (
