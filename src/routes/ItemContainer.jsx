@@ -94,6 +94,100 @@ const Header = props => {
 	)
 }
 
+const Data = props => {
+	const { data, lang, name } = props
+	const [category, setCategory] = useState()
+
+	const rowStyles = {
+		sx: {
+			'&:last-child td, &:last-child th': {
+				border: 0,
+			},
+		},
+	}
+
+	const cellStyles = {
+		size: 'small',
+		sx: {
+			borderBottomColor: 'divider',
+			'&:first-of-type': {
+				pl: 0,
+				pr: 1,
+				fontWeight: 'medium',
+				textAlign: 'right',
+			},
+			'&:last-of-type': {
+				pl: 1,
+				pr: 0,
+			},
+		},
+	}
+
+	const getCategory = category => {
+		P.getItemCategoryByName(category)
+			.then(data => setCategory(data))
+	}
+
+	useEffect(() => {
+		getCategory(data.category.name)
+	}, [data])
+
+	if (category) {
+	return (
+		<Box mb={5}>
+			<Table>
+				<TableBody>
+					{data.category && (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Category</TableCell>
+							<TableCell {...cellStyles}><Link href={`/item/category/${category.name}`} underline="hover">{filterByLang('name', category.names, lang)}</Link></TableCell>
+						</TableRow>
+					)}
+					{data.cost > 0 ? (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Cost</TableCell>
+							<TableCell {...cellStyles}>{data.cost}</TableCell>
+						</TableRow>
+					) : (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Cost</TableCell>
+							<TableCell {...cellStyles}>Not available in Pokémarts</TableCell>
+						</TableRow>
+					)}
+					{data.fling_effect || data.fling_power && (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Fling Effect</TableCell>
+							<TableCell {...cellStyles}>
+								<Typography variant="body2">{data.fling_effect ? `${data.fling_effect.name} effect` : `Flinging ${name} has no effect`}</Typography>
+								<Typography variant="body2">{data.fling_power ? `${data.fling_power} fling power` : `Flinging ${name} has no power`}</Typography>
+							</TableCell>
+						</TableRow>
+					)}
+					{data.held_by_pokemon.length > 0 && (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Held by Pokémon</TableCell>
+							<TableCell {...cellStyles}>
+								{data.held_by_pokemon.map((m,i) => (
+									<Typography key={i} variant="body2">{m.pokemon.name}</Typography>
+								))}
+							</TableCell>
+						</TableRow>
+					)}
+					{data.machines.length > 0 && (
+						<TableRow {...rowStyles}>
+							<TableCell {...cellStyles}>Moves</TableCell>
+							<TableCell {...cellStyles}>
+								<Moves lang={lang} machines={data.machines} />
+							</TableCell>
+						</TableRow>
+					)}
+				</TableBody>
+			</Table>
+		</Box>
+	)
+	}
+}
+
 const Effects = props => {
 	const { data, lang, name } = props
 
@@ -104,66 +198,6 @@ const Effects = props => {
 				<Typography key={i}>{m.effect}</Typography>
 			))}
 			{data.baby_trigger_for && getBabyTrigger(getIdFromURL(data.baby_trigger_for.url), filterByLang('name', data.names, lang), lang)}
-		</Box>
-	)
-}
-
-const Data = props => {
-	const { data, lang, name } = props
-
-	return (
-		<Box mb={5}>
-			<Typography variant="h2" sx={{ mb: 2 }}>Data on {name}</Typography>
-			<Table>
-				<TableBody>
-					{data.category && (
-						<TableRow>
-							<TableCell>Category</TableCell>
-							<TableCell>{data.category.name}</TableCell>
-						</TableRow>
-					)}
-					{data.cost > 0 ? (
-						<TableRow>
-							<TableCell>Cost in Pokémarts</TableCell>
-							<TableCell>{data.cost}</TableCell>
-						</TableRow>
-					) : (
-						<TableRow>
-							<TableCell>Cost in Pokémarts</TableCell>
-							<TableCell>Not available in Pokémarts</TableCell>
-						</TableRow>
-					)}
-					{data.fling_effect || data.fling_power && (
-						<TableRow>
-							<TableCell>Fling Effect</TableCell>
-							<TableCell>
-								<Typography variant="body2">{data.fling_effect ? `${data.fling_effect.name} effect` : `Flinging ${name} has no effect`}</Typography>
-								<Typography variant="body2">{data.fling_power ? `${data.fling_power} fling power` : `Flinging ${name} has no power`}</Typography>
-							</TableCell>
-						</TableRow>
-					)}
-					{data.held_by_pokemon.length > 0 && (
-						<TableRow>
-							<TableCell>Held by Pokémon</TableCell>
-							<TableCell>
-								{data.held_by_pokemon.map((m,i) => (
-									<Typography key={i} variant="body2">{m.pokemon.name}</Typography>
-								))}
-							</TableCell>
-						</TableRow>
-					)}
-					{data.machines.length > 0 && (
-						<TableRow>
-							<TableCell>Machines</TableCell>
-							<TableCell>
-								{data.machines.map((m,i) => (
-									<Typography key={i} variant="body2">{m.machine.url}</Typography>
-								))}
-							</TableCell>
-						</TableRow>
-					)}
-				</TableBody>
-			</Table>
 		</Box>
 	)
 }
@@ -395,6 +429,84 @@ const getBabyTrigger = (evoChain, itemName, lang) => {
 				))}
 				will leave <Link href={`/pokemon/${formatDexId(getNumByDex(baby.pokedex_numbers, 'national'), 1000)}`} underline="hover" fontWeight="medium">{filterByLang('name', baby.names, lang)}</Link> eggs at the Pokémon Day Care when holding <Typography component="span" fontWeight="medium">{itemName}</Typography>.
 			</Typography>
+		)
+	}
+}
+
+const Moves = props => {
+	const { lang, machines } = props
+	const [moves, setMoves] = useState([])
+	const [table, setTable] = useState([])
+
+	useEffect(() => {
+		setMoves([])
+
+		machines.forEach(m => {
+			P.getResource(m.machine.url)
+				.then(machine => {
+					
+					P.getMoveByName(machine.move.name)
+						.then(move => {
+
+							P.getVersionGroupByName(machine.version_group.name)
+								.then(versionGroup => {
+
+									versionGroup.versions.map(version => {
+										P.getVersionByName(version.name)
+											.then(version => {
+												setMoves(prev => [...prev, { move, version }])
+											})
+									})
+								})
+						})
+				})
+		})
+	}, [machines])
+
+	useEffect(() => {
+		let movesArr = []
+		let move = null
+		let versions = []
+
+		moves.forEach(m1 => {
+			const filter1 = moves.filter(f => f.move.id === m1.move.id)
+			const filter2 = movesArr.filter(f => f.move.id === m1.move.id)
+
+			if (!filter2.length > 0) {
+				if (!move) { move = m1.move }
+				filter1.map(m2 => versions.push(m2.version))
+			}
+
+			if (move && versions.length > 0) {
+				movesArr.push({ move, versions })
+				move = null
+				versions = []
+			}
+		})
+
+		if (table.length !== movesArr.length) setTable(movesArr)
+	}, [moves, table])
+
+	console.log(moves)
+
+	if (table.length > 0) {
+		return (
+			<Table>
+				<TableBody>
+					{table.map(m => (
+						<TableRow key={m.move.id} variant="body2">
+							<TableCell size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right' }}>
+								{filterByLang('name', m.move.names, lang)}
+							</TableCell>
+							<TableCell>
+								{m.versions.filter(f => f.id).map(v => (
+									<Typography key={v.id} component="span" fontWeight="medium" color={getColorFromGame(v.name)}>{filterByLang('name', v.names, lang)}</Typography>
+								))}
+							</TableCell>
+						</TableRow>
+					))}
+				</TableBody>
+			</Table>
 		)
 	}
 }
