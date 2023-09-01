@@ -97,10 +97,11 @@ const Header = props => {
 const Data = props => {
 	const { data, lang, name } = props
 	const [category, setCategory] = useState()
+	const [moves, setMoves] = useState([])
 
 	const rowStyles = {
 		sx: {
-			'&:last-child td, &:last-child th': {
+			'&:last-child > td, &:last-child > th': {
 				border: 0,
 			},
 		},
@@ -128,63 +129,116 @@ const Data = props => {
 			.then(data => setCategory(data))
 	}
 
+	const getMoves = machines => {
+		let count = 0
+		let movesArr = []
+
+		machines.map(m => {
+			P.getResource(m.machine.url)
+				.then(machine => {
+					P.getMoveByName(machine.move.name)
+						.then(move => {
+							P.getVersionGroupByName(machine.version_group.name)
+								.then(versionGroup => {
+									
+									versionGroup.versions.map((v,i) => {
+										P.getVersionByName(v.name)
+											.then(version => {
+												if (movesArr.filter(f => f.move.id === move.id).length === 0) {
+													movesArr.push({ move, versions: [version] })
+												} else {
+													const index = movesArr.findIndex(i => i.move.id === move.id)
+													movesArr[index].versions.push(version)
+													movesArr[index].versions.sort((a,b) => a.id-b.id)
+												}
+
+												i === 0 && count++
+
+												if (count === machines.length) {
+													setMoves(movesArr)
+												}
+											})
+									})
+								})
+						})
+				})
+		})
+	}
+
 	useEffect(() => {
 		getCategory(data.category.name)
+		data.machines.length > 0 && getMoves(data.machines)
 	}, [data])
 
 	if (category) {
-	return (
-		<Box mb={5}>
-			<Table>
-				<TableBody>
-					{data.category && (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Category</TableCell>
-							<TableCell {...cellStyles}><Link href={`/item/category/${category.name}`} underline="hover">{filterByLang('name', category.names, lang)}</Link></TableCell>
-						</TableRow>
-					)}
-					{data.cost > 0 ? (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Cost</TableCell>
-							<TableCell {...cellStyles}>{data.cost}</TableCell>
-						</TableRow>
-					) : (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Cost</TableCell>
-							<TableCell {...cellStyles}>Not available in Pokémarts</TableCell>
-						</TableRow>
-					)}
-					{data.fling_effect || data.fling_power && (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Fling Effect</TableCell>
-							<TableCell {...cellStyles}>
-								<Typography variant="body2">{data.fling_effect ? `${data.fling_effect.name} effect` : `Flinging ${name} has no effect`}</Typography>
-								<Typography variant="body2">{data.fling_power ? `${data.fling_power} fling power` : `Flinging ${name} has no power`}</Typography>
-							</TableCell>
-						</TableRow>
-					)}
-					{data.held_by_pokemon.length > 0 && (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Held by Pokémon</TableCell>
-							<TableCell {...cellStyles}>
-								{data.held_by_pokemon.map((m,i) => (
-									<Typography key={i} variant="body2">{m.pokemon.name}</Typography>
-								))}
-							</TableCell>
-						</TableRow>
-					)}
-					{data.machines.length > 0 && (
-						<TableRow {...rowStyles}>
-							<TableCell {...cellStyles}>Moves</TableCell>
-							<TableCell {...cellStyles}>
-								<Moves lang={lang} machines={data.machines} />
-							</TableCell>
-						</TableRow>
-					)}
-				</TableBody>
-			</Table>
-		</Box>
-	)
+		return (
+			<Box mb={5}>
+				<Table>
+					<TableBody>
+						{/* {data.category && (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Category</TableCell>
+								<TableCell {...cellStyles}><Link href={`/item/category/${category.name}`} underline="hover" fontWeight="medium">{filterByLang('name', category.names, lang)}</Link></TableCell>
+							</TableRow>
+						)} */}
+						{data.cost > 0 ? (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Cost</TableCell>
+								<TableCell {...cellStyles}>${data.cost}</TableCell>
+							</TableRow>
+						) : (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Cost</TableCell>
+								<TableCell {...cellStyles}>Not available in Pokémarts</TableCell>
+							</TableRow>
+						)}
+						{data.fling_effect || data.fling_power && (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Fling Effect</TableCell>
+								<TableCell {...cellStyles}>
+									<Typography variant="body2">{data.fling_effect ? `${data.fling_effect.name} effect` : `Flinging ${name} has no effect`}</Typography>
+									<Typography variant="body2">{data.fling_power ? `${data.fling_power} fling power` : `Flinging ${name} has no power`}</Typography>
+								</TableCell>
+							</TableRow>
+						)}
+						{data.held_by_pokemon.length > 0 && (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Held by Pokémon</TableCell>
+								<TableCell {...cellStyles}>
+									{data.held_by_pokemon.map((m,i) => (
+										<Typography key={i} variant="body2">{m.pokemon.name}</Typography>
+									))}
+								</TableCell>
+							</TableRow>
+						)}
+						{data.machines.length > 0 && (
+							<TableRow {...rowStyles}>
+								<TableCell {...cellStyles}>Moves</TableCell>
+								<TableCell {...cellStyles}>
+									<Table>
+										<TableBody>
+											{moves.sort((a,b) => a.versions[0].id-b.versions[0].id).map(move => (
+												<TableRow key={move.move.id} {...rowStyles}>
+													<TableCell {...cellStyles}><Link href={`/move/${move.move.name}`} underline="hover">{filterByLang('name', move.move.names, lang)}</Link></TableCell>
+													<TableCell {...cellStyles}>
+														{move.versions.map((ver,i) => (
+															<React.Fragment key={ver.id}>
+																<Typography component="span" color={getColorFromGame(ver.name)} fontWeight="medium" fontSize="inherit">{filterByLang('name', ver.names, lang)}</Typography>
+																{i < move.versions.length-1 ? <Typography component="span" fontWeight="medium" fontSize="inherit"> / </Typography> : null}
+															</React.Fragment>
+														))}
+													</TableCell>
+												</TableRow>
+											))}
+										</TableBody>
+									</Table>
+								</TableCell>
+							</TableRow>
+						)}
+					</TableBody>
+				</Table>
+			</Box>
+		)
 	}
 }
 
@@ -342,7 +396,7 @@ const Descriptions = props => {
 									{m.label}
 								</TableCell>
 								<TableCell size="small" sx={{ pl: 1, pr: 0, borderBottomColor: 'divider' }}>
-									<Typography>{m.flavor_text}</Typography>
+									<Typography fontSize="inherit">{m.flavor_text}</Typography>
 								</TableCell>
 							</TableRow>
 						)
@@ -436,71 +490,64 @@ const getBabyTrigger = (evoChain, itemName, lang) => {
 const Moves = props => {
 	const { lang, machines } = props
 	const [moves, setMoves] = useState([])
-	const [table, setTable] = useState([])
 
-	useEffect(() => {
-		setMoves([])
+	const getMoves = machines => {
+		let count = 0
+		let movesArr = []
 
-		machines.forEach(m => {
+		machines.map(m => {
 			P.getResource(m.machine.url)
 				.then(machine => {
-					
 					P.getMoveByName(machine.move.name)
 						.then(move => {
-
 							P.getVersionGroupByName(machine.version_group.name)
 								.then(versionGroup => {
-
-									versionGroup.versions.map(version => {
-										P.getVersionByName(version.name)
+									
+									versionGroup.versions.map((v,i) => {
+										P.getVersionByName(v.name)
 											.then(version => {
-												setMoves(prev => [...prev, { move, version }])
+												if (movesArr.filter(f => f.move.id === move.id).length === 0) {
+													movesArr.push({ move, versions: [version] })
+												} else {
+													const index = movesArr.findIndex(i => i.move.id === move.id)
+													movesArr[index].versions.push(version)
+													movesArr[index].versions.sort((a,b) => a.id-b.id)
+												}
+
+												i === 0 && count++
+
+												// console.log(movesArr, count)
+
+												if (count === machines.length) {
+													setMoves(movesArr)
+												}
 											})
 									})
 								})
 						})
 				})
 		})
-	}, [machines])
+	}
 
 	useEffect(() => {
-		let movesArr = []
-		let move = null
-		let versions = []
+		getMoves(machines)
+	}, [])
 
-		moves.forEach(m1 => {
-			const filter1 = moves.filter(f => f.move.id === m1.move.id)
-			const filter2 = movesArr.filter(f => f.move.id === m1.move.id)
-
-			if (!filter2.length > 0) {
-				if (!move) { move = m1.move }
-				filter1.map(m2 => versions.push(m2.version))
-			}
-
-			if (move && versions.length > 0) {
-				movesArr.push({ move, versions })
-				move = null
-				versions = []
-			}
-		})
-
-		if (table.length !== movesArr.length) setTable(movesArr)
-	}, [moves, table])
-
-	console.log(moves)
-
-	if (table.length > 0) {
+	if (moves.length > 0) {
 		return (
 			<Table>
 				<TableBody>
-					{table.map(m => (
-						<TableRow key={m.move.id} variant="body2">
+					{moves.sort((a,b) => a.versions[0].id-b.versions[0].id).map(move => (
+						<TableRow key={move.move.id} variant="body2">
 							<TableCell size="small" sx={{ pl: 0, pr: 1, borderBottomColor: 'divider', textAlign: 'right' }}>
-								{filterByLang('name', m.move.names, lang)}
+								{filterByLang('name', move.move.names, lang)}
 							</TableCell>
 							<TableCell>
-								{m.versions.filter(f => f.id).map(v => (
-									<Typography key={v.id} component="span" fontWeight="medium" color={getColorFromGame(v.name)}>{filterByLang('name', v.names, lang)}</Typography>
+								{move.versions.map((ver,i) => (
+									<Typography key={ver.id} component="span" fontWeight="medium" fontSize="small">
+										<Typography component="span" color={getColorFromGame(ver.name)} fontWeight="medium" fontSize="small">{filterByLang('name', ver.names, lang)}</Typography>
+										{i < move.versions.length-1 ? <> / </> : null}
+									</Typography>
 								))}
 							</TableCell>
 						</TableRow>
