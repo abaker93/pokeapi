@@ -18,6 +18,7 @@ import Training from '../components/pokemon/Training'
 
 import { getIdFromURL } from '../utilities/utilities'
 import Moves from '../components/pokemon/Moves'
+import Sprites from '../components/pokemon/Sprites'
 
 const P = new Pokedex()
 
@@ -287,6 +288,7 @@ const PokemonContainer = props => {
 
 
 	if (state.loading) {
+		// TODO: Loading animation
 		return (
 			<p>Loading...</p>
 		)
@@ -329,6 +331,8 @@ const PokemonContainer = props => {
 					{state.encounters && <Encounters state={state} />}
 
 					<Moves state={state} />
+
+					<Sprites state={state} />
 
 				</Container>
 			</>

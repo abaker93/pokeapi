@@ -1,5 +1,5 @@
 import Pokedex from 'pokedex-promise-v2'
-import { useState } from 'react'
+
 const P = new Pokedex()
 
 
